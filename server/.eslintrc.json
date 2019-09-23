@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb"
+  ],
+  "rules": {
+    "no-console": "error",
+    "semi": "error"
+  }
+}
