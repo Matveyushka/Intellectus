@@ -20,6 +20,8 @@
   "rules": {
     "no-console": "error",
     "semi": "error",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
           "delimiter": "comma",
@@ -30,5 +32,12 @@
           "requireLast": false
       }
   }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

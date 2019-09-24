@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "system",
     "target": "esnext",
     "sourceMap": true,
     "strictNullChecks": true,
     "jsx": "react",
     "noImplicitAny": true,
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types"],
     "outDir": "./dist",
     "lib": ["dom", "dom.iterable", "esnext"]
   },
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+    "src"
   ]
 }
