@@ -4,9 +4,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "useJSXTextNode": true,
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "./"
+    "useJSXTextNode": true
   },
   "env": {
     "browser": true
