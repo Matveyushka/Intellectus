@@ -3,9 +3,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   margin-top: 30px;
+  transition: transform 1s;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .main-container {
@@ -17,9 +22,9 @@
   & .title {
     margin: 0;
     font-weight: lighter;
-    font-size: 40px;
+    font-size: 50px;
     color: $primary-1;
-    letter-spacing: 15px;
+    letter-spacing: 20px;
     
     &:first-child {
       margin-top: 50px;
@@ -31,11 +36,12 @@
     
     & > p:first-child {
       letter-spacing: 5px;
-      font-size: 40px;
-      
+      font-size: 30px;
+
       & + p {
         text-align: right;
         font-size: 20px;
+        color: $base-3;
       }
     }
   }
