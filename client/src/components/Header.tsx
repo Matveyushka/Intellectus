@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { URLS } from '../constants';
 
 export const Header = (): React.ReactElement => (
-  <div className="header-container">
+  <nav className="header-container">
     <h1 className="header-item">
       <NavLink to={URLS.main} exact>
           MAIN
@@ -24,5 +24,5 @@ export const Header = (): React.ReactElement => (
           CONTACT US
       </NavLink>
     </h1>
-  </div>
+  </nav>
 );

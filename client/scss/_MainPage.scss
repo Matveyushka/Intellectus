@@ -1,12 +1,28 @@
 .play-icon {
   background-image: url(../images/play.svg);
   background-repeat: no-repeat;
-  background-position: center;
+  width: 100px;
+  height: 120px;
+  transform: translate(30%, 50%);
+  transition: transform 0.5s;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translate(30%, 50%) scale(1.2);
+  }
+}
+
+.share-icon {
+  background-image: url(../images/share.svg);
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 50px;
   background-size: contain;
-  width: 150px;
-  height: 150px;
-  margin-top: 30px;
-  transition: transform 1s;
+  cursor: pointer;
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  transition: transform 0.5s;
   
   &:hover {
     transform: scale(1.2);
@@ -30,19 +46,23 @@
       margin-top: 50px;
     }
   }
-  
-  & .footer {
-    margin-top: auto;
-    
-    & > p:first-child {
-      letter-spacing: 5px;
-      font-size: 30px;
+}
 
-      & + p {
-        text-align: right;
-        font-size: 20px;
-        color: $base-3;
-      }
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min-content;
+
+  & > p:first-child {
+    letter-spacing: 5px;
+    font-size: 30px;
+
+    & + p {
+      text-align: right;
+      font-size: 20px;
+      color: $base-3;
     }
   }
 }
