@@ -1,0 +1,98 @@
+* {
+  margin: 0; }
+
+body {
+  background-color: #f6f6f6;
+  margin: 0;
+  color: #969696;
+  font-weight: lighter;
+  font-family: "Segoe UI", sans-serif; }
+
+button {
+  background-color: #f6f6f6;
+  -webkit-appearance: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none; }
+
+.header-container {
+  display: flex;
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid #88c8b0; }
+
+.header-item {
+  padding: 10px 20px;
+  margin: 0;
+  border-radius: 18px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .header-item:hover a {
+    color: #707070;
+    font-weight: normal; }
+  .header-item > a {
+    color: #969696;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 5px;
+    font-weight: lighter;
+    font-family: "Roboto", sans-serif; }
+
+.play-icon {
+  background-image: url(../images/play.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 120px;
+  transform: translate(30%, 50%);
+  transition: transform 0.5s;
+  cursor: pointer; }
+  .play-icon:hover {
+    transform: translate(30%, 50%) scale(1.2); }
+
+.share-icon {
+  background-image: url(../images/share.svg);
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 50px;
+  background-size: contain;
+  cursor: pointer;
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  transition: transform 0.5s; }
+  .share-icon:hover {
+    transform: scale(1.2); }
+
+.main-container {
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .main-container .title {
+    margin: 0;
+    font-weight: lighter;
+    font-size: 50px;
+    color: #88c8b0;
+    letter-spacing: 20px; }
+    .main-container .title:first-child {
+      margin-top: 50px; }
+
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min-content; }
+  .footer > p:first-child {
+    letter-spacing: 5px;
+    font-size: 30px; }
+    .footer > p:first-child + p {
+      text-align: right;
+      font-size: 20px;
+      color: #c8c8c8; }
