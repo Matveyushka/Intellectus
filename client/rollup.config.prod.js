@@ -19,7 +19,7 @@ export default {
     commonJS({
       include: 'node_modules/**',
       namedExports: {
-        'react': ['createElement', 'Component', 'StrictMode'],
+        'react': ['createElement', 'Component', 'StrictMode', 'Fragment'],
         'node_modules/react-is/index.js': ['isValidElementType'],
         'react-dom': ['render'],
       },
