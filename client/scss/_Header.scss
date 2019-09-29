@@ -2,7 +2,7 @@
   &-container {
     display: flex;
     margin: auto;
-    width: 80%;
+    width: 65%;
     padding: 10px;
     justify-content: space-between;
     border-bottom: 1px solid $primary-1;
@@ -20,7 +20,6 @@
 
     &:hover a {
       color: darken($base-2, 15%);
-      font-weight: normal;
     }
 
     & > a {
@@ -28,8 +27,7 @@
       text-decoration: none;
       font-size: 20px;
       letter-spacing: 5px;
-      font-weight: lighter;
-      font-family: "Roboto", sans-serif;
+      font-family: "Segoe UI Light", sans-serif;
     }
   }
 }
