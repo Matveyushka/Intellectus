@@ -1,6 +1,6 @@
 const generateRandomString = () => {
   let randomString = '';
-  const possible = 'abcdefghijklmnopqrstuvwxyz';
+  const possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
   for (let i = 0; i < 5; i += 1) {
     randomString += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -9,7 +9,7 @@ const generateRandomString = () => {
   return randomString;
 };
 
-const generateToken = () => `${Buffer.from(new Date().getTime().toString()).toString('base64') + generateRandomString()};`;
+const generateToken = () => `${`${Buffer.from(new Date().getTime().toString()).toString('base64')};${generateRandomString()}`}`;
 
 module.exports = {
   generateToken,
