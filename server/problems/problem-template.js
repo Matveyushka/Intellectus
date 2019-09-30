@@ -1,20 +1,16 @@
-const problemTemplate = {};
-
-const createProblemDescription = (problemDescriptionGenerator) => problemDescriptionGenerator();
-
-const chooseFieldAsRightAnswer = (problemDescription) => {
+const chooseFieldAsRightOption = (problemDescription) => {
   const randomField = Math.floor(Math.random() * problemDescription.length);
   return randomField;
 };
 
-const createWrongAnswers = (wrongAnswersGenerator, problemDescription) => {
-  const wrongAnswers = wrongAnswersGenerator(problemDescription);
-  return wrongAnswers;
+const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
+  const wrongOptions = wrongOptionsGenerator(problemDescription);
+  return wrongOptions;
 };
 
 const convertToSvg = (array, converterToSvg, seed) => {
-  const svgArray = array.map((e) => {
-    const svgOrNull = e != null ? converterToSvg(e, seed) : null;
+  const svgArray = array.map((item) => {
+    const svgOrNull = item != null ? converterToSvg(item, seed) : null;
     return svgOrNull;
   });
   return svgArray;
@@ -22,30 +18,39 @@ const convertToSvg = (array, converterToSvg, seed) => {
 
 const generateRandomSeed = () => Math.floor(Math.random() * 99);
 
-problemTemplate.createProblem = (problemDescriptionGenerator,
-  wrongAnswersGenerator,
+/** @exports */
+const createProblem = (problemDescriptionGenerator,
+  wrongOptionsGenerator,
   converterToSvg) => {
-  const problemDescription = createProblemDescription(problemDescriptionGenerator);
+  const fullProblemDescription = problemDescriptionGenerator();
 
-  const randomAnswer = chooseFieldAsRightAnswer(problemDescription);
+  const randomOption = chooseFieldAsRightOption(fullProblemDescription);
 
-  const rightAnswer = problemDescription[randomAnswer];
+  const rightOption = fullProblemDescription[randomOption];
 
-  problemDescription[randomAnswer] = null;
+  const readyProblemDescription = fullProblemDescription.map(
+    (item, index) => (index === rightOption ? null : item),
+  );
 
-  const answers = createWrongAnswers(wrongAnswersGenerator, problemDescription);
+  const wrongOptions = createWrongOptions(wrongOptionsGenerator, readyProblemDescription);
 
-  const rightAnswerPosition = Math.floor(Math.random() * (answers.length + 1));
+  const rightOptionPosition = Math.floor(Math.random() * (wrongOptions.length + 1));
 
-  answers.splice(rightAnswerPosition, 0, rightAnswer);
+  const options = [
+    ...(wrongOptions.slice(0, rightOptionPosition)),
+    ...[rightOption],
+    ...wrongOptions.slice(rightOptionPosition, wrongOptions.length),
+  ];
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
   return {
-    problem: convertToSvg(problemDescription, converterToSvg, graphicsSeed),
-    options: convertToSvg(answers, converterToSvg, graphicsSeed),
-    rightAnswer: rightAnswerPosition,
+    problem: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
+    options: convertToSvg(options, converterToSvg, graphicsSeed),
+    rightOption: rightOptionPosition,
   };
 };
 
-module.exports = problemTemplate;
+module.exports = {
+  createProblem,
+};
