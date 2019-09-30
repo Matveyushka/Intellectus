@@ -19,9 +19,11 @@ const convertToSvg = (array, converterToSvg, seed) => {
 const generateRandomSeed = () => Math.floor(Math.random() * 99);
 
 /** @exports */
-const createProblem = (problemDescriptionGenerator,
+const createProblem = (
+  problemDescriptionGenerator,
   wrongOptionsGenerator,
-  converterToSvg) => {
+  converterToSvg,
+) => {
   const fullProblemDescription = problemDescriptionGenerator();
 
   const randomOption = chooseFieldAsRightOption(fullProblemDescription);
@@ -38,7 +40,7 @@ const createProblem = (problemDescriptionGenerator,
 
   const options = [
     ...(wrongOptions.slice(0, rightOptionPosition)),
-    ...[rightOption],
+    rightOption,
     ...wrongOptions.slice(rightOptionPosition, wrongOptions.length),
   ];
 
