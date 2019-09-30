@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react';
 export const ContactUs = (): React.ReactElement | null => (
     <>
