@@ -1,24 +1,14 @@
 const express = require('express');
+const testCreator = require('../problems/test-creator');
 
 const router = express.Router();
-const token = require('../utils/token');
+
 // Get questions.
 router.get('/', (req, res) => {
-  let uid = token.generateToken(44);
-  // eslint-disable-next-line no-use-before-define
-  while (existsToken(uid)) {
-    uid = token.generateToken(44);
-  }
+  const token = new Date().getTime().toString(33);
   res.status(200).json({
-    token: uid,
-    questions: 'questions',
+    token,
+    questions: testCreator.createStandardProblemsPack(),
   });
 });
-
-// eslint-disable-next-line no-unused-vars
-function existsToken(uid) {
-  return false;
-}
-
-
 module.exports = router;
