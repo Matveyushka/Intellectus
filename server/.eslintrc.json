@@ -8,6 +8,9 @@
   ],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
-    "semi": "error"
+    "semi": "error",
+    "function-paren-newline": ["error", "multiline"],
+    "max-params": "error",
+    "multiline-comment-style": "error"
   }
 }

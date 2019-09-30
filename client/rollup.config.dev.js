@@ -12,6 +12,7 @@ export default {
     format: 'esm',
   },
   plugins: [
+    resolve(),
     typescript(),
     serve({
       open: true,
@@ -20,14 +21,26 @@ export default {
       port: 9000,
     }),
     livereload(),
-    resolve(),
     replace({
       'process.env.NODE_ENV': JSON.stringify( 'development' )
     }),
     commonJS({
       include: 'node_modules/**',
       namedExports: {
-        'react': ['createElement', 'Component', 'StrictMode', 'Fragment'],
+        'react': [
+          'createElement', 
+          'Component', 
+          'StrictMode', 
+          'Fragment',
+          'useState',
+          'useContext',
+          'useRef',
+          'useEffect',
+          'useLayoutEffect',
+          'useReducer',
+          'useMemo',
+          'useCallback'
+        ],
         'node_modules/react-is/index.js': ['isValidElementType'],
         'react-dom': ['render'],
       },

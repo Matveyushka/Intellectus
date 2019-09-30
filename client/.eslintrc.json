@@ -29,7 +29,10 @@
           "delimiter": "comma",
           "requireLast": false
       }
-  }]
+    }],
+    "function-paren-newline": ["error", "multiline"],
+    "max-params": "error",
+    "multiline-comment-style": "error"
   },
   "settings": {
     "import/resolver": {
