@@ -11,5 +11,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/questions', routes.questions);
+app.use('/answers', routes.answers);
+
 
 app.listen(9000);
