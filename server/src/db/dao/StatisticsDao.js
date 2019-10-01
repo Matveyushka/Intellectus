@@ -6,7 +6,7 @@ const get = async () => {
   try {
     statistics = new Statistics(await Statistics.findOne());
 
-    return statistics.cnt;
+    return statistics.frequencyDistribution;
   } catch (err) {
     console.info('Get statistics failed: ', err);
     throw err;
@@ -17,7 +17,7 @@ const incPoint = async (point) => {
   try {
     const statistics = new Statistics(await Statistics.findOne());
 
-    statistics.cnt[point] += 1;
+    statistics.frequencyDistribution[point] += 1;
 
     await Statistics.update(statistics);
 
