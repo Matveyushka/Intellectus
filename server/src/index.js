@@ -1,22 +1,22 @@
 const express = require('express');
-
 const path = require('path');
+const mongoose = require('mongoose');
+const secure = require('../secure.json');
 
 const app = express();
-
-const mongoose = require('mongoose');
-
-const uri = 'mongodb+srv://lol:kek@cluster0-gsf7q.gcp.mongodb.net/db?retryWrites=true&w=majority';
-
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.info('MongoDB connected.'))
-  .catch((err) => console.info('MongoDB connection error: ', err));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
+
+const { MONGO_ATLAS_LOGIN, MONGO_ATLAS_PASSWORD } = secure;
+const uri = `mongodb+srv://${MONGO_ATLAS_LOGIN}:${MONGO_ATLAS_PASSWORD}@cluster0-gsf7q.gcp.mongodb.net/db?retryWrites=true&w=majority`;
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.info('MongoDB connected.'))
+  .catch((err) => console.info('MongoDB connection error: ', err));
 
 const Port = process.env.Port || 3000;
 
