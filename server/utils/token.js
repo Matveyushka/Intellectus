@@ -1,12 +1,6 @@
 const generateRandomString = () => {
-  let randomString = '';
-  const possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-
-  for (let i = 0; i < 5; i += 1) {
-    randomString += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return randomString;
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  return Array(5).fill(null).map(() => alphabet.charAt(Math.floor(Math.random() * alphabet.length))).join('');
 };
 
 const generateToken = () => `${`${Buffer.from(new Date().getTime().toString()).toString('base64')};${generateRandomString()}`}`;
