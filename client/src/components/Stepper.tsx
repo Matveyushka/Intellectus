@@ -8,10 +8,11 @@ export interface StepItem {
 
 export interface StepperProps {
   data: StepItem[],
+  value: StepItem,
 }
 
 export const Stepper = (props: StepperProps): React.ReactElement => {
-  const { data } = props;
+  const { data, value } = props;
 
   return (
     <div className="stepper-wrapper">
@@ -21,6 +22,7 @@ export const Stepper = (props: StepperProps): React.ReactElement => {
         const itemClassNames = mergeClassNames(
           'stepper-item',
           { completed: item.isCompleted },
+          { current: item === value },
         );
 
         return (

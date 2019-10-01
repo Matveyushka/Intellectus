@@ -12,6 +12,7 @@ export const TestView = (): React.ReactElement => {
       <br />
       <Stepper
         data={stepperData}
+        value={stepperData[3]}
       />
     </div>
   );
