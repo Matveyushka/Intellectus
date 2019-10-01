@@ -1,18 +1,22 @@
 const chooseFieldAsRightOption = (problemDescription) => {
   const randomField = Math.floor(Math.random() * problemDescription.length);
+
   return randomField;
 };
 
 const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
   const wrongOptions = wrongOptionsGenerator(problemDescription);
+
   return wrongOptions;
 };
 
 const convertToSvg = (array, converterToSvg, seed) => {
   const svgArray = array.map((item) => {
     const svgOrNull = item != null ? converterToSvg(item, seed) : null;
+
     return svgOrNull;
   });
+
   return svgArray;
 };
 
