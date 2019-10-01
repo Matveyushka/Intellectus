@@ -2,6 +2,9 @@
   "env": {
     "node": true
   },
+  "plugins": [
+    "prefer-arrow"
+  ],
   "extends": [
     "eslint:recommended",
     "airbnb"
@@ -9,8 +12,29 @@
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
     "semi": "error",
-    "function-paren-newline": ["error", "multiline"],
+    "function-paren-newline": ["error", "multiline-arguments"],
+    "prefer-arrow/prefer-arrow-functions": "error",
+    "prefer-arrow-callback": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"], "next": "*"},
+      { "blankLine": "any", "prev": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"], "next": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"]},
+      { "blankLine": "always", "prev":  "*", "next": ["expression", "return"]}
+    ],
+    "multiline-comment-style": "error",
+    "max-len": ["error", {
+      "tabWidth": 2,
+      "code": 100,
+      "ignoreUrls": true
+    }],
     "max-params": "error",
-    "multiline-comment-style": "error"
+    "eqeqeq": ["error", "always", {"null": "ignore"}],
+    "no-param-reassign": "error",
+    "indent": ["error", 2],
+    "new-cap": "error",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+    "prefer-const": "error"
   }
 }
