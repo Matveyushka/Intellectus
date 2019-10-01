@@ -6,27 +6,27 @@ export const ContactUs = (): React.ReactElement | null => (
     <main className="main-container">
       <form className="contact-form">
         <div className="input-field">
-          <label htmlFor="name">
+          <label className="input-label" htmlFor="name">
             <p className="label-title">Your name:</p>
-            <input type="text" id="name" name="name" />
+            <input className="input-text" type="text" id="name" name="name" />
           </label>
         </div>
         <div className="input-field">
-          <label htmlFor="email">
+          <label className="input-label" htmlFor="email">
             <p className="label-title">Email:</p>
-            <input type="text" id="email" name="email" />
+            <input className="input-text" type="text" id="email" name="email" />
           </label>
         </div>
         <div className="input-field">
-          <label htmlFor="text">
+          <label className="input-label" htmlFor="text">
             <p className="label-title">Feedback:</p>
             <div className="input-with-area">
-              <input type="text" placeholder="Title" name="title" />
-              <textarea id="text" placeholder="Body" name="body" />
+              <input className="input-text" type="text" placeholder="Title" name="title" />
+              <textarea className="input-area" id="text" placeholder="Body" name="body" />
               <div className="send-form">
                 <div className="area-count">0 / 300</div>
                 <button type="button" className="send-btn">
-                  <img alt="" src="data:image/svg+xml,%3Csvg fill='%2388c8b0' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z'/%3E%3C/svg%3E" />
+                  <i className="plane-icon" />
                 </button>
               </div>
             </div>
