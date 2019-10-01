@@ -9,7 +9,9 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const uid = token.generateToken();
   const questions = testCreator.createStandardProblemsPack();
+
   session.saveSession(token, questions);
+
   res.status(200).json({
     token: uid,
     questions,

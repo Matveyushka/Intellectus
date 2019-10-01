@@ -1,7 +1,9 @@
 const easyProblem = require('./easy-problem-creator');
 
-//  Пока готов только один генератор задач - он работает на все
-//  уровни сложности
+/*
+ *  Пока готов только один генератор задач - он работает на все
+ *  уровни сложности
+ */
 const createProblemWithLevel = {
   e: easyProblem.createProblem,
   easy: easyProblem.createProblem,
@@ -13,7 +15,8 @@ const createProblemWithLevel = {
 
 /** @exports */
 const createProblemsPack = (problemsLevels) => {
-  const problemsPack = problemsLevels.map((item) => createProblemWithLevel[item]());
+  const problemsPack = problemsLevels.map(item => createProblemWithLevel[item]());
+
   return problemsPack;
 };
 

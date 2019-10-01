@@ -12,6 +12,7 @@ const newImage = (sourceImage = baseSvgTag) => ({
       element,
       ...(sourceImageArray.slice(insertPosition, sourceImageArray.length)),
     ];
+
     return newImage(image.join(''));
   },
 
