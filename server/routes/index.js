@@ -1,1 +1,5 @@
-// routes to be here
+const questions = require('./questions');
+
+module.exports = {
+  questions,
+};
