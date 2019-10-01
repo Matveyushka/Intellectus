@@ -8,7 +8,7 @@
     "rollup:watch": "rollup -w -c rollup.config.dev.js",
     "start": "run-p sass:watch rollup:watch",
     "build": "rollup -c rollup.config.prod.js",
-    "lint": "eslint src/**",
+    "lint": "eslint 'src/**'",
     "sass": "node-sass scss/main.scss dist/styles.css",
     "sass:watch": "node-sass --watch scss/main.scss dist/styles.css"
   },
