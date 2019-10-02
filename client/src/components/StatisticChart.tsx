@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 
 interface Props {
-  rows: number[],
-  chosenRowIndex?: number,
+  rows: number[];
+  chosenRowIndex?: number;
 }
 
 export const StatisticChart = (props: Props): React.ReactElement => {
@@ -22,7 +22,9 @@ export const StatisticChart = (props: Props): React.ReactElement => {
             rowStyle.backgroundColor = '#969696';
           }
 
-          return <div key={i.toString()} className="stats-column" style={rowStyle} />;
+          return (
+            <div key={i.toString()} className="stats-column" style={rowStyle} />
+          );
         })}
       </div>
     </>
