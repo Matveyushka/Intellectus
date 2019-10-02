@@ -51,7 +51,7 @@ const createProblem = (
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
   return {
-    problem: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
+    problems: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
     options: convertToSvg(options, converterToSvg, graphicsSeed),
     rightOption: rightOptionPosition,
   };
