@@ -1,36 +1,35 @@
 import React, { CSSProperties } from 'react';
 
-interface Props {
-  rows: number[];
+export interface StaticChartProps {
+  rows?: number[];
   chosenRowIndex?: number;
 }
 
-export const StatisticChart = (props: Props): React.ReactElement => {
-  const { rows, chosenRowIndex } = props;
+export const StatisticChart = (props: StaticChartProps): React.ReactElement => {
+  const { rows = [], chosenRowIndex } = props;
+  const magicChartMaxHeight = 97;
+  const magicChartWidth = 84;
 
   return (
-    <>
-      <div className="stats">
-        {rows.map((x, i) => {
-          const rowStyle: CSSProperties = {};
+    <div className="stats">
+      {rows.map((value, index) => {
+        const rowStyle: CSSProperties = {
+          height: `${(magicChartMaxHeight * value) / Math.max(...rows)}%`,
+          width: `${magicChartWidth / rows.length}%`,
+        };
 
-          rowStyle.height = `${(97 * x) / Math.max(...rows)}%`;
+        if (index === chosenRowIndex) {
+          rowStyle.backgroundColor = '#969696';
+        }
 
-          rowStyle.width = `${84 / rows.length}%`;
-
-          if (i === chosenRowIndex) {
-            rowStyle.backgroundColor = '#969696';
-          }
-
-          return (
-            <div key={i.toString()} className="stats-column" style={rowStyle} />
-          );
-        })}
-      </div>
-    </>
+        return (
+          <div
+            key={index.toString()}
+            className="stats-column"
+            style={rowStyle}
+          />
+        );
+      })}
+    </div>
   );
-};
-
-StatisticChart.defaultProps = {
-  rows: [],
 };
