@@ -8,7 +8,7 @@ const get = async () => {
 
     return statistics.frequencyDistribution;
   } catch (err) {
-    console.info('Get statistics failed: ', err);
+    console.error(`Get statistics failed: ${err}`);
     throw err;
   }
 };
@@ -23,7 +23,7 @@ const incPoint = async (point) => {
 
     console.info('statistics updated: ', statistics);
   } catch (err) {
-    console.info('Increment statistics point failed: ', err);
+    console.error(`Increment statistics point failed: ${err}`);
     throw err;
   }
 };

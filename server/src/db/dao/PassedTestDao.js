@@ -19,7 +19,7 @@ const insert = async (test) => {
 
     console.info('passed_test saved: ', passedTest);
   } catch (err) {
-    console.info('passed_test save failed. ', err);
+    console.error(`passed_test save failed: ${err}`);
 
     await session.abortTransaction();
 

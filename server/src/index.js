@@ -19,7 +19,7 @@ const uri = `mongodb+srv://${MONGO_ATLAS_LOGIN}:${MONGO_ATLAS_PASSWORD}@cluster0
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.info('MongoDB connected.'))
-  .catch(err => console.info('MongoDB connection error: ', err));
+  .catch(err => console.error(`MongoDB connection error: ${err}`));
 
 const Port = process.env.Port || 9000;
 
