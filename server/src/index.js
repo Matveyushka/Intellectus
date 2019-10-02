@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
-const routes = require('../routes/index');
+const mongoose = require('mongoose');
+const secure = require('../secure.json');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -14,4 +16,13 @@ app.use('/questions', routes.questions);
 app.use('/answers', routes.answers);
 
 
-app.listen(9000);
+const { MONGO_ATLAS_LOGIN, MONGO_ATLAS_PASSWORD } = secure;
+const uri = `mongodb+srv://${MONGO_ATLAS_LOGIN}:${MONGO_ATLAS_PASSWORD}@cluster0-gsf7q.gcp.mongodb.net/db?retryWrites=true&w=majority`;
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.info('MongoDB connected.'))
+  .catch(err => console.error(`MongoDB connection error: ${err}`));
+
+const Port = process.env.Port || 9000;
+
+app.listen(Port, () => console.info('Server started.'));
