@@ -31,6 +31,14 @@
       "singleline": {
           "delimiter": "comma",
           "requireLast": false
+      },
+      "overrides": {
+        "interface": {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": true
+          }
+        }
       }}],
     "prefer-arrow/prefer-arrow-functions": "error",
     "prefer-arrow-callback": "error",

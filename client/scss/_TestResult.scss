@@ -1,0 +1,74 @@
+.test-result {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .test-title {
+    color: $primary-1;
+    font-weight: 100;
+    font-size: 40px;
+    letter-spacing: 8px;
+    margin-bottom: 25px;
+  }
+
+  .test-hint {
+    padding-top: 15px;
+    color: $base-1;
+    font-size: 27px;
+    letter-spacing: 5px;
+  }
+
+  .test-thumbs {
+    margin-top: 25px;
+    display: flex;
+
+    .test-thumb {
+      position: relative;
+      width: 35px;
+      height: 35px;
+      border: 1px solid $primary-1;
+      border-radius: 50%;
+      margin: 0 15px;
+      cursor: pointer;
+
+      &:after {
+        content: "";
+        width: 20px;
+        height: 8px;
+        position: absolute;
+        border-bottom: 1px solid $primary-1;
+        border-left: 1px solid $primary-1;
+        top: 12px;
+        left: 8px;
+        transform: rotate(-45deg);
+      }
+
+      &.cross {
+        border: 1px solid $base-1;
+
+        &:after {
+          content: "";
+          height: 0;
+          width: 26px;
+          position: absolute;
+          border-bottom: 1px solid $base-1;
+          top: 17px;
+          left: 4px;
+          transform: rotate(45deg);
+        }
+
+        &:before {
+          content: "";
+          height: 0;
+          width: 26px;
+          position: absolute;
+          border-bottom: 1px solid $base-1;
+          top: 17px;
+          left: 5px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}
