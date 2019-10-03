@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import mergeClassNames from 'classnames';
+
 import { StatisticChart } from './StatisticChart';
 
 export const TestResult = (): React.ReactElement => (
@@ -12,7 +14,10 @@ export const TestResult = (): React.ReactElement => (
     <div className="test-hint">you are here</div>
     <div className="test-thumbs">
       {[...Array(12)].map((_, index) => (
-        <div key={index.toString()} className="test-thumb" />
+        <div
+          key={index.toString()}
+          className={mergeClassNames('test-thumb', { cross: index % 2 === 0 })}
+        />
       ))}
     </div>
   </div>

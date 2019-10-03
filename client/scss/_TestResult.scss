@@ -44,7 +44,7 @@
         transform: rotate(-45deg);
       }
 
-      &:first-child {
+      &.cross {
         border: 1px solid $base-1;
 
         &:after {

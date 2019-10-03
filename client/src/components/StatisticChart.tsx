@@ -1,5 +1,7 @@
 import React, { CSSProperties } from 'react';
 
+import mergeClassNames from 'classnames';
+
 export interface StaticChartProps {
   rows?: number[];
   chosenRowIndex?: number;
@@ -7,25 +9,23 @@ export interface StaticChartProps {
 
 export const StatisticChart = (props: StaticChartProps): React.ReactElement => {
   const { rows = [], chosenRowIndex } = props;
-  const magicChartMaxHeight = 97;
-  const magicChartWidth = 84;
+  const chartMaxHeight = 97;
+  const chartWidth = 84;
 
   return (
     <div className="stats">
       {rows.map((value, index) => {
         const rowStyle: CSSProperties = {
-          height: `${(magicChartMaxHeight * value) / Math.max(...rows)}%`,
-          width: `${magicChartWidth / rows.length}%`,
+          height: `${(chartMaxHeight * value) / Math.max(...rows)}%`,
+          width: `${chartWidth / rows.length}%`,
         };
-
-        if (index === chosenRowIndex) {
-          rowStyle.backgroundColor = '#969696';
-        }
 
         return (
           <div
             key={index.toString()}
-            className="stats-column"
+            className={mergeClassNames('stats-column', {
+              selected: index === chosenRowIndex,
+            })}
             style={rowStyle}
           />
         );
