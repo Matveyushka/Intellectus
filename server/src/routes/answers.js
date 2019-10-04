@@ -38,8 +38,6 @@ router.post('/', urlencodedParser, (req, res) => {
 
   passedTest.insert(completedTest).then(r => console.info(r));
 
-  statistics.incPoint(points).then(r => console.info(r));
-
   res.status(201).json({
     rightOptions,
     statistics: statistics.get(),
