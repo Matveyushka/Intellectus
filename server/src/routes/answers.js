@@ -28,10 +28,10 @@ router.post('/', urlencodedParser, (req, res) => {
     elapsedTime: session.getTimeSession(token),
     points,
     questions: {
-      problems: testPack.getProblems(test).join(),
-      options: testPack.getOptions(test).join(),
-      solutions: rightOptions.join(),
-      answers: answers.join(),
+      problems: testPack.getProblems(test),
+      options: testPack.getOptions(test),
+      solutions: rightOptions,
+      answers,
     },
   };
 
