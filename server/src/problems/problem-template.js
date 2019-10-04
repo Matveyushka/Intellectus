@@ -35,7 +35,7 @@ const createProblem = (
   const rightOption = fullProblemDescription[randomOption];
 
   const readyProblemDescription = fullProblemDescription.map(
-    (item, index) => (index === rightOption ? null : item),
+    (item, index) => (index === randomOption ? null : item),
   );
 
   const wrongOptions = createWrongOptions(wrongOptionsGenerator, readyProblemDescription);
@@ -49,6 +49,12 @@ const createProblem = (
   ];
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
+
+  console.info(readyProblemDescription);
+
+  console.info(options);
+
+  console.info(rightOptionPosition);
 
   return {
     problem: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
