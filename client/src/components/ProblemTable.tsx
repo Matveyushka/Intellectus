@@ -5,7 +5,7 @@ import * as React from 'react';
 import { toDataURL } from '../helpers';
 
 export interface ProblemTableProps {
-  problems: (string | null)[],
+  problems: (string | null)[];
 }
 
 export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {

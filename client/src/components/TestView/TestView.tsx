@@ -10,15 +10,15 @@ import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 
 export interface TestViewProps {
-  onFinishButtonClick: () => void,
-  userAnswers: number[],
-  onUserAnswersUpdate: (newAnswers: number[]) => void,
+  onFinishButtonClick: () => void;
+  userAnswers: number[];
+  onUserAnswersUpdate: (newAnswers: number[]) => void;
 }
 
 export interface Question {
-  token: string,
-  problems: string[],
-  options: string[],
+  token: string;
+  problems: string[];
+  options: string[];
 }
 
 const stepperInitialData = generateInitialStepperData();

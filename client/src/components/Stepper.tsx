@@ -2,13 +2,13 @@ import * as React from 'react';
 import mergeClassNames from 'classnames';
 
 export interface StepItem {
-  text: string,
-  isCompleted?: boolean,
+  text: string;
+  isCompleted?: boolean;
 }
 
 export interface StepperProps {
-  data: StepItem[],
-  value: StepItem,
+  data: StepItem[];
+  value: StepItem;
 }
 
 export const Stepper = (props: StepperProps): React.ReactElement => {

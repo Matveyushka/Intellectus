@@ -6,9 +6,9 @@ import mergeClassNames from 'classnames';
 import { toDataURL } from '../helpers';
 
 export interface OptionTableProps {
-  options: string[],
-  selectedIndex: number | null,
-  onSelect: (optionIndex: number) => void,
+  options: string[];
+  selectedIndex: number | null;
+  onSelect: (optionIndex: number) => void;
 }
 
 export const OptionTable = (props: OptionTableProps): React.ReactElement => {

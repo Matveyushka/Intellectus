@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Footer } from './Footer';
 
 export interface IntroViewProps {
-  onPlayButtonClick: () => void,
+  onPlayButtonClick: () => void;
 }
 
 export const IntroView = (props: IntroViewProps): React.ReactElement => {

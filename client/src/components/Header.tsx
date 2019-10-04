@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { URLS } from '../constants';
 
 export interface HeaderProps {
-  location: Location,
+  location: Location;
 }
 
 export const Header = (props: HeaderProps): React.ReactElement => {
