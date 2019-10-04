@@ -1,9 +1,18 @@
-const rightOptions = testPack => testPack.map(item => item.rightOption);
+const getRightOptions = testPack => testPack.questions.map(item => item.rightOption);
+const getProblems = testPack => testPack.questions.map(item => item.problems);
+const getOptions = testPack => testPack.questions.map(item => item.options);
 
 // eslint-disable-next-line max-len
-const clientTestPack = testPack => testPack.map(task => ({ problem: task.problem, options: task.options }));
+const clientTestPack = testPack => testPack.map(task => ({ problems: task.problems, options: task.options }));
+
+const getNumberOfCorrectAnswers = (correctAnswers, userAnswers) =>
+  // eslint-disable-next-line max-len,implicit-arrow-linebreak
+  userAnswers.filter((userAnswer, indexOfAnswer) => userAnswer === correctAnswers[indexOfAnswer]).length();
 
 module.exports = {
-  rightOptions,
   clientTestPack,
+  getNumberOfCorrectAnswers,
+  getRightOptions,
+  getProblems,
+  getOptions,
 };

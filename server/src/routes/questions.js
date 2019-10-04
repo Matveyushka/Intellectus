@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
   res.status(200).json({
     token: uid,
-    clientTestPack,
+    questions: clientTestPack,
   });
 });
 

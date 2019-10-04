@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const statistics = require('../db/dao/StatisticsDao');
+const passedTest = require('../db/dao/PassedTestDao');
 const session = require('../utils/session');
 const testPack = require('../utils/testPack');
 
@@ -19,9 +20,25 @@ router.post('/', urlencodedParser, (req, res) => {
 
     return;
   }
-
   const test = session.getSession(token);
-  const rightOptions = testPack.rightOptions(test);
+  const rightOptions = testPack.getRightOptions(test);
+  const points = testPack.getNumberOfCorrectAnswers(rightOptions, answers);
+  const completedTest = {
+    token,
+    elapsedTime: session.getTimeSession(token),
+    points,
+    questions: {
+      problems: testPack.getProblems(test).join(),
+      options: testPack.getOptions(test).join(),
+      solutions: rightOptions.join(),
+      answers: answers.join(),
+    },
+  };
+
+
+  passedTest.insert(completedTest).then(r => console.info(r));
+
+  statistics.incPoint(points).then(r => console.info(r));
 
   res.status(201).json({
     rightOptions,

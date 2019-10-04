@@ -8,7 +8,7 @@
     "rollup:watch": "rollup -w -c rollup.config.dev.js",
     "start": "run-p sass:watch rollup:watch",
     "build": "rollup -c rollup.config.prod.js",
-    "lint": "eslint src/**",
+    "lint": "eslint src --ext .ts,.tsx",
     "sass": "node-sass scss/main.scss dist/styles.css",
     "sass:watch": "node-sass --watch scss/main.scss dist/styles.css"
   },
@@ -43,6 +43,7 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prefer-arrow": "^1.1.6",
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.5",
     "ncp": "^2.0.0",
