@@ -8,7 +8,7 @@ export interface TestResultProps {
 }
 
 export const TestResult = (props: TestResultProps): React.ReactElement => {
-  const { answers = [false, true, false], statistics = [1, 3, 6, 2] } = props;
+  const { answers = [false, true, false], statistics = [0, 3, 6, 2] } = props;
 
   const rightAnswersCount = answers.reduce((t, v) => (v ? t + 1 : t), 0);
 

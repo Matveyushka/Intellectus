@@ -11,12 +11,13 @@ export const StatisticChart = (props: StaticChartProps): React.ReactElement => {
   const { rows = [], chosenRowIndex } = props;
   const chartMaxHeight = 97;
   const chartWidth = 84;
+  const chartZeroHeight = 2;
 
   return (
     <div className="stats">
       {rows.map((value, index) => {
         const rowStyle: CSSProperties = {
-          height: `${(chartMaxHeight * value) / Math.max(...rows)}%`,
+          height: `${(chartMaxHeight * value) / Math.max(...rows) + chartZeroHeight}%`,
           width: `${chartWidth / rows.length}%`,
         };
 
