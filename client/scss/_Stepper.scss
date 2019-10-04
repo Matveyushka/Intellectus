@@ -2,8 +2,12 @@
   &-wrapper {
     display: flex;
     counter-reset: stepper;
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
   }
-  
+
   &-item {
     counter-increment: stepper;
     height: 40px;
@@ -17,7 +21,7 @@
     border: 2px solid $base-3;
     font-family: 'Segoe UI Light', sans-serif;
     cursor: pointer;
-    
+
     &::before {
       content: counter(stepper);
       width: 30px;
@@ -25,12 +29,12 @@
       text-align: center;
       padding-bottom: 5px;
     }
-    
+
     &.completed {
       border-color: $primary-1;
-      
+
       &::before {
-        background-image: url("../images/check.svg");
+        background-image: url("/images/check.svg");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -38,7 +42,7 @@
         padding: 0;
       }
     }
-    
+
     &.current {
       border-color: $primary-1;
       color: $primary-1;
@@ -46,7 +50,7 @@
       cursor: default;
     }
   }
-  
+
   &-line {
     height: 1px;
     margin: 0 2px;

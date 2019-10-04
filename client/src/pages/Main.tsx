@@ -1,34 +1,38 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react';
-import { History } from 'history';
-import { URLS } from '../constants';
+import { MAIN_VIEW_TYPES } from '../constants';
+import { Values } from '../commonTypes';
+import { IntroView, TestView } from '../components';
 
-export interface MainProps {
-  history: History,
-}
+type ViewTypes = Values<typeof MAIN_VIEW_TYPES>;
 
-export const Main = (props: MainProps): React.ReactElement | null => {
-  const { history } = props;
+export const Main = (): React.ReactElement | null => {
+  const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
+  const [userAnswers, setUserAnswers] = React.useState<number[]>([]);
 
-  const handlePlayButtonClick = (): void => history.push(URLS.testView);
-
-  return (
-    <>
-      <main className="main-container">
-        <h1 className="title">CHALLENGE</h1>
-        <h1 className="title">YOUR MIND</h1>
-        <button
-          type="button"
-          className="play-icon"
-          title="Start test!"
-          onClick={handlePlayButtonClick}
+  switch (currentView) {
+    case MAIN_VIEW_TYPES.intro: {
+      return (
+        <IntroView
+          onPlayButtonClick={() => setCurrentView(MAIN_VIEW_TYPES.test)}
         />
-        <button type="button" title="Share this site with your friends!" className="share-icon" />
-      </main>
-      <footer className="footer">
-        <p>INTELLECTUS</p>
-        <p>BY NOBRAINS</p>
-      </footer>
-    </>
-  );
+      );
+    }
+    case MAIN_VIEW_TYPES.test: {
+      return (
+        <TestView
+          userAnswers={userAnswers}
+          onUserAnswersUpdate={setUserAnswers}
+          onFinishButtonClick={() => setCurrentView(MAIN_VIEW_TYPES.results)}
+        />
+      );
+    }
+    case MAIN_VIEW_TYPES.results: {
+    // TODO: добавить ResultsView
+      return null;
+    }
+    default: {
+      return null;
+    }
+  }
 };

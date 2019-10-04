@@ -23,6 +23,10 @@
     "semi": "error",
     "import/prefer-default-export": "off",
     "react/jsx-filename-extension": "off",
+    "@typescript-eslint/explicit-function-return-type": ["error", {
+      "allowExpressions": true,
+      "allowTypedFunctionExpressions": true
+    }],
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
           "delimiter": "comma",
@@ -50,7 +54,9 @@
     "max-params": "error",
     "eqeqeq": ["error", "always", {"null": "ignore"}],
     "no-param-reassign": "error",
-    "indent": ["error", 2],
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
     "new-cap": "error",
     "no-nested-ternary": "error",
     "no-unneeded-ternary": "error",

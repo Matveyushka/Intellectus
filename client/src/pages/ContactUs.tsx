@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react';
+import { Footer } from '../components';
 
 export const ContactUs = (): React.ReactElement | null => (
   <>
@@ -34,9 +35,6 @@ export const ContactUs = (): React.ReactElement | null => (
         </div>
       </form>
     </main>
-    <footer className="footer">
-      <p>INTELLECTUS</p>
-      <p>BY NOBRAINS</p>
-    </footer>
+    <Footer />
   </>
 );

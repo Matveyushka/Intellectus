@@ -1,4 +1,4 @@
-import { StepItem } from '../../components/Stepper';
+import { StepItem } from '../Stepper';
 
 export const generateInitialStepperData = (): StepItem[] => Array(12)
   .fill(null)

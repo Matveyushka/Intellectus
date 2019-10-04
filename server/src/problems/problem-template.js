@@ -12,7 +12,9 @@ const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
 
 const convertToSvg = (array, converterToSvg, seed) => {
   const svgArray = array.map((item) => {
-    const svgOrNull = item != null ? converterToSvg(item, seed) : null;
+    const svgOrNull = item != null
+      ? Buffer.from(converterToSvg(item, seed)).toString('base64')
+      : null;
 
     return svgOrNull;
   });
@@ -51,7 +53,7 @@ const createProblem = (
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
   return {
-    problem: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
+    problems: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
     options: convertToSvg(options, converterToSvg, graphicsSeed),
     rightOption: rightOptionPosition,
   };

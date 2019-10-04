@@ -29,5 +29,10 @@
       letter-spacing: 5px;
       font-family: "Segoe UI Light", sans-serif;
     }
+
+    &.active, &.active > a {
+      cursor: default;
+      color: darken($base-2, 15%);
+    }
   }
 }

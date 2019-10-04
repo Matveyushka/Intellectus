@@ -2,17 +2,16 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components';
 import {
-  About, ContactUs, Main, Statistics, TestView,
+  About, ContactUs, Main, Statistics,
 } from './pages';
 import { URLS } from './constants';
 
 export const MainLayout = (): React.ReactElement => (
   <div>
     <Router>
-      <Header />
+      <Route component={Header} />
       <Switch>
         <Route path={URLS.main} exact component={Main} />
-        <Route path={URLS.testView} component={TestView} />
         <Route path={URLS.statistics} component={Statistics} />
         <Route path={URLS.about} component={About} />
         <Route path={URLS.contactUs} component={ContactUs} />
