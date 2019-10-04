@@ -7,7 +7,7 @@ const clientTestPack = testPack => testPack
   .map(task => ({ problems: task.problems, options: task.options }));
 
 const getNumberOfCorrectAnswers = (correctAnswers, userAnswers) => userAnswers
-  .filter((userAnswer, indexOfAnswer) => userAnswer === correctAnswers[indexOfAnswer]).length();
+  .filter((userAnswer, indexOfAnswer) => userAnswer === correctAnswers[indexOfAnswer]).length;
 
 module.exports = {
   clientTestPack,
