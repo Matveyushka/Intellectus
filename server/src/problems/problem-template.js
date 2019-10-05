@@ -12,7 +12,7 @@ const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
 
 const convertToSvg = (array, converterToSvg, seed) => {
   const svgArray = array.map((item) => {
-    const svgOrNull = item != null
+    const svgOrNull = item !== null
       ? Buffer.from(converterToSvg(item, seed)).toString('base64')
       : null;
 

@@ -1,9 +1,12 @@
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
+const {
+  grayColor,
+  numberOfWrongAnswers,
+  transparentColor,
+} = require('../constants');
 
-const strokeColor = '#636363';
-const fillColor = 'rgba(0,0,0,0)';
-const numberOfWrongAnswers = 5;
+const maxNumberIn9Bits = 512;
 
 /*
  * Каждое поле представляет собой сетку из фигур или пробелов 3х3
@@ -18,9 +21,7 @@ const numberOfWrongAnswers = 5;
 
 const generateTaskDescription = () => {
   const generateField = (excludedVariant = 0) => {
-    const maxNumberIn9Bits = 512;
-
-    //  Магические единицы для того, чтобы исключить генерацию крайних значений - 0 и 511
+    //  Единицы для того, чтобы исключить генерацию крайних значений - 0 и 511
     const field = Math.floor(Math.random() * (maxNumberIn9Bits - 1)) + 1;
 
     const isExcluded = field === excludedVariant;
@@ -67,8 +68,6 @@ const generateWrongOptions = (description) => {
   };
 
   const generateField = () => {
-    const maxNumberIn9Bits = 512;
-
     const field = Math.floor(Math.random() * maxNumberIn9Bits);
 
     return (field === 0 || checkFieldsValidity(field))
@@ -108,9 +107,9 @@ const convertToSvg = (code, seed) => {
         x: xPosition,
         y: yPosition,
         size: elementSize,
-        color: fillColor,
+        color: transparentColor,
         borderWidth: thickness,
-        borderColor: strokeColor,
+        borderColor: grayColor,
       });
     }
 

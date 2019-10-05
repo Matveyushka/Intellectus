@@ -1,4 +1,3 @@
-
 const problemTemplate = require('./problem-template');
 
 const missingElementProblem = require('./problem-types/missing-element-problem');

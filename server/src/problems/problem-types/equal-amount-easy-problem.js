@@ -1,12 +1,22 @@
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
-
-const strokeColorGray = '#636363';
-const strokeColorGreen = '#88c8b0';
-const fillColor = 'rgba(0,0,0,0)';
-const numberOfWrongAnswers = 5;
+const {
+  greenColor,
+  grayColor,
+  transparentColor,
+  numberOfWrongAnswers,
+} = require('../constants');
 
 const generateTaskDescription = () => {
+  /*
+   * Каждый квадратик в условии задачи - это две фигуры - одна сверху, другая снизу.
+   * Фигуры могут быть трёх типов, соответственно каждый тип обозначен цифрой от 0 до 2
+   * Каждая фигура встречается на определённой позиции 3 раза.
+   *
+   * Получается, одно поле (квадратик) можно представить в виде двуразрядного числа, где
+   * цифра старшего разряда - код фигуры сверху, а цифра младшего разраяда - цифра фигуры
+   * снизу.
+   */
   const topArray = [0, 0, 0, 1, 1, 1, 2, 2, 2].sort(() => Math.random() - 0.5);
   const bottomArray = [0, 0, 0, 1, 1, 1, 2, 2, 2].sort(() => Math.random() - 0.5);
 
@@ -52,20 +62,20 @@ const convertToSvg = (code, seed) => {
     y: newY,
     width: figureWidth,
     height: figureHeight,
-    color: fillColor,
+    color: transparentColor,
     borderWidth: thickness,
     borderColor: newBorderColor,
   });
 
-  const topGreenFigureParams = newFigureParamsFromTemplate(spaceSize, strokeColorGreen);
-  const topGrayFigureParams = newFigureParamsFromTemplate(spaceSize, strokeColorGray);
+  const topGreenFigureParams = newFigureParamsFromTemplate(spaceSize, greenColor);
+  const topGrayFigureParams = newFigureParamsFromTemplate(spaceSize, grayColor);
   const bottomGreenFigureParams = newFigureParamsFromTemplate(
     spaceSize + figureHeight + spaceSize,
-    strokeColorGreen,
+    greenColor,
   );
   const bottomGrayFigureParams = newFigureParamsFromTemplate(
     spaceSize + figureHeight + spaceSize,
-    strokeColorGray,
+    grayColor,
   );
 
   const topFigureDrawingVariants = [
