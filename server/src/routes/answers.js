@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  const questionsToSend = test.questions.map( (problem, index) => ({
+  const questionsToSend = test.questions.map((problem, index) => ({
     problems: problem.problems,
     options: problem.options,
     solution: problem.rightOption,
