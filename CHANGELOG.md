@@ -25,7 +25,7 @@ Stepper and Header component
 - index `/`, `/questions` and `/answers` routes
 - public folder for client static files
 - Utils, token and session handlers
-- Random generation of 2 problem types
+- Random generation of 3 problem types
 - Database to store statistics
  
 ## [0.0.1] - 2019-09-23
