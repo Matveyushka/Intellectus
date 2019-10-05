@@ -18,7 +18,8 @@
   &-body {
     display: flex;
     justify-content: center;
-     margin-top: 15px;
+    margin-top: 15px;
+    position: relative;
   }
 
   &-next-button {
@@ -30,7 +31,7 @@
     font-family: "Segoe UI Light", sans-serif;
     font-size: 20px;
     position: absolute;
-    right: 50px;
+    right: -100px;
     cursor: pointer;
     transition: transform 1s;
 
@@ -59,6 +60,11 @@
     font-weight: normal;
     color: $primary-1;
     text-align: center;
+
+    &.options {
+      flex-grow: 0;
+      width: 245px;
+    }
   }
 
   &-cell {

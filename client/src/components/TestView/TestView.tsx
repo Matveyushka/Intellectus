@@ -90,7 +90,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
     <div className="test-view">
       <div className="test-view-header">
         <h1 className="problem-title">Problem:</h1>
-        <h1 className="problem-title">Options:</h1>
+        <h1 className="problem-title options">Options:</h1>
       </div>
       <div className="test-view-body">
         <div className="problem-wrapper">
