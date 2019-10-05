@@ -1,0 +1,62 @@
+.stepper {
+  &-wrapper {
+    display: flex;
+    counter-reset: stepper;
+    position: fixed;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+  }
+
+  &-item {
+    counter-increment: stepper;
+    height: 40px;
+    width: 40px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: $base-3;
+    border: 2px solid $base-3;
+    font-family: 'Segoe UI Light', sans-serif;
+    cursor: pointer;
+
+    &::before {
+      content: counter(stepper);
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      padding-bottom: 5px;
+    }
+
+    &.completed {
+      border-color: $primary-1;
+
+      &::before {
+        background-image: url("/images/check.svg");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        content: " ";
+        padding: 0;
+      }
+    }
+
+    &.current {
+      border-color: $primary-1;
+      color: $primary-1;
+      padding: 0;
+      cursor: default;
+    }
+  }
+
+  &-line {
+    height: 1px;
+    margin: 0 2px;
+    width: 20px;
+    position: relative;
+    top: 22px;
+    background-color: $base-3;
+  }
+}

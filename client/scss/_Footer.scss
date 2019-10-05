@@ -1,0 +1,20 @@
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min-content;
+
+  & > p:first-child {
+    letter-spacing: 5px;
+    font-size: 30px;
+
+    & + p {
+      text-align: right;
+      padding-right: 2px;
+      font-size: 20px;
+      letter-spacing: 5px;
+      color: $base-3;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "module": "esnext",
     "target": "esnext",
     "sourceMap": true,
     "strictNullChecks": true,

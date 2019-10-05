@@ -9,7 +9,7 @@ import { URLS } from './constants';
 export const MainLayout = (): React.ReactElement => (
   <div>
     <Router>
-      <Header />
+      <Route component={Header} />
       <Switch>
         <Route path={URLS.main} exact component={Main} />
         <Route path={URLS.statistics} component={Statistics} />

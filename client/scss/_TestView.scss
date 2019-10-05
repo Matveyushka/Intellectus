@@ -1,0 +1,101 @@
+.test-view {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+
+  &-separator {
+    width: 1px;
+    background-color: $primary-1;
+    margin: 0 10px;
+  }
+
+  &-header {
+    display: flex;
+    margin-top: 30px;
+  }
+
+  &-body {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    position: relative;
+  }
+
+  &-next-button {
+    display: flex;
+    align-self: center;
+    padding: 5px;
+    margin-left: 10px;
+    color: $primary-1;
+    font-family: "Segoe UI Light", sans-serif;
+    font-size: 20px;
+    position: absolute;
+    right: -100px;
+    cursor: pointer;
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.problem {
+  &-wrapper {
+    display: grid;
+    grid-template-areas:
+    "a b c"
+    "d e f"
+    "g h i";
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 8px;
+  }
+
+  &-title {
+    font-size: 25px;
+    flex-grow: 1;
+    font-family: "Segoe UI Light", sans-serif;
+    font-weight: normal;
+    color: $primary-1;
+    text-align: center;
+
+    &.options {
+      flex-grow: 0;
+      width: 245px;
+    }
+  }
+
+  &-cell {
+    width: 80px;
+    height: 80px;
+    border: 1px solid $primary-1;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+
+    &.clickable {
+      cursor: pointer;
+    }
+
+    &.selected {
+      cursor: default;
+      border-color: $base-2;
+      box-shadow: inset 0 0 0 1px $base-2;
+    }
+  }
+}
+
+.option {
+  &-wrapper {
+    display: grid;
+    grid-template-areas:
+    "a b"
+    "c d"
+    "e f";
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+  }
+}

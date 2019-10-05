@@ -12,6 +12,7 @@
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
     "semi": "error",
+    "function-paren-newline": ["error", "multiline-arguments"],
     "prefer-arrow/prefer-arrow-functions": "error",
     "prefer-arrow-callback": "error",
     "padding-line-between-statements": [
@@ -29,7 +30,9 @@
     "max-params": "error",
     "eqeqeq": ["error", "always", {"null": "ignore"}],
     "no-param-reassign": "error",
-    "indent": ["error", 2],
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
     "new-cap": "error",
     "no-nested-ternary": "error",
     "no-unneeded-ternary": "error",
