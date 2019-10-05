@@ -62,6 +62,12 @@ const realizeProblem = (problemType) => {
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
+  console.info(readyProblemDescription);
+
+  console.info(options);
+
+  console.info(rightOptionPosition);
+
   return {
     problems: convertToSvg(readyProblemDescription, problemType.convertToSvg, graphicsSeed),
     options: convertToSvg(options, problemType.convertToSvg, graphicsSeed),
