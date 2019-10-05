@@ -65,6 +65,7 @@ const realizeProblem = (problemType) => {
   return {
     problems: convertToSvg(readyProblemDescription, problemType.convertToSvg, graphicsSeed),
     options: convertToSvg(options, problemType.convertToSvg, graphicsSeed),
+
     rightOption: rightOptionPosition,
   };
 };
