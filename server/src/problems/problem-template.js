@@ -12,7 +12,7 @@ const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
 
 const convertToSvg = (array, converterToSvg, seed) => {
   const svgArray = array.map((item) => {
-    const svgOrNull = item != null
+    const svgOrNull = item !== null
       ? Buffer.from(converterToSvg(item, seed)).toString('base64')
       : null;
 
@@ -25,22 +25,32 @@ const convertToSvg = (array, converterToSvg, seed) => {
 const generateRandomSeed = () => Math.floor(Math.random() * 99);
 
 /** @exports */
-const createProblem = (
+const newProblemType = (
   problemDescriptionGenerator,
   wrongOptionsGenerator,
   converterToSvg,
-) => {
-  const fullProblemDescription = problemDescriptionGenerator();
+) => ({
+  generateTaskDescription: problemDescriptionGenerator,
+  generateWrongOptions: wrongOptionsGenerator,
+  convertToSvg: converterToSvg,
+});
+
+/** @exports */
+const realizeProblem = (problemType) => {
+  const fullProblemDescription = problemType.generateTaskDescription();
 
   const randomOption = chooseFieldAsRightOption(fullProblemDescription);
 
   const rightOption = fullProblemDescription[randomOption];
 
   const readyProblemDescription = fullProblemDescription.map((item, index) => (
-    index === rightOption ? null : item
+    index === randomOption ? null : item
   ));
 
-  const wrongOptions = createWrongOptions(wrongOptionsGenerator, readyProblemDescription);
+  const wrongOptions = createWrongOptions(
+    problemType.generateWrongOptions,
+    readyProblemDescription,
+  );
 
   const rightOptionPosition = Math.floor(Math.random() * (wrongOptions.length + 1));
 
@@ -52,19 +62,14 @@ const createProblem = (
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
-  console.info(readyProblemDescription);
-
-  console.info(options);
-
-  console.info(rightOptionPosition);
-
   return {
-    problems: convertToSvg(readyProblemDescription, converterToSvg, graphicsSeed),
-    options: convertToSvg(options, converterToSvg, graphicsSeed),
+    problems: convertToSvg(readyProblemDescription, problemType.convertToSvg, graphicsSeed),
+    options: convertToSvg(options, problemType.convertToSvg, graphicsSeed),
     rightOption: rightOptionPosition,
   };
 };
 
 module.exports = {
-  createProblem,
+  newProblemType,
+  realizeProblem,
 };

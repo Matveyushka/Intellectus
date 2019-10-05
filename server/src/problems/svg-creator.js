@@ -37,6 +37,13 @@ const newImage = (sourceImage = baseSvgTag) => ({
     .add(
       `<rect x="${x}" y="${y}" width="${width}" height="${height}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
     ),
+
+  ellipse: ({
+    x, y, width, height, color, borderWidth, borderColor,
+  }) => newImage(sourceImage)
+    .add(
+      `<ellipse cx="${x + width / 2}" cy="${y + height / 2}" rx="${width / 2}" ry="${height / 2}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+    ),
 });
 
 module.exports = {

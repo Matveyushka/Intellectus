@@ -5,7 +5,7 @@ const passedTestSchema = mongoose.Schema({
   elapsedTime: Number,
   points: Number,
   questions: [{
-    problem: [String],
+    problems: [String],
     options: [String],
     solutions: [String],
     answers: [String],
