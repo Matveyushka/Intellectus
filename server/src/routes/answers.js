@@ -55,11 +55,9 @@ router.post('/', async (req, res) => {
 
   await passedTest.insert(completedTest);
 
-  const statisticsToSend = await statistics.get();
-
   res.status(201).json({
     rightOptions,
-    statistics: statisticsToSend,
+    statistics: await statistics.get(),
   });
 });
 

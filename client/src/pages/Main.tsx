@@ -12,7 +12,6 @@ export const Main = (): React.ReactElement | null => {
   const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
   const [userAnswers, setUserAnswers] = React.useState<number[]>([]);
   const [rightAnswers, setRightAnswers] = React.useState<number[]>([]);
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [statistics, setStatistics] = React.useState<number[]>([]);
 
   const onFinishButtonClick = (token: string, answers: number[]): void => {
