@@ -22,7 +22,7 @@ Stepper and Header component
 ### SERVER
 ### Added
 - Express
-- index `/`, `/questions` and `/answers routes
+- index `/`, `/questions` and `/answers` routes
 - public folder for client static files
 - Utils, token and session handlers
 - Random generation of 2 problem types
