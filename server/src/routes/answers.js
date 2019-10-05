@@ -50,10 +50,7 @@ router.post('/', (req, res) => {
     },
   };
 
-
-  passedTest.insert(completedTest).then(r => console.info(r));
-
-  console.info('completedTest', completedTest);
+  passedTest.insert(completedTest).then(r => r);
 
   res.status(201).json({
     rightOptions,
