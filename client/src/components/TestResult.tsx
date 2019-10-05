@@ -3,14 +3,16 @@ import mergeClassNames from 'classnames';
 import { StatisticChart } from './StatisticChart';
 
 export interface TestResultProps {
-  statistics?: number[];
-  answers?: boolean[];
+  statistics: number[];
+  rightAnswers: number[];
+  userAnswers: number[];
 }
 
 export const TestResult = (props: TestResultProps): React.ReactElement => {
-  const { answers = [false, true, false], statistics = [0, 3, 6, 2] } = props;
+  const { userAnswers, rightAnswers, statistics = [0, 3, 6, 2] } = props;
 
-  const rightAnswersCount = answers.reduce((t, v) => (v ? t + 1 : t), 0);
+  const answers: boolean[] = userAnswers.map((v, i) => rightAnswers[i] === v);
+  const rightAnswersCount: number = answers.reduce((t, v) => (v ? t + 1 : t), 0);
 
   return (
     <div className="test-result">
