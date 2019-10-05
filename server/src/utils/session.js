@@ -1,5 +1,5 @@
 const session = {};
-const lifeTimeSession = 60000 * 5;
+const lifeTimeSession = 1000 * 60 * 60 * 5;
 const saveSession = (token, questions) => {
   session[token] = {
     questions,
