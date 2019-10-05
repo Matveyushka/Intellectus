@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import * as React from 'react';
 
 import mergeClassNames from 'classnames';
 
@@ -16,7 +16,7 @@ export const StatisticChart = (props: StaticChartProps): React.ReactElement => {
   return (
     <div className="stats">
       {rows.map((value, index) => {
-        const rowStyle: CSSProperties = {
+        const rowStyle: React.CSSProperties = {
           height: `${(chartMaxHeight * value) / Math.max(...rows) + chartMinHeight}%`,
           width: `${chartWidth / rows.length}%`,
         };

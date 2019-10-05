@@ -10,7 +10,7 @@ import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 
 export interface TestViewProps {
-  onFinishButtonClick: () => void;
+  onFinishButtonClick: (token: string, answers: number[]) => void;
   userAnswers: number[];
   onUserAnswersUpdate: (newAnswers: number[]) => void;
 }
@@ -33,8 +33,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
   const [questions, setQuestions] = React.useState<Question[] | null>(null);
 
   const [selectedOptionIndex, setSelectedOptionIndex] = React.useState<number | null>(null);
-  // TODO: использовать токен
-  // eslint-disable-next-line no-unused-vars
+
   const [token, setToken] = React.useState<string>('');
 
   React.useEffect(() => {
@@ -59,16 +58,15 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
 
   const handleNextTaskButtonClick = (): void => {
     if (_.isNil(selectedOptionIndex)) return;
+    const newAnswers = [...userAnswers, selectedOptionIndex];
 
     if (stepIndex === stepperData.length - 1) {
-      onUserAnswersUpdate([...userAnswers, selectedOptionIndex]);
-
-      onFinishButtonClick();
+      onFinishButtonClick(token, newAnswers);
 
       return;
     }
 
-    onUserAnswersUpdate([...userAnswers, selectedOptionIndex]);
+    onUserAnswersUpdate(newAnswers);
 
     setStepperData(stepperData.map((item, index) => {
       if (index === stepIndex) {
@@ -94,9 +92,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
       </div>
       <div className="test-view-body">
         <div className="problem-wrapper">
-          <ProblemTable
-            problems={currentProblems}
-          />
+          <ProblemTable problems={currentProblems} />
         </div>
         <div className="test-view-separator" />
         <div className="option-wrapper">
@@ -116,10 +112,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
           </button>
         )}
       </div>
-      <Stepper
-        data={stepperData}
-        value={stepperData[stepIndex]}
-      />
+      <Stepper data={stepperData} value={stepperData[stepIndex]} />
     </div>
   );
 };

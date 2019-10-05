@@ -36,10 +36,9 @@ module.exports = env => merge(commonConfig, {
       aggregateTimeout: 300,
       poll: 1000,
     },
-    proxy: {
-      '/questions': {
-        target: 'http://localhost:9000/',
-      },
-    },
+    proxy: [{
+      context: ['/questions', '/answers'],
+      target: 'http://localhost:9000/',
+    }],
   },
 });

@@ -17,7 +17,7 @@ const insert = async (test) => {
 
     session.endSession();
 
-    console.info('passed_test saved: ', passedTest);
+    console.info('passed_test saved');
   } catch (err) {
     console.error(`passed_test save failed: ${err}`);
 

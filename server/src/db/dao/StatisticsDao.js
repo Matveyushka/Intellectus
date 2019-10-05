@@ -21,7 +21,7 @@ const incPoint = async (point) => {
 
     await Statistics.update(statistics);
 
-    console.info('statistics updated: ', statistics);
+    console.info('statistics updated');
   } catch (err) {
     console.error(`Increment statistics point failed: ${err}`);
     throw err;
