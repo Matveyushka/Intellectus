@@ -1,21 +1,39 @@
-const easyProblem = require('./easy-problem-creator');
 
-/*
- *  Пока готов только один генератор задач - он работает на все
- *  уровни сложности
- */
-const createProblemWithLevel = {
-  e: easyProblem.createProblem,
-  easy: easyProblem.createProblem,
-  m: easyProblem.createProblem,
-  medium: easyProblem.createProblem,
-  h: easyProblem.createProblem,
-  hard: easyProblem.createProblem,
+const problemTemplate = require('./problem-template');
+
+const missingElementProblem = require('./problem-types/missing-element-problem');
+const equalAmountEasyProblem = require('./problem-types/equal-amount-easy-problem');
+const bitwiseProblem = require('./problem-types/bitwise-problem');
+
+const easyProblems = [
+  missingElementProblem,
+];
+
+const mediumProblems = [
+  equalAmountEasyProblem,
+];
+
+const hardProblems = [
+  bitwiseProblem,
+];
+
+const levels = {
+  e: easyProblems,
+  easy: easyProblems,
+  m: mediumProblems,
+  medium: mediumProblems,
+  h: hardProblems,
+  hard: hardProblems,
 };
 
 /** @exports */
 const createProblemsPack = (problemsLevels) => {
-  const problemsPack = problemsLevels.map(item => createProblemWithLevel[item]());
+  const problemsPack = problemsLevels.map((level) => {
+    const numberOfProblemInArray = Math.floor(Math.random() * levels[level].length);
+    const choosedProblem = levels[level][numberOfProblemInArray];
+
+    return problemTemplate.realizeProblem(choosedProblem);
+  });
 
   return problemsPack;
 };
