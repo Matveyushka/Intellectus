@@ -6,7 +6,7 @@ const testPack = require('../utils/testPack');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { answers, token } = req.body;
 
   if (!(answers && token)) {
@@ -36,25 +36,30 @@ router.post('/', (req, res) => {
 
     return;
   }
+
+  const questionsToSend = test.questions.map( (problem, index) => ({
+    problems: problem.problems,
+    options: problem.options,
+    solution: problem.rightOption,
+    answer: answers[index],
+  }));
+
   const rightOptions = testPack.getRightOptions(test);
   const points = testPack.getNumberOfCorrectAnswers(rightOptions, answers);
   const completedTest = {
     token,
     elapsedTime: session.getTimeSession(token),
     points,
-    questions: {
-      problems: testPack.getProblems(test),
-      options: testPack.getOptions(test),
-      solutions: rightOptions,
-      answers,
-    },
+    questions: questionsToSend,
   };
 
-  passedTest.insert(completedTest).then(r => r);
+  await passedTest.insert(completedTest);
+
+  const statisticsToSend = await statistics.get();
 
   res.status(201).json({
     rightOptions,
-    statistics: statistics.get(),
+    statistics: statisticsToSend,
   });
 });
 

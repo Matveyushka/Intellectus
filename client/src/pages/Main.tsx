@@ -26,6 +26,8 @@ export const Main = (): React.ReactElement | null => {
 
         setRightAnswers(res.data.rightOptions);
 
+        setStatistics(res.data.statistics);
+
         setCurrentView(MAIN_VIEW_TYPES.results);
       })
       .catch((err: Error) => {

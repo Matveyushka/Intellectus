@@ -7,8 +7,8 @@ const passedTestSchema = mongoose.Schema({
   questions: [{
     problems: [String],
     options: [String],
-    solutions: [String],
-    answers: [String],
+    solution: Number,
+    answer: Number,
   }],
 });
 
