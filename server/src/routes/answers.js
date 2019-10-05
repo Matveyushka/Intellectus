@@ -7,10 +7,7 @@ const testPack = require('../utils/testPack');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  const { answers } = req.body;
-  const { token } = req.body;
-
-  console.info();
+  const { answers, token } = req.body;
 
   if (!(answers && token)) {
     res.status(400).json({

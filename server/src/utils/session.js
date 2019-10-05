@@ -7,7 +7,7 @@ const saveSession = (token, questions) => {
   };
 
   setTimeout(() => {
-    delete session[token];
+    session[token] = undefined;
   }, lifeTimeSession);
 };
 const getSession = (token) => {
