@@ -12,7 +12,7 @@ Cypress.Commands.add('postAnswers', (req = 'fx:answers-req', resp = 'fx:answers-
   cy.route({
     method: 'POST',
     url: '/answers',
-    status: 200,
+    status: 201,
     request: req,
     response: resp
   });
