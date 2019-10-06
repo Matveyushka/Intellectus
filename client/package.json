@@ -10,7 +10,8 @@
     "build": "webpack --mode=production --config webpack.prod.config.js",
     "lint": "eslint src --ext .ts,.tsx",
     "sass": "node-sass scss/main.scss dist/styles.css",
-    "sass:watch": "node-sass --watch scss/main.scss dist/styles.css"
+    "sass:watch": "node-sass --watch scss/main.scss dist/styles.css",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
     "circular-dependency-plugin": "^5.2.0",
+    "cypress": "^3.4.1",
     "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
