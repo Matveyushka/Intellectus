@@ -1,18 +1,19 @@
-Cypress.Commands.add('getQuestions', (questions = 'fuxture:questions') => {
-    cy.server();
-    cy.route({
-        method: 'GET',
-        url: '/api/questions',
-        response: questions
-    });
+Cypress.Commands.add('getQuestions', (questions = 'fx:questions') => {
+  cy.server();
+  cy.route({
+    method: 'GET',
+    url: '/questions',
+    response: questions
+  });
 })
 
-Cypress.Commands.add('postAnswers', (answers = 'fixture:answers') => {
-    cy.server();
-    cy.route({
-        method: 'POST',
-        url: '/api/answers',
-        status: 200,
-        response: answers
-    });
+Cypress.Commands.add('postAnswers', (req = 'fx:answers-req', resp = 'fx:answers-resp') => {
+  cy.server();
+  cy.route({
+    method: 'POST',
+    url: '/answers',
+    status: 200,
+    request: req,
+    response: resp
+  });
 })

@@ -2,6 +2,7 @@ const next = 'Next';
 
 beforeEach(() => {
   cy.visit('/');
+  // cy.getQuestions();
   cy.get('.play-icon').click();
 })
 
@@ -22,6 +23,7 @@ it('After 12 answers, finish button should appear', () => {
 
 it('Clicking Finish button shows statistics', () => {
   passTest();
+  // cy.postAnswers();
   cy.get('.test-view-next-button').click();
   cy.get('.stats').should('be.visible');
 })
