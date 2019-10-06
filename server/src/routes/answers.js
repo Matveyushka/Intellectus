@@ -37,6 +37,17 @@ router.post('/', async (req, res) => {
     return;
   }
 
+  if (test.finished) {
+    res.status(404).json({
+      error: true,
+      message: 'Тест уже завершён.',
+    });
+
+    return;
+  }
+
+  session.finishSession(token);
+
   const questionsToSend = test.questions.map((problem, index) => ({
     problems: problem.problems,
     options: problem.options,
