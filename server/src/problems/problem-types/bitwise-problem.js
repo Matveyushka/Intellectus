@@ -21,8 +21,8 @@ const maxNumberIn9Bits = 512;
 
 const generateTaskDescription = () => {
   const generateField = (excludedVariant = 0) => {
-    //  Единицы для того, чтобы исключить генерацию крайних значений - 0 и 511
-    const field = Math.floor(Math.random() * (maxNumberIn9Bits - 1)) + 1;
+    //  Минус два и плюс один, чтобы исключить генерацию крайних значений - 0 и 511
+    const field = Math.floor(Math.random() * (maxNumberIn9Bits - 2)) + 1;
 
     const isExcluded = field === excludedVariant;
     const isSelfSufficient = (excludedVariant !== 0
