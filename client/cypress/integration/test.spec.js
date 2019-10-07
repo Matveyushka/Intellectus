@@ -56,7 +56,7 @@ describe('UI', () => {
   }
 })
 
-describe.only('Requests', () => {
+describe('Requests', () => {
   it('Get right answers for valid token and answers', () => {
     cy.request('GET', '/questions')
       .then(resp => {

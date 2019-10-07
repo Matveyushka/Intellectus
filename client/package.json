@@ -11,7 +11,8 @@
     "lint": "eslint src --ext .ts,.tsx",
     "sass": "node-sass scss/main.scss dist/styles.css",
     "sass:watch": "node-sass --watch scss/main.scss dist/styles.css",
-    "cypress": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",
