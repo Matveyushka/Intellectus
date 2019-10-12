@@ -9,7 +9,7 @@ type of request: GET
 	"token": "string",
 	"questions": [
 		{
-			"problems": [
+			"problemFields": [
 				"svg or link",
 				"svg or link",
 				...
@@ -45,13 +45,13 @@ type of request: POST
 ```
 *** RETURNS ***
 {
-	"rightAnswers": [
+	"solutions": [
 		0,
 		2,
 		...
 		2
 	],
-	"statistics": [
+	"pointsDistribution": [
 		15,
 		26,
 		...
@@ -81,7 +81,7 @@ type of request: POST
 	"email": "string",
 	"token": "string",
 	"body": "string",
-	"numOfQuestion": 10
+	"numberOfQuestion": 10
 }
 ```
 statistics/  
@@ -90,7 +90,9 @@ type of request: GET
 ```
 *** RETURNS ***
 {
-	"statistics": [
+	"passedTestsCounter": 152,
+	"averageTime": 879,
+	"pointsDistribution": [
 		15,
 		26,
 		...
