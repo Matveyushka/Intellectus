@@ -13,7 +13,7 @@ const get = async () => {
   }
 };
 
-const incPointsDistributionPoint = async (points) => {
+const increasePointsDistributionAt = async (points) => {
   try {
     const statistics = new Statistics(await Statistics.findOne());
 
@@ -28,4 +28,4 @@ const incPointsDistributionPoint = async (points) => {
   }
 };
 
-module.exports = { get, incPointsDistributionPoint };
+module.exports = { get, increasePointsDistributionAt };

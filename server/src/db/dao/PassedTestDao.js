@@ -11,7 +11,7 @@ const insert = async (test) => {
   try {
     await passedTest.save();
 
-    await statisticsDao.incPointsDistributionPoint(passedTest.points);
+    await statisticsDao.increasePointsDistributionAt(passedTest.points);
 
     await session.commitTransaction();
 
