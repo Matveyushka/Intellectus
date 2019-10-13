@@ -97,6 +97,12 @@ type of request: GET
 		26,
 		...
 		17
+	],
+	"averageTimeDistribution": [
+		12723,
+		28641,
+		...
+		412783
 	]
 } 
 ```
