@@ -57,7 +57,7 @@ describe('UI', () => {
 })
 
 describe('Requests', () => {
-  it('Get right answers for valid token and answers', () => {
+  it('Get solutions for valid token and answers', () => {
     cy.request('GET', '/questions')
       .then(resp => {
         cy.request({

@@ -17,7 +17,7 @@ export interface TestViewProps {
 
 export interface Question {
   token: string;
-  problems: string[];
+  problemFields: string[];
   options: string[];
 }
 
@@ -48,7 +48,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
       });
   }, []);
 
-  const currentProblems = questions ? questions[stepIndex].problems : [];
+  const currentProblemFields = questions ? questions[stepIndex].problemFields : [];
 
   const currentOptions = questions ? questions[stepIndex].options : [];
 
@@ -92,7 +92,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
       </div>
       <div className="test-view-body">
         <div className="problem-wrapper">
-          <ProblemTable problems={currentProblems} />
+          <ProblemTable problemFields={currentProblemFields} />
         </div>
         <div className="test-view-separator" />
         <div className="option-wrapper">

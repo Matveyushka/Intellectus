@@ -11,8 +11,8 @@ type ViewTypes = Values<typeof MAIN_VIEW_TYPES>;
 export const Main = (): React.ReactElement | null => {
   const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
   const [userAnswers, setUserAnswers] = React.useState<number[]>([]);
-  const [rightAnswers, setRightAnswers] = React.useState<number[]>([]);
-  const [statistics, setStatistics] = React.useState<number[]>([]);
+  const [solutions, setSolutions] = React.useState<number[]>([]);
+  const [pointsDistribution, setPointsDistribution] = React.useState<number[]>([]);
 
   const onFinishButtonClick = (token: string, answers: number[]): void => {
     axios
@@ -23,9 +23,9 @@ export const Main = (): React.ReactElement | null => {
       .then((res) => {
         setUserAnswers(answers);
 
-        setRightAnswers(res.data.rightOptions);
+        setSolutions(res.data.solutions);
 
-        setStatistics(res.data.statistics);
+        setPointsDistribution(res.data.pointsDistribution);
 
         setCurrentView(MAIN_VIEW_TYPES.results);
       })
@@ -55,8 +55,8 @@ export const Main = (): React.ReactElement | null => {
       return (
         <TestResult
           userAnswers={userAnswers}
-          rightAnswers={rightAnswers}
-          statistics={statistics}
+          solutions={solutions}
+          pointsDistribution={pointsDistribution}
         />
       );
     }

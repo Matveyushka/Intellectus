@@ -18,9 +18,9 @@ The problems/questions is an array of form:
 ```
 [
 	{
-		problem: [ strings ]
+		problemFields: [ strings ]
 		options: [ strings ]
-		rightAnswer: number
+		solution: number
 	},
 	...
 ]

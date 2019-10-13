@@ -6,18 +6,18 @@ const get = async () => {
   try {
     statistics = new Statistics(await Statistics.findOne());
 
-    return statistics.frequencyDistribution;
+    return statistics.pointsDistribution;
   } catch (err) {
     console.error(`Get statistics failed: ${err}`);
     throw err;
   }
 };
 
-const incPoint = async (point) => {
+const increasePointsDistributionAt = async (points) => {
   try {
     const statistics = new Statistics(await Statistics.findOne());
 
-    statistics.frequencyDistribution[point] += 1;
+    statistics.pointsDistribution[points] += 1;
 
     await Statistics.update(statistics);
 
@@ -28,4 +28,4 @@ const incPoint = async (point) => {
   }
 };
 
-module.exports = { get, incPoint };
+module.exports = { get, increasePointsDistributionAt };

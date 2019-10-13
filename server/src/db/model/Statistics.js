@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const statisticsSchema = mongoose.Schema({
-  frequencyDistribution: [Number],
+  pointsDistribution: [Number],
 });
 
 const Statistics = mongoose.model('statistics', statisticsSchema);

@@ -1,10 +1,10 @@
-const getRightOptions = testPack => testPack.questions.map(item => item.rightOption);
-const getProblems = testPack => testPack.questions.map(item => item.problems);
+const getSolutions = testPack => testPack.questions.map(item => item.solution);
+const getProblemFields = testPack => testPack.questions.map(item => item.problemFields);
 const getOptions = testPack => testPack.questions.map(item => item.options);
 
 
 const clientTestPack = testPack => testPack
-  .map(task => ({ problems: task.problems, options: task.options }));
+  .map(task => ({ problemFields: task.problemFields, options: task.options }));
 
 const getNumberOfCorrectAnswers = (correctAnswers, userAnswers) => userAnswers
   .filter((userAnswer, indexOfAnswer) => userAnswer === correctAnswers[indexOfAnswer]).length;
@@ -12,7 +12,7 @@ const getNumberOfCorrectAnswers = (correctAnswers, userAnswers) => userAnswers
 module.exports = {
   clientTestPack,
   getNumberOfCorrectAnswers,
-  getRightOptions,
-  getProblems,
+  getSolutions,
+  getProblemFields,
   getOptions,
 };

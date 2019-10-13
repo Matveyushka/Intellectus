@@ -26,9 +26,9 @@ router.post('/', async (req, res) => {
 
     return;
   }
-  const test = session.getSession(token);
+  const processedSession = session.getSession(token);
 
-  if (!test) {
+  if (!processedSession) {
     res.status(404).json({
       error: true,
       message: 'Данные теста не найдены.',
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  if (test.finished) {
+  if (processedSession.finished) {
     res.status(404).json({
       error: true,
       message: 'Тест уже завершён.',
@@ -48,17 +48,20 @@ router.post('/', async (req, res) => {
 
   session.finishSession(token);
 
-  const questionsToSend = test.questions.map((problem, index) => ({
-    problems: problem.problems,
-    options: problem.options,
-    solution: problem.rightOption,
+  const questionsToSend = processedSession.questions.map((question, index) => ({
+    problemFields: question.problemFields,
+    options: question.options,
+    solution: question.solution,
     answer: answers[index],
   }));
 
-  const rightOptions = testPack.getRightOptions(test);
-  const points = testPack.getNumberOfCorrectAnswers(rightOptions, answers);
+  const solutions = testPack.getSolutions(processedSession);
+
+  const points = testPack.getNumberOfCorrectAnswers(solutions, answers);
+
   const completedTest = {
     token,
+    completionTimestamp: new Date(),
     elapsedTime: session.getTimeSession(token),
     points,
     questions: questionsToSend,
@@ -67,8 +70,8 @@ router.post('/', async (req, res) => {
   await passedTest.insert(completedTest);
 
   res.status(201).json({
-    rightOptions,
-    statistics: await statistics.get(),
+    solutions,
+    pointsDistribution: await statistics.get(),
   });
 });
 

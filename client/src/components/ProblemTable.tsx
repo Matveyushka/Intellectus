@@ -5,15 +5,15 @@ import * as React from 'react';
 import { toDataURL } from '../helpers';
 
 export interface ProblemTableProps {
-  problems: (string | null)[];
+  problemFields: (string | null)[];
 }
 
 export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
-  const { problems } = props;
+  const { problemFields } = props;
 
   return (
     <>
-      {problems.map((item, index) => (item
+      {problemFields.map((item, index) => (item
         ? (
           <img
             className="problem-cell"
