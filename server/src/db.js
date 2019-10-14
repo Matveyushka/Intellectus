@@ -10,9 +10,11 @@ const initializeStatistics = async () => Statistics.create({
 });
 
 const recalculateStatistics = async (passedTest) => {
-  const recalculateAverage = (currentValue, counter, increment) =>
-    // eslint-disable-next-line implicit-arrow-linebreak
-    Math.round((currentValue * counter + increment) / (counter + 1));
+  const recalculateAverage = (
+    currentValue,
+    counter,
+    increment,
+  ) => Math.round((currentValue * counter + increment) / (counter + 1));
 
   let statistics = await Statistics.findOne();
 

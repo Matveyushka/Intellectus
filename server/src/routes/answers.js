@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../db/db');
+const db = require('../db');
 const session = require('../utils/session');
 const testPack = require('../utils/testPack');
 
