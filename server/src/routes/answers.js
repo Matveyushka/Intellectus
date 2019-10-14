@@ -1,6 +1,5 @@
 const express = require('express');
-const statistics = require('../db/dao/StatisticsDao');
-const passedTest = require('../db/dao/PassedTestDao');
+const db = require('../db/db');
 const session = require('../utils/session');
 const testPack = require('../utils/testPack');
 
@@ -67,11 +66,12 @@ router.post('/', async (req, res) => {
     questions: questionsToSend,
   };
 
-  await passedTest.insert(completedTest);
+  await db.savePassedTest(completedTest);
+  const statistics = await db.getStatistics();
 
   res.status(201).json({
     solutions,
-    pointsDistribution: await statistics.get(),
+    pointsDistribution: statistics.pointsDistribution,
   });
 });
 
