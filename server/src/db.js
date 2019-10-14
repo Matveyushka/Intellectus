@@ -9,16 +9,14 @@ const initializeStatistics = async () => Statistics.create({
   averageTimeDistribution: Array(13).fill(0),
 });
 
-const recalculateStatistics = async (passedTest) => {
+const recalculateStatistics = async (passedTest, opts) => {
   const recalculateAverage = (
     currentValue,
     counter,
     increment,
   ) => Math.round((currentValue * counter + increment) / (counter + 1));
 
-  let statistics = await Statistics.findOne();
-
-  if (!statistics) statistics = await initializeStatistics();
+  const statistics = await Statistics.findOne();
 
   const newPassedTestsCounter = statistics.passedTestsCounter + 1;
 
@@ -42,15 +40,23 @@ const recalculateStatistics = async (passedTest) => {
     passedTest.elapsedTime,
   );
 
-  await Statistics.update({}, {
+  await Statistics.updateOne(statistics, {
     passedTestsCounter: newPassedTestsCounter,
     averageTime: newAverageTime,
     pointsDistribution: newPointsDistribution,
     averageTimeDistribution: newAverageTimeDistribution,
-  });
+  }, opts);
 };
 
 /** @exports */
+const initializeDB = async () => {
+  await PassedTest.createCollection();
+
+  await Statistics.createCollection();
+
+  if (!await Statistics.findOne()) await initializeStatistics();
+};
+
 const savePassedTest = async (test) => {
   const passedTest = new PassedTest(test);
 
@@ -58,25 +64,25 @@ const savePassedTest = async (test) => {
 
   session.startTransaction();
   try {
-    await passedTest.save();
+    const opts = { session };
 
-    await recalculateStatistics(passedTest);
+    await passedTest.save(opts);
+
+    await recalculateStatistics(passedTest, opts);
 
     await session.commitTransaction();
-
-    session.endSession();
 
     console.info('passed_test saved');
   } catch (err) {
     console.error(`passed_test save failed: ${err}`);
 
     await session.abortTransaction();
-
-    session.endSession();
     throw err;
+  } finally {
+    session.endSession();
   }
 };
 
 const getStatistics = () => Statistics.findOne();
 
-module.exports = { savePassedTest, getStatistics };
+module.exports = { initializeDB, savePassedTest, getStatistics };
