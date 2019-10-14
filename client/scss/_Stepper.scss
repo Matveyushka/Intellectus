@@ -2,10 +2,7 @@
   &-wrapper {
     display: flex;
     counter-reset: stepper;
-    position: fixed;
-    left: 50%;
-    bottom: 50px;
-    transform: translateX(-50%);
+    margin: auto auto 20px auto;
   }
 
   &-item {
@@ -35,6 +32,19 @@
 
       &::before {
         background-image: url("/images/check.svg");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        content: " ";
+        padding: 0;
+      }
+    }
+
+    &.failed {
+      border-color: $base-3;
+
+      &::before {
+        background-image: url("/images/cross.svg");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
