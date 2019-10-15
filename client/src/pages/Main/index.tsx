@@ -22,26 +22,38 @@ export interface AnswersFetchResult {
 export const Main = (): React.ReactElement | null => {
   const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
   const [userAnswers, setUserAnswers] = React.useState<number[]>([]);
+  const [shouldFetchQuestions, setShouldFetchQuestions] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [shouldFetchAnswers, setShouldFetchAnswers] = React.useState<boolean>(false);
 
-  const [isTestLoading, { token, questions }] = useFetch<QuestionsFetchResult>(
-    '/questions',
-    currentView === MAIN_VIEW_TYPES.test,
-  );
-  const [isResultLoading, { solutions, pointsDistribution }] = useFetch<AnswersFetchResult>(
-    '/answers',
-    shouldFetchAnswers,
-    { method: 'post', data: { token, answers: userAnswers } },
-  );
-
-  const isLoading = isTestLoading || isResultLoading;
+  const { token, questions } = useFetch<QuestionsFetchResult>({
+    url: '/questions',
+    shouldFetch: shouldFetchQuestions,
+    onLoad: () => setIsLoading(false),
+  });
+  const { solutions, pointsDistribution } = useFetch<AnswersFetchResult>({
+    url: '/answers',
+    shouldFetch: shouldFetchAnswers,
+    onLoad: () => setIsLoading(false),
+    config: { method: 'post', data: { token, answers: userAnswers } },
+  });
 
   const onFinishButtonClick = (answers: number[]): void => {
     setUserAnswers(answers);
 
+    setShouldFetchAnswers(true);
+
     setCurrentView(MAIN_VIEW_TYPES.results);
 
-    setShouldFetchAnswers(true);
+    setIsLoading(true);
+  };
+
+  const handlePlayButtonClick = (): void => {
+    setShouldFetchQuestions(true);
+
+    setCurrentView(MAIN_VIEW_TYPES.test);
+
+    setIsLoading(true);
   };
 
   if (isLoading) return <Loader />;
@@ -50,7 +62,7 @@ export const Main = (): React.ReactElement | null => {
     case MAIN_VIEW_TYPES.intro: {
       return (
         <IntroView
-          onPlayButtonClick={() => setCurrentView(MAIN_VIEW_TYPES.test)}
+          onPlayButtonClick={handlePlayButtonClick}
         />
       );
     }
