@@ -19,8 +19,8 @@ export const IntroView = (props: IntroViewProps): React.ReactElement => {
           title="Start test!"
           onClick={onPlayButtonClick}
         />
-        <Footer />
       </main>
+      <Footer />
       <button type="button" title="Share this site with your friends!" className="share-icon" />
     </>
   );
