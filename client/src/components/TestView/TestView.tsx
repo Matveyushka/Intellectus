@@ -1,8 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import * as React from 'react';
-import axios from 'axios';
 import * as _ from 'lodash';
 import { StepItem, Stepper } from '../Stepper';
 import { generateInitialStepperData } from './helpers';
@@ -10,9 +6,10 @@ import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 
 export interface TestViewProps {
-  onFinishButtonClick: (token: string, answers: number[]) => void;
+  onFinishButtonClick: (answers: number[]) => void;
   userAnswers: number[];
   onUserAnswersUpdate: (newAnswers: number[]) => void;
+  questions?: Question[] | null;
 }
 
 export interface Question {
@@ -24,29 +21,15 @@ export interface Question {
 const stepperInitialData = generateInitialStepperData();
 
 export const TestView = (props: TestViewProps): React.ReactElement => {
-  const { onFinishButtonClick, userAnswers, onUserAnswersUpdate } = props;
+  const {
+    onFinishButtonClick, userAnswers, onUserAnswersUpdate, questions,
+  } = props;
 
   const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
 
   const [stepIndex, setStepIndex] = React.useState<number>(0);
 
-  const [questions, setQuestions] = React.useState<Question[] | null>(null);
-
   const [selectedOptionIndex, setSelectedOptionIndex] = React.useState<number | null>(null);
-
-  const [token, setToken] = React.useState<string>('');
-
-  React.useEffect(() => {
-    axios.get('/questions')
-      .then((res) => {
-        setToken(res.data.token);
-
-        setQuestions(res.data.questions);
-      })
-      .catch((err: Error) => {
-        throw err;
-      });
-  }, []);
 
   const currentProblemFields = questions ? questions[stepIndex].problemFields : [];
 
@@ -61,7 +44,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
     const newAnswers = [...userAnswers, selectedOptionIndex];
 
     if (stepIndex === stepperData.length - 1) {
-      onFinishButtonClick(token, newAnswers);
+      onFinishButtonClick(newAnswers);
 
       return;
     }
@@ -86,31 +69,38 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
 
   return (
     <div className="test-view">
-      <div className="test-view-header">
-        <h1 className="problem-title">Problem:</h1>
-        <h1 className="problem-title options">Options:</h1>
-      </div>
-      <div className="test-view-body">
-        <div className="problem-wrapper">
-          <ProblemTable problemFields={currentProblemFields} />
+      <div className="test-view-layout">
+        <div className="test-view-aside" />
+        <div className="test-view-content">
+          <div className="test-view-header">
+            <h1 className="problem-title">Problem:</h1>
+            <h1 className="problem-title options">Options:</h1>
+          </div>
+          <div className="test-view-body">
+            <div className="problem-wrapper">
+              <ProblemTable problemFields={currentProblemFields} />
+            </div>
+            <div className="test-view-separator" />
+            <div className="option-wrapper">
+              <OptionTable
+                options={currentOptions}
+                selectedIndex={selectedOptionIndex}
+                onSelect={handleOptionSelect}
+              />
+            </div>
+          </div>
         </div>
-        <div className="test-view-separator" />
-        <div className="option-wrapper">
-          <OptionTable
-            options={currentOptions}
-            selectedIndex={selectedOptionIndex}
-            onSelect={handleOptionSelect}
-          />
+        <div className="test-view-aside">
+          {!_.isNil(selectedOptionIndex) && (
+            <button
+              type="button"
+              className="test-view-next-button"
+              onClick={handleNextTaskButtonClick}
+            >
+              {stepIndex === stepperData.length - 1 ? 'Finish' : 'Next'}
+            </button>
+          )}
         </div>
-        {!_.isNil(selectedOptionIndex) && (
-          <button
-            type="button"
-            className="test-view-next-button"
-            onClick={handleNextTaskButtonClick}
-          >
-            {stepIndex === stepperData.length - 1 ? 'Finish' : 'Next'}
-          </button>
-        )}
       </div>
       <Stepper data={stepperData} value={stepperData[stepIndex]} />
     </div>

@@ -5,17 +5,18 @@ import { URLS } from '../constants';
 
 export interface HeaderProps {
   location: Location;
+  onBackToMainPageClick: () => void;
 }
 
 export const Header = (props: HeaderProps): React.ReactElement => {
-  const { location: { pathname } } = props;
+  const { location: { pathname }, onBackToMainPageClick } = props;
 
   return (
     <nav className="header-container">
       <h1
         className={mergeClassNames('header-item', { active: pathname === URLS.main })}
       >
-        <NavLink to={URLS.main} exact>
+        <NavLink to={`${URLS.main}`} onClick={onBackToMainPageClick} exact>
             MAIN
         </NavLink>
       </h1>

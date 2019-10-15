@@ -1,8 +1,26 @@
 .test-view {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
-  width: fit-content;
-  margin: auto;
+  width: 100%;
+
+  &-layout {
+    display: flex;
+    height: 100%;
+  }
+
+  &-content {
+    margin: auto;
+    // TODO: починить, когда изменится layout
+    padding-bottom: 48px;
+  }
+
+  &-aside {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+  }
 
   &-separator {
     width: 1px;
@@ -12,7 +30,6 @@
 
   &-header {
     display: flex;
-    margin-top: 30px;
   }
 
   &-body {
@@ -26,12 +43,10 @@
     display: flex;
     align-self: center;
     padding: 5px;
-    margin-left: 10px;
+    margin: 0 auto;
     color: $primary-1;
     font-family: "Segoe UI Light", sans-serif;
     font-size: 20px;
-    position: absolute;
-    right: -100px;
     cursor: pointer;
     transition: transform 1s;
 

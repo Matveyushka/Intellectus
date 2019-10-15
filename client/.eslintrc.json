@@ -69,7 +69,13 @@
     "no-nested-ternary": "error",
     "no-unneeded-ternary": "error",
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
-    "prefer-const": "error"
+    "prefer-const": "error",
+    // не поддерживаем WAI-ARIA
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/alt-text": "off",
+    "jsx-a11y/control-has-associated-label": "off"
   },
   "settings": {
     "import/resolver": {
