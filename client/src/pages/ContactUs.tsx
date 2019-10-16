@@ -8,6 +8,8 @@ export const ContactUs = (): React.ReactElement | null => {
 
   const [textareaLength, setTextareaLength] = React.useState<number>(0);
 
+  const maxTextAreaLength = 300;
+
   const onTextareaChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ): void => {
@@ -94,12 +96,14 @@ export const ContactUs = (): React.ReactElement | null => {
                   placeholder="Body"
                   name="body"
                   onChange={onTextareaChange}
+                  maxLength={maxTextAreaLength}
                   ref={register({ required: true })}
                 />
                 <div className="send-form">
                   <div className="area-count">
                     {textareaLength}
-                    &nbsp;/ 300
+                    &nbsp;/&nbsp;
+                    {maxTextAreaLength}
                   </div>
                   <button type="submit" className="send-btn">
                     <i className="plane-icon" />
