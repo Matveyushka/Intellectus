@@ -65,7 +65,7 @@ export const ContactUs = (): React.ReactElement | null => {
                 ref={register({
                   required: 'Email required',
                   pattern: {
-                    value: /\S+@\S+\.\S+/,
+                    value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/,
                     message: 'Email should looks like email',
                   },
                 })}
