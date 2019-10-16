@@ -92,6 +92,11 @@
             display: inline-block;
             background-image: url('/images/plane.svg');
             background-size: cover;
+            transition: 0.2s;
+          }
+          
+          &:hover .plane-icon {
+            transform: scale(1.1);
           }
         }
       }
