@@ -1,7 +1,7 @@
 .contact-form {
-  width: 35%;
   font-size: 19px;
   margin-top: 10px;
+  width: 100%;
 
   .input-field {
     display: flex;
@@ -12,6 +12,10 @@
 
       .label-title {
         padding: 10px 10px 4px 10px;
+
+        .label-error{
+          color: $error-1;
+        }
       }
 
       .input-text {
