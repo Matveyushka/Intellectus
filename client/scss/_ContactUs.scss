@@ -1,3 +1,7 @@
+.error {
+  color: $error-1;
+}
+
 .contact-form {
   font-size: 19px;
   margin-top: 10px;
@@ -94,7 +98,7 @@
             background-size: cover;
             transition: 0.2s;
           }
-          
+
           &:hover .plane-icon {
             transform: scale(1.1);
           }
