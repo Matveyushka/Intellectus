@@ -15,11 +15,8 @@ describe('Test statistics', () => {
 
   it('The histogram should highlight the current column', () => {
     for (let i = 0; i <= 12; i++) {
-      if (i !== 5) {
-        cy.get('.stats').children().eq(i).should('not.have.class', 'selected');
-      } else {
-        cy.get('.stats').children().eq(i).should('have.class', 'selected');
-      }
+      cy.get('.stats').children().eq(i)
+        .should(i !== 5 ? 'not.have.class' : 'have.class', 'selected');
     }
   })
 })

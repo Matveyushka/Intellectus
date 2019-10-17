@@ -33,11 +33,14 @@ describe('Stepper', () => {
     })
 
     it('Shows right and wrong answers', () => {
-      cy.get('.stepper-wrapper').children().eq(0*2).should('not.have.class', 'failed');
-      cy.get('.stepper-wrapper').children().eq(1*2).should('not.have.class', 'failed');
-      cy.get('.stepper-wrapper').children().eq(2*2).should('have.class', 'failed');
-      cy.get('.stepper-wrapper').children().eq(3*2).should('have.class', 'failed');
-      cy.get('.stepper-wrapper').children().eq(4*2).should('have.class', 'failed');
+      cy.fixture('answers-req').then(req => {
+        cy.fixture('answers-resp').then(resp => {
+          for (let i = 0; i < req.answers.length; i++) {
+            cy.get('.stepper-wrapper').children().eq(i*2)
+              .should(req.answers[i] === resp.solutions[i] ? 'not.have.class' : 'have.class', 'failed');
+          }
+        })
+      })
     })
   })
 })

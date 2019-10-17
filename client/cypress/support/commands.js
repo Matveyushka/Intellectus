@@ -1,6 +1,5 @@
 Cypress.Commands.add('getQuestions', (questions = 'fx:questions') => {
-  cy.server();
-  cy.route({
+  cy.server().route({
     method: 'GET',
     url: '/questions',
     response: questions
@@ -8,8 +7,7 @@ Cypress.Commands.add('getQuestions', (questions = 'fx:questions') => {
 })
 
 Cypress.Commands.add('postAnswers', (req = 'fx:answers-req', resp = 'fx:answers-resp') => {
-  cy.server();
-  cy.route({
+  cy.server().route({
     method: 'POST',
     url: '/answers',
     status: 201,
@@ -19,27 +17,13 @@ Cypress.Commands.add('postAnswers', (req = 'fx:answers-req', resp = 'fx:answers-
 })
 
 Cypress.Commands.add('passTest', () => {
-  cy.get('.option-wrapper').children().eq(1).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(2).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(3).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(4).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(5).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(0).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(1).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(2).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(3).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(4).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(5).click();
-  cy.get('.test-view-next-button').click();
-  cy.get('.option-wrapper').children().eq(0).click();
+  cy.fixture('answers-req').then(req => {
+    const lastIndex = req.answers.length - 1;
+    for (let i = 0; i < lastIndex; i++) {
+      cy.get('.option-wrapper').children().eq(req.answers[i]).click();
+      cy.get('.test-view-next-button').click();
+    }
+    cy.get('.option-wrapper').children().eq(req.answers[lastIndex]).click();
+    // Finish button not clicked
+  })
 })

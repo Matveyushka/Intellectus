@@ -7,9 +7,16 @@ describe('Smoke tests', () => {
     })
 
     it('Passing a test', () => {
+      cy.server().route('GET', '/questions').as('questionsReq');
       cy.get('.play-icon').click();
+      cy.wait('@questionsReq');
+
       cy.passTest();
+      
+      cy.server().route('POST', '/answers').as('answersReq');
       cy.get('.test-view-next-button').click();
+      cy.wait('@answersReq');
+      
       cy.get('.stats').should('be.visible');
     })
   })

@@ -5,8 +5,7 @@ describe('Loader', () => {
   })
 
   it('Loader is shown when questions loading', () => {
-    cy.server();
-    cy.route({
+    cy.server().route({
       method: 'GET',
       url: '/questions',
       response: 'fx:questions',
@@ -20,8 +19,7 @@ describe('Loader', () => {
     cy.getQuestions();
     cy.get('.play-icon').click();
     cy.passTest();
-    cy.server();
-    cy.route({
+    cy.server().route({
       method: 'POST',
       url: '/answers',
       status: 201,
