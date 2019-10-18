@@ -59,13 +59,12 @@ export const ContactUs = (): React.ReactElement | null => {
             {finishState.error !== false && (
               <>
                 <div className="error">{finishState.error}</div>
-                <button
-                  type="button"
+                <div
                   className="button"
                   onClick={tryToSendFormAgain}
                 >
                   Try again
-                </button>
+                </div>
               </>
             )}
             {finishState.error === false && (
