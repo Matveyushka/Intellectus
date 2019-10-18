@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import { Footer, ContactUsForm } from '../components';
 import { Loader } from '../components/Loader';
 
@@ -27,7 +28,7 @@ export const ContactUs = (): React.ReactElement | null => {
 
     axios('/feedback', { method: 'post', data })
       .catch((err: Error) => {
-        error = 'Error, try again later';
+        error = 'Something went wrong';
         throw err;
       })
       .finally(() => {
@@ -54,17 +55,33 @@ export const ContactUs = (): React.ReactElement | null => {
     return (
       <>
         <main className="main-container">
-          {finishState.error !== false && (
-            <>
-              <div className="error">{finishState.error}</div>
-              <button type="button" className="button" onClick={tryToSendFormAgain}>
-                Try again
-              </button>
-            </>
-          )}
-          {finishState.error === false && (
-            <div className="success">Success! Thanks for feedback!</div>
-          )}
+          <div className="contact-results">
+            {finishState.error !== false && (
+              <>
+                <div className="error">{finishState.error}</div>
+                <button
+                  type="button"
+                  className="button"
+                  onClick={tryToSendFormAgain}
+                >
+                  Try again
+                </button>
+              </>
+            )}
+            {finishState.error === false && (
+              <>
+                <div className="success">We got your feedback</div>
+                <NavLink
+                  to="/"
+                  type="button"
+                  className="button"
+                  onClick={tryToSendFormAgain}
+                >
+                  Go to main page
+                </NavLink>
+              </>
+            )}
+          </div>
         </main>
         <Footer />
       </>
@@ -74,7 +91,10 @@ export const ContactUs = (): React.ReactElement | null => {
   return (
     <>
       <main className="main-container">
-        <ContactUsForm feedbackFormSubmit={feedbackFormSubmit} data={finishState.oldData} />
+        <ContactUsForm
+          feedbackFormSubmit={feedbackFormSubmit}
+          data={finishState.oldData}
+        />
       </main>
       <Footer />
     </>

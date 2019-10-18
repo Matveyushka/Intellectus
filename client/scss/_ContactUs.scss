@@ -1,5 +1,30 @@
-.error {
-  color: $error-1;
+
+
+.contact-results {
+  text-align: center;
+
+  .error, .success {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .error {
+    color: $error-1;
+  }
+
+  .success {
+    color: $primary-1;
+  }
+
+  .button {
+    color: $base-2;
+    text-transform: lowercase;
+    font-size: 24px;
+    letter-spacing: 4px;
+    text-decoration: none;
+  }
 }
 
 .contact-form {
