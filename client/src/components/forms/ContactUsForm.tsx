@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useForm from 'react-hook-form';
+import mergeClassNames from 'classnames';
 
 export interface ContactUsFormProps {
   feedbackFormSubmit: (data: Record<string, string>) => void;
@@ -10,7 +11,8 @@ export const ContactUsForm = ({
   data,
   feedbackFormSubmit,
 }: ContactUsFormProps): React.ReactElement | null => {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, clearError } = useForm({
+    mode: 'onBlur',
     defaultValues: data,
   });
   const [textareaLength, setTextareaLength] = React.useState<number>(0);
@@ -27,39 +29,44 @@ export const ContactUsForm = ({
     <form className="contact-form" onSubmit={handleSubmit(feedbackFormSubmit)}>
       <div className="input-field">
         <label className="input-label" htmlFor="name">
-          <p className="label-title">
-            Your name:&nbsp;
-            <span className="label-error">
-              {errors.name && 'Name required'}
-            </span>
+          <p className={mergeClassNames("label-title",{
+            'label-error': errors.name
+          })}>
+            Your name:
           </p>
           <input
-            className="input-text"
+            className={mergeClassNames("input-text",{
+              'border-error': errors.name
+            })}
             type="text"
             id="name"
             name="name"
+            onFocus={() => clearError("name")}
             ref={register({ required: true })}
           />
         </label>
       </div>
       <div className="input-field">
         <label className="input-label" htmlFor="email">
-          <p className="label-title">
+          <p className={mergeClassNames("label-title",{
+            'label-error': errors.email
+          })}>
             Email:&nbsp;
-            <span className="label-error">
-              {errors.email && errors.email.message}
-            </span>
+            {errors.email && errors.email.message}
           </p>
           <input
-            className="input-text"
+            className={mergeClassNames("input-text",{
+              'border-error': errors.email
+            })}
             type="text"
             id="email"
             name="email"
+            onFocus={() => clearError("email")}
             ref={register({
-              required: 'Email required',
+              required: true,
               pattern: {
                 value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/,
-                message: 'Email should looks like email',
+                message: 'should looks like email',
               },
             })}
           />
@@ -67,15 +74,18 @@ export const ContactUsForm = ({
       </div>
       <div className="input-field">
         <label className="input-label" htmlFor="text">
-          <p className="label-title">
-            Feedback:&nbsp;
-            <span className="label-error">
-              {errors.body && 'Body required'}
-            </span>
+          <p className={mergeClassNames("label-title",{
+            'label-error': errors.body
+          })}>
+            Feedback:
           </p>
-          <div className="input-with-area">
+          <div className={mergeClassNames("input-with-area",{
+              'border-error': errors.body
+            })}>
             <input
-              className="input-text"
+              className={mergeClassNames("input-text",{
+                'border-error': errors.body
+              })}
               type="text"
               placeholder="Title"
               name="title"
@@ -88,6 +98,7 @@ export const ContactUsForm = ({
               name="body"
               onChange={onTextareaChange}
               maxLength={maxTextAreaLength}
+              onFocus={() => clearError("body")}
               ref={register({ required: true })}
             />
             <div className="send-form">

@@ -7,6 +7,8 @@
   margin-top: 10px;
   width: 100%;
 
+  
+
   .input-field {
     display: flex;
     flex-direction: column;
@@ -17,7 +19,7 @@
       .label-title {
         padding: 10px 10px 4px 10px;
 
-        .label-error{
+        &.label-error, .label-error {
           color: $error-1;
         }
       }
@@ -105,5 +107,9 @@
         }
       }
     }
+  }
+
+  .border-error {
+    border-color: $error-1 !important;
   }
 }
