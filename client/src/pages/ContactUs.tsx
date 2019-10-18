@@ -3,6 +3,7 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { Footer, ContactUsForm } from '../components';
 import { Loader } from '../components/Loader';
+import { URLS } from '../constants';
 
 interface FinishState {
   isFinish: boolean;
@@ -71,7 +72,7 @@ export const ContactUs = (): React.ReactElement | null => {
               <>
                 <div className="success">We got your feedback</div>
                 <NavLink
-                  to="/"
+                  to={URLS.main}
                   type="button"
                   className="button"
                 >
