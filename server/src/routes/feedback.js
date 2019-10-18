@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
   const { name } = req.body;
 
-  setTimeout(() => res.status(name === 'Slavik' ? 200 : 500).json(), 2000);
+  setTimeout(() => res.status(name === 'Slavik' ? 200 : 500).json(), 1000);
 });
 
 module.exports = router;

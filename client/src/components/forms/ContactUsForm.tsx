@@ -6,12 +6,12 @@ export interface ContactUsFormProps {
   data: Record<string, string>;
 }
 
-export const ContactUsForm = (
-  props: ContactUsFormProps,
-): React.ReactElement | null => {
-  const { data, feedbackFormSubmit } = props;
+export const ContactUsForm = ({
+  data,
+  feedbackFormSubmit,
+}: ContactUsFormProps): React.ReactElement | null => {
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: { data },
+    defaultValues: data,
   });
   const [textareaLength, setTextareaLength] = React.useState<number>(0);
 
@@ -24,10 +24,7 @@ export const ContactUsForm = (
   };
 
   return (
-    <form
-      className="contact-form"
-      onSubmit={handleSubmit(feedbackFormSubmit)}
-    >
+    <form className="contact-form" onSubmit={handleSubmit(feedbackFormSubmit)}>
       <div className="input-field">
         <label className="input-label" htmlFor="name">
           <p className="label-title">
