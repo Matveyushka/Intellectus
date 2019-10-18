@@ -1,3 +1,24 @@
+%prev-next-button-common {
+  display: flex;
+  align-self: center;
+  padding: 5px;
+  margin-left: 28px;
+  background-image: url("/images/arrow.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  color: $primary-1;
+  font-family: "Segoe UI Light", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
 .test-view {
   display: flex;
   flex-grow: 1;
@@ -11,15 +32,21 @@
 
   &-content {
     margin: auto;
-    // TODO: починить, когда изменится layout
-    padding-bottom: 48px;
   }
 
   &-aside {
     display: flex;
     width: 100%;
-    align-items: center;
-    justify-items: center;
+
+    &.right {
+      align-items: flex-start;
+      justify-items: flex-start;
+    }
+
+    &.left {
+      align-items: flex-end;
+      justify-items: flex-end;
+    }
   }
 
   &-separator {
@@ -30,6 +57,7 @@
 
   &-header {
     display: flex;
+    width: 545px;
   }
 
   &-body {
@@ -40,15 +68,28 @@
   }
 
   &-next-button {
-    display: flex;
-    align-self: center;
-    padding: 5px;
-    margin: 0 auto;
+    @extend %prev-next-button-common;
+  }
+
+  &-prev-button {
+    @extend %prev-next-button-common;
+    transform: scale(1) rotate(180deg);
+
+    &:hover {
+      transform: scale(1.2) rotate(180deg);
+    }
+  }
+
+  &-finish-button {
+    height: 48px;
     color: $primary-1;
+    font-size: 25px;
     font-family: "Segoe UI Light", sans-serif;
-    font-size: 20px;
-    cursor: pointer;
+    font-weight: normal;
+    display: flex;
+    margin: 0 auto;
     transition: transform 1s;
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.2);
@@ -70,15 +111,17 @@
 
   &-title {
     font-size: 25px;
-    flex-grow: 1;
     font-family: "Segoe UI Light", sans-serif;
     font-weight: normal;
     color: $primary-1;
     text-align: center;
 
+    &:first-of-type {
+      width: 320px;
+    }
+
     &.options {
-      flex-grow: 0;
-      width: 245px;
+      flex-grow: 1;
     }
   }
 

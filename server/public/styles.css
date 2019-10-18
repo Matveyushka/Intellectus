@@ -1,6 +1,9 @@
 * {
   margin: 0; }
 
+*, *::before, *::after {
+  box-sizing: border-box; }
+
 body {
   background-color: #f6f6f6;
   margin: 0;
@@ -17,14 +20,14 @@ button {
 
 .header-container {
   display: flex;
-  margin: auto;
-  width: 50%;
+  margin: 0 auto;
+  width: 600px;
   padding: 10px;
   justify-content: space-between;
   border-bottom: 1px solid #88c8b0; }
 
 .header-item {
-  padding: 10px 20px;
+  padding: 10px;
   margin: 0;
   border-radius: 18px;
   position: relative;
@@ -41,19 +44,23 @@ button {
     letter-spacing: 5px;
     font-family: "Segoe UI Light", sans-serif; }
   .header-item.active, .header-item.active > a {
-    cursor: default;
     color: #707070; }
 
 .footer {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min-content; }
-  .footer > p:first-child {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-items: center; }
+  .footer .credentials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
+  .footer p:first-child {
     letter-spacing: 5px;
     font-size: 30px; }
-    .footer > p:first-child + p {
+    .footer p:first-child + p {
       text-align: right;
       padding-right: 2px;
       font-size: 20px;
@@ -65,11 +72,11 @@ button {
   background-repeat: no-repeat;
   width: 100px;
   height: 120px;
-  transform: translate(0, 50%);
+  margin-top: 40px;
   transition: transform 0.5s;
   cursor: pointer; }
   .play-icon:hover {
-    transform: translate(0, 50%) scale(1.2); }
+    transform: scale(1.2); }
 
 .share-icon {
   background-image: url(/images/share.svg);
@@ -86,8 +93,9 @@ button {
     transform: scale(1.2); }
 
 .main-container {
-  height: calc(100vh - 100px);
   display: flex;
+  margin: auto;
+  width: 600px;
   flex-direction: column;
   align-items: center; }
   .main-container .title {
@@ -96,16 +104,16 @@ button {
     font-size: 50px;
     color: #88c8b0;
     letter-spacing: 20px; }
-    .main-container .title:first-child {
-      margin-top: 75px; }
+
+.main-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
 
 .stepper-wrapper {
   display: flex;
   counter-reset: stepper;
-  position: fixed;
-  left: 50%;
-  bottom: 50px;
-  transform: translateX(-50%); }
+  margin: auto auto 20px auto; }
 
 .stepper-item {
   counter-increment: stepper;
@@ -124,6 +132,9 @@ button {
     content: counter(stepper);
     width: 30px;
     height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding-bottom: 5px; }
   .stepper-item.completed {
@@ -135,18 +146,31 @@ button {
       background-repeat: no-repeat;
       content: " ";
       padding: 0; }
+  .stepper-item.failed {
+    border-color: #c8c8c8; }
+    .stepper-item.failed::before {
+      background-image: url("/images/cross.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      content: " ";
+      padding: 0; }
   .stepper-item.current {
     border-color: #88c8b0;
     color: #88c8b0;
     padding: 0;
     cursor: default; }
+    .stepper-item.current::before {
+      content: counter(stepper);
+      background-image: none;
+      padding-bottom: 5px; }
 
 .stepper-line {
   height: 1px;
   margin: 0 2px;
   width: 20px;
   position: relative;
-  top: 22px;
+  top: 20px;
   background-color: #c8c8c8; }
 
 .contact-form {
@@ -215,36 +239,70 @@ button {
             background-image: url("/images/plane.svg");
             background-size: cover; }
 
+.test-view-next-button, .test-view-prev-button {
+  display: flex;
+  align-self: center;
+  padding: 5px;
+  margin-left: 28px;
+  background-image: url("/images/arrow.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  color: #88c8b0;
+  font-family: "Segoe UI Light", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 1s; }
+  .test-view-next-button:hover, .test-view-prev-button:hover {
+    transform: scale(1.2); }
+
 .test-view {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
-  width: fit-content;
-  margin: auto; }
+  width: 100%; }
+  .test-view-layout {
+    display: flex;
+    height: 100%; }
+  .test-view-content {
+    margin: auto; }
+  .test-view-aside {
+    display: flex;
+    width: 100%; }
+    .test-view-aside.right {
+      align-items: flex-start;
+      justify-items: flex-start; }
+    .test-view-aside.left {
+      align-items: flex-end;
+      justify-items: flex-end; }
   .test-view-separator {
     width: 1px;
     background-color: #88c8b0;
     margin: 0 10px; }
   .test-view-header {
     display: flex;
-    margin-top: 30px; }
+    width: 545px; }
   .test-view-body {
     display: flex;
     justify-content: center;
     margin-top: 15px;
     position: relative; }
-  .test-view-next-button {
-    display: flex;
-    align-self: center;
-    padding: 5px;
-    margin-left: 10px;
+  .test-view-prev-button {
+    transform: scale(1) rotate(180deg); }
+    .test-view-prev-button:hover {
+      transform: scale(1.2) rotate(180deg); }
+  .test-view-finish-button {
+    height: 48px;
     color: #88c8b0;
+    font-size: 25px;
     font-family: "Segoe UI Light", sans-serif;
-    font-size: 20px;
-    position: absolute;
-    right: -100px;
-    cursor: pointer;
-    transition: transform 1s; }
-    .test-view-next-button:hover {
+    font-weight: normal;
+    display: flex;
+    margin: 0 auto;
+    transition: transform 1s;
+    cursor: pointer; }
+    .test-view-finish-button:hover {
       transform: scale(1.2); }
 
 .problem-wrapper {
@@ -256,14 +314,14 @@ button {
 
 .problem-title {
   font-size: 25px;
-  flex-grow: 1;
   font-family: "Segoe UI Light", sans-serif;
   font-weight: normal;
   color: #88c8b0;
   text-align: center; }
+  .problem-title:first-of-type {
+    width: 320px; }
   .problem-title.options {
-    flex-grow: 0;
-    width: 245px; }
+    flex-grow: 1; }
 
 .problem-cell {
   width: 80px;
@@ -287,62 +345,23 @@ button {
   grid-gap: 8px; }
 
 .test-result {
-  margin-top: 40px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center; }
-  .test-result .test-title {
-    color: #88c8b0;
-    font-weight: 100;
-    font-size: 40px;
-    letter-spacing: 8px;
-    margin-bottom: 25px; }
-  .test-result .test-hint {
-    padding-top: 15px;
-    color: #636363;
-    font-size: 27px;
-    letter-spacing: 5px; }
-  .test-result .test-thumbs {
-    margin-top: 25px;
-    display: flex; }
-    .test-result .test-thumbs .test-thumb {
-      position: relative;
-      width: 35px;
-      height: 35px;
-      border: 1px solid #88c8b0;
-      border-radius: 50%;
-      margin: 0 15px;
-      cursor: pointer; }
-      .test-result .test-thumbs .test-thumb:after {
-        content: "";
-        width: 20px;
-        height: 8px;
-        position: absolute;
-        border-bottom: 1px solid #88c8b0;
-        border-left: 1px solid #88c8b0;
-        top: 12px;
-        left: 8px;
-        transform: rotate(-45deg); }
-      .test-result .test-thumbs .test-thumb.cross {
-        border: 1px solid #636363; }
-        .test-result .test-thumbs .test-thumb.cross:after {
-          content: "";
-          height: 0;
-          width: 26px;
-          position: absolute;
-          border-bottom: 1px solid #636363;
-          top: 17px;
-          left: 4px;
-          transform: rotate(45deg); }
-        .test-result .test-thumbs .test-thumb.cross:before {
-          content: "";
-          height: 0;
-          width: 26px;
-          position: absolute;
-          border-bottom: 1px solid #636363;
-          top: 17px;
-          left: 5px;
-          transform: rotate(-45deg); }
+
+.test-title {
+  color: #88c8b0;
+  font-weight: 100;
+  font-size: 40px;
+  letter-spacing: 8px;
+  margin-bottom: 25px; }
+
+.test-hint {
+  padding-top: 15px;
+  color: #636363;
+  font-size: 27px;
+  letter-spacing: 5px; }
 
 .stats {
   width: 70%;
@@ -359,3 +378,29 @@ button {
     cursor: pointer; }
     .stats .stats-column:hover, .stats .stats-column.selected {
       background-color: #969696; }
+
+.loader {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  background-image: url("/images/loader.svg");
+  background-position: center;
+  background-size: contain;
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+.loader-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

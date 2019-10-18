@@ -8,6 +8,7 @@
     "webpack:watch": "webpack-dev-server --mode=development --config webpack.dev.config.js",
     "start": "run-p sass:watch webpack:watch",
     "build": "webpack --mode=production --config webpack.prod.config.js",
+    "build:server": "npm run build && npm run sass && ncp ./dist ../server/public/ && ncp ./public ../server/public",
     "lint": "eslint src --ext .ts,.tsx",
     "sass": "node-sass scss/main.scss dist/styles.css",
     "sass:watch": "node-sass --watch scss/main.scss dist/styles.css",
