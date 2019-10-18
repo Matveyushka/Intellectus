@@ -75,7 +75,6 @@ export const ContactUs = (): React.ReactElement | null => {
                   to="/"
                   type="button"
                   className="button"
-                  onClick={tryToSendFormAgain}
                 >
                   Go to main page
                 </NavLink>
