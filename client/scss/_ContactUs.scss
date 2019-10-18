@@ -1,7 +1,9 @@
 
 
 .contact-results {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .error, .success {
     text-transform: uppercase;
@@ -25,6 +27,8 @@
     letter-spacing: 4px;
     text-decoration: none;
     transition: 0.2s;
+    font-family: inherit;
+    display: block;
 
     &:hover {
       transform: scale(1.1);
