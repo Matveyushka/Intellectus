@@ -2,9 +2,16 @@ import * as React from 'react';
 import useForm from 'react-hook-form';
 import mergeClassNames from 'classnames';
 
+export interface DefaultContactData {
+  email?: string;
+  title?: string;
+  name?: string;
+  body?: string;
+}
+
 export interface ContactUsFormProps {
-  feedbackFormSubmit: (data: Record<string, string>) => void;
-  data: Record<string, string>;
+  feedbackFormSubmit: (data: DefaultContactData) => void;
+  data: DefaultContactData;
 }
 
 export const ContactUsForm = ({
@@ -12,16 +19,15 @@ export const ContactUsForm = ({
   feedbackFormSubmit,
 }: ContactUsFormProps): React.ReactElement | null => {
   const {
-    register,
-    handleSubmit,
-    errors,
-    clearError,
+    register, handleSubmit, errors, clearError,
   } = useForm({
     mode: 'onBlur',
     defaultValues: data,
   });
 
-  const [textareaLength, setTextareaLength] = React.useState<number>(0);
+  const [textareaLength, setTextareaLength] = React.useState<number>(
+    data.body ? data.body.length : 0,
+  );
   const maxTextAreaLength = 300;
 
   const onTextareaChange = (
@@ -29,10 +35,6 @@ export const ContactUsForm = ({
   ): void => {
     setTextareaLength(event.target.value.length);
   };
-
-  React.useEffect(() => {
-    setTextareaLength(data.body ? data.body.length : textareaLength);
-  }, []);
 
   return (
     <form className="contact-form" onSubmit={handleSubmit(feedbackFormSubmit)}>
@@ -78,7 +80,8 @@ export const ContactUsForm = ({
             ref={register({
               required: true,
               pattern: {
-                value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/,
+                // eslint-disable-next-line max-len
+                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'should looks like email',
               },
             })}

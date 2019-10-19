@@ -1,14 +1,14 @@
 import * as React from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { Footer, ContactUsForm } from '../components';
+import { Footer, ContactUsForm, DefaultContactData } from '../components';
 import { Loader } from '../components/Loader';
 import { URLS } from '../constants';
 
 interface FinishState {
   isFinish: boolean;
   error: false | string;
-  oldData: Record<string, string>;
+  oldData: DefaultContactData;
 }
 
 const defaultFinishState: FinishState = {
@@ -18,12 +18,12 @@ const defaultFinishState: FinishState = {
 };
 
 export const ContactUs = (): React.ReactElement | null => {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [finishState, setFinishState] = React.useState<FinishState>(
     defaultFinishState,
   );
 
-  const feedbackFormSubmit = (data: Record<string, string>): void => {
+  const feedbackFormSubmit = (data: DefaultContactData): void => {
     setIsLoading(true);
     let error: false | string = false;
 
@@ -43,12 +43,10 @@ export const ContactUs = (): React.ReactElement | null => {
       });
   };
 
-  const tryToSendFormAgain = (): void => {
-    setFinishState({
-      ...defaultFinishState,
-      oldData: finishState.oldData,
-    });
-  };
+  const tryToSendFormAgain = (): void => setFinishState({
+    ...defaultFinishState,
+    oldData: finishState.oldData,
+  });
 
   if (isLoading) return <Loader />;
 
@@ -57,25 +55,17 @@ export const ContactUs = (): React.ReactElement | null => {
       <>
         <main className="main-container">
           <div className="contact-results">
-            {finishState.error !== false && (
+            {finishState.error !== false ? (
               <>
                 <div className="error">{finishState.error}</div>
-                <div
-                  className="button"
-                  onClick={tryToSendFormAgain}
-                >
+                <div className="button" onClick={tryToSendFormAgain}>
                   Try again
                 </div>
               </>
-            )}
-            {finishState.error === false && (
+            ) : (
               <>
                 <div className="success">We got your feedback</div>
-                <NavLink
-                  to={URLS.main}
-                  type="button"
-                  className="button"
-                >
+                <NavLink to={URLS.main} type="button" className="button">
                   Go to main page
                 </NavLink>
               </>

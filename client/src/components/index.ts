@@ -3,4 +3,4 @@ export { Stepper } from './Stepper';
 export { TestView } from './TestView';
 export { IntroView } from './IntroView';
 export { Footer } from './Footer';
-export { ContactUsForm } from './forms/ContactUsForm';
+export { ContactUsForm, DefaultContactData, ContactUsFormProps } from './forms/ContactUsForm';
