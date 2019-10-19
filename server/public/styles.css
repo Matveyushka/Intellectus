@@ -53,10 +53,14 @@ button {
   padding-bottom: 20px;
   align-items: center;
   justify-items: center; }
-  .footer > p:first-child {
+  .footer .credentials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
+  .footer p:first-child {
     letter-spacing: 5px;
     font-size: 30px; }
-    .footer > p:first-child + p {
+    .footer p:first-child + p {
       text-align: right;
       padding-right: 2px;
       font-size: 20px;
@@ -156,6 +160,10 @@ button {
     color: #88c8b0;
     padding: 0;
     cursor: default; }
+    .stepper-item.current::before {
+      content: counter(stepper);
+      background-image: none;
+      padding-bottom: 5px; }
 
 .stepper-line {
   height: 1px;
@@ -231,6 +239,24 @@ button {
             background-image: url("/images/plane.svg");
             background-size: cover; }
 
+.test-view-next-button, .test-view-prev-button {
+  display: flex;
+  align-self: center;
+  padding: 5px;
+  margin-left: 28px;
+  background-image: url("/images/arrow.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  color: #88c8b0;
+  font-family: "Segoe UI Light", sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 1s; }
+  .test-view-next-button:hover, .test-view-prev-button:hover {
+    transform: scale(1.2); }
+
 .test-view {
   display: flex;
   flex-grow: 1;
@@ -240,35 +266,43 @@ button {
     display: flex;
     height: 100%; }
   .test-view-content {
-    margin: auto;
-    padding-bottom: 48px; }
+    margin: auto; }
   .test-view-aside {
     display: flex;
-    width: 100%;
-    align-items: center;
-    justify-items: center; }
+    width: 100%; }
+    .test-view-aside.right {
+      align-items: flex-start;
+      justify-items: flex-start; }
+    .test-view-aside.left {
+      align-items: flex-end;
+      justify-items: flex-end; }
   .test-view-separator {
     width: 1px;
     background-color: #88c8b0;
     margin: 0 10px; }
   .test-view-header {
-    display: flex; }
+    display: flex;
+    width: 545px; }
   .test-view-body {
     display: flex;
     justify-content: center;
     margin-top: 15px;
     position: relative; }
-  .test-view-next-button {
-    display: flex;
-    align-self: center;
-    padding: 5px;
-    margin: 0 auto;
+  .test-view-prev-button {
+    transform: scale(1) rotate(180deg); }
+    .test-view-prev-button:hover {
+      transform: scale(1.2) rotate(180deg); }
+  .test-view-finish-button {
+    height: 48px;
     color: #88c8b0;
+    font-size: 25px;
     font-family: "Segoe UI Light", sans-serif;
-    font-size: 20px;
-    cursor: pointer;
-    transition: transform 1s; }
-    .test-view-next-button:hover {
+    font-weight: normal;
+    display: flex;
+    margin: 0 auto;
+    transition: transform 1s;
+    cursor: pointer; }
+    .test-view-finish-button:hover {
       transform: scale(1.2); }
 
 .problem-wrapper {
@@ -280,14 +314,14 @@ button {
 
 .problem-title {
   font-size: 25px;
-  flex-grow: 1;
   font-family: "Segoe UI Light", sans-serif;
   font-weight: normal;
   color: #88c8b0;
   text-align: center; }
+  .problem-title:first-of-type {
+    width: 320px; }
   .problem-title.options {
-    flex-grow: 0;
-    width: 245px; }
+    flex-grow: 1; }
 
 .problem-cell {
   width: 80px;
