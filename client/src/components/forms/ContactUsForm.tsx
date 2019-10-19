@@ -92,24 +92,25 @@ export const ContactUsForm = ({
         <label className="input-label" htmlFor="text">
           <p
             className={mergeClassNames('label-title', {
-              'label-error': errors.body,
+              'label-error': errors.body || errors.title,
             })}
           >
             Feedback:
           </p>
           <div
             className={mergeClassNames('input-with-area', {
-              'border-error': errors.body,
+              'border-error': errors.body || errors.title,
             })}
           >
             <input
               className={mergeClassNames('input-text', {
-                'border-error': errors.body,
+                'border-error': errors.body || errors.title,
               })}
               type="text"
               placeholder="Title"
               name="title"
-              ref={register}
+              onFocus={() => clearError('title')}
+              ref={register({ required: true })}
             />
             <textarea
               className="input-area"
