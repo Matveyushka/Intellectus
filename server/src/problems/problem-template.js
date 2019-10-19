@@ -1,16 +1,14 @@
-const chooseFieldAsRightOption = (problemDescription) => {
-  const randomField = Math.floor(Math.random() * problemDescription.length);
-
-  return randomField;
-};
+const { numberOfWrongOptions } = require('./constants');
 
 const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
   const wrongOptions = wrongOptionsGenerator(problemDescription);
 
-  return wrongOptions;
+  return [...new Set(wrongOptions)].length === numberOfWrongOptions
+    ? wrongOptions
+    : createWrongOptions(wrongOptionsGenerator, problemDescription);
 };
 
-const convertToSvg = (array, converterToSvg, seed) => {
+const createProblemSvg = (array, converterToSvg, seed) => {
   const svgArray = array.map((item) => {
     const svgOrNull = item !== null
       ? Buffer.from(converterToSvg(item, seed)).toString('base64')
@@ -22,54 +20,53 @@ const convertToSvg = (array, converterToSvg, seed) => {
   return svgArray;
 };
 
-const generateRandomSeed = () => Math.floor(Math.random() * 99);
+const seedTopBound = 99;
+const generateRandomSeed = () => Math.floor(Math.random() * seedTopBound);
 
-/** @exports */
 const newProblemType = (
   problemDescriptionGenerator,
   wrongOptionsGenerator,
   converterToSvg,
 ) => ({
-  generateTaskDescription: problemDescriptionGenerator,
+  generateProblemDescription: problemDescriptionGenerator,
   generateWrongOptions: wrongOptionsGenerator,
   convertToSvg: converterToSvg,
 });
 
-/** @exports */
-const realizeProblem = (problemType) => {
-  const fullProblemDescription = problemType.generateTaskDescription();
+const createProblem = (problemType) => {
+  const problemDescription = problemType.generateProblemDescription();
 
-  const randomOption = chooseFieldAsRightOption(fullProblemDescription);
+  const desiredFieldIndex = Math.floor(Math.random() * problemDescription.length);
 
-  const rightOption = fullProblemDescription[randomOption];
+  const desiredField = problemDescription[desiredFieldIndex];
 
-  const readyProblemDescription = fullProblemDescription.map((item, index) => (
-    index === randomOption ? null : item
+  const problemFields = problemDescription.map((item, index) => (
+    index === desiredFieldIndex ? null : item
   ));
 
   const wrongOptions = createWrongOptions(
     problemType.generateWrongOptions,
-    readyProblemDescription,
+    problemFields,
   );
 
-  const rightOptionPosition = Math.floor(Math.random() * (wrongOptions.length + 1));
+  const solutionPosition = Math.floor(Math.random() * (wrongOptions.length + 1));
 
   const options = [
-    ...(wrongOptions.slice(0, rightOptionPosition)),
-    rightOption,
-    ...wrongOptions.slice(rightOptionPosition, wrongOptions.length),
+    ...(wrongOptions.slice(0, solutionPosition)),
+    desiredField,
+    ...wrongOptions.slice(solutionPosition, wrongOptions.length),
   ];
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
   return {
-    problemFields: convertToSvg(readyProblemDescription, problemType.convertToSvg, graphicsSeed),
-    options: convertToSvg(options, problemType.convertToSvg, graphicsSeed),
-    solution: rightOptionPosition,
+    problemFields: createProblemSvg(problemFields, problemType.convertToSvg, graphicsSeed),
+    options: createProblemSvg(options, problemType.convertToSvg, graphicsSeed),
+    solution: solutionPosition,
   };
 };
 
 module.exports = {
   newProblemType,
-  realizeProblem,
+  createProblem,
 };

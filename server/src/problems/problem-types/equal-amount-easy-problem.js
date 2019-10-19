@@ -4,10 +4,10 @@ const {
   greenColor,
   grayColor,
   transparentColor,
-  numberOfWrongAnswers,
+  numberOfWrongOptions,
 } = require('../constants');
 
-const generateTaskDescription = () => {
+const generateProblemDescription = () => {
   /*
    * Каждый квадратик в условии задачи - это две фигуры - одна сверху, другая снизу.
    * Фигуры могут быть трёх типов, соответственно каждый тип обозначен цифрой от 0 до 2
@@ -40,13 +40,7 @@ const generateWrongOptions = (description) => {
     return checkProblemValidity(possibleOption) ? generateOption() : possibleOption;
   };
 
-  const generateSet = () => {
-    const set = [...new Set(Array(numberOfWrongAnswers).fill(0).map(() => generateOption()))];
-
-    return set.length === numberOfWrongAnswers ? set : generateSet();
-  };
-
-  return generateSet();
+  return Array(numberOfWrongOptions).fill(0).map(() => generateOption());
 };
 
 const convertToSvg = (code, seed) => {
@@ -103,7 +97,7 @@ const convertToSvg = (code, seed) => {
 };
 
 module.exports = problemTemplate.newProblemType(
-  generateTaskDescription,
+  generateProblemDescription,
   generateWrongOptions,
   convertToSvg,
 );
