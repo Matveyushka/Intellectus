@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
 const { shuffle } = require('../../utils/arrayShuffle');
@@ -43,11 +45,15 @@ const generateProblemDescription = () => {
   ].map((field, index) => createFieldDescription(field, fieldsStyles[index]));
 };
 
+const validateLine = lineDescription => (
+  lineDescription[2].figuresAmount - lineDescription[1].figuresAmount
+  === lineDescription[1].figuresAmount - lineDescription[0].figuresAmount
+);
+
 const validateField = (problemDescription, fieldToValidate) => {
   const descriptionToCheck = problemDescription
-    .map(field => (field === null ? fieldToValidate : field));
+    .map(field => (_.isNil(field) ? fieldToValidate : field));
 
-  // Стили обозначены цифрами 0, 1 и 2 - каждая по 3 раза. 0*3 + 1*3 + 2*3 = 9
   const styleHashSum = 9;
 
   const styleCheckSum = descriptionToCheck.reduce((checkSum, field) => checkSum + field.style, 0);
@@ -56,14 +62,20 @@ const validateField = (problemDescription, fieldToValidate) => {
     return false;
   }
 
-  if (descriptionToCheck[2].figuresAmount - descriptionToCheck[1].figuresAmount
-    !== descriptionToCheck[1].figuresAmount - descriptionToCheck[0].figuresAmount
-    || descriptionToCheck[5].figuresAmount - descriptionToCheck[4].figuresAmount
-    !== descriptionToCheck[4].figuresAmount - descriptionToCheck[3].figuresAmount
-    || descriptionToCheck[8].figuresAmount - descriptionToCheck[7].figuresAmount
-    !== descriptionToCheck[7].figuresAmount - descriptionToCheck[6].figuresAmount) {
-    return false;
-  }
+  if (!validateLine([
+    descriptionToCheck[0].figuresAmount,
+    descriptionToCheck[1].figuresAmount,
+    descriptionToCheck[2].figuresAmount,
+  ]) || !validateLine([
+    descriptionToCheck[3].figuresAmount,
+    descriptionToCheck[4].figuresAmount,
+    descriptionToCheck[5].figuresAmount,
+  ]) || !validateLine([
+    descriptionToCheck[6].figuresAmount,
+    descriptionToCheck[7].figuresAmount,
+    descriptionToCheck[8].figuresAmount,
+  ])
+  ) return false;
 
   return true;
 };
@@ -92,10 +104,10 @@ const convertToSvg = (fieldDescription, seed) => {
   const thickness = 1;
   const numberOfElementsInLine = 3;
 
-  let image = svgCreator.newImage();
+  const fillImage = (image, figuresLeft, position = 0) => {
+    const processedImage = (image ? svgCreator.newImage(image) : svgCreator.newImage());
 
-  const fillImageFromCode = (figuresLeft, position = 0) => {
-    if (figuresLeft === 0) return;
+    if (figuresLeft === 0) return processedImage;
 
     const seededPosition = ((position + seed) % 9);
 
@@ -121,22 +133,18 @@ const convertToSvg = (fieldDescription, seed) => {
     const grayImageParams = createImageParams(grayColor);
 
     const figures = [
-      () => image.circle(greenImageParams),
-      () => image.square(greenImageParams),
-      () => image.circle(grayImageParams),
-      () => image.square(grayImageParams),
+      () => processedImage.circle(greenImageParams),
+      () => processedImage.square(greenImageParams),
+      () => processedImage.circle(grayImageParams),
+      () => processedImage.square(grayImageParams),
     ];
 
     const randomFigure = (seed + fieldDescription.style) % figures.length;
 
-    image = figures[randomFigure]();
-
-    fillImageFromCode(figuresLeft - 1, position + 1);
+    return fillImage(figures[randomFigure]().getImage(), figuresLeft - 1, position + 1);
   };
 
-  fillImageFromCode(fieldDescription.figuresAmount);
-
-  return image.getImage();
+  return fillImage(null, fieldDescription.figuresAmount).getImage();
 };
 
 module.exports = problemTemplate.newProblemType(

@@ -1,9 +1,11 @@
+const _ = require('lodash');
+
 const { numberOfWrongOptions } = require('./constants');
 
 const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
   const wrongOptions = wrongOptionsGenerator(problemDescription);
 
-  return [...new Set(wrongOptions)].length === numberOfWrongOptions
+  return _.uniq(wrongOptions).length === numberOfWrongOptions
     ? wrongOptions
     : createWrongOptions(wrongOptionsGenerator, problemDescription);
 };
