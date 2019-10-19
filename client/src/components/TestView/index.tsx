@@ -117,11 +117,11 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
                 className="test-view-finish-button"
                 onClick={onFinishButtonClick}
               >
-              Finish!
+                Finish
               </button>
             )
             : (
-            // заглушка, чтобы при появлении кнопки интерфейс не дергался
+              // заглушка, чтобы при появлении кнопки интерфейс не дергался
               <div className="test-view-finish-button" />
             )}
         </div>

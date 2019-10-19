@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run test",
     "webpack:watch": "webpack-dev-server --mode=development --config webpack.dev.config.js",
-    "start": "run-p sass:watch webpack:watch",
+    "start": "npm run sass && run-p sass:watch webpack:watch",
     "build": "webpack --mode=production --config webpack.prod.config.js",
     "build:server": "npm run build && npm run sass && ncp ./dist ../server/public/ && ncp ./public ../server/public",
     "lint": "eslint src --ext .ts,.tsx",
