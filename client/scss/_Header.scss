@@ -1,15 +1,28 @@
 .header {
+  &-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 600px;
+    height: 100px;
+    padding: 35px;
+    border-bottom: 1px solid $primary-1;
+    &-img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
   &-container {
     display: flex;
     margin: 0 auto;
     width: 600px;
     padding: 10px;
     justify-content: space-between;
-    border-bottom: 1px solid $primary-1;
   }
 
   &-item {
-    padding: 10px;
     margin: 0;
     border-radius: 18px;
     position: relative;
@@ -28,6 +41,7 @@
       font-size: 20px;
       letter-spacing: 5px;
       font-family: inherit;
+      padding: 10px;
     }
 
     &.active, &.active > a {
