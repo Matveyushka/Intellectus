@@ -2,12 +2,12 @@ const _ = require('lodash');
 
 const { numberOfWrongOptions } = require('./constants');
 
-const createWrongOptions = (wrongOptionsGenerator, problemDescription) => {
-  const wrongOptions = wrongOptionsGenerator(problemDescription);
+const createWrongOptions = (wrongOptionsGenerator, problemDescription, solution) => {
+  const wrongOptions = wrongOptionsGenerator(problemDescription, solution);
 
   return _.uniq(wrongOptions).length === numberOfWrongOptions
     ? wrongOptions
-    : createWrongOptions(wrongOptionsGenerator, problemDescription);
+    : createWrongOptions(wrongOptionsGenerator, problemDescription, solution);
 };
 
 const createProblemSvg = (array, converterToSvg, seed) => {
@@ -49,6 +49,7 @@ const createProblem = (problemType) => {
   const wrongOptions = createWrongOptions(
     problemType.generateWrongOptions,
     problemFields,
+    desiredField,
   );
 
   const solutionPosition = Math.floor(Math.random() * (wrongOptions.length + 1));

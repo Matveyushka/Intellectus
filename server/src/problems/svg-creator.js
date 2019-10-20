@@ -39,6 +39,13 @@ const newImage = (sourceImage = baseSvgTag) => ({
       `<rect x="${x}" y="${y}" rx="${defaultBorderRadius}" ry="${defaultBorderRadius}" width="${width}" height="${height}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
     ),
 
+  triangle: ({
+    x, y, size, color, borderWidth, borderColor,
+  }) => newImage(sourceImage)
+    .add(
+      `<polygon points="${x},${y + size} ${x + size / 2},${y} ${x + size},${y + size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+    ),
+
   ellipse: ({
     x, y, width, height, color, borderWidth, borderColor,
   }) => newImage(sourceImage)

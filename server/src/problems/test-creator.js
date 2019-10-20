@@ -5,10 +5,12 @@ const missingElementProblem = require('./problem-types/missing-element-problem')
 const equalAmountEasyProblem = require('./problem-types/equal-amount-easy-problem');
 const bitwiseProblem = require('./problem-types/bitwise-problem');
 const sumProblem = require('./problem-types/sum-problem');
+const twoFiguresProblem = require('./problem-types/two-figures-problem');
 
 const easyProblems = [
   missingElementProblem,
   sumProblem,
+  twoFiguresProblem,
 ];
 
 const mediumProblems = [
