@@ -4,7 +4,7 @@ import { Values } from '../../commonTypes';
 import { IntroView, TestView } from '../../components';
 import { TestResult } from '../../components/TestResult';
 import { Loader } from '../../components/Loader';
-import { Question } from '../../components/TestView/TestView';
+import { Question } from '../../components/TestView';
 import { useFetch } from './hooks';
 
 type ViewTypes = Values<typeof MAIN_VIEW_TYPES>;
@@ -21,7 +21,7 @@ export interface AnswersFetchResult {
 
 export const Main = (): React.ReactElement | null => {
   const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
-  const [userAnswers, setUserAnswers] = React.useState<number[]>([]);
+  const [userAnswers, setUserAnswers] = React.useState<number[]>(Array(12).fill(null));
   const [shouldFetchQuestions, setShouldFetchQuestions] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [shouldFetchAnswers, setShouldFetchAnswers] = React.useState<boolean>(false);
@@ -38,9 +38,7 @@ export const Main = (): React.ReactElement | null => {
     config: { method: 'post', data: { token, answers: userAnswers } },
   });
 
-  const onFinishButtonClick = (answers: number[]): void => {
-    setUserAnswers(answers);
-
+  const onFinishButtonClick = (): void => {
     setShouldFetchAnswers(true);
 
     setCurrentView(MAIN_VIEW_TYPES.results);
@@ -66,6 +64,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     case MAIN_VIEW_TYPES.test: {
       return (
         <TestView
@@ -76,6 +75,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     case MAIN_VIEW_TYPES.results: {
       return (
         <TestResult
@@ -85,6 +85,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     default: {
       return null;
     }

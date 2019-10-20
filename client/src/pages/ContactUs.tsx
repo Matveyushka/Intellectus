@@ -1,39 +1,92 @@
 import * as React from 'react';
-import { Footer } from '../components';
+import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { Footer, ContactUsForm, DefaultContactData } from '../components';
+import { Loader } from '../components/Loader';
+import { URLS } from '../constants';
 
-export const ContactUs = (): React.ReactElement | null => (
-  <>
-    <main className="main-container">
-      <form className="contact-form">
-        <div className="input-field">
-          <label className="input-label" htmlFor="name">
-            <p className="label-title">Your name:</p>
-            <input className="input-text" type="text" id="name" name="name" />
-          </label>
-        </div>
-        <div className="input-field">
-          <label className="input-label" htmlFor="email">
-            <p className="label-title">Email:</p>
-            <input className="input-text" type="text" id="email" name="email" />
-          </label>
-        </div>
-        <div className="input-field">
-          <label className="input-label" htmlFor="text">
-            <p className="label-title">Feedback:</p>
-            <div className="input-with-area">
-              <input className="input-text" type="text" placeholder="Title" name="title" />
-              <textarea className="input-area" id="text" placeholder="Body" name="body" />
-              <div className="send-form">
-                <div className="area-count">0 / 300</div>
-                <button type="button" className="send-btn">
-                  <i className="plane-icon" />
-                </button>
-              </div>
-            </div>
-          </label>
-        </div>
-      </form>
-    </main>
-    <Footer />
-  </>
-);
+interface FinishState {
+  isFinish: boolean;
+  error: false | string;
+  oldData: DefaultContactData;
+}
+
+const defaultFinishState: FinishState = {
+  isFinish: false,
+  error: false,
+  oldData: {},
+};
+
+export const ContactUs = (): React.ReactElement | null => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [finishState, setFinishState] = React.useState<FinishState>(
+    defaultFinishState,
+  );
+
+  const feedbackFormSubmit = (data: DefaultContactData): void => {
+    setIsLoading(true);
+    let error: false | string = false;
+
+    axios('/feedback', { method: 'post', data })
+      .catch((err: Error) => {
+        error = 'Something went wrong';
+
+        throw err;
+      })
+      .finally(() => {
+        setFinishState({
+          oldData: data,
+          isFinish: true,
+          error,
+        });
+
+        setIsLoading(false);
+      });
+  };
+
+  const tryToSendFormAgain = (): void => setFinishState({
+    ...defaultFinishState,
+    oldData: finishState.oldData,
+  });
+
+  if (isLoading) return <Loader />;
+
+  if (finishState.isFinish) {
+    return (
+      <>
+        <main className="main-container">
+          <div className="contact-results">
+            {finishState.error !== false ? (
+              <>
+                <div className="error">{finishState.error}</div>
+                <div className="button" onClick={tryToSendFormAgain}>
+                  Try again
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="success">We got your feedback</div>
+                <NavLink to={URLS.main} type="button" className="button">
+                  Go to main page
+                </NavLink>
+              </>
+            )}
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <main className="main-container">
+        <ContactUsForm
+          feedbackFormSubmit={feedbackFormSubmit}
+          data={finishState.oldData}
+        />
+      </main>
+      <Footer />
+    </>
+  );
+};
