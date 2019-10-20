@@ -3,6 +3,7 @@ import { isFunction } from 'lodash';
 import * as React from 'react';
 
 type FetchResult<T> = Partial<T>;
+
 // правило сломалось и требует обернуть дженерик в круглые скобки
 // eslint-disable-next-line arrow-parens
 export const useFetch = <T>({

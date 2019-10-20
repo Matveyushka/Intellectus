@@ -30,6 +30,7 @@ export const ContactUs = (): React.ReactElement | null => {
     axios('/feedback', { method: 'post', data })
       .catch((err: Error) => {
         error = 'Something went wrong';
+
         throw err;
       })
       .finally(() => {
