@@ -64,6 +64,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     case MAIN_VIEW_TYPES.test: {
       return (
         <TestView
@@ -74,6 +75,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     case MAIN_VIEW_TYPES.results: {
       return (
         <TestResult
@@ -83,6 +85,7 @@ export const Main = (): React.ReactElement | null => {
         />
       );
     }
+
     default: {
       return null;
     }

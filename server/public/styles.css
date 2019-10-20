@@ -16,7 +16,8 @@ button {
   border: none;
   padding: 0;
   margin: 0;
-  outline: none; }
+  outline: none;
+  cursor: pointer; }
 
 .header-container {
   display: flex;
@@ -173,10 +174,36 @@ button {
   top: 20px;
   background-color: #c8c8c8; }
 
+.contact-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .contact-results .error, .contact-results .success {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 30px;
+    margin-bottom: 20px; }
+  .contact-results .error {
+    color: #b86e6e; }
+  .contact-results .success {
+    color: #88c8b0; }
+  .contact-results .button {
+    color: #969696;
+    text-transform: lowercase;
+    font-size: 24px;
+    letter-spacing: 4px;
+    text-decoration: none;
+    transition: 0.2s;
+    font-family: inherit;
+    display: block;
+    cursor: pointer; }
+    .contact-results .button:hover {
+      transform: scale(1.1); }
+
 .contact-form {
-  width: 35%;
   font-size: 19px;
-  margin-top: 10px; }
+  margin-top: 10px;
+  width: 100%; }
   .contact-form .input-field {
     display: flex;
     flex-direction: column; }
@@ -184,6 +211,8 @@ button {
       color: #88c8b0; }
       .contact-form .input-field .input-label .label-title {
         padding: 10px 10px 4px 10px; }
+        .contact-form .input-field .input-label .label-title.label-error, .contact-form .input-field .input-label .label-title .label-error {
+          color: #b86e6e; }
       .contact-form .input-field .input-label .input-text {
         border: 1px solid #88c8b0;
         border-radius: 15px;
@@ -237,13 +266,18 @@ button {
             height: 30px;
             display: inline-block;
             background-image: url("/images/plane.svg");
-            background-size: cover; }
+            background-size: cover;
+            transition: 0.2s; }
+          .contact-form .input-field .input-label .send-form .send-btn:hover .plane-icon {
+            transform: scale(1.1); }
+  .contact-form .border-error {
+    border-color: #b86e6e !important; }
 
 .test-view-next-button, .test-view-prev-button {
   display: flex;
   align-self: center;
   padding: 5px;
-  margin-left: 28px;
+  margin: 0 28px;
   background-image: url("/images/arrow.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -271,11 +305,9 @@ button {
     display: flex;
     width: 100%; }
     .test-view-aside.right {
-      align-items: flex-start;
-      justify-items: flex-start; }
+      justify-content: flex-start; }
     .test-view-aside.left {
-      align-items: flex-end;
-      justify-items: flex-end; }
+      justify-content: flex-end; }
   .test-view-separator {
     width: 1px;
     background-color: #88c8b0;
@@ -317,11 +349,10 @@ button {
   font-family: "Segoe UI Light", sans-serif;
   font-weight: normal;
   color: #88c8b0;
-  text-align: center; }
-  .problem-title:first-of-type {
-    width: 320px; }
+  text-align: center;
+  margin: 0 120px 0 110px; }
   .problem-title.options {
-    flex-grow: 1; }
+    margin: 0 55px 0 72px; }
 
 .problem-cell {
   width: 80px;
