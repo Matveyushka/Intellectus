@@ -4,11 +4,15 @@ import { Header } from './components';
 import {
   About, ContactUs, Main, Statistics,
 } from './pages';
+
 import { URLS } from './constants';
 
 export const MainLayout = (): React.ReactElement => {
-  const [mainKey, setMainKey] = React.useState<string>('intro');
-  const handleBackToMainPage = (): void => setMainKey(mainKey === 'test' ? 'intro' : 'test');
+  const [isTest, setIsTest] = React.useState<boolean>(false);
+
+  const handleBackToMainPage = (): void => setIsTest(false);
+
+  const handleStartTest = (): void => setIsTest(true);
 
   return (
     <div className="main-layout">
@@ -18,12 +22,18 @@ export const MainLayout = (): React.ReactElement => {
             <Header
               location={location as unknown as Location}
               onBackToMainPageClick={handleBackToMainPage}
+              isTest={isTest}
             />
           )}
         </Route>
         <Switch>
           <Route path={URLS.main} exact>
-            <Main key={mainKey} />
+            {({ location }) => (
+              <Main
+                key={(location.state) ? location.state.mainKey : 0}
+                onStartTest={handleStartTest}
+              />
+            )}
           </Route>
           <Route path={URLS.statistics} component={Statistics} />
           <Route path={URLS.about} component={About} />
