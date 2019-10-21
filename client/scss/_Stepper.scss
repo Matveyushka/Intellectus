@@ -61,6 +61,12 @@
       color: $primary-1;
       padding: 0;
       cursor: default;
+
+      &::before {
+        content: counter(stepper);
+        background-image: none;
+        padding-bottom: 5px;
+      }
     }
   }
 
