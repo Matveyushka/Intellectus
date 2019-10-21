@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import { isNumber } from 'lodash';
 import { StepItem, Stepper } from '../Stepper';
 import { generateInitialStepperData } from './helpers';
 import { OptionTable } from '../OptionTable';
@@ -36,7 +36,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
 
   const selectedOptionIndex = userAnswers[stepIndex];
 
-  const isTestFinished = userAnswers.every(_.isNumber);
+  const isTestFinished = userAnswers.every(isNumber);
 
   const handleOptionSelect = (optionIndex: number): void => {
     const newAnswers = userAnswers.map((item, index) => (

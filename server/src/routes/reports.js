@@ -8,7 +8,6 @@ const maxLengthName = 25;
 const minNumberOfQuestions = 1;
 const maxNumberOfQuestions = 12;
 
-
 router.post('/', async (req, res) => {
   const {
     name, email, token, body, numberOfQuestion,
@@ -21,13 +20,13 @@ router.post('/', async (req, res) => {
       message: 'Данные не отправлены.',
     });
   }
+
   if (!validator.isEmail(email)) {
     return res.status(400).json({
       error: true,
       message: 'Некорректный Email.',
     });
   }
-
 
   if (name.length < minLengthName || name.length > maxLengthName) {
     return res.status(400).json({
@@ -61,7 +60,6 @@ router.post('/', async (req, res) => {
       message: 'Возникла ошибка при отправке.',
     });
   }
-
 
   return res.status(200).json({
     error: false,

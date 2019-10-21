@@ -1,50 +1,37 @@
 const problemTemplate = require('./problem-template');
+const { shuffle } = require('../utils/arrayShuffle');
 
 const missingElementProblem = require('./problem-types/missing-element-problem');
-const equalAmountEasyProblem = require('./problem-types/equal-amount-easy-problem');
+const twoFiguresMediumProblem = require('./problem-types/two-figures-medium-problem');
 const bitwiseProblem = require('./problem-types/bitwise-problem');
+const sumProblem = require('./problem-types/sum-problem');
+const twoFiguresEasyProblem = require('./problem-types/two-figures-easy-problem');
 
 const easyProblems = [
   missingElementProblem,
+  sumProblem,
+  twoFiguresEasyProblem,
 ];
 
 const mediumProblems = [
-  equalAmountEasyProblem,
+  twoFiguresMediumProblem,
 ];
 
 const hardProblems = [
   bitwiseProblem,
 ];
 
-const levels = {
-  e: easyProblems,
-  easy: easyProblems,
-  m: mediumProblems,
-  medium: mediumProblems,
-  h: hardProblems,
-  hard: hardProblems,
-};
+const getShuffledProblemsFromArray = (amount, array) => shuffle(Array(amount)
+  .fill(null)
+  .map((_item, index) => array[index % array.length]));
 
-/** @exports */
-const createProblemsPack = (problemsLevels) => {
-  const problemsPack = problemsLevels.map((level) => {
-    const numberOfProblemInArray = Math.floor(Math.random() * levels[level].length);
-    const choosedProblem = levels[level][numberOfProblemInArray];
+const createProblemsPack = (easyProblemsAmount, mediumProblemsAmount, hardProblemsAmount) => [
+  ...getShuffledProblemsFromArray(easyProblemsAmount, easyProblems),
+  ...getShuffledProblemsFromArray(mediumProblemsAmount, mediumProblems),
+  ...getShuffledProblemsFromArray(hardProblemsAmount, hardProblems),
+].map(problem => problemTemplate.createProblem(problem));
 
-    return problemTemplate.realizeProblem(choosedProblem);
-  });
-
-  return problemsPack;
-};
-
-/** @exports */
-const createStandardProblemsPack = () => {
-  const problemsPack = createProblemsPack(
-    ['e', 'e', 'e', 'e', 'm', 'm', 'm', 'm', 'h', 'h', 'h', 'h'],
-  );
-
-  return problemsPack;
-};
+const createStandardProblemsPack = () => createProblemsPack(4, 4, 4);
 
 module.exports = {
   createProblemsPack,
