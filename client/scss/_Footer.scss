@@ -6,19 +6,11 @@
   align-items: center;
   justify-items: center;
 
-  & .credentials {
+  .credentials {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-  }
-
-  & p:first-child {
-    letter-spacing: 5px;
-    font-size: 30px;
-
-    & + p {
-      text-align: right;
-      padding-right: 2px;
+    p {
       font-size: 20px;
       letter-spacing: 5px;
       color: $base-3;
