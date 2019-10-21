@@ -14,6 +14,13 @@ const createField = (bigFigureType, smallFigureType) => ({
   smallFigureType,
 });
 
+/*
+ * В данной задаче каждое поле заполнено двумя фигурами -
+ * большой и малой. Есть 3 типа фигур, причём каждый
+ * тип большой фигуры должен встречаться с каждым типом
+ * малой фигуры.
+ */
+
 const generateProblemDescription = () => {
   const bigFigureTypes = [...Array(figureTypesAmount).keys()];
   const smallFigureTypes = [...Array(figureTypesAmount).keys()];

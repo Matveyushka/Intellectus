@@ -2,19 +2,19 @@ const problemTemplate = require('./problem-template');
 const { shuffle } = require('../utils/arrayShuffle');
 
 const missingElementProblem = require('./problem-types/missing-element-problem');
-const equalAmountEasyProblem = require('./problem-types/equal-amount-easy-problem');
+const twoFiguresMediumProblem = require('./problem-types/two-figures-medium-problem');
 const bitwiseProblem = require('./problem-types/bitwise-problem');
 const sumProblem = require('./problem-types/sum-problem');
-const twoFiguresProblem = require('./problem-types/two-figures-problem');
+const twoFiguresEasyProblem = require('./problem-types/two-figures-easy-problem');
 
 const easyProblems = [
   missingElementProblem,
   sumProblem,
-  twoFiguresProblem,
+  twoFiguresEasyProblem,
 ];
 
 const mediumProblems = [
-  equalAmountEasyProblem,
+  twoFiguresMediumProblem,
 ];
 
 const hardProblems = [

@@ -5,7 +5,7 @@ const { numberOfWrongOptions } = require('./constants');
 const createWrongOptions = (wrongOptionsGenerator, problemDescription, solution) => {
   const wrongOptions = wrongOptionsGenerator(problemDescription, solution);
 
-  return _.uniq(wrongOptions).length === numberOfWrongOptions
+  return _.uniqWith(wrongOptions, _.isEqual).length === numberOfWrongOptions
     ? wrongOptions
     : createWrongOptions(wrongOptionsGenerator, problemDescription, solution);
 };

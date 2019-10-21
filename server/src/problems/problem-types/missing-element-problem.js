@@ -6,6 +6,12 @@ const {
   numberOfWrongOptions,
 } = require('../constants');
 
+/*
+ * Фигура может занимать в поле одну из 9 позиций.
+ * В задаче есть 9 полей, во всех фигура должна
+ * занимать разные позиции.
+ */
+
 const generateProblemDescription = () => [0, 1, 2, 3, 4, 5, 6, 7, 8]
   .sort(() => Math.random() - 0.5);
 
