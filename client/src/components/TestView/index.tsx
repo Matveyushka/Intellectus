@@ -2,13 +2,14 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { StepItem, Stepper } from '../Stepper';
-import { generateInitialStepperData } from './helpers';
+import { adjustSecond, formatTime, generateInitialStepperData } from './helpers';
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
 import { getResults, setUserAnswers } from '../../pages/Main/actions';
 import { MainState } from '../../pages/Main/initialState';
 import { State } from '../../store';
+import { useInterval } from '../../helpers';
 
 export interface Question {
   token: string;
@@ -24,16 +25,15 @@ export const TestView = (): React.ReactElement => {
   const { questions, token, userAnswers } = useSelector<State, MainState>(state => state.main);
 
   const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
-
   const [stepIndex, setStepIndex] = React.useState<number>(0);
+  const [time, setTime] = React.useState<Date>(new Date(1, 1, 1, 0, 0, 0));
 
   const currentProblemFields = questions ? questions[stepIndex].problemFields : [];
-
   const currentOptions = questions ? questions[stepIndex].options : [];
-
   const selectedOptionIndex = userAnswers[stepIndex];
-
   const isTestFinished = userAnswers.every(_.isNumber);
+
+  useInterval(() => setTime(adjustSecond(time)), 1000);
 
   const handleOptionSelect = (optionIndex: number): void => {
     const newAnswers = userAnswers.map((item, index) => (
@@ -105,8 +105,9 @@ export const TestView = (): React.ReactElement => {
               />
             </div>
           </div>
-          {isTestFinished
-            ? (
+          <div className="test-view-bottom">
+            <span className="test-view-timer">{formatTime(time)}</span>
+            {isTestFinished && (
               <button
                 type="button"
                 className="test-view-finish-button"
@@ -114,11 +115,8 @@ export const TestView = (): React.ReactElement => {
               >
                 Finish
               </button>
-            )
-            : (
-              // заглушка, чтобы при появлении кнопки интерфейс не дергался
-              <div className="test-view-finish-button" />
             )}
+          </div>
         </div>
         <div className="test-view-aside right">
           {stepIndex < stepperData.length - 1 && (

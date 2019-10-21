@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import axios from 'axios';
 import {
-  GetResultsAction, MAIN_ACTION_TYPES, setCurrentView, setQuestions, setResults,
+  GetResultsAction, MAIN_ACTION_TYPES, setCurrentView, setQuestions, setResults, setUserAnswers,
 } from './actions';
 import { hideLoader, showLoader } from '../../components/Loader/actions';
 import { MAIN_VIEW_TYPES } from '../../constants';
@@ -10,6 +10,8 @@ import { MAIN_VIEW_TYPES } from '../../constants';
 function* getQuestions(): SagaIterator {
   try {
     yield put(showLoader());
+
+    yield put(setUserAnswers(Array(12).fill(null)));
 
     const { data } = yield call(axios.get, '/questions');
 
@@ -34,6 +36,8 @@ function* getResults(action: GetResultsAction): SagaIterator {
     const { data } = yield call(axios.post, '/answers', { token, answers });
 
     yield put(setResults(data));
+
+    yield put(setUserAnswers(Array(12).fill(null)));
 
     yield put(setCurrentView(MAIN_VIEW_TYPES.results));
 
