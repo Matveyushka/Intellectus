@@ -1,22 +1,29 @@
 import * as React from 'react';
 import mergeClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { URLS } from '../constants';
+import { useDispatch } from 'react-redux';
+import { MAIN_VIEW_TYPES, URLS } from '../constants';
+import { setCurrentView } from '../pages/Main/actions';
 
 export interface HeaderProps {
   location: Location;
-  onBackToMainPageClick: () => void;
 }
 
 export const Header = (props: HeaderProps): React.ReactElement => {
-  const { location: { pathname }, onBackToMainPageClick } = props;
+  const { location: { pathname } } = props;
+
+  const dispatch = useDispatch();
 
   return (
     <nav className="header-container">
       <h1
         className={mergeClassNames('header-item', { active: pathname === URLS.main })}
       >
-        <NavLink to={`${URLS.main}`} onClick={onBackToMainPageClick} exact>
+        <NavLink
+          to={`${URLS.main}`}
+          onClick={() => dispatch(setCurrentView(MAIN_VIEW_TYPES.intro))}
+          exact
+        >
             MAIN
         </NavLink>
       </h1>

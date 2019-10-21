@@ -1,17 +1,14 @@
 import * as React from 'react';
 import * as _ from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 import { StepItem, Stepper } from '../Stepper';
 import { generateInitialStepperData } from './helpers';
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
-
-export interface TestViewProps {
-  onFinishButtonClick: () => void;
-  userAnswers: number[];
-  onUserAnswersUpdate: (newAnswers: number[]) => void;
-  questions?: Question[] | null;
-}
+import { getResults, setUserAnswers } from '../../pages/Main/actions';
+import { MainState } from '../../pages/Main/initialState';
+import { State } from '../../store';
 
 export interface Question {
   token: string;
@@ -21,10 +18,10 @@ export interface Question {
 
 const stepperInitialData = generateInitialStepperData();
 
-export const TestView = (props: TestViewProps): React.ReactElement => {
-  const {
-    onFinishButtonClick, userAnswers, onUserAnswersUpdate, questions,
-  } = props;
+export const TestView = (): React.ReactElement => {
+  const dispatch = useDispatch();
+
+  const { questions, token, userAnswers } = useSelector<State, MainState>(state => state.main);
 
   const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
 
@@ -45,7 +42,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
         : item
     ));
 
-    onUserAnswersUpdate(newAnswers);
+    dispatch(setUserAnswers(newAnswers));
 
     setStepperData(stepperData.map((item, index) => (
       index === stepIndex
@@ -59,14 +56,6 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
 
   const handlePrevNextButtonClick = (direction: number): void => {
     if (selectedOptionIndex) {
-      const newAnswers = userAnswers.map((item, index) => (
-        index === stepIndex
-          ? selectedOptionIndex
-          : item
-      ));
-
-      onUserAnswersUpdate(newAnswers);
-
       setStepperData(stepperData.map((item, index) => (
         index === stepIndex
           ? ({
@@ -78,6 +67,12 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
     }
 
     setStepIndex(stepIndex + direction);
+  };
+
+  const handleFinishButtonClick = (): void => {
+    if (token && userAnswers) {
+      dispatch(getResults({ token, answers: userAnswers }));
+    }
   };
 
   return (
@@ -115,7 +110,7 @@ export const TestView = (props: TestViewProps): React.ReactElement => {
               <button
                 type="button"
                 className="test-view-finish-button"
-                onClick={onFinishButtonClick}
+                onClick={handleFinishButtonClick}
               >
                 Finish
               </button>
