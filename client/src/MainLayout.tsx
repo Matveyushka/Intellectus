@@ -4,6 +4,7 @@ import { Header } from './components';
 import {
   About, ContactUs, Main, Statistics,
 } from './pages';
+
 import { URLS } from './constants';
 
 export const MainLayout = (): React.ReactElement => (

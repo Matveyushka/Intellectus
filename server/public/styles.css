@@ -4,11 +4,18 @@
 *, *::before, *::after {
   box-sizing: border-box; }
 
+@font-face {
+  font-family: "Comfortaa";
+  src: url("/fonts/Comfortaa.ttf"); }
+
 body {
   background-color: #f6f6f6;
   margin: 0;
   color: #969696;
-  font-family: "Segoe UI Light", sans-serif; }
+  font-family: "Comfortaa", sans-serif; }
+
+input {
+  font-family: "Comfortaa", sans-serif; }
 
 button {
   background-color: #f6f6f6;
@@ -16,18 +23,30 @@ button {
   border: none;
   padding: 0;
   margin: 0;
-  outline: none; }
+  outline: none;
+  cursor: pointer; }
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 600px;
+  height: 100px;
+  padding: 35px;
+  border-bottom: 1px solid #88c8b0; }
+  .header-logo-img {
+    height: 100%;
+    width: auto; }
 
 .header-container {
   display: flex;
   margin: 0 auto;
   width: 600px;
   padding: 10px;
-  justify-content: space-between;
-  border-bottom: 1px solid #88c8b0; }
+  justify-content: space-between; }
 
 .header-item {
-  padding: 10px;
   margin: 0;
   border-radius: 18px;
   position: relative;
@@ -42,7 +61,8 @@ button {
     text-decoration: none;
     font-size: 20px;
     letter-spacing: 5px;
-    font-family: "Segoe UI Light", sans-serif; }
+    font-family: inherit;
+    padding: 10px; }
   .header-item.active, .header-item.active > a {
     color: #707070; }
 
@@ -50,22 +70,18 @@ button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   align-items: center;
   justify-items: center; }
   .footer .credentials {
     display: flex;
     flex-direction: column;
     align-items: flex-end; }
-  .footer p:first-child {
-    letter-spacing: 5px;
-    font-size: 30px; }
-    .footer p:first-child + p {
-      text-align: right;
-      padding-right: 2px;
+    .footer .credentials p {
       font-size: 20px;
       letter-spacing: 5px;
-      color: #c8c8c8; }
+      color: #c8c8c8;
+      font-weight: bold; }
 
 .play-icon {
   background-image: url(/images/play.svg);
@@ -103,7 +119,10 @@ button {
     font-weight: lighter;
     font-size: 50px;
     color: #88c8b0;
-    letter-spacing: 20px; }
+    letter-spacing: 20px;
+    word-spacing: 10px; }
+    .main-container .title:first-child {
+      padding-bottom: 15px; }
 
 .main-layout {
   height: 100vh;
@@ -173,10 +192,35 @@ button {
   top: 20px;
   background-color: #c8c8c8; }
 
+.contact-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .contact-results .error, .contact-results .success {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 30px;
+    margin-bottom: 20px; }
+  .contact-results .error {
+    color: #b86e6e; }
+  .contact-results .success {
+    color: #88c8b0; }
+  .contact-results .button {
+    color: #969696;
+    text-transform: lowercase;
+    font-size: 24px;
+    letter-spacing: 4px;
+    text-decoration: none;
+    transition: 0.2s;
+    display: block;
+    cursor: pointer; }
+    .contact-results .button:hover {
+      transform: scale(1.1); }
+
 .contact-form {
-  width: 35%;
-  font-size: 19px;
-  margin-top: 10px; }
+  font-size: 17px;
+  margin-top: 10px;
+  width: 100%; }
   .contact-form .input-field {
     display: flex;
     flex-direction: column; }
@@ -184,11 +228,13 @@ button {
       color: #88c8b0; }
       .contact-form .input-field .input-label .label-title {
         padding: 10px 10px 4px 10px; }
+        .contact-form .input-field .input-label .label-title.label-error, .contact-form .input-field .input-label .label-title .label-error {
+          color: #b86e6e; }
       .contact-form .input-field .input-label .input-text {
         border: 1px solid #88c8b0;
         border-radius: 15px;
         background: none;
-        font-size: 19px;
+        font-size: inherit;
         padding: 8px 15px;
         width: 100%;
         color: #969696; }
@@ -210,7 +256,7 @@ button {
         .contact-form .input-field .input-label .input-with-area .input-area {
           border: none;
           background: none;
-          font-size: 19px;
+          font-size: inherit;
           color: #969696;
           font-family: inherit;
           padding: 4px 0px;
@@ -237,20 +283,25 @@ button {
             height: 30px;
             display: inline-block;
             background-image: url("/images/plane.svg");
-            background-size: cover; }
+            background-size: cover;
+            transition: 0.2s; }
+          .contact-form .input-field .input-label .send-form .send-btn:hover .plane-icon {
+            transform: scale(1.1); }
+  .contact-form .border-error {
+    border-color: #b86e6e !important; }
 
 .test-view-next-button, .test-view-prev-button {
   display: flex;
   align-self: center;
   padding: 5px;
-  margin-left: 28px;
+  margin: 0 28px;
   background-image: url("/images/arrow.svg");
   background-repeat: no-repeat;
   background-size: contain;
   width: 30px;
   height: 30px;
   color: #88c8b0;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: inherit;
   font-size: 20px;
   cursor: pointer;
   transition: transform 1s; }
@@ -271,11 +322,9 @@ button {
     display: flex;
     width: 100%; }
     .test-view-aside.right {
-      align-items: flex-start;
-      justify-items: flex-start; }
+      justify-content: flex-start; }
     .test-view-aside.left {
-      align-items: flex-end;
-      justify-items: flex-end; }
+      justify-content: flex-end; }
   .test-view-separator {
     width: 1px;
     background-color: #88c8b0;
@@ -296,7 +345,7 @@ button {
     height: 48px;
     color: #88c8b0;
     font-size: 25px;
-    font-family: "Segoe UI Light", sans-serif;
+    font-family: inherit;
     font-weight: normal;
     display: flex;
     margin: 0 auto;
@@ -314,14 +363,13 @@ button {
 
 .problem-title {
   font-size: 25px;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: inherit;
   font-weight: normal;
   color: #88c8b0;
-  text-align: center; }
-  .problem-title:first-of-type {
-    width: 320px; }
+  text-align: center;
+  margin: 0 120px 0 110px; }
   .problem-title.options {
-    flex-grow: 1; }
+    margin: 0 55px 0 72px; }
 
 .problem-cell {
   width: 80px;

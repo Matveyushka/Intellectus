@@ -53,9 +53,10 @@
       "error",
       { "blankLine": "always", "prev": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"], "next": "*"},
       { "blankLine": "any", "prev": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"], "next": ["const", "let", "var", "import", "cjs-import", "export", "cjs-export"]},
-      { "blankLine": "always", "prev":  "*", "next": ["expression", "return"]}
+      { "blankLine": "always", "prev":  "*", "next": ["expression", "return", "block-like", "break", "continue", "switch", "try", "throw"]}
     ],
     "multiline-comment-style": "error",
+    "no-multiple-empty-lines": ["error", { "max":  1, "maxEOF": 1, "maxBOF": 0 }],
     "max-len": ["error", {
       "tabWidth": 2,
       "code": 100,

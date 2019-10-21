@@ -1,0 +1,29 @@
+{
+  "name": "intellectus",
+  "version": "0.0.1",
+  "description": "Intellectus project",
+  "scripts": {
+    "lint": "npm run lint --prefix client && npm run lint --prefix server",
+    "start": "npm start --prefix server",
+    "start:new": "npm run build:server --prefix client && npm start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/777PolarFox777/Intellectus.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
+  "author": "NoBrains",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/777PolarFox777/Intellectus/issues"
+  },
+  "homepage": "https://github.com/777PolarFox777/Intellectus#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^3.0.9"
+  }
+}

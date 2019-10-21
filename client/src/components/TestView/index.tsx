@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as _ from 'lodash';
+import { isNumber } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { StepItem, Stepper } from '../Stepper';
 import { adjustSecond, formatTime, generateInitialStepperData } from './helpers';
@@ -31,7 +31,7 @@ export const TestView = (): React.ReactElement => {
   const currentProblemFields = questions ? questions[stepIndex].problemFields : [];
   const currentOptions = questions ? questions[stepIndex].options : [];
   const selectedOptionIndex = userAnswers[stepIndex];
-  const isTestFinished = userAnswers.every(_.isNumber);
+  const isTestFinished = userAnswers.every(isNumber);
 
   useInterval(() => setTime(adjustSecond(time)), 1000);
 
