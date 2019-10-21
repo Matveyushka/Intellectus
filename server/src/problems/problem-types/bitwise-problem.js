@@ -2,7 +2,7 @@ const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
 const {
   grayColor,
-  numberOfWrongAnswers,
+  numberOfWrongOptions,
   transparentColor,
 } = require('../constants');
 
@@ -19,7 +19,7 @@ const maxNumberIn9Bits = 512;
  * с побитовыми операциями.
  */
 
-const generateTaskDescription = () => {
+const generateProblemDescription = () => {
   const generateField = (excludedVariant = 0) => {
     //  Минус два и плюс один, чтобы исключить генерацию крайних значений - 0 и 511
     const field = Math.floor(Math.random() * (maxNumberIn9Bits - 2)) + 1;
@@ -75,7 +75,7 @@ const generateWrongOptions = (description) => {
       : field;
   };
 
-  return Array(numberOfWrongAnswers).fill(0).map(() => generateField());
+  return Array(numberOfWrongOptions).fill(0).map(() => generateField());
 };
 
 const convertToSvg = (code, seed) => {
@@ -122,7 +122,7 @@ const convertToSvg = (code, seed) => {
 };
 
 module.exports = problemTemplate.newProblemType(
-  generateTaskDescription,
+  generateProblemDescription,
   generateWrongOptions,
   convertToSvg,
 );
