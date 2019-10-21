@@ -31,7 +31,6 @@ const getSession = (token) => {
 
 const getTimeSession = token => new Date().getTime() - session[token].createdAt;
 
-
 module.exports = {
   saveSession,
   finishSession,

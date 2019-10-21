@@ -63,6 +63,7 @@ const savePassedTest = async (test) => {
   const session = await mongoose.startSession();
 
   session.startTransaction();
+
   try {
     const opts = { session };
 
@@ -77,6 +78,7 @@ const savePassedTest = async (test) => {
     console.error(`passed_test save failed: ${err}`);
 
     await session.abortTransaction();
+
     throw err;
   } finally {
     session.endSession();
