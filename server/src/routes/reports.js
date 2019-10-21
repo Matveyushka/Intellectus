@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
   };
 
   try {
-    await transporter.mailer(message);
+    await transporter.mailSender(message);
   } catch (error) {
     console.error(error);
 
