@@ -9,7 +9,7 @@
   width: 30px;
   height: 30px;
   color: $primary-1;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: inherit;
   font-size: 20px;
   cursor: pointer;
   transition: transform 1s;
@@ -81,8 +81,8 @@
   &-finish-button {
     height: 48px;
     color: $primary-1;
-    font-size: 25px;
-    font-family: "Segoe UI Light", sans-serif;
+    font-size: 21px;
+    font-family: inherit;
     font-weight: normal;
     display: flex;
     margin: 0 auto;
@@ -105,8 +105,8 @@
   }
 
   &-title {
-    font-size: 25px;
-    font-family: "Segoe UI Light", sans-serif;
+    font-size: 21px;
+    font-family: inherit;
     font-weight: normal;
     color: $primary-1;
     text-align: center;

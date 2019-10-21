@@ -9,6 +9,10 @@ import { useFetch } from './hooks';
 
 type ViewTypes = Values<typeof MAIN_VIEW_TYPES>;
 
+export interface MainProps {
+  onStartTest: () => void;
+}
+
 export interface QuestionsFetchResult {
   token: string;
   questions: Question[];
@@ -19,7 +23,8 @@ export interface AnswersFetchResult {
   pointsDistribution: number[];
 }
 
-export const Main = (): React.ReactElement | null => {
+export const Main = (props: MainProps): React.ReactElement | null => {
+  const { onStartTest } = props;
   const [currentView, setCurrentView] = React.useState<ViewTypes>(MAIN_VIEW_TYPES.intro);
   const [userAnswers, setUserAnswers] = React.useState<number[]>(Array(12).fill(null));
   const [shouldFetchQuestions, setShouldFetchQuestions] = React.useState<boolean>(false);
@@ -47,6 +52,8 @@ export const Main = (): React.ReactElement | null => {
   };
 
   const handlePlayButtonClick = (): void => {
+    onStartTest();
+
     setShouldFetchQuestions(true);
 
     setCurrentView(MAIN_VIEW_TYPES.test);

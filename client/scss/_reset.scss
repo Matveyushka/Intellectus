@@ -6,11 +6,21 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Comfortaa";
+  src: url('/fonts/Comfortaa.ttf');
+}
+
 body {
   background-color: $base-4;
   margin: 0;
   color: $base-2;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: $main-font;
+  font-weight: lighter;
+}
+
+input{
+  font-family: $main-font;
 }
 
 button {
