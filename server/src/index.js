@@ -22,7 +22,11 @@ app.use('/questions', routes.questions);
 
 app.use('/answers', routes.answers);
 
+app.use('/reports', routes.reports);
+
 app.use('/feedback', routes.feedback);
+
+app.use('/statistics', routes.statistics);
 
 const { MONGO_ATLAS_LOGIN, MONGO_ATLAS_PASSWORD } = process.env;
 const uri = `mongodb+srv://${MONGO_ATLAS_LOGIN}:${MONGO_ATLAS_PASSWORD}@cluster0-gsf7q.gcp.mongodb.net/db?retryWrites=true&w=majority`;
