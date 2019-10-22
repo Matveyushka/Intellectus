@@ -1,37 +1,37 @@
 import * as React from 'react';
 import mergeClassNames from 'classnames';
-import * as shortid from 'shortid';
 import { NavLink } from 'react-router-dom';
-import { URLS } from '../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { MAIN_VIEW_TYPES, URLS } from '../constants';
+import { setCurrentView } from '../pages/Main/actions';
+import { State } from '../store';
+import { MainState } from '../pages/Main/initialState';
 
 export interface HeaderProps {
   location: Location;
-  onBackToMainPageClick: () => void;
-  isTest: boolean;
 }
 
 export const Header = (props: HeaderProps): React.ReactElement => {
-  const {
-    location: { pathname },
-    isTest,
-    onBackToMainPageClick,
-  } = props;
+  const { location: { pathname } } = props;
+
+  const dispatch = useDispatch();
+
+  const { currentView } = useSelector<State, MainState>(state => state.main);
+
+  const shouldRenderNavBar = currentView !== MAIN_VIEW_TYPES.intro && pathname === URLS.main;
 
   return (
     <header className="header">
       <div className="header-logo">
         <NavLink
-          to={{
-            pathname: `${URLS.main}`,
-            state: { mainKey: shortid.generate() },
-          }}
-          onClick={onBackToMainPageClick}
+          to={URLS.main}
+          onClick={() => dispatch(setCurrentView(MAIN_VIEW_TYPES.intro))}
           exact
         >
           <img className="header-logo-img" src="images/logo.png" />
         </NavLink>
       </div>
-      {!isTest && (
+      {!shouldRenderNavBar && (
         <nav className="header-container">
           <h1
             className={mergeClassNames('header-item', {

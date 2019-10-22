@@ -11,12 +11,14 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "prefer-arrow"
+    "prefer-arrow",
+    "redux-saga"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb"
+    "airbnb",
+    "plugin:redux-saga/recommended"
   ],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
