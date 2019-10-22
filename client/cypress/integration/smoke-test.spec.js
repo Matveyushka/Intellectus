@@ -14,10 +14,21 @@ describe('Smoke tests', () => {
       cy.passTest();
       
       cy.server().route('POST', '/answers').as('answersReq');
-      cy.get('.test-view-next-button').click();
+      cy.get('.test-view-finish-button').click();
       cy.wait('@answersReq');
       
       cy.get('.stats').should('be.visible');
+    })
+
+    it.only('Send feedback', () => {
+      cy.get('.header-container').contains('CONTACT US').click();
+      cy.get('[name="name"]').type('Пётр');
+      cy.get('[name="email"]').type('asd@gmail.com');
+      cy.get('[name="title"]').type('Моё мнение о сайте');
+      cy.get('[name="body"]').type('Какой больной ублюдок составлял эти тесты? Их же невозможно пройти.');
+      cy.server().route('POST', '/feedback').as('feedbackReq');
+      cy.get('.send-btn').click();
+      cy.wait('@feedbackReq');
     })
   })
 

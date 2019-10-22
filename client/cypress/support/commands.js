@@ -27,3 +27,12 @@ Cypress.Commands.add('passTest', () => {
     // Finish button not clicked
   })
 })
+
+Cypress.Commands.add('checkProblemFields', question => {
+  question.problemFields.forEach((field, index) => {
+    if (field) {
+      cy.get('.problem-wrapper').children().eq(index)
+        .should('have.attr', 'src').and('include', field);
+    }
+  })
+})

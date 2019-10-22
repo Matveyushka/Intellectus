@@ -6,7 +6,7 @@ describe('Test statistics', () => {
     cy.get('.play-icon').click();
     cy.passTest();
     cy.postAnswers(); // 5 right answers
-    cy.get('.test-view-next-button').click();
+    cy.get('.test-view-finish-button').click();
   })
 
   it('Statistics title contains right number of answers', () => {
