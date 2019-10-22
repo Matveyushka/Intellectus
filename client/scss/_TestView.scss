@@ -47,6 +47,24 @@
     }
   }
 
+  &-bottom {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    position: relative;
+    height: 48px
+  }
+
+  &-timer {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    position: absolute;
+    left: 15px;
+    font-size: 21px;
+    color: $primary-1;
+  }
+
   &-separator {
     width: 1px;
     background-color: $primary-1;
@@ -79,13 +97,11 @@
   }
 
   &-finish-button {
-    height: 48px;
     color: $primary-1;
     font-size: 21px;
     font-family: inherit;
     font-weight: normal;
     display: flex;
-    margin: 0 auto;
     transition: transform 1s;
     cursor: pointer;
 

@@ -5,8 +5,8 @@ export const URLS = {
   contactUs: '/contact-us',
 } as const;
 
-export const MAIN_VIEW_TYPES = {
-  intro: 'intro',
-  test: 'test',
-  results: 'results',
-} as const;
+export enum MAIN_VIEW_TYPES {
+  intro = 'intro',
+  test = 'test',
+  results = 'results',
+}
