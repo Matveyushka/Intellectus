@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
-/** @exports */
+
 const baseSvgTag = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1"></svg>';
+
+const defaultBorderRadius = 5;
 
 const newImage = (sourceImage = baseSvgTag) => ({
   getImage: () => sourceImage,
@@ -27,14 +29,21 @@ const newImage = (sourceImage = baseSvgTag) => ({
     x, y, size, color, borderWidth, borderColor,
   }) => newImage(sourceImage)
     .add(
-      `<rect x="${x}" y="${y}" width="${size}" height="${size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+      `<rect x="${x}" y="${y}" rx="${defaultBorderRadius}" ry="${defaultBorderRadius}" width="${size}" height="${size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
     ),
 
   rectangle: ({
     x, y, width, height, color, borderWidth, borderColor,
   }) => newImage(sourceImage)
     .add(
-      `<rect x="${x}" y="${y}" width="${width}" height="${height}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+      `<rect x="${x}" y="${y}" rx="${defaultBorderRadius}" ry="${defaultBorderRadius}" width="${width}" height="${height}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+    ),
+
+  triangle: ({
+    x, y, size, color, borderWidth, borderColor,
+  }) => newImage(sourceImage)
+    .add(
+      `<polygon points="${x},${y + size} ${x + size / 2},${y} ${x + size},${y + size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
     ),
 
   ellipse: ({

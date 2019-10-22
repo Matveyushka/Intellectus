@@ -1,12 +1,14 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { Footer } from './Footer';
+import { getQuestions } from '../pages/Main/actions';
 
-export interface IntroViewProps {
-  onPlayButtonClick: () => void;
-}
+export const IntroView = (): React.ReactElement => {
+  const dispatch = useDispatch();
 
-export const IntroView = (props: IntroViewProps): React.ReactElement => {
-  const { onPlayButtonClick } = props;
+  const handlePlayButtonClick = (): void => {
+    dispatch(getQuestions());
+  };
 
   return (
     <>
@@ -17,7 +19,7 @@ export const IntroView = (props: IntroViewProps): React.ReactElement => {
           type="button"
           className="play-icon"
           title="Start test!"
-          onClick={onPlayButtonClick}
+          onClick={handlePlayButtonClick}
         />
       </main>
       <Footer />

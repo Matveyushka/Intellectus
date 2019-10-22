@@ -4,11 +4,19 @@
 *, *::before, *::after {
   box-sizing: border-box; }
 
+@font-face {
+  font-family: "Comfortaa";
+  src: url("/fonts/Comfortaa.ttf"); }
+
 body {
   background-color: #f6f6f6;
   margin: 0;
   color: #969696;
-  font-family: "Segoe UI Light", sans-serif; }
+  font-family: "Comfortaa", sans-serif;
+  font-weight: lighter; }
+
+input {
+  font-family: "Comfortaa", sans-serif; }
 
 button {
   background-color: #f6f6f6;
@@ -19,16 +27,27 @@ button {
   outline: none;
   cursor: pointer; }
 
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 600px;
+  height: 100px;
+  padding: 35px;
+  border-bottom: 1px solid #88c8b0; }
+  .header-logo-img {
+    height: 100%;
+    width: auto; }
+
 .header-container {
   display: flex;
   margin: 0 auto;
   width: 600px;
-  padding: 10px;
-  justify-content: space-between;
-  border-bottom: 1px solid #88c8b0; }
+  padding: 10px 10px 0px 10px;
+  justify-content: space-between; }
 
 .header-item {
-  padding: 10px;
   margin: 0;
   border-radius: 18px;
   position: relative;
@@ -41,9 +60,11 @@ button {
   .header-item > a {
     color: #969696;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 5px;
-    font-family: "Segoe UI Light", sans-serif; }
+    font-family: inherit;
+    padding: 10px 10px 0px 10px;
+    font-weight: lighter; }
   .header-item.active, .header-item.active > a {
     color: #707070; }
 
@@ -58,12 +79,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: flex-end; }
-  .footer p:first-child {
-    letter-spacing: 5px;
-    font-size: 30px; }
-    .footer p:first-child + p {
-      text-align: right;
-      padding-right: 2px;
+    .footer .credentials p {
       font-size: 20px;
       letter-spacing: 5px;
       color: #c8c8c8; }
@@ -102,12 +118,16 @@ button {
   .main-container .title {
     margin: 0;
     font-weight: lighter;
-    font-size: 50px;
+    font-size: 46px;
     color: #88c8b0;
-    letter-spacing: 20px; }
+    letter-spacing: 20px;
+    word-spacing: 10px; }
+    .main-container .title:first-child {
+      padding-bottom: 15px; }
 
 .main-layout {
   height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column; }
 
@@ -194,14 +214,13 @@ button {
     letter-spacing: 4px;
     text-decoration: none;
     transition: 0.2s;
-    font-family: inherit;
     display: block;
     cursor: pointer; }
     .contact-results .button:hover {
       transform: scale(1.1); }
 
 .contact-form {
-  font-size: 19px;
+  font-size: 17px;
   margin-top: 10px;
   width: 100%; }
   .contact-form .input-field {
@@ -217,7 +236,7 @@ button {
         border: 1px solid #88c8b0;
         border-radius: 15px;
         background: none;
-        font-size: 19px;
+        font-size: inherit;
         padding: 8px 15px;
         width: 100%;
         color: #969696; }
@@ -239,12 +258,12 @@ button {
         .contact-form .input-field .input-label .input-with-area .input-area {
           border: none;
           background: none;
-          font-size: 19px;
+          font-size: inherit;
           color: #969696;
           font-family: inherit;
-          padding: 4px 0px;
+          padding: 4px 0;
           resize: none;
-          height: 200px; }
+          min-height: 150px; }
           .contact-form .input-field .input-label .input-with-area .input-area:focus {
             outline: none; }
           .contact-form .input-field .input-label .input-with-area .input-area::placeholder {
@@ -284,7 +303,7 @@ button {
   width: 30px;
   height: 30px;
   color: #88c8b0;
-  font-family: "Segoe UI Light", sans-serif;
+  font-family: inherit;
   font-size: 20px;
   cursor: pointer;
   transition: transform 1s; }
@@ -308,6 +327,20 @@ button {
       justify-content: flex-start; }
     .test-view-aside.left {
       justify-content: flex-end; }
+  .test-view-bottom {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    position: relative;
+    height: 48px; }
+  .test-view-timer {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    position: absolute;
+    left: 15px;
+    font-size: 21px;
+    color: #88c8b0; }
   .test-view-separator {
     width: 1px;
     background-color: #88c8b0;
@@ -325,13 +358,11 @@ button {
     .test-view-prev-button:hover {
       transform: scale(1.2) rotate(180deg); }
   .test-view-finish-button {
-    height: 48px;
     color: #88c8b0;
-    font-size: 25px;
-    font-family: "Segoe UI Light", sans-serif;
+    font-size: 21px;
+    font-family: inherit;
     font-weight: normal;
     display: flex;
-    margin: 0 auto;
     transition: transform 1s;
     cursor: pointer; }
     .test-view-finish-button:hover {
@@ -345,8 +376,8 @@ button {
   grid-gap: 8px; }
 
 .problem-title {
-  font-size: 25px;
-  font-family: "Segoe UI Light", sans-serif;
+  font-size: 21px;
+  font-family: inherit;
   font-weight: normal;
   color: #88c8b0;
   text-align: center;
@@ -384,14 +415,14 @@ button {
 .test-title {
   color: #88c8b0;
   font-weight: 100;
-  font-size: 40px;
+  font-size: 30px;
   letter-spacing: 8px;
   margin-bottom: 25px; }
 
 .test-hint {
   padding-top: 15px;
   color: #636363;
-  font-size: 27px;
+  font-size: 20px;
   letter-spacing: 5px; }
 
 .stats {

@@ -1,15 +1,16 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { StatisticChart } from './StatisticChart';
 import { Stepper } from './Stepper';
+import { MainState } from '../pages/Main/initialState';
+import { State } from '../store';
 
-export interface TestResultProps {
-  pointsDistribution?: number[];
-  solutions?: number[];
-  userAnswers: number[];
-}
-
-export const TestResult = (props: TestResultProps): React.ReactElement => {
-  const { userAnswers, solutions = [], pointsDistribution = [] } = props;
+export const TestResult = (): React.ReactElement => {
+  const {
+    userAnswers,
+    solutions = [],
+    pointsDistribution = [],
+  } = useSelector<State, MainState>(state => state.main);
 
   const answers: boolean[] = userAnswers.map((item, index) => solutions[index] === item);
   const solutionsCount: number = answers.reduce((accum, item) => (item ? accum + 1 : accum), 0);
@@ -23,9 +24,9 @@ export const TestResult = (props: TestResultProps): React.ReactElement => {
     <>
       <div className="test-result">
         <h2 className="test-title">
-        Your result is&nbsp;
+          Your result is&nbsp;
           {solutionsCount}
-        &nbsp;out of&nbsp;
+          &nbsp;out of&nbsp;
           {answers.length}
         </h2>
         <StatisticChart rows={pointsDistribution} chosenRowIndex={solutionsCount} />

@@ -3,16 +3,22 @@ const problemTemplate = require('../problem-template');
 const {
   grayColor,
   transparentColor,
-  numberOfWrongAnswers,
+  numberOfWrongOptions,
 } = require('../constants');
 
-const generateTaskDescription = () => [0, 1, 2, 3, 4, 5, 6, 7, 8]
+/*
+ * Фигура может занимать в поле одну из 9 позиций.
+ * В задаче есть 9 полей, во всех фигура должна
+ * занимать разные позиции.
+ */
+
+const generateProblemDescription = () => [0, 1, 2, 3, 4, 5, 6, 7, 8]
   .sort(() => Math.random() - 0.5);
 
 const generateWrongOptions = description => description
   .filter(item => item !== null)
   .sort(() => Math.random() - 0.5)
-  .slice(0, numberOfWrongAnswers);
+  .slice(0, numberOfWrongOptions);
 
 const convertToSvg = (code, seed) => {
   const elementSize = 28;
@@ -45,7 +51,7 @@ const convertToSvg = (code, seed) => {
 };
 
 module.exports = problemTemplate.newProblemType(
-  generateTaskDescription,
+  generateProblemDescription,
   generateWrongOptions,
   convertToSvg,
 );
