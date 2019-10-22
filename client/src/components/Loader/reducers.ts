@@ -7,6 +7,8 @@ export const loaderReducer = (
 ): LoaderState => {
   switch (action.type) {
     case LOADER_ACTION_TYPES.hideLoader:
+      // falls through
+
     case LOADER_ACTION_TYPES.showLoader: {
       return {
         ...state,

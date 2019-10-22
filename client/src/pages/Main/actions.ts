@@ -74,7 +74,6 @@ export const setResults = (payload: SetResultsAction['payload']): SetResultsActi
   payload,
 });
 
-
 export const setCurrentView = (payload: SetCurrentViewAction['payload']): SetCurrentViewAction => ({
   type: MAIN_ACTION_TYPES.setCurrentView,
   payload,
