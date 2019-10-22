@@ -18,6 +18,9 @@
     "url": "https://github.com/777PolarFox777/Intellectus/issues"
   },
   "homepage": "https://github.com/777PolarFox777/Intellectus#readme",
+  "engines": {
+    "node": "12.13.0"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
