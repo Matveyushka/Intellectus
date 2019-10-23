@@ -21,14 +21,14 @@ describe('Smoke tests', () => {
     })
 
     it('Send feedback', () => {
-      cy.get('.header-container').contains('CONTACT US').click();
-      cy.get('[name="name"]').type('Пётр');
-      cy.get('[name="email"]').type('asd@gmail.com');
-      cy.get('[name="title"]').type('Моё мнение о сайте');
-      cy.get('[name="body"]').type('Какой больной ублюдок составлял эти тесты? Их же невозможно пройти.');
-      cy.server().route('POST', '/feedback').as('feedbackReq');
-      cy.get('.send-btn').click();
-      cy.wait('@feedbackReq');
+      cy.fixture('feedback').then(feedback => {
+        cy.get('.header-container').contains('CONTACT US').click();
+        cy.fillContactUsInputFields(feedback);
+        
+        cy.server().route('POST', '/feedback').as('feedbackReq');
+        cy.get('.send-btn').click();
+        cy.wait('@feedbackReq');
+      })
     })
   })
 

@@ -9,7 +9,7 @@ describe('Contact us', () => {
 
   it('A success message is displayed for valid data', () => {
     cy.fixture('feedback').then(feedback => {
-      fillInputFields(feedback);
+      cy.fillContactUsInputFields(feedback);
       cy.server().route({
         method: 'POST',
         url: url,
@@ -24,7 +24,7 @@ describe('Contact us', () => {
 
   it('An error message is displayed when status ', () => {
     cy.fixture('feedback').then(feedback => {
-      fillInputFields(feedback);
+      cy.fillContactUsInputFields(feedback);
       cy.server().route({
         method: 'POST',
         url: url,
@@ -41,7 +41,7 @@ describe('Contact us', () => {
     
     it('Empty fields', () => {
       const feedback = {name: ' ', email: ' ', title: ' ', body: ' '};
-      fillInputFields(feedback)
+      cy.fillContactUsInputFields(feedback)
       cy.server().route({
         method: 'POST',
         url: url,
@@ -59,7 +59,7 @@ describe('Contact us', () => {
 
     it('Invalid email', () => {
       const feedback = {name: 'Petr', email: '1@1.1', title: 'title', body: 'body'};
-      fillInputFields(feedback)
+      cy.fillContactUsInputFields(feedback)
       cy.server().route({
         method: 'POST',
         url: url,
@@ -72,10 +72,3 @@ describe('Contact us', () => {
     })
   })
 })
-
-const fillInputFields = feedback => {
-  cy.get('[name="name"]').type(feedback.name);
-  cy.get('[name="email"]').type(feedback.email);
-  cy.get('[name="title"]').type(feedback.title);
-  cy.get('[name="body"]').type(feedback.body);
-}

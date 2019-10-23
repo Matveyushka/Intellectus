@@ -36,3 +36,10 @@ Cypress.Commands.add('checkProblemFields', question => {
     }
   })
 })
+
+Cypress.Commands.add('fillContactUsInputFields', feedback => {
+  cy.get('[name="name"]').type(feedback.name);
+  cy.get('[name="email"]').type(feedback.email);
+  cy.get('[name="title"]').type(feedback.title);
+  cy.get('[name="body"]').type(feedback.body);
+})
