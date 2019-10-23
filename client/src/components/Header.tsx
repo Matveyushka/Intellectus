@@ -6,6 +6,7 @@ import { MAIN_VIEW_TYPES, URLS } from '../constants';
 import { setCurrentView } from '../pages/Main/actions';
 import { State } from '../store';
 import { MainState } from '../pages/Main/initialState';
+import { LoaderState } from './Loader';
 
 export interface HeaderProps {
   location: Location;
@@ -16,9 +17,11 @@ export const Header = (props: HeaderProps): React.ReactElement => {
 
   const dispatch = useDispatch();
 
+  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
   const { currentView } = useSelector<State, MainState>(state => state.main);
 
-  const shouldRenderNavBar = currentView !== MAIN_VIEW_TYPES.intro && pathname === URLS.main;
+  const shouldRenderNavBar = !isLoading
+    && (currentView === MAIN_VIEW_TYPES.intro || pathname !== URLS.main);
 
   return (
     <header className="header">
@@ -31,7 +34,7 @@ export const Header = (props: HeaderProps): React.ReactElement => {
           <img className="header-logo-img" src="images/logo.png" />
         </NavLink>
       </div>
-      {!shouldRenderNavBar && (
+      {shouldRenderNavBar && (
         <nav className="header-container">
           <h1
             className={mergeClassNames('header-item', {
