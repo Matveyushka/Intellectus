@@ -32,19 +32,19 @@ router.post('/', async (req, res) => {
   if (name.length < minLengthName || name.length > maxLengthName) {
     return res.status(400).json({
       error: true,
-      message: 'Имя должно содержать от 2 до 25 символов.',
+      message: `Имя должно содержать от ${minLengthName} до ${maxLengthName} символов.`,
     });
   }
 
   if (title.length < minLengthTitle || title.length > maxLengthTitle) {
     return res.status(400).json({
       error: true,
-      message: 'Заголовок должен содержать от 2 до 35 символов.',
+      message: `Заголовок должен содержать от ${minLengthTitle} до ${maxLengthTitle} символов.`,
     });
   }
 
   const message = {
-    from: process.env.EMAIL_FROM,
+    from: email,
     to: process.env.EMAIL_TO,
     subject: 'Feedback',
     html: `Имя - ${name} <br> Заголовок - ${title} <br> Cообщение - ${body}<br> Email - 
