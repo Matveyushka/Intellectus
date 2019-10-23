@@ -37,8 +37,6 @@ function* getResults(action: GetResultsAction): SagaIterator {
 
     yield put(setResults(data));
 
-    yield put(setUserAnswers(Array(12).fill(null)));
-
     yield put(setCurrentView(MAIN_VIEW_TYPES.results));
 
     yield put(hideLoader());
