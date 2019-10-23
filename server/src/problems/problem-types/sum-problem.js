@@ -26,13 +26,16 @@ const createFieldDescription = (figuresAmount, style) => ({ figuresAmount, style
  */
 const generateProblemDescription = () => {
   const generateLine = () => {
-    const startAmount = Math.floor(Math.random() * maxStartFiguresAmountInField) + 1;
+    const startFiguresAmount = Math.floor(Math.random() * maxStartFiguresAmountInField) + 1;
 
-    const maxStepSize = Math.floor((maxFiguresAmountInField - startAmount) / 2);
+    const maxStepSize = Math.floor((maxFiguresAmountInField - startFiguresAmount) / 2);
 
     const stepNumber = Math.floor(Math.random() * maxStepSize) + 1;
 
-    return [startAmount, startAmount + stepNumber, startAmount + stepNumber * 2];
+    return [
+      startFiguresAmount,
+      startFiguresAmount + stepNumber,
+      startFiguresAmount + stepNumber * 2];
   };
 
   // 3 стиля на 9 клеток - обозначаются цифрами от 0 до 2
@@ -45,42 +48,9 @@ const generateProblemDescription = () => {
   ].map((field, index) => createFieldDescription(field, fieldsStyles[index]));
 };
 
-const validateLine = lineDescription => (
-  lineDescription[2].figuresAmount - lineDescription[1].figuresAmount
-  === lineDescription[1].figuresAmount - lineDescription[0].figuresAmount
-);
-
-const validateField = (problemDescription, fieldToValidate) => {
-  const descriptionToCheck = problemDescription
-    .map(field => (_.isNil(field) ? fieldToValidate : field));
-
-  const styleHashSum = 9;
-
-  const styleCheckSum = descriptionToCheck.reduce((checkSum, field) => checkSum + field.style, 0);
-
-  if (styleCheckSum !== styleHashSum) {
-    return false;
-  }
-
-  if (!validateLine([
-    descriptionToCheck[0].figuresAmount,
-    descriptionToCheck[1].figuresAmount,
-    descriptionToCheck[2].figuresAmount,
-  ]) || !validateLine([
-    descriptionToCheck[3].figuresAmount,
-    descriptionToCheck[4].figuresAmount,
-    descriptionToCheck[5].figuresAmount,
-  ]) || !validateLine([
-    descriptionToCheck[6].figuresAmount,
-    descriptionToCheck[7].figuresAmount,
-    descriptionToCheck[8].figuresAmount,
-  ])
-  ) return false;
-
-  return true;
-};
-
-const generateWrongOption = (problemDescription, maxFiguresAmount, styleTopBound) => {
+const generateWrongOption = ({
+  problemDescription, maxFiguresAmount, styleTopBound, solution,
+}) => {
   const figuresAmount = Math.floor(Math.random() * maxFiguresAmount) + 1;
   const style = Math.floor(Math.random() * styleTopBound);
 
@@ -89,14 +59,21 @@ const generateWrongOption = (problemDescription, maxFiguresAmount, styleTopBound
     style,
   );
 
-  return validateField(problemDescription, wrongOption)
-    ? generateWrongOption(problemDescription, maxFiguresAmount, styleTopBound)
+  return _.isEqual(solution, wrongOption)
+    ? generateWrongOption({
+      problemDescription, maxFiguresAmount, styleTopBound, solution,
+    })
     : wrongOption;
 };
 
-const generateWrongOptions = problemDescription => Array(numberOfWrongOptions)
+const generateWrongOptions = (problemDescription, solution) => Array(numberOfWrongOptions)
   .fill(null)
-  .map(() => generateWrongOption(problemDescription, maxFiguresAmountInField, 2));
+  .map(() => generateWrongOption({
+    problemDescription,
+    maxFiguresAmount: maxFiguresAmountInField,
+    styleTopBound: 2,
+    solution,
+  }));
 
 const convertToSvg = (fieldDescription, seed) => {
   const elementSize = 28;
