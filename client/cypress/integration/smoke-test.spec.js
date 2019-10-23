@@ -20,7 +20,7 @@ describe('Smoke tests', () => {
       cy.get('.stats').should('be.visible');
     })
 
-    it.only('Send feedback', () => {
+    it('Send feedback', () => {
       cy.get('.header-container').contains('CONTACT US').click();
       cy.get('[name="name"]').type('Пётр');
       cy.get('[name="email"]').type('asd@gmail.com');
