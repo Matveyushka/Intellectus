@@ -5,4 +5,6 @@
 /client/ @SlavikTraktor
 
 # These guys is requested for each server review
-/server/ @DmitriySimakov @STAJLb
+/server/ @STAJLb
+
+/server/src/problems/ @DmitriySimakov
