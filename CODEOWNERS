@@ -4,8 +4,5 @@
 # This guys is requested for each client review
 /client/ @SlavikTraktor @777PolarFox777
 
-# This guy is requested for each server review
-/server/ @STAJLb
-
 # This guy is requested for each problems review
 /server/src/problems/ @DmitriySimakov @Matveyushka
