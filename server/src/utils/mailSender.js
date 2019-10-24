@@ -19,8 +19,8 @@ const mailSender = async (message) => {
 
   try {
     await transporter.sendMail(message);
-  } catch (e) {
-    throw new Error(e);
+  } catch (error) {
+    throw new Error(error);
   }
 };
 

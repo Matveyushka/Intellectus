@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
   if (name.length < minLengthName || name.length > maxLengthName) {
     return res.status(400).json({
       error: true,
-      message: 'Имя должно содержать от 2 до 25 символов.',
+      message: `Имя должно содержать от ${minLengthName} до ${maxLengthName} символов.`,
     });
   }
 
