@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 import mergeClassNames from 'classnames';
 
 export interface StepItem {
