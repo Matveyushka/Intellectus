@@ -1,14 +1,16 @@
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressStaticGzip = require('express-static-gzip');
 const routes = require('./routes/index');
 const db = require('./db');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/', expressStaticGzip(path.join(__dirname, '../public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -25,7 +27,14 @@ app.use('/feedback', routes.feedback);
 app.use('/statistics', routes.statistics);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  // грязные хаки, чтобы браузер не скачивал gzip-архив, а отображал его как html
+  const file = fs.readFileSync(path.join(__dirname, '../public', 'index.html.gz'));
+
+  res.type('html');
+
+  res.setHeader('Content-Encoding', 'gzip');
+
+  res.send(file);
 });
 
 const { MONGO_ATLAS_LOGIN, MONGO_ATLAS_PASSWORD } = process.env;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { useDispatch, useSelector } from 'react-redux';
 import { StepItem, Stepper } from '../Stepper';
 import { adjustSecond, formatTime, generateInitialStepperData } from './helpers';
