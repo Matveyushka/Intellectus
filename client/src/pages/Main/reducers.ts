@@ -36,6 +36,13 @@ export const mainReducer = (
       };
     }
 
+    case MAIN_ACTION_TYPES.setStepIndex: {
+      return {
+        ...state,
+        stepIndex: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

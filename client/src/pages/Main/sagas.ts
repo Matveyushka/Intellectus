@@ -2,7 +2,13 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import axios from 'axios';
 import {
-  GetResultsAction, MAIN_ACTION_TYPES, setCurrentView, setQuestions, setResults, setUserAnswers,
+  GetResultsAction,
+  MAIN_ACTION_TYPES,
+  setCurrentView,
+  setQuestions,
+  setResults,
+  setStepIndex,
+  setUserAnswers,
 } from './actions';
 import { hideLoader, showLoader } from '../../components/Loader/actions';
 import { MAIN_VIEW_TYPES } from '../../constants';
@@ -12,6 +18,8 @@ function* getQuestions(): SagaIterator {
     yield put(showLoader());
 
     yield put(setUserAnswers(Array(12).fill(null)));
+
+    yield put(setStepIndex(0));
 
     const { data } = yield call(axios.get, '/questions');
 

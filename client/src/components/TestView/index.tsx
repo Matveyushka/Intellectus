@@ -6,7 +6,7 @@ import { adjustSecond, formatTime, generateInitialStepperData } from './helpers'
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
-import { getResults, setUserAnswers } from '../../pages/Main/actions';
+import { getResults, setStepIndex, setUserAnswers } from '../../pages/Main/actions';
 import { MainState } from '../../pages/Main/initialState';
 import { State } from '../../store';
 import { useInterval } from '../../helpers';
@@ -22,14 +22,13 @@ const stepperInitialData = generateInitialStepperData();
 export const TestView = (): React.ReactElement => {
   const dispatch = useDispatch();
 
-  const { questions, token, userAnswers } = useSelector<State, MainState>(state => state.main);
+  const {
+    token, userAnswers, stepIndex,
+  } = useSelector<State, MainState>(state => state.main);
 
   const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
-  const [stepIndex, setStepIndex] = React.useState<number>(0);
   const [time, setTime] = React.useState<Date>(new Date(1, 1, 1, 0, 0, 0));
 
-  const currentProblemFields = questions ? questions[stepIndex].problemFields : [];
-  const currentOptions = questions ? questions[stepIndex].options : [];
   const selectedOptionIndex = userAnswers[stepIndex];
   const isTestFinished = userAnswers.every(isNumber);
 
@@ -66,7 +65,7 @@ export const TestView = (): React.ReactElement => {
       )));
     }
 
-    setStepIndex(stepIndex + direction);
+    dispatch(setStepIndex(stepIndex + direction));
   };
 
   const handleFinishButtonClick = (): void => {
@@ -94,13 +93,11 @@ export const TestView = (): React.ReactElement => {
           </div>
           <div className="test-view-body">
             <div className="problem-wrapper">
-              <ProblemTable problemFields={currentProblemFields} />
+              <ProblemTable />
             </div>
             <div className="test-view-separator" />
             <div className="option-wrapper">
               <OptionTable
-                options={currentOptions}
-                selectedIndex={selectedOptionIndex}
                 onSelect={handleOptionSelect}
               />
             </div>
