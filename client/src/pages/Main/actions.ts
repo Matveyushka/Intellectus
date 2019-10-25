@@ -8,9 +8,10 @@ export enum MAIN_ACTION_TYPES {
   setResults = 'MAIN/SET_RESULTS',
   setCurrentView = 'MAIN/SET_CURRENT_VIEW',
   setUserAnswers = 'MAIN/SET_USER_ANSWERS',
+  setStepIndex = 'MAIN/SET_STEP_INDEX',
 }
 
-export interface SetUserAnswers {
+export interface SetUserAnswersAction {
   type: MAIN_ACTION_TYPES.setUserAnswers;
   payload: number[];
 }
@@ -48,12 +49,18 @@ export interface SetCurrentViewAction {
   payload: MAIN_VIEW_TYPES;
 }
 
+export interface SetStepIndexAction {
+  type: MAIN_ACTION_TYPES.setStepIndex;
+  payload: number;
+}
+
 export type AllMainActions = GetQuestionsAction
   | GetResultsAction
   | SetQuestionsAction
   | SetResultsAction
   | SetCurrentViewAction
-  | SetUserAnswers;
+  | SetUserAnswersAction
+  | SetStepIndexAction;
 
 export const getQuestions = (): GetQuestionsAction => ({
   type: MAIN_ACTION_TYPES.getQuestions,
@@ -79,7 +86,12 @@ export const setCurrentView = (payload: SetCurrentViewAction['payload']): SetCur
   payload,
 });
 
-export const setUserAnswers = (payload: number[]): SetUserAnswers => ({
+export const setUserAnswers = (payload: number[]): SetUserAnswersAction => ({
   type: MAIN_ACTION_TYPES.setUserAnswers,
+  payload,
+});
+
+export const setStepIndex = (payload: number): SetStepIndexAction => ({
+  type: MAIN_ACTION_TYPES.setStepIndex,
   payload,
 });

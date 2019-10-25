@@ -141,6 +141,14 @@
     padding: 5px;
     border-radius: 10px;
 
+    &.empty {
+      border-style: dashed;
+    }
+
+    &.preview {
+      opacity: 0.5;
+    }
+
     &.clickable {
       cursor: pointer;
     }
