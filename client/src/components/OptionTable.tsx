@@ -6,7 +6,7 @@ export interface OptionTableProps {
   options: string[];
   selectedIndex: number | null;
   onSelect?: (optionIndex: number) => void;
-  rightAnswerIndex?: number | null;
+  rightAnswerIndex?: number;
 }
 
 export const OptionTable = (props: OptionTableProps): React.ReactElement => {
@@ -14,7 +14,7 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement => {
     options,
     onSelect = () => {},
     selectedIndex,
-    rightAnswerIndex = null,
+    rightAnswerIndex,
   } = props;
 
   return (
@@ -26,7 +26,7 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement => {
           error:
             index === selectedIndex
             && selectedIndex !== rightAnswerIndex
-            && rightAnswerIndex !== null,
+            && rightAnswerIndex !== undefined,
         });
 
         return (

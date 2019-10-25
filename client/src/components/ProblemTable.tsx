@@ -3,11 +3,11 @@ import { toDataURL } from '../helpers';
 
 export interface ProblemTableProps {
   problemFields: (string | null)[];
-  rightAnswer?: string | false;
+  rightAnswer?: string;
 }
 
 export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
-  const { problemFields, rightAnswer = false } = props;
+  const { problemFields, rightAnswer } = props;
 
   return (
     <>
@@ -22,10 +22,10 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
           ); // img без src отображает заглушку, поэтому используем div
         }
 
-        if (rightAnswer === false) {
+        if (rightAnswer === undefined) {
           return <div className="problem-cell" key={index.toString()} />;
         }
-
+        
         return (
           <img
             className="problem-cell right-answer"
