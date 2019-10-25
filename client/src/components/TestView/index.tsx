@@ -132,7 +132,7 @@ export const TestView = (): React.ReactElement => {
       <Stepper
         data={stepperData}
         value={stepperData[stepIndex]}
-        onClick={(_item, index) => setStepIndex(index)}
+        onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
     </div>
   );

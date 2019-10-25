@@ -15,7 +15,7 @@ export interface StepperProps {
 }
 
 export const Stepper = (props: StepperProps): React.ReactElement => {
-  const { data, value, onClick } = props;
+  const { data, value, onClick = () => {} } = props;
 
   return (
     <div className="stepper-wrapper">
