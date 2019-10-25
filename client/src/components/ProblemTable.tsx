@@ -1,13 +1,21 @@
 import * as React from 'react';
+import isNil from 'lodash/isNil';
+import { useSelector } from 'react-redux';
 import { toDataURL } from '../helpers';
+import { MainState } from '../pages/Main/initialState';
+import { State } from '../store';
 
 export interface ProblemTableProps {
-  problemFields: (string | null)[];
   rightAnswer?: string;
 }
 
-export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
-  const { problemFields, rightAnswer } = props;
+export const ProblemTable = (props: ProblemTableProps): React.ReactElement | null => {
+  const { rightAnswer } = props;
+  const { userAnswers, questions, stepIndex } = useSelector<State, MainState>(state => state.main);
+
+  if (!questions) return null;
+
+  const { problemFields, options } = questions[stepIndex];
 
   return (
     <>
@@ -22,18 +30,40 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
           );
         }
 
-        // если нету rightAnswer отображаем заглушку, используем div
-        if (rightAnswer === undefined) {
-          return <div className="problem-cell" key={index.toString()} />;
+        // img без src отображает заглушку, поэтому используем div
+        if (isNil(item) && isNil(userAnswers[stepIndex])) {
+          return (
+            <div
+              className="problem-cell empty"
+              key={index.toString()}
+            />
+          );
         }
-        
-        return (
-          <img
-            className="problem-cell right-answer"
-            src={toDataURL(rightAnswer)}
-            key={index.toString()}
-          />
-        );
+
+        // Если есть правильный ответ, то показываем его
+        if (rightAnswer !== undefined) {
+          return (
+            <img
+              className="problem-cell right-answer"
+              src={toDataURL(rightAnswer)}
+              key={index.toString()}
+            />
+          );
+        }
+
+        if (isNil(item) && !isNil(userAnswers[stepIndex]) && questions) {
+          return (
+            <div className="problem-cell-wrapper">
+              <img
+                className="problem-cell empty preview"
+                src={toDataURL(options[userAnswers[stepIndex]])}
+                key={index.toString()}
+              />
+            </div>
+          );
+        }
+
+        return null;
       })}
     </>
   );

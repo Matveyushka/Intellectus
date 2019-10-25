@@ -4,7 +4,8 @@ import { StatisticChart } from './StatisticChart';
 import { Stepper } from './Stepper';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
-import { setWatchResultIndex } from '../pages/Main/actions';
+import { setStepIndex, setCurrentView } from '../pages/Main/actions';
+import { MAIN_VIEW_TYPES } from '../constants';
 
 export const TestResult = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -36,7 +37,11 @@ export const TestResult = (): React.ReactElement => {
       </div>
       <Stepper
         data={stepperData}
-        onClick={(_item, index) => dispatch(setWatchResultIndex(index))}
+        onClick={(_item, index) => {
+          dispatch(setStepIndex(index));
+
+          dispatch(setCurrentView(MAIN_VIEW_TYPES.watch));
+        }}
       />
     </>
   );

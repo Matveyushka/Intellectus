@@ -1,21 +1,23 @@
 import * as React from 'react';
 import mergeClassNames from 'classnames';
+import { useSelector } from 'react-redux';
 import { toDataURL } from '../helpers';
+import { MainState } from '../pages/Main/initialState';
+import { State } from '../store';
 
 export interface OptionTableProps {
-  options: string[];
-  selectedIndex: number | null;
   onSelect?: (optionIndex: number) => void;
   rightAnswerIndex?: number;
 }
 
-export const OptionTable = (props: OptionTableProps): React.ReactElement => {
-  const {
-    options,
-    onSelect = () => {},
-    selectedIndex,
-    rightAnswerIndex,
-  } = props;
+export const OptionTable = (props: OptionTableProps): React.ReactElement | null => {
+  const { onSelect = () => {}, rightAnswerIndex } = props;
+  const { questions, userAnswers, stepIndex } = useSelector<State, MainState>(state => state.main);
+
+  if (!questions) return null;
+
+  const { options } = questions[stepIndex];
+  const selectedIndex = userAnswers[stepIndex];
 
   return (
     <>

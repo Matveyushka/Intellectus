@@ -4,7 +4,7 @@ import { StepItem, Stepper } from './Stepper';
 import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
 import { STEPPER_DIRECTION } from './TestView/constants';
-import { setWatchResultIndex, setCurrentView } from '../pages/Main/actions';
+import { setStepIndex, setCurrentView } from '../pages/Main/actions';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
 import { formatTime } from './TestView/helpers';
@@ -22,7 +22,7 @@ export const WatchResults = (): React.ReactElement => {
   const {
     questions,
     userAnswers,
-    stepWatchResultIndex = 0,
+    stepIndex,
     solutions,
     resultTime = new Date(1, 1, 1, 0, 0, 0),
   } = useSelector<State, MainState>(state => state.main);
@@ -33,15 +33,11 @@ export const WatchResults = (): React.ReactElement => {
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
 
-  const currentProblemFields = questions
-    ? questions[stepWatchResultIndex].problemFields
-    : [];
-  const currentOptions = questions ? questions[stepWatchResultIndex].options : [];
-  const selectedOptionIndex = userAnswers[stepWatchResultIndex];
-  const rightAnswerIndex = solutions ? solutions[stepWatchResultIndex] : 0;
+  const currentOptions = questions ? questions[stepIndex].options : [];
+  const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
 
   const handlePrevNextButtonClick = (direction: number): void => {
-    dispatch(setWatchResultIndex(stepWatchResultIndex + direction));
+    dispatch(setStepIndex(stepIndex + direction));
   };
 
   const handleResultsButtonClick = (): void => {
@@ -55,7 +51,7 @@ export const WatchResults = (): React.ReactElement => {
     <div className="test-view">
       <div className="test-view-layout">
         <div className="test-view-aside left">
-          {stepWatchResultIndex > 0 && (
+          {stepIndex > 0 && (
             <button
               type="button"
               className="test-view-prev-button"
@@ -71,15 +67,12 @@ export const WatchResults = (): React.ReactElement => {
           <div className="test-view-body">
             <div className="problem-wrapper">
               <ProblemTable
-                problemFields={currentProblemFields}
                 rightAnswer={currentOptions[rightAnswerIndex]}
               />
             </div>
             <div className="test-view-separator" />
             <div className="option-wrapper">
               <OptionTable
-                options={currentOptions}
-                selectedIndex={selectedOptionIndex}
                 rightAnswerIndex={rightAnswerIndex}
               />
             </div>
@@ -103,7 +96,7 @@ export const WatchResults = (): React.ReactElement => {
           </div>
         </div>
         <div className="test-view-aside right">
-          {stepWatchResultIndex < stepperData.length - 1 && (
+          {stepIndex < stepperData.length - 1 && (
             <button
               type="button"
               className="test-view-next-button"
@@ -114,8 +107,8 @@ export const WatchResults = (): React.ReactElement => {
       </div>
       <Stepper
         data={stepperData}
-        value={stepperData[stepWatchResultIndex]}
-        onClick={(_item, index) => dispatch(setWatchResultIndex(index))}
+        value={stepperData[stepIndex]}
+        onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
     </div>
   );

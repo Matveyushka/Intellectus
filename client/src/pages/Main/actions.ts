@@ -8,11 +8,11 @@ export enum MAIN_ACTION_TYPES {
   setResults = 'MAIN/SET_RESULTS',
   setCurrentView = 'MAIN/SET_CURRENT_VIEW',
   setUserAnswers = 'MAIN/SET_USER_ANSWERS',
-  setWatchResultIndex = 'MAIN/SET_WATCH_RESULT_INDEX',
   setResultTime = 'MAIN/SET_RESULT_TIME',
+  setStepIndex = 'MAIN/SET_STEP_INDEX',
 }
 
-export interface SetUserAnswers {
+export interface SetUserAnswersAction {
   type: MAIN_ACTION_TYPES.setUserAnswers;
   payload: number[];
 }
@@ -50,14 +50,14 @@ export interface SetCurrentViewAction {
   payload: MAIN_VIEW_TYPES;
 }
 
-export interface SetWatchResultAction {
-  type: MAIN_ACTION_TYPES.setWatchResultIndex;
-  payload: number;
-}
-
 export interface SetResultTimeAction {
   type: MAIN_ACTION_TYPES.setResultTime;
   payload: Date;
+}
+
+export interface SetStepIndexAction {
+  type: MAIN_ACTION_TYPES.setStepIndex;
+  payload: number;
 }
 
 export type AllMainActions = GetQuestionsAction
@@ -65,9 +65,9 @@ export type AllMainActions = GetQuestionsAction
   | SetQuestionsAction
   | SetResultsAction
   | SetCurrentViewAction
-  | SetUserAnswers
-  | SetWatchResultAction
-  | SetResultTimeAction;
+  | SetResultTimeAction
+  | SetUserAnswersAction
+  | SetStepIndexAction;
 
 export const getQuestions = (): GetQuestionsAction => ({
   type: MAIN_ACTION_TYPES.getQuestions,
@@ -93,19 +93,17 @@ export const setCurrentView = (payload: SetCurrentViewAction['payload']): SetCur
   payload,
 });
 
-export const setUserAnswers = (payload: number[]): SetUserAnswers => ({
+export const setUserAnswers = (payload: number[]): SetUserAnswersAction => ({
   type: MAIN_ACTION_TYPES.setUserAnswers,
-  payload,
-});
-
-export const setWatchResultIndex = (
-  payload: SetWatchResultAction['payload'],
-): SetWatchResultAction => ({
-  type: MAIN_ACTION_TYPES.setWatchResultIndex,
   payload,
 });
 
 export const setResultTime = (payload: SetResultTimeAction['payload']): SetResultTimeAction => ({
   type: MAIN_ACTION_TYPES.setResultTime,
+  payload,
+});
+
+export const setStepIndex = (payload: number): SetStepIndexAction => ({
+  type: MAIN_ACTION_TYPES.setStepIndex,
   payload,
 });

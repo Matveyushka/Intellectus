@@ -27,7 +27,7 @@ describe('Loader', () => {
       response: 'fx:answers-resp',
       delay: 100
     });
-    cy.get('.test-view-next-button').click();
+    cy.get('.test-view-finish-button').click();
     cy.get('.loader').should('be.visible');
   })
 })
