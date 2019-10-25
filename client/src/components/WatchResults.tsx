@@ -22,7 +22,7 @@ export const WatchResults = (): React.ReactElement => {
   const {
     questions,
     userAnswers,
-    stepWatchResultIndex,
+    stepWatchResultIndex = 0,
     solutions,
     resultTime = new Date(1, 1, 1, 0, 0, 0),
   } = useSelector<State, MainState>(state => state.main);
@@ -33,30 +33,29 @@ export const WatchResults = (): React.ReactElement => {
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
 
-  const currentStepIndex = stepWatchResultIndex === undefined ? 0 : stepWatchResultIndex;
-
   const currentProblemFields = questions
-    ? questions[currentStepIndex].problemFields
+    ? questions[stepWatchResultIndex].problemFields
     : [];
-  const currentOptions = questions ? questions[currentStepIndex].options : [];
-  const selectedOptionIndex = userAnswers[currentStepIndex];
-  const rightAnswerIndex = solutions ? solutions[currentStepIndex] : 0;
+  const currentOptions = questions ? questions[stepWatchResultIndex].options : [];
+  const selectedOptionIndex = userAnswers[stepWatchResultIndex];
+  const rightAnswerIndex = solutions ? solutions[stepWatchResultIndex] : 0;
 
   const handlePrevNextButtonClick = (direction: number): void => {
-    dispatch(setWatchResultIndex(currentStepIndex + direction));
+    dispatch(setWatchResultIndex(stepWatchResultIndex + direction));
   };
 
   const handleResultsButtonClick = (): void => {
     dispatch(setCurrentView(MAIN_VIEW_TYPES.results));
   };
 
+  // TODO Добавить реализацию ReportModal
   const handleReportButtonClick = (): void => {};
 
   return (
     <div className="test-view">
       <div className="test-view-layout">
         <div className="test-view-aside left">
-          {currentStepIndex > 0 && (
+          {stepWatchResultIndex > 0 && (
             <button
               type="button"
               className="test-view-prev-button"
@@ -104,7 +103,7 @@ export const WatchResults = (): React.ReactElement => {
           </div>
         </div>
         <div className="test-view-aside right">
-          {currentStepIndex < stepperData.length - 1 && (
+          {stepWatchResultIndex < stepperData.length - 1 && (
             <button
               type="button"
               className="test-view-next-button"
@@ -115,7 +114,7 @@ export const WatchResults = (): React.ReactElement => {
       </div>
       <Stepper
         data={stepperData}
-        value={stepperData[currentStepIndex]}
+        value={stepperData[stepWatchResultIndex]}
         onClick={(_item, index) => dispatch(setWatchResultIndex(index))}
       />
     </div>

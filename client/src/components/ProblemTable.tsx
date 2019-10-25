@@ -19,9 +19,10 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement => {
               src={item ? toDataURL(item) : undefined}
               key={index.toString()}
             />
-          ); // img без src отображает заглушку, поэтому используем div
+          );
         }
 
+        // если нету rightAnswer отображаем заглушку, используем div
         if (rightAnswer === undefined) {
           return <div className="problem-cell" key={index.toString()} />;
         }

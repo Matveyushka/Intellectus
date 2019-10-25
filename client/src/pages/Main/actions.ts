@@ -8,7 +8,7 @@ export enum MAIN_ACTION_TYPES {
   setResults = 'MAIN/SET_RESULTS',
   setCurrentView = 'MAIN/SET_CURRENT_VIEW',
   setUserAnswers = 'MAIN/SET_USER_ANSWERS',
-  setWatchResultIndex = 'MAIN/SET_WATCHRESULT_INDEX',
+  setWatchResultIndex = 'MAIN/SET_WATCH_RESULT_INDEX',
   setResultTime = 'MAIN/SET_RESULT_TIME',
 }
 
