@@ -22,13 +22,14 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
   return (
     <>
       {options.map((item, index) => {
-        const className = mergeClassNames('problem-cell', 'clickable', {
+        const className = mergeClassNames('problem-cell', {
           selected: index === selectedIndex,
           'right-answer': index === rightAnswerIndex,
           error:
             index === selectedIndex
             && selectedIndex !== rightAnswerIndex
             && rightAnswerIndex !== undefined,
+          clickable: rightAnswerIndex === undefined,
         });
 
         return (
