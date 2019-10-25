@@ -9,4 +9,5 @@ export enum MAIN_VIEW_TYPES {
   intro = 'intro',
   test = 'test',
   results = 'results',
+  watch = 'watch',
 }

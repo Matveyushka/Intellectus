@@ -8,6 +8,8 @@ export interface MainState {
   solutions?: number[];
   pointsDistribution?: number[];
   userAnswers: number[];
+  stepWatchResultIndex?: number;
+  resultTime?: Date;
 }
 
 export const initialMainState: MainState = {

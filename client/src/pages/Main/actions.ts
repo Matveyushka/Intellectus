@@ -8,6 +8,8 @@ export enum MAIN_ACTION_TYPES {
   setResults = 'MAIN/SET_RESULTS',
   setCurrentView = 'MAIN/SET_CURRENT_VIEW',
   setUserAnswers = 'MAIN/SET_USER_ANSWERS',
+  setWatchResultIndex = 'MAIN/SET_WATCHRESULT_INDEX',
+  setResultTime = 'MAIN/SET_RESULT_TIME',
 }
 
 export interface SetUserAnswers {
@@ -48,12 +50,24 @@ export interface SetCurrentViewAction {
   payload: MAIN_VIEW_TYPES;
 }
 
+export interface SetWatchResultAction {
+  type: MAIN_ACTION_TYPES.setWatchResultIndex;
+  payload: number;
+}
+
+export interface SetResultTimeAction {
+  type: MAIN_ACTION_TYPES.setResultTime;
+  payload: Date;
+}
+
 export type AllMainActions = GetQuestionsAction
   | GetResultsAction
   | SetQuestionsAction
   | SetResultsAction
   | SetCurrentViewAction
-  | SetUserAnswers;
+  | SetUserAnswers
+  | SetWatchResultAction
+  | SetResultTimeAction;
 
 export const getQuestions = (): GetQuestionsAction => ({
   type: MAIN_ACTION_TYPES.getQuestions,
@@ -81,5 +95,17 @@ export const setCurrentView = (payload: SetCurrentViewAction['payload']): SetCur
 
 export const setUserAnswers = (payload: number[]): SetUserAnswers => ({
   type: MAIN_ACTION_TYPES.setUserAnswers,
+  payload,
+});
+
+export const setWatchResultIndex = (
+  payload: SetWatchResultAction['payload'],
+): SetWatchResultAction => ({
+  type: MAIN_ACTION_TYPES.setWatchResultIndex,
+  payload,
+});
+
+export const setResultTime = (payload: SetResultTimeAction['payload']): SetResultTimeAction => ({
+  type: MAIN_ACTION_TYPES.setResultTime,
   payload,
 });

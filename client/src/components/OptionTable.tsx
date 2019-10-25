@@ -5,20 +5,29 @@ import { toDataURL } from '../helpers';
 export interface OptionTableProps {
   options: string[];
   selectedIndex: number | null;
-  onSelect: (optionIndex: number) => void;
+  onSelect?: (optionIndex: number) => void;
+  rightAnswerIndex?: number | null;
 }
 
 export const OptionTable = (props: OptionTableProps): React.ReactElement => {
-  const { options, onSelect, selectedIndex } = props;
+  const {
+    options,
+    onSelect = () => {},
+    selectedIndex,
+    rightAnswerIndex = null,
+  } = props;
 
   return (
     <>
       {options.map((item, index) => {
-        const className = mergeClassNames(
-          'problem-cell',
-          'clickable',
-          { selected: index === selectedIndex },
-        );
+        const className = mergeClassNames('problem-cell', 'clickable', {
+          selected: index === selectedIndex,
+          'right-answer': index === rightAnswerIndex,
+          error:
+            index === selectedIndex
+            && selectedIndex !== rightAnswerIndex
+            && rightAnswerIndex !== null,
+        });
 
         return (
           <img

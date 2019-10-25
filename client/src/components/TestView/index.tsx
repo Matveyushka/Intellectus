@@ -6,7 +6,7 @@ import { adjustSecond, formatTime, generateInitialStepperData } from './helpers'
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
-import { getResults, setUserAnswers } from '../../pages/Main/actions';
+import { getResults, setUserAnswers, setResultTime } from '../../pages/Main/actions';
 import { MainState } from '../../pages/Main/initialState';
 import { State } from '../../store';
 import { useInterval } from '../../helpers';
@@ -71,6 +71,8 @@ export const TestView = (): React.ReactElement => {
 
   const handleFinishButtonClick = (): void => {
     if (token && userAnswers) {
+      dispatch(setResultTime(time));
+
       dispatch(getResults({ token, answers: userAnswers }));
     }
   };
