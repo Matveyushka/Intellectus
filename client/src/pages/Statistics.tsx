@@ -6,8 +6,8 @@ import { URLS } from '../constants';
 import { Loader } from '../components/Loader';
 import { formatTime } from '../components/TestView/helpers';
 
-const averageTimesGraph = 'Distribution of average elapsed time by correct answers number';
 const passedTestGraph = 'Distribution of passed test number by correct answers number';
+const averageTimesGraph = 'Distribution of average elapsed time by correct answers number';
 
 interface StatisticsProps {
   passedTestsCounter: number;
