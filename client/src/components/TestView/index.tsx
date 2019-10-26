@@ -13,12 +13,6 @@ import { MainState } from '../../pages/Main/initialState';
 import { State } from '../../store';
 import { useInterval } from '../../helpers';
 
-export interface Question {
-  token: string;
-  problemFields: string[];
-  options: string[];
-}
-
 const stepperInitialData = generateInitialStepperData();
 
 export const TestView = (): React.ReactElement => {

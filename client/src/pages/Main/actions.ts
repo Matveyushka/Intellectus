@@ -1,4 +1,4 @@
-import { Question } from '../../components/TestView';
+import { Question } from '../../commonTypes';
 import { MAIN_VIEW_TYPES } from '../../constants';
 
 export enum MAIN_ACTION_TYPES {

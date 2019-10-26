@@ -10,12 +10,6 @@ import { State } from '../store';
 import { formatTime } from './TestView/helpers';
 import { MAIN_VIEW_TYPES } from '../constants';
 
-export interface Question {
-  token: string;
-  problemFields: string[];
-  options: string[];
-}
-
 export const WatchResults = (): React.ReactElement => {
   const dispatch = useDispatch();
 

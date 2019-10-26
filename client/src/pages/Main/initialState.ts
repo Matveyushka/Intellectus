@@ -1,5 +1,5 @@
 import { MAIN_VIEW_TYPES } from '../../constants';
-import { Question } from '../../components/TestView';
+import { Question } from '../../commonTypes';
 
 export interface MainState {
   currentView: MAIN_VIEW_TYPES;
