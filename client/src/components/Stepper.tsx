@@ -11,11 +11,11 @@ export interface StepItem {
 export interface StepperProps {
   data: StepItem[];
   value?: StepItem;
-  onClick?: (item: StepItem, index: number) => void;
+  onClick: (item: StepItem, index: number) => void;
 }
 
 export const Stepper = (props: StepperProps): React.ReactElement => {
-  const { data, value, onClick = () => {} } = props;
+  const { data, value, onClick } = props;
 
   return (
     <div className="stepper-wrapper">
