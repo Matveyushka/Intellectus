@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { Footer } from '../components';
-import { StatisticChart } from '../components/StatisticChart';
+import { Footer, Graph } from '../components';
 import { URLS } from '../constants';
 import { Loader } from '../components/Loader';
+import { formatTime } from '../components/TestView/helpers';
 
 const averageTimesGraph = 'Distribution of average elapsed time by correct answers number';
 const passedTestGraph = 'Distribution of passed test number by correct answers number';
@@ -12,26 +12,16 @@ const passedTestGraph = 'Distribution of passed test number by correct answers n
 interface StatisticsProps {
   passedTestsCounter: number;
   averageTime: number;
-  pointsDistribution: [];
-  averageTimeDistribution: [];
+  pointsDistribution: number[];
+  averageTimeDistribution: number[];
 }
+
 const defaultStatisticsData: StatisticsProps = {
   passedTestsCounter: 0,
   averageTime: 0,
   pointsDistribution: [],
   averageTimeDistribution: [],
 };
-
-const graphComponent = (text: string, arrayGraph: []): React.ReactElement | null => (
-  <>
-    <div className="statistics-graphWithText">
-      <StatisticChart rows={arrayGraph} chosenRowIndex={arrayGraph.length} />
-      <div className="graphtext textFont">
-        {text}
-      </div>
-    </div>
-  </>
-);
 
 export const Statistics = (): React.ReactElement | null => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -46,22 +36,15 @@ export const Statistics = (): React.ReactElement | null => {
     setIsLoading(false);
   };
 
+  const time = React.useMemo(() => formatTime(
+      new Date(new Date(0, 0, 0, 0, 0, 0).getTime() + statisticsData.averageTime),
+  ), [statisticsData]);
+
   React.useEffect(() => {
     if (isLoading === true) {
       loadStatisticsData();
     }
   }, []);
-
-  const formatTime = (): string => {
-    const hours = Math.round(statisticsData.averageTime / (60 * 60 * 1000));
-    const minutes = Math.round(statisticsData.averageTime / (60 * 1000) - hours);
-    const seconds = Math.round(((statisticsData.averageTime / 1000) - hours) - minutes);
-    const hoursString = `${(hours < 10 ? '0' : '')}${hours.toString()}:`;
-    const minutesString = `${(minutes < 10 ? '0' : '')}${minutes.toString()}:`;
-    const secondsString = `${(seconds < 10 ? '0' : '')}${seconds.toString()}`;
-
-    return hoursString + minutesString + secondsString;
-  };
 
   if (isLoading) return <Loader />;
 
@@ -72,12 +55,18 @@ export const Statistics = (): React.ReactElement | null => {
           {'The test was passed '}
           {statisticsData.passedTestsCounter}
           {' times with average time '}
-          {formatTime()}
+          {time}
         </div>
 
         <div className="statistics-graphs">
-          {graphComponent(averageTimesGraph, statisticsData.averageTimeDistribution)}
-          {graphComponent(passedTestGraph, statisticsData.pointsDistribution)}
+          <Graph
+            text={averageTimesGraph}
+            arrayGraph={statisticsData.averageTimeDistribution}
+          />
+          <Graph
+            text={passedTestGraph}
+            arrayGraph={statisticsData.pointsDistribution}
+          />
         </div>
 
         <NavLink
