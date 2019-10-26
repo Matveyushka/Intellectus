@@ -1,4 +1,4 @@
-.textFont {
+.text-font {
   font-weight: lighter;
   text-decoration: none;
   font-family: $main-font;
@@ -30,7 +30,7 @@
     }
   }
 
-  &-graphWithText {
+  &-graph-with-text {
     display: flex;
     flex-direction: column;
     width: 450px;

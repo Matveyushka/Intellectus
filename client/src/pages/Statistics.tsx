@@ -52,7 +52,7 @@ export const Statistics = (): React.ReactElement | null => {
   return (
     <>
       <main className="main-container">
-        <div className="statistics-title textFont">
+        <div className="statistics-title text-font">
           {'The test was passed '}
           {statisticsData.passedTestsCounter}
           {' times with average time '}
