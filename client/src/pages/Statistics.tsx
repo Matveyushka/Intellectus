@@ -7,7 +7,8 @@ import { Loader } from '../components/Loader';
 import { formatTime } from '../components/TestView/helpers';
 
 const passedTestGraph = 'Distribution of passed test number by correct answers number';
-const averageTimesGraph = 'Distribution of average elapsed time by correct answers number';
+const averageTimeGraph = 'Distribution of average elapsed time by correct answers number';
+const ZeroTime = new Date(0, 0, 0).getTime();
 
 interface StatisticsProps {
   passedTestsCounter: number;
@@ -37,11 +38,11 @@ export const Statistics = (): React.ReactElement | null => {
   };
 
   const time = React.useMemo(() => formatTime(
-      new Date(new Date(0, 0, 0, 0, 0, 0).getTime() + statisticsData.averageTime),
+      new Date(ZeroTime + statisticsData.averageTime),
   ), [statisticsData]);
 
   React.useEffect(() => {
-    if (isLoading === true) {
+    if (isLoading) {
       loadStatisticsData();
     }
   }, []);
@@ -60,7 +61,7 @@ export const Statistics = (): React.ReactElement | null => {
 
         <div className="statistics-graphs">
           <Graph
-            text={averageTimesGraph}
+            text={averageTimeGraph}
             arrayGraph={statisticsData.averageTimeDistribution}
           />
           <Graph
@@ -73,7 +74,7 @@ export const Statistics = (): React.ReactElement | null => {
           to={URLS.main}
           exact
         >
-          <button type="button" className="statistics-but textFont">Try now</button>
+          <button type="button" className="statistics-button textFont">Try now</button>
         </NavLink>
       </main>
       <Footer />
