@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Footer, Graph } from '../components';
 import { URLS } from '../constants';
-import { Loader } from '../components/Loader';
+import { Loader, LoaderState } from '../components/Loader';
+import { hideLoader, showLoader } from '../components/Loader/actions';
 import { formatTime } from '../components/TestView/helpers';
+import { State } from '../store';
 
 const passedTestGraph = 'Distribution of passed test number by correct answers number';
 const averageTimeGraph = 'Distribution of average elapsed time by correct answers number';
@@ -25,7 +28,8 @@ const defaultStatisticsData: StatisticsProps = {
 };
 
 export const Statistics = (): React.ReactElement | null => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
+  const dispatch = useDispatch();
   const [statisticsData, setStatisticsData] = React
     .useState<StatisticsProps>(
       defaultStatisticsData,
@@ -34,17 +38,17 @@ export const Statistics = (): React.ReactElement | null => {
   const loadStatisticsData = async (): Promise<void> => {
     setStatisticsData((await axios.get('/statistics')).data);
 
-    setIsLoading(false);
+    dispatch(hideLoader());
   };
 
   const time = React.useMemo(() => formatTime(
-      new Date(zeroTime + statisticsData.averageTime),
+    new Date(zeroTime + statisticsData.averageTime),
   ), [statisticsData]);
 
   React.useEffect(() => {
-    if (isLoading) {
-      loadStatisticsData();
-    }
+    dispatch(showLoader());
+
+    loadStatisticsData();
   }, []);
 
   if (isLoading) return <Loader />;

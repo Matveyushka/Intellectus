@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatisticChart } from '../components/StatisticChart';
+import { StatisticChart } from './StatisticChart';
 
 interface GraphProps {
   text: string;
