@@ -8,7 +8,7 @@ import { formatTime } from '../components/TestView/helpers';
 
 const passedTestGraph = 'Distribution of passed test number by correct answers number';
 const averageTimeGraph = 'Distribution of average elapsed time by correct answers number';
-const ZeroTime = new Date(0, 0, 0).getTime();
+const zeroTime = new Date(0, 0, 0).getTime();
 
 interface StatisticsProps {
   passedTestsCounter: number;
@@ -38,7 +38,7 @@ export const Statistics = (): React.ReactElement | null => {
   };
 
   const time = React.useMemo(() => formatTime(
-      new Date(ZeroTime + statisticsData.averageTime),
+      new Date(zeroTime + statisticsData.averageTime),
   ), [statisticsData]);
 
   React.useEffect(() => {
