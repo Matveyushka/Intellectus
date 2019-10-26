@@ -4,14 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { Footer, ContactUsForm, DefaultContactData } from '../components';
 import { Loader } from '../components/Loader';
 import { URLS } from '../constants';
+import { FinishFormState } from '../commonTypes';
 
-interface FinishState {
-  isFinish: boolean;
-  error: false | string;
-  oldData: DefaultContactData;
-}
-
-const defaultFinishState: FinishState = {
+const defaultFinishState: FinishFormState<DefaultContactData> = {
   isFinish: false,
   error: false,
   oldData: {},
@@ -19,7 +14,7 @@ const defaultFinishState: FinishState = {
 
 export const ContactUs = (): React.ReactElement | null => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [finishState, setFinishState] = React.useState<FinishState>(
+  const [finishState, setFinishState] = React.useState<FinishFormState<DefaultContactData>>(
     defaultFinishState,
   );
 

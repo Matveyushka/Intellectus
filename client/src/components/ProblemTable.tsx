@@ -53,11 +53,10 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement | nul
 
         if (isNil(item) && !isNil(userAnswers[stepIndex]) && questions) {
           return (
-            <div className="problem-cell-wrapper">
+            <div key={index.toString()} className="problem-cell-wrapper">
               <img
                 className="problem-cell empty preview"
                 src={toDataURL(options[userAnswers[stepIndex]])}
-                key={index.toString()}
               />
             </div>
           );

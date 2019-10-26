@@ -37,7 +37,7 @@ export const ContactUsForm = ({
   };
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit(feedbackFormSubmit)}>
+    <form className="contact-form sl-form" onSubmit={handleSubmit(feedbackFormSubmit)}>
       <div className="input-field">
         <label className="input-label" htmlFor="name">
           <p
