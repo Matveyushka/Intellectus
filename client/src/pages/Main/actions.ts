@@ -1,4 +1,4 @@
-import { Question } from '../../components/TestView';
+import { Question } from '../../commonTypes';
 import { MAIN_VIEW_TYPES } from '../../constants';
 
 export enum MAIN_ACTION_TYPES {
@@ -8,6 +8,7 @@ export enum MAIN_ACTION_TYPES {
   setResults = 'MAIN/SET_RESULTS',
   setCurrentView = 'MAIN/SET_CURRENT_VIEW',
   setUserAnswers = 'MAIN/SET_USER_ANSWERS',
+  setResultTime = 'MAIN/SET_RESULT_TIME',
   setStepIndex = 'MAIN/SET_STEP_INDEX',
 }
 
@@ -49,6 +50,11 @@ export interface SetCurrentViewAction {
   payload: MAIN_VIEW_TYPES;
 }
 
+export interface SetResultTimeAction {
+  type: MAIN_ACTION_TYPES.setResultTime;
+  payload: Date;
+}
+
 export interface SetStepIndexAction {
   type: MAIN_ACTION_TYPES.setStepIndex;
   payload: number;
@@ -59,6 +65,7 @@ export type AllMainActions = GetQuestionsAction
   | SetQuestionsAction
   | SetResultsAction
   | SetCurrentViewAction
+  | SetResultTimeAction
   | SetUserAnswersAction
   | SetStepIndexAction;
 
@@ -88,6 +95,11 @@ export const setCurrentView = (payload: SetCurrentViewAction['payload']): SetCur
 
 export const setUserAnswers = (payload: number[]): SetUserAnswersAction => ({
   type: MAIN_ACTION_TYPES.setUserAnswers,
+  payload,
+});
+
+export const setResultTime = (payload: SetResultTimeAction['payload']): SetResultTimeAction => ({
+  type: MAIN_ACTION_TYPES.setResultTime,
   payload,
 });
 

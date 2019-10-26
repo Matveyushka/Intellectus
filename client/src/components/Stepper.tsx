@@ -11,7 +11,7 @@ export interface StepItem {
 export interface StepperProps {
   data: StepItem[];
   value?: StepItem;
-  onClick?: (item: StepItem, index: number) => void;
+  onClick: (item: StepItem, index: number) => void;
 }
 
 export const Stepper = (props: StepperProps): React.ReactElement => {

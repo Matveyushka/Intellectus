@@ -5,7 +5,12 @@ import { toDataURL } from '../helpers';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
 
-export const ProblemTable = (): React.ReactElement | null => {
+export interface ProblemTableProps {
+  rightAnswer?: string;
+}
+
+export const ProblemTable = (props: ProblemTableProps): React.ReactElement | null => {
+  const { rightAnswer } = props;
   const { userAnswers, questions, stepIndex } = useSelector<State, MainState>(state => state.main);
 
   if (!questions) return null;
@@ -30,6 +35,17 @@ export const ProblemTable = (): React.ReactElement | null => {
           return (
             <div
               className="problem-cell empty"
+              key={index.toString()}
+            />
+          );
+        }
+
+        // Если есть правильный ответ, то показываем его
+        if (rightAnswer !== undefined) {
+          return (
+            <img
+              className="problem-cell right-answer"
+              src={toDataURL(rightAnswer)}
               key={index.toString()}
             />
           );

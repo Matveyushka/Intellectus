@@ -6,11 +6,12 @@ import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
 
 export interface OptionTableProps {
-  onSelect: (optionIndex: number) => void;
+  onSelect?: (optionIndex: number) => void;
+  rightAnswerIndex?: number;
 }
 
 export const OptionTable = (props: OptionTableProps): React.ReactElement | null => {
-  const { onSelect } = props;
+  const { onSelect = () => {}, rightAnswerIndex } = props;
   const { questions, userAnswers, stepIndex } = useSelector<State, MainState>(state => state.main);
 
   if (!questions) return null;
@@ -21,11 +22,15 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
   return (
     <>
       {options.map((item, index) => {
-        const className = mergeClassNames(
-          'problem-cell',
-          'clickable',
-          { selected: index === selectedIndex },
-        );
+        const className = mergeClassNames('problem-cell', {
+          selected: index === selectedIndex,
+          'right-answer': index === rightAnswerIndex,
+          error:
+            index === selectedIndex
+            && selectedIndex !== rightAnswerIndex
+            && rightAnswerIndex !== undefined,
+          clickable: rightAnswerIndex === undefined,
+        });
 
         return (
           <img

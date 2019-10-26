@@ -6,16 +6,12 @@ import { adjustSecond, formatTime, generateInitialStepperData } from './helpers'
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
-import { getResults, setStepIndex, setUserAnswers } from '../../pages/Main/actions';
+import {
+  getResults, setStepIndex, setUserAnswers, setResultTime,
+} from '../../pages/Main/actions';
 import { MainState } from '../../pages/Main/initialState';
 import { State } from '../../store';
 import { useInterval } from '../../helpers';
-
-export interface Question {
-  token: string;
-  problemFields: string[];
-  options: string[];
-}
 
 const stepperInitialData = generateInitialStepperData();
 
@@ -70,6 +66,8 @@ export const TestView = (): React.ReactElement => {
 
   const handleFinishButtonClick = (): void => {
     if (token && userAnswers) {
+      dispatch(setResultTime(time));
+
       dispatch(getResults({ token, answers: userAnswers }));
     }
   };
@@ -128,7 +126,7 @@ export const TestView = (): React.ReactElement => {
       <Stepper
         data={stepperData}
         value={stepperData[stepIndex]}
-        onClick={(_item, index) => setStepIndex(index)}
+        onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
     </div>
   );

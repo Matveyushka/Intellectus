@@ -36,6 +36,13 @@ export const mainReducer = (
       };
     }
 
+    case MAIN_ACTION_TYPES.setResultTime: {
+      return {
+        ...state,
+        resultTime: action.payload,
+      };
+    }
+
     case MAIN_ACTION_TYPES.setStepIndex: {
       return {
         ...state,

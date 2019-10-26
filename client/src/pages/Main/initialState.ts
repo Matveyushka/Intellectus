@@ -1,5 +1,5 @@
 import { MAIN_VIEW_TYPES } from '../../constants';
-import { Question } from '../../components/TestView';
+import { Question } from '../../commonTypes';
 
 export interface MainState {
   currentView: MAIN_VIEW_TYPES;
@@ -8,6 +8,7 @@ export interface MainState {
   solutions?: number[];
   pointsDistribution?: number[];
   userAnswers: number[];
+  resultTime?: Date;
   stepIndex: number;
 }
 
