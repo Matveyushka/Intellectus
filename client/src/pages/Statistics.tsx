@@ -35,12 +35,6 @@ export const Statistics = (): React.ReactElement | null => {
       defaultStatisticsData,
     );
 
-  const loadStatisticsData = async (): Promise<void> => {
-    setStatisticsData((await axios.get('/statistics')).data);
-
-    dispatch(hideLoader());
-  };
-
   const time = React.useMemo(() => formatTime(
     new Date(zeroTime + statisticsData.averageTime),
   ), [statisticsData]);
@@ -48,7 +42,11 @@ export const Statistics = (): React.ReactElement | null => {
   React.useEffect(() => {
     dispatch(showLoader());
 
-    loadStatisticsData();
+    axios.get('/statistics').then((res) => {
+      setStatisticsData(res.data);
+
+      dispatch(hideLoader());
+    });
   }, []);
 
   if (isLoading) return <Loader />;
