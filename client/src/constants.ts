@@ -1,6 +1,6 @@
 export const URLS = {
   main: '/',
-  statistics: '/statistics',
+  statistics: '/browse-statistics',
   about: '/about',
   contactUs: '/contact-us',
 } as const;
