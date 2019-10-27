@@ -5,11 +5,12 @@ import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
-import { Modal, ModalProps } from './Modal/Modal';
+import { Modal } from './Modal/Modal';
 import { ReportForm, DefaultReportData } from './forms/ReportForm';
-import { Loader } from './Loader';
+import { Loader, LoaderState } from './Loader';
 import { FinishFormState } from '../commonTypes';
 import { hideModal } from './Modal/actions';
+import { showLoader, hideLoader } from './Loader/actions';
 
 const defaultFinishFormState: FinishFormState<DefaultReportData> = {
   isFinish: false,
@@ -27,7 +28,7 @@ export const ReportModal = (): React.ReactElement => {
     State,
     MainState
   >(state => state.main);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
   const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
@@ -37,7 +38,7 @@ export const ReportModal = (): React.ReactElement => {
    * надо бы вынести её в отдельный компонент FormContainer
    */
   const onReportSubmit = (formData: DefaultReportData): void => {
-    setIsLoading(true);
+    dispatch(showLoader());
     let error: string;
     const data = {
       ...formData,
@@ -58,7 +59,7 @@ export const ReportModal = (): React.ReactElement => {
           error,
         });
 
-        setIsLoading(false);
+        dispatch(hideLoader());
       });
   };
 
