@@ -2,8 +2,8 @@ const svgCreator = require('../svg-creator');
 const { shuffle } = require('../../utils/arrayShuffle');
 const problemTemplate = require('../problem-template');
 const {
+  whiteColor,
   grayColor,
-  transparentColor,
   numberOfWrongOptions,
 } = require('../constants');
 
@@ -47,25 +47,18 @@ const generateWrongOptions = (description, solution) => Array(numberOfWrongOptio
   .fill(null).map(() => generateWrongOption(description, solution));
 
 const convertToSvg = (fieldDescription, seed) => {
-  const thickness = 1;
-
   const bigFigureImageParams = {
     x: 5,
     y: 5,
     size: 90,
-    color: transparentColor,
-    borderWidth: thickness,
-    borderColor: grayColor,
+    color: grayColor,
   };
 
   const smallFigureImageParams = {
     x: 38,
     y: 38,
     size: 24,
-    color: transparentColor,
-    borderWidth: thickness,
-    borderColor: grayColor,
-    borderRadius: 0,
+    color: whiteColor,
   };
 
   const bigFiguresImageCreators = [

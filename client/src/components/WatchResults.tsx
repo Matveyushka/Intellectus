@@ -9,6 +9,9 @@ import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
 import { formatTime } from './TestView/helpers';
 import { MAIN_VIEW_TYPES } from '../constants';
+import { ReportModal } from './ReportModal';
+import { ModalState } from './Modal';
+import { showModal } from './Modal/actions';
 
 export const WatchResults = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -27,6 +30,9 @@ export const WatchResults = (): React.ReactElement => {
     isFailed: solutions ? solutions[index] !== item : true,
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
+  const {
+    isModalOpen,
+  } = useSelector<State, ModalState>(state => state.modal);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
   const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
@@ -38,9 +44,6 @@ export const WatchResults = (): React.ReactElement => {
   const handleResultsButtonClick = (): void => {
     dispatch(setCurrentView(MAIN_VIEW_TYPES.results));
   };
-
-  // TODO Добавить реализацию ReportModal
-  const handleReportButtonClick = (): void => {};
 
   return (
     <div className="test-view">
@@ -84,7 +87,7 @@ export const WatchResults = (): React.ReactElement => {
             <button
               type="button"
               className="test-view-report-button"
-              onClick={handleReportButtonClick}
+              onClick={() => dispatch(showModal())}
             >
               Report
             </button>
@@ -105,6 +108,7 @@ export const WatchResults = (): React.ReactElement => {
         value={stepperData[stepIndex]}
         onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
+      {isModalOpen && <ReportModal />}
     </div>
   );
 };

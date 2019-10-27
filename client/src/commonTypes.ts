@@ -5,3 +5,9 @@ export interface Question {
   problemFields: string[];
   options: string[];
 }
+
+export interface FinishFormState<T> {
+  isFinish: boolean;
+  error?: string;
+  oldData: T;
+}

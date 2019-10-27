@@ -1,9 +1,7 @@
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
 const {
-  grayColor,
   numberOfWrongOptions,
-  transparentColor,
 } = require('../constants');
 
 const maxNumberIn9Bits = 512;
@@ -79,46 +77,21 @@ const generateWrongOptions = (description) => {
 };
 
 const convertToSvg = (code, seed) => {
-  const elementSize = 28;
-  const spaceSize = 4;
-  const thickness = 1;
-  const numberOfElementsInLine = 3;
+  const fillImageFromCode = (image, codeToDraw, position = 0) => {
+    if (codeToDraw === 0) return image;
 
-  let image = svgCreator.newImage();
+    const nextImage = codeToDraw % 2 === 1
+      ? image.drawSmallFigure(seed, position)
+      : image;
 
-  const fillImageFromCode = (codeToDraw, position = 0) => {
-    if (codeToDraw === 0) return;
-
-    if (codeToDraw % 2 === 1) {
-      const figures = [
-        image.circle,
-        image.square,
-      ];
-
-      const xPosition = spaceSize
-        + (position % numberOfElementsInLine)
-        * (spaceSize + elementSize);
-
-      const yPosition = spaceSize
-        + Math.floor(position / numberOfElementsInLine)
-        * (spaceSize + elementSize);
-
-      image = figures[seed % figures.length]({
-        x: xPosition,
-        y: yPosition,
-        size: elementSize,
-        color: transparentColor,
-        borderWidth: thickness,
-        borderColor: grayColor,
-      });
-    }
-
-    fillImageFromCode(Math.floor(codeToDraw / 2), position + 1);
+    return fillImageFromCode(
+      nextImage,
+      Math.floor(codeToDraw / 2),
+      position + 1,
+    );
   };
 
-  fillImageFromCode(code);
-
-  return image.getImage();
+  return fillImageFromCode(svgCreator.newImage(), code).getImage();
 };
 
 module.exports = problemTemplate.newProblemType(
