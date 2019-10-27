@@ -1,19 +1,15 @@
 import * as React from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
-import { Modal, ModalProps } from './Modal';
+import { Modal, ModalProps } from './Modal/Modal';
 import { ReportForm, DefaultReportData } from './forms/ReportForm';
 import { Loader } from './Loader';
 import { FinishFormState } from '../commonTypes';
-
-export interface ReportModalProps {
-  isShowing: ModalProps['isShowing'];
-  toggleModal: ModalProps['toggleModal'];
-}
+import { hideModal } from './Modal/actions';
 
 const defaultFinishFormState: FinishFormState<DefaultReportData> = {
   isFinish: false,
@@ -21,8 +17,8 @@ const defaultFinishFormState: FinishFormState<DefaultReportData> = {
   oldData: {},
 };
 
-export const ReportModal = (props: ReportModalProps): React.ReactElement => {
-  const { isShowing, toggleModal } = props;
+export const ReportModal = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const [finishState, setFinishState] = React.useState<
     FinishFormState<DefaultReportData>>(defaultFinishFormState);
   const {
@@ -73,7 +69,7 @@ export const ReportModal = (props: ReportModalProps): React.ReactElement => {
 
   if (isLoading) {
     return (
-      <Modal isShowing={isShowing} toggleModal={() => toggleModal()}>
+      <Modal>
         <div className="contact-results padding-for-modal">
           <Loader />
         </div>
@@ -83,7 +79,7 @@ export const ReportModal = (props: ReportModalProps): React.ReactElement => {
 
   if (finishState.isFinish) {
     return (
-      <Modal isShowing={isShowing} toggleModal={() => toggleModal()}>
+      <Modal>
         <div className="contact-results padding-for-modal">
           {finishState.error !== false ? (
             <>
@@ -93,9 +89,7 @@ export const ReportModal = (props: ReportModalProps): React.ReactElement => {
               </div>
             </>
           ) : (
-            <>
               <div className="success">We got your feedback</div>
-            </>
           )}
         </div>
       </Modal>
@@ -103,7 +97,7 @@ export const ReportModal = (props: ReportModalProps): React.ReactElement => {
   }
 
   return (
-    <Modal isShowing={isShowing} toggleModal={() => toggleModal()}>
+    <Modal>
       <div className="test-view-content">
         <div className="test-view-header">
           <h1 className="problem-title">Problem:</h1>
@@ -122,7 +116,7 @@ export const ReportModal = (props: ReportModalProps): React.ReactElement => {
       <ReportForm
         reportFormSubmit={onReportSubmit}
         data={finishState.oldData}
-        cancelForm={() => toggleModal()}
+        cancelForm={() => dispatch(hideModal())}
       />
     </Modal>
   );

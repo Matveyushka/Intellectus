@@ -37,7 +37,7 @@ module.exports = env => merge(commonConfig, {
       poll: 1000,
     },
     proxy: [{
-      context: ['/questions', '/answers', '/feedback', '/statistics', '/reports'],
+      context: ['/questions', '/answers', '/feedback', '/statistics', '/report'],
       target: 'http://localhost:9000/',
     }],
   },

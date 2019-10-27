@@ -9,8 +9,9 @@ import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
 import { formatTime } from './TestView/helpers';
 import { MAIN_VIEW_TYPES } from '../constants';
-import { useModal } from '../hooks';
 import { ReportModal } from './ReportModal';
+import { ModalState } from './Modal';
+import { showModal } from './Modal/actions';
 
 export const WatchResults = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ export const WatchResults = (): React.ReactElement => {
     isFailed: solutions ? solutions[i] !== v : true,
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
-  const { isShowing, toggleModal } = useModal();
+  const {
+    isModalOpen,
+  } = useSelector<State, ModalState>(state => state.modal);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
   const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
@@ -83,7 +86,7 @@ export const WatchResults = (): React.ReactElement => {
             <button
               type="button"
               className="test-view-report-button"
-              onClick={() => toggleModal()}
+              onClick={() => dispatch(showModal())}
             >
               Report
             </button>
@@ -104,7 +107,7 @@ export const WatchResults = (): React.ReactElement => {
         value={stepperData[stepIndex]}
         onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
-      {isShowing && <ReportModal isShowing={isShowing} toggleModal={toggleModal} />}
+      {isModalOpen && <ReportModal/>}
     </div>
   );
 };
