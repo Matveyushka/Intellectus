@@ -3,11 +3,17 @@
   flex-direction: column;
   align-items: center;
 
+  &.padding-for-modal {
+    padding: 80px 45px;
+  }
+
   .error, .success {
     text-transform: uppercase;
     letter-spacing: 6px;
     font-size: 30px;
     margin-bottom: 20px;
+    line-height: 40px;
+    text-align: center;
   }
 
   .error {
@@ -34,7 +40,7 @@
   }
 }
 
-.contact-form {
+.common-form {
   font-size: 17px;
   margin-top: 10px;
   width: 100%;
@@ -95,6 +101,9 @@
           padding: 4px 0;
           resize: none;
           min-height: 150px;
+          &.mini {
+            min-height: 80px;
+          }
 
           &:focus {
             outline: none;
@@ -139,7 +148,43 @@
     }
   }
 
+  .form-bottom {
+    margin: 0 20%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      font-size: 24px;
+      text-decoration: none;
+      transition: 0.2s;
+      cursor: pointer;
+      font-family: inherit;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    button.submit {
+      color: $primary-1;
+    }
+
+    button.cancel {
+      color: $base-2;
+    }
+  }
+
   .border-error {
     border-color: $error-1 !important;
+  }
+
+  .two-columns {
+    display: flex;
+    justify-content: space-between;
+    
+    .input-field {
+      width: 49%;
+    }
   }
 }

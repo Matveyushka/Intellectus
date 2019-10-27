@@ -5,3 +5,4 @@ export { IntroView } from './IntroView';
 export { Footer } from './Footer';
 export { ContactUsForm, DefaultContactData, ContactUsFormProps } from './forms/ContactUsForm';
 export { Graph } from './Graph';
+export { Modal, ModalProps } from './Modal';

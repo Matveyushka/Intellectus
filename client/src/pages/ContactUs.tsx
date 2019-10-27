@@ -4,28 +4,23 @@ import { NavLink } from 'react-router-dom';
 import { Footer, ContactUsForm, DefaultContactData } from '../components';
 import { Loader } from '../components/Loader';
 import { URLS } from '../constants';
+import { FinishFormState } from '../commonTypes';
 
-interface FinishState {
-  isFinish: boolean;
-  error: false | string;
-  oldData: DefaultContactData;
-}
-
-const defaultFinishState: FinishState = {
+const defaultFinishState: FinishFormState<DefaultContactData> = {
   isFinish: false,
-  error: false,
+  error: undefined,
   oldData: {},
 };
 
 export const ContactUs = (): React.ReactElement | null => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [finishState, setFinishState] = React.useState<FinishState>(
+  const [finishState, setFinishState] = React.useState<FinishFormState<DefaultContactData>>(
     defaultFinishState,
   );
 
   const feedbackFormSubmit = (data: DefaultContactData): void => {
     setIsLoading(true);
-    let error: false | string = false;
+    let error: string;
 
     axios('/feedback', { method: 'post', data })
       .catch((err: Error) => {
@@ -56,7 +51,7 @@ export const ContactUs = (): React.ReactElement | null => {
       <>
         <main className="main-container">
           <div className="contact-results">
-            {finishState.error !== false ? (
+            {finishState.error ? (
               <>
                 <div className="error">{finishState.error}</div>
                 <div className="button" onClick={tryToSendFormAgain}>
