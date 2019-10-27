@@ -10,20 +10,20 @@ const {
 const maxValue = 5;
 const minValue = 0;
 
-const swapColumns = (square, column1, column2) => square.map(row => row.map(
+const swapColumns = (square, firstColumnIndex, secondColumnIndex) => square.map(row => row.map(
   (item, index) => (() => {
-    if (index === column1) return row[column2];
+    if (index === firstColumnIndex) return row[secondColumnIndex];
 
-    if (index === column2) return row[column1];
+    if (index === secondColumnIndex) return row[firstColumnIndex];
 
     return item;
   })(),
 ));
 
-const swapRows = (square, row1, row2) => square.map((row, index) => (() => {
-  if (index === row1) return square[row2];
+const swapRows = (square, firstRowIndex, secondRowIndex) => square.map((row, index) => (() => {
+  if (index === firstRowIndex) return square[secondRowIndex];
 
-  if (index === row2) return square[row1];
+  if (index === secondRowIndex) return square[firstRowIndex];
 
   return row;
 })());
