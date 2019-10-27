@@ -8,7 +8,7 @@ import { FinishFormState } from '../commonTypes';
 
 const defaultFinishState: FinishFormState<DefaultContactData> = {
   isFinish: false,
-  error: false,
+  error: undefined,
   oldData: {},
 };
 
@@ -20,7 +20,7 @@ export const ContactUs = (): React.ReactElement | null => {
 
   const feedbackFormSubmit = (data: DefaultContactData): void => {
     setIsLoading(true);
-    let error: false | string = false;
+    let error: string;
 
     axios('/feedback', { method: 'post', data })
       .catch((err: Error) => {
@@ -51,7 +51,7 @@ export const ContactUs = (): React.ReactElement | null => {
       <>
         <main className="main-container">
           <div className="contact-results">
-            {finishState.error !== false ? (
+            {finishState.error? (
               <>
                 <div className="error">{finishState.error}</div>
                 <div className="button" onClick={tryToSendFormAgain}>

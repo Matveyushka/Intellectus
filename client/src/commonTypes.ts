@@ -8,6 +8,6 @@ export interface Question {
 
 export interface FinishFormState<T> {
   isFinish: boolean;
-  error: false | string;
+  error?: string;
   oldData: T;
 }

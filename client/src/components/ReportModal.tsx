@@ -13,7 +13,7 @@ import { hideModal } from './Modal/actions';
 
 const defaultFinishFormState: FinishFormState<DefaultReportData> = {
   isFinish: false,
-  error: false,
+  error: undefined,
   oldData: {},
 };
 
@@ -38,7 +38,7 @@ export const ReportModal = (): React.ReactElement => {
    */
   const onReportSubmit = (formData: DefaultReportData): void => {
     setIsLoading(true);
-    let error: false | string = false;
+    let error: string;
     const data = {
       ...formData,
       numberOfQuestion: stepIndex + 1,
@@ -81,7 +81,7 @@ export const ReportModal = (): React.ReactElement => {
     return (
       <Modal>
         <div className="contact-results padding-for-modal">
-          {finishState.error !== false ? (
+          {finishState.error ? (
             <>
               <div className="error">{finishState.error}</div>
               <div className="button" onClick={tryToSendFormAgain}>
