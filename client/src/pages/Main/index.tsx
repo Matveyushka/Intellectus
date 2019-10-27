@@ -4,9 +4,10 @@ import { MAIN_VIEW_TYPES } from '../../constants';
 import { IntroView, TestView } from '../../components';
 import { TestResult } from '../../components/TestResult';
 import { WatchResults } from '../../components/WatchResults';
-import { Loader, LoaderState } from '../../components/Loader';
+import { Loader } from '../../components/Loader';
 import { State } from '../../store';
 import { MainState } from './initialState';
+import { LoaderState } from '../../components/Loader/initialState';
 
 export const Main = (): React.ReactElement | null => {
   const { isLoading } = useSelector<State, LoaderState>(state => state.loader);

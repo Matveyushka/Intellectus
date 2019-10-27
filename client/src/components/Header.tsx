@@ -6,7 +6,7 @@ import { MAIN_VIEW_TYPES, URLS } from '../constants';
 import { setCurrentView } from '../pages/Main/actions';
 import { State } from '../store';
 import { MainState } from '../pages/Main/initialState';
-import { LoaderState } from './Loader';
+import { LoaderState } from './Loader/initialState';
 
 export interface HeaderProps {
   location: Location;

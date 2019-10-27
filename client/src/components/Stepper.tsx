@@ -1,5 +1,4 @@
 import * as React from 'react';
-import isFunction from 'lodash/isFunction';
 import mergeClassNames from 'classnames';
 
 export interface StepItem {
@@ -33,9 +32,7 @@ export const Stepper = (props: StepperProps): React.ReactElement => {
           <React.Fragment key={item.text}>
             <div
               className={itemClassNames}
-              onClick={() => {
-                if (isFunction(onClick)) onClick(item, index);
-              }}
+              onClick={() => onClick?.(item, index)}
             />
             {!isLastItem && <div className="stepper-line" />}
           </React.Fragment>

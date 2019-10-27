@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { Footer, ContactUsForm, DefaultContactData } from '../components';
 import { Loader } from '../components/Loader';
-import { URLS } from '../constants';
+import { API, URLS } from '../constants';
 
 interface FinishState {
   isFinish: boolean;
@@ -27,11 +27,11 @@ export const ContactUs = (): React.ReactElement | null => {
     setIsLoading(true);
     let error: false | string = false;
 
-    axios('/feedback', { method: 'post', data })
+    axios(API.feedback, { method: 'post', data })
       .catch((err: Error) => {
         error = 'Something went wrong';
 
-        throw err;
+        throw err; // на самом деле это просто реджектит промис, а не крашит приложение
       })
       .finally(() => {
         setFinishState({

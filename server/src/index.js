@@ -24,7 +24,7 @@ app.use('/reports', routes.reports);
 
 app.use('/feedback', routes.feedback);
 
-app.use('/statistics', routes.statistics);
+app.use('/statistics-data', routes.statistics);
 
 app.get('*', (req, res) => {
   // грязные хаки, чтобы браузер не скачивал gzip-архив, а отображал его как html

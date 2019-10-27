@@ -1,15 +1,17 @@
-export const URLS = {
-  main: '/',
-  /*
-   * TODO :
-   * Поменять часть сервера так, чтобы на клиенте использовать '/statistics'
-   * в данный момент клиент при переходе по url: 'LH:hryak/statistics'
-   * сталкивается с ошибкой неверной переадресации и попытке вывести серверную часть.
-   */
-  statistics: '/browse-statistics',
-  about: '/about',
-  contactUs: '/contact-us',
-} as const;
+export enum URLS {
+  main = '/',
+  statistics = '/statistics',
+  about = '/about',
+  contactUs = '/contact-us',
+}
+
+export enum API {
+  statisticsData = '/statistics-data',
+  questions = '/questions',
+  answers = '/answers',
+  feedback = '/feedback',
+  report = '/report'
+}
 
 export enum MAIN_VIEW_TYPES {
   intro = 'intro',
@@ -17,3 +19,5 @@ export enum MAIN_VIEW_TYPES {
   results = 'results',
   watch = 'watch',
 }
+
+export const zeroTime = new Date(0, 0, 0).getTime();

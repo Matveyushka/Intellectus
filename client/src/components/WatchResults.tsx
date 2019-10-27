@@ -18,12 +18,13 @@ export const WatchResults = (): React.ReactElement => {
     userAnswers,
     stepIndex,
     solutions,
-    resultTime = new Date(1, 1, 1, 0, 0, 0),
+    resultTime = new Date(0, 0, 0),
   } = useSelector<State, MainState>(state => state.main);
-  const stepperInitialData: StepItem[] = userAnswers.map((v, i) => ({
-    text: i.toString(),
+
+  const stepperInitialData: StepItem[] = userAnswers.map((item, index) => ({
+    text: index.toString(),
     isCompleted: true,
-    isFailed: solutions ? solutions[i] !== v : true,
+    isFailed: solutions ? solutions[index] !== item : true,
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
 

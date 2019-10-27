@@ -11,7 +11,7 @@ export interface OptionTableProps {
 }
 
 export const OptionTable = (props: OptionTableProps): React.ReactElement | null => {
-  const { onSelect = () => {}, rightAnswerIndex } = props;
+  const { onSelect, rightAnswerIndex } = props;
   const { questions, userAnswers, stepIndex } = useSelector<State, MainState>(state => state.main);
 
   if (!questions) return null;
@@ -36,7 +36,7 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
           <img
             className={className}
             src={toDataURL(item)}
-            onClick={() => onSelect(index)}
+            onClick={() => onSelect?.(index)}
             key={index.toString()}
           />
         );
