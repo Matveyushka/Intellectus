@@ -3,7 +3,6 @@ const problemTemplate = require('../problem-template');
 const {
   greenColor,
   grayColor,
-  transparentColor,
   numberOfWrongOptions,
 } = require('../constants');
 
@@ -47,7 +46,6 @@ const convertToSvg = (code, seed) => {
   const spaceSize = 8;
   const figureHeight = 38;
   const figureWidth = 84;
-  const thickness = 1;
 
   let image = svgCreator.newImage();
 
@@ -56,9 +54,7 @@ const convertToSvg = (code, seed) => {
     y: newY,
     width: figureWidth,
     height: figureHeight,
-    color: transparentColor,
-    borderWidth: thickness,
-    borderColor: newBorderColor,
+    color: newBorderColor,
   });
 
   const topGreenFigureParams = newFigureParamsFromTemplate(spaceSize, greenColor);

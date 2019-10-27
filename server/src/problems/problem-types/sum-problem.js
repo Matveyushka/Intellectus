@@ -5,9 +5,6 @@ const problemTemplate = require('../problem-template');
 const { shuffle } = require('../../utils/arrayShuffle');
 
 const {
-  greenColor,
-  grayColor,
-  transparentColor,
   numberOfWrongOptions,
 } = require('../constants');
 
@@ -76,52 +73,20 @@ const generateWrongOptions = (problemDescription, solution) => Array(numberOfWro
   }));
 
 const convertToSvg = (fieldDescription, seed) => {
-  const elementSize = 28;
-  const spaceSize = 4;
-  const thickness = 1;
-  const numberOfElementsInLine = 3;
-
   const fillImage = (image, figuresLeft, position = 0) => {
-    const processedImage = (image ? svgCreator.newImage(image) : svgCreator.newImage());
+    if (figuresLeft === 0) return image;
 
-    if (figuresLeft === 0) return processedImage;
-
-    const seededPosition = ((position + seed) % 9);
-
-    const xPosition = spaceSize
-      + (seededPosition % numberOfElementsInLine)
-      * (spaceSize + elementSize);
-
-    const yPosition = spaceSize
-      + Math.floor(seededPosition / numberOfElementsInLine)
-      * (spaceSize + elementSize);
-
-    const createImageParams = color => ({
-      x: xPosition,
-      y: yPosition,
-      size: elementSize,
-      color: transparentColor,
-      borderWidth: thickness,
-      borderColor: color,
-    });
-
-    const greenImageParams = createImageParams(greenColor);
-
-    const grayImageParams = createImageParams(grayColor);
-
-    const figures = [
-      () => processedImage.circle(greenImageParams),
-      () => processedImage.square(greenImageParams),
-      () => processedImage.circle(grayImageParams),
-      () => processedImage.square(grayImageParams),
-    ];
-
-    const randomFigure = (seed + fieldDescription.style) % figures.length;
-
-    return fillImage(figures[randomFigure]().getImage(), figuresLeft - 1, position + 1);
+    return fillImage(
+      image.drawSmallFigure(
+        fieldDescription.style + seed,
+        (position + seed) % maxFiguresAmountInField,
+      ),
+      figuresLeft - 1,
+      position + 1,
+    );
   };
 
-  return fillImage(null, fieldDescription.figuresAmount).getImage();
+  return fillImage(svgCreator.newImage(), fieldDescription.figuresAmount).getImage();
 };
 
 module.exports = problemTemplate.newProblemType(
