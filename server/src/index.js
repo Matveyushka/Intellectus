@@ -20,7 +20,7 @@ app.use('/questions', routes.questions);
 
 app.use('/answers', routes.answers);
 
-app.use('/reports', routes.reports);
+app.use('/report', routes.reports);
 
 app.use('/feedback', routes.feedback);
 
