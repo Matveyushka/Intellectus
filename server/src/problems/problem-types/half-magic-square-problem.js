@@ -34,15 +34,11 @@ const transformWithMask = (square, mask, transformation) => square.map(
   ),
 );
 
-const maskContainsMax = (square, mask) => mask.reduce(
-  (contains, item, index) => (square[index][item] === maxValue) || contains,
-  false,
-);
+const maskContainsMax = (square, mask) => square
+  .some((row, index) => row[mask[index]] === maxValue);
 
-const maskContainsMin = (square, mask) => mask.reduce(
-  (contains, item, index) => (square[index][item] === minValue) || contains,
-  false,
-);
+const maskContainsMin = (square, mask) => square
+  .some((row, index) => row[mask[index]] === minValue);
 
 const mutate = (square) => {
   const mask = shuffle([0, 1, 2]);
@@ -87,6 +83,10 @@ const actions = [
 const generateProblemDescription = () => {
   const shuffleDepth = 30;
 
+  /*
+   * Шаблонный магический квадрат - числа расставлены одним из возможных вариантов
+   * Трансформируя его, получим случайный магический квадрат
+   */
   const startMagicSquare = [
     [3, 1, 4],
     [2, 5, 1],

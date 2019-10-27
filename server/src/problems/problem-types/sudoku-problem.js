@@ -24,13 +24,13 @@ const sudokuTemplate = [
 const sectorsAmount = 9;
 const sectorSize = 3;
 
-const random0To2 = excludedVariant => (_.isNil(excludedVariant)
-  ? Math.floor(Math.random() * 3)
-  : (excludedVariant + Math.floor(Math.random() * 2) + 1)) % 3;
+const random = (max, excludedVariant) => (_.isNil(excludedVariant)
+  ? _.random(max)
+  : (excludedVariant + _.random(max)) % (max + 1));
 
 const transpose = sudokuMap => _.zip(...sudokuMap);
 
-const swapRows = sudokuMap => row1 => row2 => sudokuMap.map((row, index) => {
+const swapRows = (sudokuMap, row1, row2) => sudokuMap.map((row, index) => {
   if (index === row1) return sudokuMap[row2].slice();
 
   if (index === row2) return sudokuMap[row1].slice();
@@ -44,9 +44,7 @@ const swapRows = sudokuMap => row1 => row2 => sudokuMap.map((row, index) => {
  */
 const swapRowsInArea = sudokuMap => area => row1 => row2 => swapRows(
   sudokuMap,
-)(
   area * sectorSize + row1,
-)(
   area * sectorSize + row2,
 );
 
@@ -54,48 +52,48 @@ const swapColumnsInArea = sudokuMap => area => column1 => column2 => transpose(
   swapRowsInArea(transpose(sudokuMap))(area)(column1)(column2),
 );
 
-const swapHorizontalAreas = sudokuMap => area1 => area2 => Array(sectorSize)
+const swapHorizontalAreas = (sudokuMap, area1, area2) => Array(sectorSize)
   .fill(null)
   .reduce(
     (currentSudokuMap, _value, index) => {
       const firstAreaRow = area1 * sectorSize + index;
       const secondAreaRow = area2 * sectorSize + index;
 
-      return swapRows(currentSudokuMap)(firstAreaRow)(secondAreaRow);
+      return swapRows(currentSudokuMap, firstAreaRow, secondAreaRow);
     },
     sudokuMap,
   );
 
-const swapVerticalAreas = sudokuMap => area1 => area2 => transpose(
-  swapHorizontalAreas(transpose(sudokuMap))(area1)(area2),
+const swapVerticalAreas = (sudokuMap, area1, area2) => transpose(
+  swapHorizontalAreas(transpose(sudokuMap), area1, area2),
 );
 
 const actions = [
   (sudokuMap) => {
-    const area = random0To2();
-    const column1 = random0To2();
-    const column2 = random0To2(column1);
+    const area = random(sectorSize - 1);
+    const column1 = random(sectorSize - 1);
+    const column2 = random(sectorSize - 1, column1);
 
     return swapColumnsInArea(sudokuMap)(area)(column1)(column2);
   },
   (sudokuMap) => {
-    const area = random0To2();
-    const row1 = random0To2();
-    const row2 = random0To2(row1);
+    const area = random(sectorSize - 1);
+    const row1 = random(sectorSize - 1);
+    const row2 = random(sectorSize - 1, row1);
 
     return swapRowsInArea(sudokuMap)(area)(row1)(row2);
   },
   (sudokuMap) => {
-    const area1 = random0To2();
-    const area2 = random0To2(area1);
+    const area1 = random(sectorSize - 1);
+    const area2 = random(sectorSize - 1, area1);
 
-    return swapHorizontalAreas(sudokuMap)(area1)(area2);
+    return swapHorizontalAreas(sudokuMap, area1, area2);
   },
   (sudokuMap) => {
-    const area1 = random0To2();
-    const area2 = random0To2(area1);
+    const area1 = random(sectorSize - 1);
+    const area2 = random(sectorSize - 1, area1);
 
-    return swapVerticalAreas(sudokuMap)(area1)(area2);
+    return swapVerticalAreas(sudokuMap, area1, area2);
   },
   sudokuMap => transpose(sudokuMap),
 ];
@@ -114,7 +112,7 @@ const generateProblemDescription = () => {
   const shuffleDepth = 30;
 
   const sudoku = Array(shuffleDepth).fill(null).reduce((sudokuMap) => {
-    const randomAction = actions[Math.floor(Math.random() * actions.length)];
+    const randomAction = actions[_.random(actions.length - 1)];
 
     return randomAction(sudokuMap);
   }, sudokuTemplate);
