@@ -103,7 +103,7 @@ export const ReportModal = (): React.ReactElement => {
   return (
     <Modal>
       <div className="test-view-content">
-        <div className="test-view-header">
+        <div className="test-view-header margin-left">
           <h1 className="problem-title">Problem:</h1>
           <h1 className="problem-title options">Options:</h1>
         </div>
