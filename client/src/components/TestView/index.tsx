@@ -110,7 +110,7 @@ export const TestView = (): React.ReactElement => {
                 Finish
               </button>
             )}
-            {process.env.NODE_ENV === 'development' && (
+            {process.env.NODE_ENV === 'development' && !isTestFinished && (
               // данный код удаляется вебпаком при сборке
               <button
                 type="button"
