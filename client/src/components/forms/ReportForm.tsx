@@ -38,7 +38,7 @@ export const ReportForm = ({
   };
 
   return (
-    <form className="sl-form" onSubmit={handleSubmit(reportFormSubmit)}>
+    <form className="common-form" onSubmit={handleSubmit(reportFormSubmit)}>
       <div className="two-columns">
         <div className="input-field">
           <label className="input-label" htmlFor="name">

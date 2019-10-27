@@ -18,12 +18,10 @@ export const Modal = (props: ModalProps): React.ReactElement | null => {
 
   return isModalOpen
     ? ReactDOM.createPortal(
-      <>
-        <div className="modal">
-          <div className="modal-bg" onClick={() => dispatch(hideModal())} />
-          <div className="modal-body">{children}</div>
-        </div>
-      </>,
+      <div className="modal">
+        <div className="modal-bg" onClick={() => dispatch(hideModal())} />
+        <div className="modal-body">{children}</div>
+      </div>,
       document.body,
     )
     : null;

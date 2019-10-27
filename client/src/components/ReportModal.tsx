@@ -12,7 +12,9 @@ import { FinishFormState } from '../commonTypes';
 import { hideModal } from './Modal/actions';
 import { showLoader, hideLoader } from './Loader/actions';
 
-const defaultFinishFormState: FinishFormState<DefaultReportData> = {
+type FinishState = FinishFormState<DefaultReportData>
+
+const defaultFinishFormState: FinishState = {
   isFinish: false,
   error: undefined,
   oldData: {},
@@ -20,14 +22,10 @@ const defaultFinishFormState: FinishFormState<DefaultReportData> = {
 
 export const ReportModal = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const [finishState, setFinishState] = React.useState<
-    FinishFormState<DefaultReportData>>(defaultFinishFormState);
+  const [finishState, setFinishState] = React.useState<FinishState>(defaultFinishFormState);
   const {
     questions, stepIndex, solutions, token,
-  } = useSelector<
-    State,
-    MainState
-  >(state => state.main);
+  } = useSelector<State, MainState>(state => state.main);
   const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
