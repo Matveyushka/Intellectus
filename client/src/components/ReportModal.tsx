@@ -45,7 +45,7 @@ export const ReportModal = (): React.ReactElement => {
       token,
     };
 
-    axios('/reports', { method: 'post', data })
+    axios('/report', { method: 'post', data })
       .catch((err: Error) => {
         error = 'Something went wrong';
 
