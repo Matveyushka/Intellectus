@@ -6,8 +6,11 @@ const twoFiguresMediumProblem = require('./problem-types/two-figures-medium-prob
 const bitwiseProblem = require('./problem-types/bitwise-problem');
 const sumProblem = require('./problem-types/sum-problem');
 const twoFiguresEasyProblem = require('./problem-types/two-figures-easy-problem');
+const sudokuProblem = require('./problem-types/sudoku-problem');
+const magicSquareProblem = require('./problem-types/half-magic-square-problem');
 
 const easyProblems = [
+  magicSquareProblem,
   missingElementProblem,
   sumProblem,
   twoFiguresEasyProblem,
@@ -18,6 +21,7 @@ const mediumProblems = [
 ];
 
 const hardProblems = [
+  sudokuProblem,
   bitwiseProblem,
 ];
 
