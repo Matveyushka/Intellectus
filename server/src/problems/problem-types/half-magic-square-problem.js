@@ -21,9 +21,9 @@ const swapColumns = (square, column1, column2) => square.map(row => row.map(
 ));
 
 const swapRows = (square, row1, row2) => square.map((row, index) => (() => {
-  if (index === row1) { return square[row2]; }
+  if (index === row1) return square[row2];
 
-  if (index === row2) { return square[row1]; }
+  if (index === row2) return square[row1];
 
   return row;
 })());
