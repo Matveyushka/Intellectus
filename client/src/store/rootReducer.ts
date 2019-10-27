@@ -6,5 +6,5 @@ import { modalReducer } from '../components/Modal';
 export const rootReducer = combineReducers({
   loader: loaderReducer,
   main: mainReducer,
-  modal: modalReducer
+  modal: modalReducer,
 });

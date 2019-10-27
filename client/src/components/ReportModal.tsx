@@ -90,7 +90,7 @@ export const ReportModal = (): React.ReactElement => {
               </div>
             </>
           ) : (
-              <div className="success">We got your feedback</div>
+            <div className="success">We got your feedback</div>
           )}
         </div>
       </Modal>

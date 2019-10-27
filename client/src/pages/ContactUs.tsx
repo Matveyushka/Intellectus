@@ -51,7 +51,7 @@ export const ContactUs = (): React.ReactElement | null => {
       <>
         <main className="main-container">
           <div className="contact-results">
-            {finishState.error? (
+            {finishState.error ? (
               <>
                 <div className="error">{finishState.error}</div>
                 <div className="button" onClick={tryToSendFormAgain}>

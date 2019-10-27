@@ -15,7 +15,7 @@ export const Modal = (props: ModalProps): React.ReactElement | null => {
   const {
     isModalOpen,
   } = useSelector<State, ModalState>(state => state.modal);
-  
+
   return isModalOpen
     ? ReactDOM.createPortal(
       <>

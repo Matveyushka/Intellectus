@@ -107,7 +107,7 @@ export const WatchResults = (): React.ReactElement => {
         value={stepperData[stepIndex]}
         onClick={(_item, index) => dispatch(setStepIndex(index))}
       />
-      {isModalOpen && <ReportModal/>}
+      {isModalOpen && <ReportModal />}
     </div>
   );
 };
