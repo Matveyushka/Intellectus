@@ -13,12 +13,13 @@
 Вы можете посмотреть лог изменений [здесь](/#/Documentation/Changelog)
 
 ## Licence
-This project is distributed under MIT license
+Этот проект распростаняется под лиценизей MIT
 
 ## Contributors
 
 - [777PolarFox777](https://github.com/777PolarFox777)
 - [DmitriySimakov](https://github.com/DmitriySimakov)
+- [Cat-and](https://github.com/Cat-and)
 - [Matveyushka](https://github.com/Matveyushka)
 - [SlavikTraktor](https://github.com/SlavikTraktor)
 - [STAJLb](https://github.com/STAJLb)
