@@ -25,12 +25,15 @@ const smallFigures = [
   (image, x, y) => image.circle(newSmallFigureParams(x, y, greenColor)),
   (image, x, y) => image.circle(newSmallFigureParams(x, y, grayColor)),
   (image, x, y) => image.triangle(newSmallFigureParams(x, y, redColor)),
+  (image, x, y) => image.pentagon(newSmallFigureParams(x, y, redColor)),
   (image, x, y) => image.square(newSmallFigureParams(x, y, grayColor)),
   (image, x, y) => image.triangle(newSmallFigureParams(x, y, grayColor)),
   (image, x, y) => image.circle(newSmallFigureParams(x, y, redColor)),
   (image, x, y) => image.triangle(newSmallFigureParams(x, y, greenColor)),
   (image, x, y) => image.square(newSmallFigureParams(x, y, redColor)),
+  (image, x, y) => image.pentagon(newSmallFigureParams(x, y, grayColor)),
   (image, x, y) => image.square(newSmallFigureParams(x, y, greenColor)),
+  (image, x, y) => image.pentagon(newSmallFigureParams(x, y, greenColor)),
 ];
 
 const newImage = (sourceImage = baseSvgTag) => ({
