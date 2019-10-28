@@ -60,6 +60,11 @@ const generateWrongOptions = (_problemDescription, solution) => shuffle(Array(nu
   .fill(null)
   .map((_item, index) => {
     const styleCode = (() => {
+      /*
+       * Делаем так, чтобы среди вариантов ответов
+       * каждый стиль фигур встречался 2 раза.
+       */
+
       if (index === 0) return solution.style;
 
       if (index === 1 || index === 2) return (solution.style + 1) % stylesAmount;

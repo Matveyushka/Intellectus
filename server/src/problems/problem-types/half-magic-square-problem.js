@@ -99,7 +99,7 @@ const generateProblemDescription = () => {
     return randomAction(square);
   }, startMagicSquare).flat();
 
-  return magicSquare.indexOf(5) === -1
+  return magicSquare.indexOf(maxValue) === -1
     ? generateProblemDescription()
     : magicSquare;
 };
