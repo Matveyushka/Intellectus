@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext",
+    "target": "es2018",
     "sourceMap": true,
     "strictNullChecks": true,
     "jsx": "react",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types"],
     "outDir": "./dist",
     "lib": ["dom", "dom.iterable", "esnext"]
@@ -17,5 +19,6 @@
   ],
   "include": [
     "src/*"
-  ]
+  ],
+  "files": ["src/index.tsx"]
 }

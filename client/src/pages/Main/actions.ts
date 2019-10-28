@@ -39,10 +39,6 @@ export interface SetResultsAction {
 
 export interface GetResultsAction {
   type: MAIN_ACTION_TYPES.getResults;
-  payload: {
-    token: string,
-    answers: number[],
-  };
 }
 
 export interface SetCurrentViewAction {
@@ -78,9 +74,8 @@ export const setQuestions = (payload: SetQuestionsAction['payload']): SetQuestio
   payload,
 });
 
-export const getResults = (payload: GetResultsAction['payload']): GetResultsAction => ({
+export const getResults = (): GetResultsAction => ({
   type: MAIN_ACTION_TYPES.getResults,
-  payload,
 });
 
 export const setResults = (payload: SetResultsAction['payload']): SetResultsAction => ({

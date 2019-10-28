@@ -5,12 +5,13 @@ import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
 import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
-import { Modal } from './Modal/Modal';
+import { Modal } from './Modal';
 import { ReportForm, DefaultReportData } from './forms/ReportForm';
-import { Loader, LoaderState } from './Loader';
+import { Loader } from './Loader';
 import { FinishFormState } from '../commonTypes';
 import { hideModal } from './Modal/actions';
 import { showLoader, hideLoader } from './Loader/actions';
+import { LoaderState } from './Loader/initialState';
 
 type FinishState = FinishFormState<DefaultReportData>
 

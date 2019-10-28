@@ -12,7 +12,8 @@
   "plugins": [
     "@typescript-eslint",
     "prefer-arrow",
-    "redux-saga"
+    "redux-saga",
+    "react-hooks"
   ],
   "extends": [
     "eslint:recommended",
@@ -79,7 +80,15 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/alt-text": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "react/jsx-curly-brace-presence": "off"
+    // TODO: содержит баг, включить, когда починят
+    // https://github.com/yannickcr/eslint-plugin-react/issues/2454
+    "react/jsx-curly-brace-presence": "off",
+    // Не распознает optional chaining
+    // https://github.com/typescript-eslint/typescript-eslint/issues/1104
+    "no-undef": "warn",
+    "no-use-before-define": "warn",
+    "no-restricted-globals": "warn",
+    "no-unused-expressions": "warn"
   },
   "settings": {
     "import/resolver": {

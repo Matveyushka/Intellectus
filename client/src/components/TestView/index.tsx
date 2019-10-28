@@ -1,5 +1,6 @@
 import * as React from 'react';
 import isNumber from 'lodash/isNumber';
+import random from 'lodash/random';
 import { useDispatch, useSelector } from 'react-redux';
 import { StepItem, Stepper } from '../Stepper';
 import { adjustSecond, formatTime, generateInitialStepperData } from './helpers';
@@ -19,7 +20,7 @@ export const TestView = (): React.ReactElement => {
   const dispatch = useDispatch();
 
   const {
-    token, userAnswers, stepIndex,
+    userAnswers, stepIndex,
   } = useSelector<State, MainState>(state => state.main);
 
   const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
@@ -65,11 +66,9 @@ export const TestView = (): React.ReactElement => {
   };
 
   const handleFinishButtonClick = (): void => {
-    if (token && userAnswers) {
-      dispatch(setResultTime(time));
+    dispatch(setResultTime(time));
 
-      dispatch(getResults({ token, answers: userAnswers }));
-    }
+    dispatch(getResults());
   };
 
   return (
@@ -109,6 +108,22 @@ export const TestView = (): React.ReactElement => {
                 onClick={handleFinishButtonClick}
               >
                 Finish
+              </button>
+            )}
+            {process.env.NODE_ENV === 'development' && !isTestFinished && (
+              // данный код удаляется вебпаком при сборке
+              <button
+                type="button"
+                className="test-view-finish-button"
+                onClick={() => {
+                  const newAnswers = Array.from(Array(12), () => random(0, 5));
+
+                  dispatch(setUserAnswers(newAnswers));
+
+                  dispatch(getResults());
+                }}
+              >
+                Finish Instantly
               </button>
             )}
           </div>

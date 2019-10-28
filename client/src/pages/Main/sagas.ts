@@ -1,8 +1,9 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  call, put, takeEvery, select,
+} from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import axios from 'axios';
 import {
-  GetResultsAction,
   MAIN_ACTION_TYPES,
   setCurrentView,
   setQuestions,
@@ -11,7 +12,9 @@ import {
   setUserAnswers,
 } from './actions';
 import { hideLoader, showLoader } from '../../components/Loader/actions';
-import { MAIN_VIEW_TYPES } from '../../constants';
+import { API, MAIN_VIEW_TYPES } from '../../constants';
+import { validateQuestions, validateResults } from '../../validators';
+import { MainState } from './initialState';
 
 function* getQuestions(): SagaIterator {
   try {
@@ -21,7 +24,9 @@ function* getQuestions(): SagaIterator {
 
     yield put(setStepIndex(0));
 
-    const { data } = yield call(axios.get, '/questions');
+    const { data } = yield call(axios.get, API.questions);
+
+    validateQuestions(data); // may throw
 
     yield put(setQuestions(data));
 
@@ -35,13 +40,15 @@ function* getQuestions(): SagaIterator {
   }
 }
 
-function* getResults(action: GetResultsAction): SagaIterator {
+function* getResults(): SagaIterator {
   try {
     yield put(showLoader());
 
-    const { token, answers } = action.payload;
+    const { token, userAnswers }: MainState = yield select(state => state.main);
 
-    const { data } = yield call(axios.post, '/answers', { token, answers });
+    const { data } = yield call(axios.post, '/answers', { token, answers: userAnswers });
+
+    validateResults(data); // may throw
 
     yield put(setResults(data));
 

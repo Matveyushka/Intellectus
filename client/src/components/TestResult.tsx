@@ -15,6 +15,7 @@ export const TestResult = (): React.ReactElement => {
     solutions = [],
     pointsDistribution = [],
   } = useSelector<State, MainState>(state => state.main);
+
   const answers: boolean[] = userAnswers.map((item, index) => solutions[index] === item);
   const solutionsCount: number = answers.reduce((accum, item) => (item ? accum + 1 : accum), 0);
   const stepperData = answers.map((item, index) => ({

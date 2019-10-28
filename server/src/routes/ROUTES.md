@@ -84,7 +84,7 @@ type of request: POST
 	"numberOfQuestion": 10
 }
 ```
-statistics/  
+statistics-data/  
 -----------   
 type of request: GET 
 ```
