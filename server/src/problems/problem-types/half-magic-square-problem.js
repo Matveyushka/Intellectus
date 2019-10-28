@@ -93,11 +93,15 @@ const generateProblemDescription = () => {
     [3, 2, 3],
   ];
 
-  return Array(shuffleDepth).fill(null).reduce((magicSquare) => {
+  const magicSquare = Array(shuffleDepth).fill(null).reduce((square) => {
     const randomAction = actions[Math.floor(Math.random() * actions.length)];
 
-    return randomAction(magicSquare);
+    return randomAction(square);
   }, startMagicSquare).flat();
+
+  return magicSquare.indexOf(maxValue) === -1
+    ? generateProblemDescription()
+    : magicSquare;
 };
 
 const generateWrongOptions = (_description, solution) => {
