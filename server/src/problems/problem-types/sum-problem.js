@@ -10,6 +10,7 @@ const {
 
 const maxFiguresAmountInField = 9;
 const maxStartFiguresAmountInField = 7;
+const stylesAmount = 3;
 
 const createFieldDescription = (figuresAmount, style) => ({ figuresAmount, style });
 
@@ -45,31 +46,34 @@ const generateProblemDescription = () => {
   ].map((field, index) => createFieldDescription(field, fieldsStyles[index]));
 };
 
-const generateWrongOption = ({
-  problemDescription, maxFiguresAmount, styleTopBound, solution,
-}) => {
+const generateWrongOption = (style, maxFiguresAmount, solution) => {
   const figuresAmount = Math.floor(Math.random() * maxFiguresAmount) + 1;
-  const style = Math.floor(Math.random() * styleTopBound);
 
-  const wrongOption = createFieldDescription(
-    figuresAmount,
-    style,
-  );
+  const wrongOption = createFieldDescription(figuresAmount, style);
 
   return _.isEqual(solution, wrongOption)
-    ? generateWrongOption({
-      problemDescription, maxFiguresAmount, styleTopBound, solution,
-    })
+    ? generateWrongOption(style, maxFiguresAmount, solution)
     : wrongOption;
 };
 
-const generateWrongOptions = (problemDescription, solution) => Array(numberOfWrongOptions)
+const generateWrongOptions = (_problemDescription, solution) => shuffle(Array(numberOfWrongOptions)
   .fill(null)
-  .map(() => generateWrongOption({
-    problemDescription,
-    maxFiguresAmount: maxFiguresAmountInField,
-    styleTopBound: 2,
-    solution,
+  .map((_item, index) => {
+    const styleCode = (() => {
+      if (index === 0) return solution.style;
+
+      if (index === 1 || index === 2) return (solution.style + 1) % stylesAmount;
+
+      if (index === 3 || index === 4) return (solution.style + 2) % stylesAmount;
+
+      return null;
+    })();
+
+    return generateWrongOption(
+      styleCode,
+      maxFiguresAmountInField,
+      solution,
+    );
   }));
 
 const convertToSvg = (fieldDescription, seed) => {
