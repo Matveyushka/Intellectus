@@ -12,14 +12,12 @@
   "plugins": [
     "@typescript-eslint",
     "prefer-arrow",
-    "redux-saga",
     "react-hooks"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb",
-    "plugin:redux-saga/recommended"
+    "airbnb"
   ],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],

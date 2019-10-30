@@ -61,7 +61,6 @@
     "eslint-plugin-prefer-arrow": "^1.1.6",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
-    "eslint-plugin-redux-saga": "^1.1.1",
     "gzipper": "^3.3.0",
     "ncp": "^2.0.0",
     "node-sass": "^4.12.0",
