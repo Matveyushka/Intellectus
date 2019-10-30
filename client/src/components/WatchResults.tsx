@@ -4,17 +4,14 @@ import { StepItem, Stepper } from './Stepper';
 import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
 import { STEPPER_DIRECTION } from './TestView/constants';
-import { setStepIndex, setCurrentView } from '../pages/Main/actions';
-import { MainState } from '../pages/Main/initialState';
-import { State } from '../store';
+import { Dispatch, State } from '../store';
 import { formatTime } from './TestView/helpers';
 import { MAIN_VIEW_TYPES } from '../constants';
 import { ReportModal } from './ReportModal';
-import { ModalState } from './Modal';
-import { showModal } from './Modal/actions';
+import { MainState } from '../pages/Main/model';
 
 export const WatchResults = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const {
     questions,
@@ -30,19 +27,17 @@ export const WatchResults = (): React.ReactElement => {
     isFailed: solutions ? solutions[index] !== item : true,
   }));
   const [stepperData] = React.useState<StepItem[]>(stepperInitialData);
-  const {
-    isModalOpen,
-  } = useSelector<State, ModalState>(state => state.modal);
+  const isModalOpen = useSelector<State, boolean>(state => state.modal);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
   const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
 
   const handlePrevNextButtonClick = (direction: number): void => {
-    dispatch(setStepIndex(stepIndex + direction));
+    dispatch.main.setStepIndex(stepIndex + direction);
   };
 
   const handleResultsButtonClick = (): void => {
-    dispatch(setCurrentView(MAIN_VIEW_TYPES.results));
+    dispatch.main.setCurrentView(MAIN_VIEW_TYPES.results);
   };
 
   return (
@@ -87,7 +82,7 @@ export const WatchResults = (): React.ReactElement => {
             <button
               type="button"
               className="test-view-report-button"
-              onClick={() => dispatch(showModal())}
+              onClick={() => dispatch.modal.showModal()}
             >
               Report
             </button>
@@ -106,7 +101,7 @@ export const WatchResults = (): React.ReactElement => {
       <Stepper
         data={stepperData}
         value={stepperData[stepIndex]}
-        onClick={(_item, index) => dispatch(setStepIndex(index))}
+        onClick={(_item, index) => dispatch.main.setStepIndex(index)}
       />
       {isModalOpen && <ReportModal />}
     </div>

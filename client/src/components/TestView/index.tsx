@@ -7,17 +7,14 @@ import { adjustSecond, formatTime, generateInitialStepperData } from './helpers'
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
-import {
-  getResults, setStepIndex, setUserAnswers, setResultTime,
-} from '../../pages/Main/actions';
-import { MainState } from '../../pages/Main/initialState';
-import { State } from '../../store';
+import { Dispatch, State } from '../../store';
 import { useInterval } from '../../helpers';
+import { MainState } from '../../pages/Main/model';
 
 const stepperInitialData = generateInitialStepperData();
 
 export const TestView = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const {
     userAnswers, stepIndex,
@@ -38,7 +35,7 @@ export const TestView = (): React.ReactElement => {
         : item
     ));
 
-    dispatch(setUserAnswers(newAnswers));
+    dispatch.main.setUserAnswers(newAnswers);
 
     setStepperData(stepperData.map((item, index) => (
       index === stepIndex
@@ -62,13 +59,13 @@ export const TestView = (): React.ReactElement => {
       )));
     }
 
-    dispatch(setStepIndex(stepIndex + direction));
+    dispatch.main.setStepIndex(stepIndex + direction);
   };
 
   const handleFinishButtonClick = (): void => {
-    dispatch(setResultTime(time));
+    dispatch.main.setResultTime(time);
 
-    dispatch(getResults());
+    dispatch.main.getResults();
   };
 
   return (
@@ -118,9 +115,9 @@ export const TestView = (): React.ReactElement => {
                 onClick={() => {
                   const newAnswers = Array.from(Array(12), () => random(0, 5));
 
-                  dispatch(setUserAnswers(newAnswers));
+                  dispatch.main.setUserAnswers(newAnswers);
 
-                  dispatch(getResults());
+                  dispatch.main.getResults();
                 }}
               >
                 Finish Instantly
@@ -141,7 +138,7 @@ export const TestView = (): React.ReactElement => {
       <Stepper
         data={stepperData}
         value={stepperData[stepIndex]}
-        onClick={(_item, index) => dispatch(setStepIndex(index))}
+        onClick={(_item, index) => dispatch.main.setStepIndex(index)}
       />
     </div>
   );

@@ -2,13 +2,12 @@ import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StatisticChart } from './StatisticChart';
 import { Stepper } from './Stepper';
-import { MainState } from '../pages/Main/initialState';
-import { State } from '../store';
-import { setStepIndex, setCurrentView } from '../pages/Main/actions';
+import { Dispatch, State } from '../store';
 import { MAIN_VIEW_TYPES } from '../constants';
+import { MainState } from '../pages/Main/model';
 
 export const TestResult = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const {
     userAnswers,
@@ -39,9 +38,9 @@ export const TestResult = (): React.ReactElement => {
       <Stepper
         data={stepperData}
         onClick={(_item, index) => {
-          dispatch(setStepIndex(index));
+          dispatch.main.setStepIndex(index);
 
-          dispatch(setCurrentView(MAIN_VIEW_TYPES.watch));
+          dispatch.main.setCurrentView(MAIN_VIEW_TYPES.watch);
         }}
       />
     </>
