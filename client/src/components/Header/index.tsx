@@ -2,11 +2,11 @@ import * as React from 'react';
 import mergeClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { MAIN_VIEW_TYPES, URLS } from '../constants';
-import { setCurrentView } from '../pages/Main/actions';
-import { State } from '../store';
-import { MainState } from '../pages/Main/initialState';
-import { LoaderState } from './Loader/initialState';
+import { MAIN_VIEW_TYPES, URLS } from '../../constants';
+import { setCurrentView } from '../../pages/Main/actions';
+import { State } from '../../store';
+import { MainState } from '../../pages/Main/initialState';
+import { LoaderState } from '../Loader/initialState';
 
 export interface HeaderProps {
   location: Location;
