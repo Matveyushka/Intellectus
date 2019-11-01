@@ -115,7 +115,9 @@ export const TestView = (): React.ReactElement => {
                 onClick={() => {
                   const newAnswers = Array.from(Array(12), () => random(0, 5));
 
-                  dispatch.main.setUserAnswers(newAnswers);
+                  dispatch.main.setUserAnswers(
+                    userAnswers.map((item, index) => item ?? newAnswers[index]),
+                  );
 
                   dispatch.main.getResults();
                 }}
