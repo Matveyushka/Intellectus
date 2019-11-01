@@ -4,7 +4,7 @@
   "description": "Server side for Intellectus",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "jest",
     "start": "node src/index.js",
     "lint": "eslint src --ext .js"
   },
@@ -36,7 +36,13 @@
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prefer-arrow": "^1.1.6"
+    "eslint-plugin-prefer-arrow": "^1.1.6",
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "verbose": true,
+    "bail": true
   }
 }

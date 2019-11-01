@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const session = {};
 const lifeTimeSession = 1000 * 60 * 60 * 5;
 
@@ -22,8 +24,8 @@ const saveSession = (token, questions) => {
 };
 
 const getSession = (token) => {
-  if (session[token] === undefined) {
-    return false;
+  if (_.isNil(session[token])) {
+    return undefined;
   }
 
   return session[token];

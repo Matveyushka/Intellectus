@@ -7,19 +7,22 @@
     "useJSXTextNode": true
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jest/globals": true
   },
   "plugins": [
     "@typescript-eslint",
     "prefer-arrow",
     "redux-saga",
-    "react-hooks"
+    "react-hooks",
+    "jest"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
-    "plugin:redux-saga/recommended"
+    "plugin:redux-saga/recommended",
+    "plugin:jest/recommended"
   ],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
