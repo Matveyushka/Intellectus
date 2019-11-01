@@ -8,6 +8,11 @@
     height: 100px;
     padding: 35px;
     border-bottom: 1px solid $primary-1;
+
+    &-link {
+      height: 100%;
+    }
+
     &-img {
       height: 100%;
       width: auto;
