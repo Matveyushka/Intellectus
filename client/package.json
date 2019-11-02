@@ -4,7 +4,7 @@
   "description": "Client side for Intellectus",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "jest",
     "webpack:watch": "webpack-dev-server --mode=development --config webpack.dev.config.js",
     "start": "npm run sass && run-p sass:watch webpack:watch",
     "build": "webpack --mode=production --config webpack.prod.config.js",
@@ -43,6 +43,12 @@
     "shortid": "^2.2.15"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/classnames": "^2.2.9",
     "@types/history": "^4.7.3",
     "@types/lodash": "^4.14.144",
@@ -52,16 +58,21 @@
     "@types/shortid": "0.0.29",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
+    "babel-jest": "^24.9.0",
     "circular-dependency-plugin": "^5.2.0",
     "cypress": "^3.4.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prefer-arrow": "^1.1.6",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
     "gzipper": "^3.3.0",
+    "jest": "^24.9.0",
     "ncp": "^2.0.0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
@@ -73,5 +84,15 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
     "webpack-merge": "^4.2.2"
+  },
+  "jest": {
+    "verbose": true,
+    "bail": true,
+    "testMatch": [
+      "**/?*.test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest/setupEnzyme.js"
+    ]
   }
 }
