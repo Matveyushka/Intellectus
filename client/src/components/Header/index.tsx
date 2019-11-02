@@ -2,9 +2,9 @@ import * as React from 'react';
 import mergeClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { MAIN_VIEW_TYPES, URLS } from '../constants';
-import { Dispatch, State } from '../store';
-import { MainState } from '../pages/Main/model';
+import { MAIN_VIEW_TYPES, URLS } from '../../constants';
+import { Dispatch, State } from '../../store';
+import { MainState } from '../../pages/Main/model';
 
 export interface HeaderProps {
   location: Location;
