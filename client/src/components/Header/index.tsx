@@ -2,11 +2,9 @@ import * as React from 'react';
 import mergeClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { MAIN_VIEW_TYPES, URLS } from '../constants';
-import { setCurrentView } from '../pages/Main/actions';
-import { State } from '../store';
-import { MainState } from '../pages/Main/initialState';
-import { LoaderState } from './Loader/initialState';
+import { MAIN_VIEW_TYPES, URLS } from '../../constants';
+import { Dispatch, State } from '../../store';
+import { MainState } from '../../pages/Main/model';
 
 export interface HeaderProps {
   location: Location;
@@ -15,9 +13,9 @@ export interface HeaderProps {
 export const Header = (props: HeaderProps): React.ReactElement => {
   const { location: { pathname } } = props;
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
-  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
+  const isLoading = useSelector<State, boolean>(state => state.loader);
   const { currentView } = useSelector<State, MainState>(state => state.main);
 
   const shouldRenderNavBar = !isLoading
@@ -28,8 +26,9 @@ export const Header = (props: HeaderProps): React.ReactElement => {
       <div className="header-logo">
         <NavLink
           to={URLS.main}
-          onClick={() => dispatch(setCurrentView(MAIN_VIEW_TYPES.intro))}
+          onClick={() => dispatch.main.setCurrentView(MAIN_VIEW_TYPES.intro)}
           exact
+          className="header-logo-link"
         >
           <img className="header-logo-img" src="images/logo.png" />
         </NavLink>

@@ -5,10 +5,9 @@ import { Footer, Graph, Header } from '../../components';
 import { URLS } from '../../constants';
 import { Loader } from '../../components/Loader';
 import { formatTime } from '../../components/TestView/helpers';
-import { State } from '../../store';
-import { getStatistics, setStatistics } from './actions';
-import { initialStatisticsState, StatisticsState } from './initialState';
+import { Dispatch, State } from '../../store';
 import { averageTimeGraph, passedTestGraph } from './constants';
+import { statistics, StatisticsState } from './model';
 
 export interface StatisticsProps {
   location: Location;
@@ -17,16 +16,16 @@ export interface StatisticsProps {
 export const Statistics = (props: StatisticsProps): React.ReactElement | null => {
   const { location } = props;
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const {
     averageTime, averageTimeDistribution, passedTestsCounter, pointsDistribution, isLoading,
   } = useSelector<State, StatisticsState>(state => state.statistics);
 
   React.useEffect((): () => void => {
-    dispatch(getStatistics());
+    dispatch.statistics.getStatistics();
 
-    return () => dispatch(setStatistics(initialStatisticsState));
+    return () => dispatch.statistics.setStatistics(statistics.state);
   }, []);
 
   if (isLoading) return <Loader />;

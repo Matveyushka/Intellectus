@@ -7,9 +7,7 @@ import { TestResult } from '../../components/TestResult';
 import { WatchResults } from '../../components/WatchResults';
 import { Loader } from '../../components/Loader';
 import { State } from '../../store';
-import { MainState } from './initialState';
-import { LoaderState } from '../../components/Loader/initialState';
-import { ModalState } from '../../components/Modal';
+import { MainState } from './model';
 
 export interface MainProps {
   location: Location;
@@ -18,8 +16,8 @@ export interface MainProps {
 export const Main = (props: MainProps): React.ReactElement | null => {
   const { location } = props;
 
-  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
-  const { isModalOpen } = useSelector<State, ModalState>(state => state.modal);
+  const isLoading = useSelector<State, boolean>(state => state.loader);
+  const isModalOpen = useSelector<State, boolean>(state => state.modal);
   const { currentView } = useSelector<State, MainState>(state => state.main);
 
   const getContent = (): React.ReactElement | null => {
