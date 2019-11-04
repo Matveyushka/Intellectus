@@ -2,8 +2,8 @@ import * as React from 'react';
 import mergeClassNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { toDataURL } from '../helpers';
-import { MainState } from '../pages/Main/initialState';
 import { State } from '../store';
+import { MainState } from '../pages/Main/model';
 
 export interface OptionTableProps {
   onSelect?: (optionIndex: number) => void;

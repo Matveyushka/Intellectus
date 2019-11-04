@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Footer } from './Footer';
-import { getQuestions } from '../pages/Main/actions';
+import { Dispatch } from '../store';
 
 export const IntroView = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const handlePlayButtonClick = (): void => {
-    dispatch(getQuestions());
+    dispatch.main.getQuestions();
   };
 
   return (

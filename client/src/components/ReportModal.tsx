@@ -3,15 +3,12 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { OptionTable } from './OptionTable';
 import { ProblemTable } from './ProblemTable';
-import { MainState } from '../pages/Main/initialState';
-import { State } from '../store';
+import { Dispatch, State } from '../store';
 import { Modal } from './Modal';
 import { ReportForm, DefaultReportData } from './forms/ReportForm';
 import { Loader } from './Loader';
 import { FinishFormState } from '../commonTypes';
-import { hideModal } from './Modal/actions';
-import { showLoader, hideLoader } from './Loader/actions';
-import { LoaderState } from './Loader/initialState';
+import { MainState } from '../pages/Main/model';
 
 type FinishState = FinishFormState<DefaultReportData>
 
@@ -22,12 +19,12 @@ const defaultFinishFormState: FinishState = {
 };
 
 export const ReportModal = (): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
   const [finishState, setFinishState] = React.useState<FinishState>(defaultFinishFormState);
   const {
     questions, stepIndex, solutions, token,
   } = useSelector<State, MainState>(state => state.main);
-  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
+  const isLoading = useSelector<State, boolean>(state => state.loader);
 
   const currentOptions = questions ? questions[stepIndex].options : [];
   const rightAnswerIndex = solutions ? solutions[stepIndex] : 0;
@@ -37,7 +34,7 @@ export const ReportModal = (): React.ReactElement => {
    * надо бы вынести её в отдельный компонент FormContainer
    */
   const onReportSubmit = (formData: DefaultReportData): void => {
-    dispatch(showLoader());
+    dispatch.loader.showLoader();
     let error: string;
     const data = {
       ...formData,
@@ -58,7 +55,7 @@ export const ReportModal = (): React.ReactElement => {
           error,
         });
 
-        dispatch(hideLoader());
+        dispatch.loader.hideLoader();
       });
   };
 
@@ -91,7 +88,7 @@ export const ReportModal = (): React.ReactElement => {
           ) : (
             <>
               <div className="success">We got your feedback</div>
-              <div className="button" onClick={() => dispatch(hideModal())}>
+              <div className="button" onClick={() => dispatch.modal.hideModal()}>
                 Return to results
               </div>
             </>
@@ -121,7 +118,7 @@ export const ReportModal = (): React.ReactElement => {
       <ReportForm
         reportFormSubmit={onReportSubmit}
         data={finishState.oldData}
-        cancelForm={() => dispatch(hideModal())}
+        cancelForm={() => dispatch.modal.hideModal()}
       />
     </Modal>
   );

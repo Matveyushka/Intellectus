@@ -13,7 +13,6 @@
   "plugins": [
     "@typescript-eslint",
     "prefer-arrow",
-    "redux-saga",
     "react-hooks",
     "jest"
   ],
@@ -21,7 +20,6 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb",
-    "plugin:redux-saga/recommended",
     "plugin:jest/recommended"
   ],
   "rules": {

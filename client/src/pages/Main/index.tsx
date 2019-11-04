@@ -6,13 +6,11 @@ import { TestResult } from '../../components/TestResult';
 import { WatchResults } from '../../components/WatchResults';
 import { Loader } from '../../components/Loader';
 import { State } from '../../store';
-import { MainState } from './initialState';
-import { LoaderState } from '../../components/Loader/initialState';
-import { ModalState } from '../../components/Modal';
+import { MainState } from './model';
 
 export const Main = (): React.ReactElement | null => {
-  const { isLoading } = useSelector<State, LoaderState>(state => state.loader);
-  const { isModalOpen } = useSelector<State, ModalState>(state => state.modal);
+  const isLoading = useSelector<State, boolean>(state => state.loader);
+  const isModalOpen = useSelector<State, boolean>(state => state.modal);
   const { currentView } = useSelector<State, MainState>(state => state.main);
 
   if (!isModalOpen && isLoading) return <Loader />;

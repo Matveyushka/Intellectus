@@ -1,28 +1,9 @@
-import createSagaMiddleware from 'redux-saga';
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { initialLoaderState } from '../components/Loader/initialState';
-import { initialModalState } from '../components/Modal';
-import { rootReducer } from './rootReducer';
-import { rootSaga } from './rootSaga';
-import { initialMainState } from '../pages/Main/initialState';
-import { initialStatisticsState } from '../pages/Statistics/initialState';
+import { init, RematchDispatch, RematchRootState } from '@rematch/core';
+import { models } from './models';
 
-export const initialState = {
-  loader: initialLoaderState,
-  modal: initialModalState,
-  main: initialMainState,
-  statistics: initialStatisticsState,
-};
+export const store = init({
+  models,
+});
 
-export type State = typeof initialState;
-
-const sagaMiddleware = createSagaMiddleware();
-
-export const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(sagaMiddleware)),
-);
-
-sagaMiddleware.run(rootSaga);
+export type State = RematchRootState<typeof models>;
+export type Dispatch = RematchDispatch<typeof models>;
