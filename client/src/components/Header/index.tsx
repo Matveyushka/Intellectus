@@ -28,6 +28,7 @@ export const Header = (props: HeaderProps): React.ReactElement => {
           to={URLS.main}
           onClick={() => dispatch.main.setCurrentView(MAIN_VIEW_TYPES.intro)}
           exact
+          className="header-logo-link"
         >
           <img className="header-logo-img" src="images/logo.png" />
         </NavLink>
