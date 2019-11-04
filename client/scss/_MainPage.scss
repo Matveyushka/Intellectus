@@ -1,11 +1,14 @@
 .play-icon {
   background-image: url(/images/play.svg);
   background-repeat: no-repeat;
+  background-size: contain;
   width: 100px;
   height: 120px;
+  align-self: center;
   margin-top: 40px;
   transition: transform 0.5s;
   cursor: pointer;
+  grid-area: p;
 
   &:hover {
     transform: scale(1.2);
@@ -35,6 +38,15 @@
   width: 600px;
   flex-direction: column;
   align-items: center;
+}
+
+.title-container {
+  display: flex;
+  margin: auto;
+  width: 600px;
+  flex-direction: column;
+  align-items: center;
+  grid-area: t;
 
   .title {
     margin: 0;
@@ -54,4 +66,58 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  &.intro {
+    display: grid;
+    grid-template:
+      ". . hl hl hl . ."          100px
+      ". nav nav nav nav nav ."   50px
+      ". . . . . . ."             1fr
+      ". t t t t t ."             auto
+      ". . . p . . ."             auto
+      ". . . . . . ."             1fr
+      ". . f f f . ."             100px / 1fr auto auto auto auto auto 1fr;
+  }
+}
+
+@media only screen and (max-width: $sm-screen) {
+  .play-icon {
+    width: 85px;
+    height: 100px;
+    margin-top: 32px;
+  }
+
+  .title-container {
+    width: 232px;
+
+    .title {
+      font-size: 28px;
+      letter-spacing: 5px;
+      word-spacing: 5px;
+
+      &:first-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .share-icon {
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .main-layout {
+    &.intro {
+      grid-template:
+      ". . hl hl hl . ."          56px
+      ". nav nav nav nav nav ."   36px
+      ". . . . . . ."             1fr
+      ". t t t t t ."             auto
+      ". . . p . . ."             auto
+      ". . . . . . ."             1fr
+      ". . f f f . ."             56px / 1fr auto auto auto auto auto 1fr;
+    }
+  }
 }

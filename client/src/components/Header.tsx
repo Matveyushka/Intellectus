@@ -24,7 +24,7 @@ export const Header = (props: HeaderProps): React.ReactElement => {
     && (currentView === MAIN_VIEW_TYPES.intro || pathname !== URLS.main);
 
   return (
-    <header className="header">
+    <>
       <div className="header-logo">
         <NavLink
           to={URLS.main}
@@ -65,6 +65,6 @@ export const Header = (props: HeaderProps): React.ReactElement => {
           </h1>
         </nav>
       )}
-    </header>
+    </>
   );
 };
