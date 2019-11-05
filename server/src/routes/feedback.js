@@ -1,5 +1,6 @@
 const validator = require('validator');
 const express = require('express');
+const bot = require('../utils/bot');
 const transporter = require('../utils/mailSender');
 
 const router = express.Router();
@@ -60,6 +61,18 @@ router.post('/', async (req, res) => {
       error: true,
       message: 'Возникла ошибка при отправке.',
     });
+  }
+
+  try {
+    await bot.sendMessageBot(
+      `[Отправлен фидбек] 
+      Имя - ${name} 
+      Заголовок - ${title}  
+      Cообщение - ${body} 
+      Email - ${email}`,
+    );
+  } catch (error) {
+    console.error(error);
   }
 
   return res.status(200).json({
