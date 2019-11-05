@@ -12,16 +12,16 @@ export const IntroView = (): React.ReactElement => {
 
   return (
     <>
-      <main className="main-container">
+      <main className="title-container">
         <h1 className="title">CHALLENGE</h1>
         <h1 className="title">YOUR MIND</h1>
-        <button
-          type="button"
-          className="play-icon"
-          title="Start test!"
-          onClick={handlePlayButtonClick}
-        />
       </main>
+      <button
+        type="button"
+        className="play-icon"
+        title="Start test!"
+        onClick={handlePlayButtonClick}
+      />
       <Footer />
       <button type="button" title="Share this site with your friends!" className="share-icon" />
     </>

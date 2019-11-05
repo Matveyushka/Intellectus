@@ -1,10 +1,16 @@
 import * as React from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { Footer, ContactUsForm, DefaultContactData } from '../components';
+import {
+  Footer, ContactUsForm, DefaultContactData, Header,
+} from '../components';
 import { Loader } from '../components/Loader';
 import { API, URLS } from '../constants';
 import { FinishFormState } from '../commonTypes';
+
+export interface ContactUsProps {
+  location: Location;
+}
 
 const defaultFinishState: FinishFormState<DefaultContactData> = {
   isFinish: false,
@@ -12,7 +18,9 @@ const defaultFinishState: FinishFormState<DefaultContactData> = {
   oldData: {},
 };
 
-export const ContactUs = (): React.ReactElement | null => {
+export const ContactUs = (props: ContactUsProps): React.ReactElement | null => {
+  const { location } = props;
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [finishState, setFinishState] = React.useState<FinishFormState<DefaultContactData>>(
     defaultFinishState,
@@ -48,7 +56,8 @@ export const ContactUs = (): React.ReactElement | null => {
 
   if (finishState.isFinish) {
     return (
-      <>
+      <div className="main-layout contact-us">
+        <Header location={location} />
         <main className="main-container">
           <div className="contact-results">
             {finishState.error ? (
@@ -69,12 +78,13 @@ export const ContactUs = (): React.ReactElement | null => {
           </div>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="main-layout contact-us">
+      <Header location={location} />
       <main className="main-container">
         <ContactUsForm
           feedbackFormSubmit={feedbackFormSubmit}
@@ -82,6 +92,6 @@ export const ContactUs = (): React.ReactElement | null => {
         />
       </main>
       <Footer />
-    </>
+    </div>
   );
 };

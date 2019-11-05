@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Footer, Graph } from '../../components';
+import { Footer, Graph, Header } from '../../components';
 import { URLS } from '../../constants';
 import { Loader } from '../../components/Loader';
 import { formatTime } from '../../components/TestView/helpers';
@@ -9,7 +9,13 @@ import { Dispatch, State } from '../../store';
 import { averageTimeGraph, passedTestGraph } from './constants';
 import { statistics, StatisticsState } from './model';
 
-export const Statistics = (): React.ReactElement | null => {
+export interface StatisticsProps {
+  location: Location;
+}
+
+export const Statistics = (props: StatisticsProps): React.ReactElement | null => {
+  const { location } = props;
+
   const dispatch: Dispatch = useDispatch();
 
   const {
@@ -25,7 +31,8 @@ export const Statistics = (): React.ReactElement | null => {
   if (isLoading) return <Loader />;
 
   return (
-    <>
+    <div className="main-layout statistics">
+      <Header location={location} />
       <main className="main-container">
         <div className="statistics-title text-font">
           {'The test was passed '}
@@ -51,6 +58,6 @@ export const Statistics = (): React.ReactElement | null => {
         </NavLink>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
