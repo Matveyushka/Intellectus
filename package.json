@@ -17,8 +17,5 @@
     "url": "https://github.com/777PolarFox777/Intellectus/issues"
   },
   "homepage": "https://github.com/777PolarFox777/Intellectus#readme",
-  "dependencies": {
-    "telegraf": "^3.33.3"
-  },
   "devDependencies": {}
 }
