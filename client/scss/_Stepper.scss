@@ -86,3 +86,22 @@
     background-color: $base-3;
   }
 }
+
+@media only screen and (max-width: $sm-screen) {
+  .stepper {
+    &-wrapper {
+      display: grid;
+      grid-template-areas: "1 2 3 4 5 6" "7 8 9 10 11 12";
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    &-item {
+      margin: 5px;
+    }
+
+    &-line {
+      display: none;
+    }
+  }
+}

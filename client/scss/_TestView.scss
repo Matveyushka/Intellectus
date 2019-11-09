@@ -157,10 +157,11 @@
     color: $primary-1;
     text-align: center;
     margin: 0 auto;
+    padding: 0 5px;
     grid-area: titl1;
+    position: relative;
 
     &.options {
-      margin: 0 auto;
       grid-area: titl2;
     }
   }
@@ -248,6 +249,27 @@
       width: 40%;
       margin-top: 15px;
       position: relative;
+    }
+  }
+
+  .problem {
+    &-title {
+      background-color: $base-4;
+      z-index: 15;
+    }
+  }
+
+  .problem-wrapper, .option-wrapper {
+    position: relative;
+    &::before {
+      content: "";
+      top: -14px;
+      left: 0;
+      position: absolute;
+      z-index: 14;
+      background-color: $primary-1;
+      width: 100%;
+      height: 1px;
     }
   }
 

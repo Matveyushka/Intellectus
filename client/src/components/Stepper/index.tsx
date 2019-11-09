@@ -32,7 +32,7 @@ export const Stepper = (props: StepperProps): React.ReactElement => {
           <React.Fragment key={item.text}>
             <div
               className={itemClassNames}
-              onClick={() => onClick?.(item, index)}
+              onClick={() => onClick(item, index)}
             />
             {!isLastItem && <div className="stepper-line" />}
           </React.Fragment>
