@@ -105,7 +105,7 @@
     }
   }
 
-  @media only screen and (max-height: 650px) {
+  @media only screen and (max-height: $very-sm-height) {
     .stepper {
       &-item {
         font-size: 20px;

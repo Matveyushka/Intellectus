@@ -294,7 +294,7 @@
     }
   }
 
-  @media only screen and (max-height: 800px) {
+  @media only screen and (max-height: $sm-height) {
     .problem-wrapper, .option-wrapper {
       &::before {
         top: -9px;
