@@ -115,7 +115,7 @@
     cursor: pointer;
 
     &.instantly {
-      width: 50%;
+      margin-left: auto;
     }
 
     &:hover {
@@ -246,7 +246,6 @@
       grid-template-areas: "titl1" "prob" "titl2" "opt";
       grid-template-columns: 1fr;
       grid-template-rows: auto 3fr auto 2fr;
-      width: 40%;
       margin-top: 15px;
       position: relative;
     }
