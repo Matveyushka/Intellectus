@@ -1,6 +1,7 @@
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
 const {
+  redColor,
   greenColor,
   grayColor,
   numberOfWrongOptions,
@@ -47,53 +48,56 @@ const convertToSvg = (code, seed) => {
   const figureHeight = 38;
   const figureWidth = 84;
 
-  let image = svgCreator.newImage();
+  const randomNumbers = [
+    Math.abs(seed * seed + seed) % 117,
+    Math.abs(Math.round(Math.log(seed * seed + 1)) * seed + seed) % 117,
+    Math.abs(Math.round(Math.log(seed * seed * 17 + 1)) * seed + seed) % 117,
+    Math.abs(Math.round(Math.log(seed * seed * 31 + 1)) * seed + seed) % 117,
+  ];
 
-  const newFigureParamsFromTemplate = (newY, newBorderColor) => ({
+  const newFigureParamsFromTemplate = (y, color) => ({
     x: spaceSize,
-    y: newY,
+    y,
     width: figureWidth,
     height: figureHeight,
-    color: newBorderColor,
+    color,
   });
 
-  const topGreenFigureParams = newFigureParamsFromTemplate(spaceSize, greenColor);
-  const topGrayFigureParams = newFigureParamsFromTemplate(spaceSize, grayColor);
-  const bottomGreenFigureParams = newFigureParamsFromTemplate(
-    spaceSize + figureHeight + spaceSize,
+  const colors = [
+    redColor,
     greenColor,
-  );
-  const bottomGrayFigureParams = newFigureParamsFromTemplate(
-    spaceSize + figureHeight + spaceSize,
     grayColor,
+  ];
+
+  const figures = [
+    image => image.ellipse,
+    image => image.triangle,
+    image => image.rectangle,
+    image => image.pentagon,
+  ];
+
+  const topFigureVariant = (Math.floor(code / 10) + randomNumbers[0]) % figures.length;
+  const bottomFigureVariant = ((code % 10) + randomNumbers[1]) % figures.length;
+  const topColorIndex = (Math.floor(code / 10) + randomNumbers[2]) % colors.length;
+  const bottomColorIndex = ((code % 10) + randomNumbers[3]) % colors.length;
+
+  const topFigure = figures[topFigureVariant](
+    svgCreator.newImage(),
+  )(
+    newFigureParamsFromTemplate(spaceSize, colors[topColorIndex]),
   );
 
-  const topFigureDrawingVariants = [
-    () => image.ellipse(topGreenFigureParams),
-    () => image.rectangle(topGreenFigureParams),
-    () => image.ellipse(topGrayFigureParams),
-    () => image.rectangle(topGrayFigureParams),
-  ];
+  const resultFigure = figures[bottomFigureVariant](
+    topFigure,
+  )(
+    newFigureParamsFromTemplate(spaceSize + figureHeight + spaceSize, colors[bottomColorIndex]),
+  );
 
-  const bottomFigureDrawingVariants = [
-    () => image.ellipse(bottomGreenFigureParams),
-    () => image.rectangle(bottomGreenFigureParams),
-    () => image.ellipse(bottomGrayFigureParams),
-    () => image.rectangle(bottomGrayFigureParams),
-  ];
-
-  const topFigureVariant = (Math.floor(code / 10) + seed) % topFigureDrawingVariants.length;
-  const bottomFigureVariant = ((code % 10) + seed) % bottomFigureDrawingVariants.length;
-
-  image = topFigureDrawingVariants[topFigureVariant]();
-
-  image = bottomFigureDrawingVariants[bottomFigureVariant]();
-
-  return image.getImage();
+  return resultFigure.getImage();
 };
 
-module.exports = problemTemplate.newProblemType(
-  generateProblemDescription,
-  generateWrongOptions,
-  convertToSvg,
-);
+module.exports = problemTemplate.newProblemType({
+  problemDescriptionGenerator: generateProblemDescription,
+  wrongOptionsGenerator: generateWrongOptions,
+  converterToSvg: convertToSvg,
+});

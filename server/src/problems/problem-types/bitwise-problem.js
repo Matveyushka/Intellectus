@@ -94,8 +94,9 @@ const convertToSvg = (code, seed) => {
   return fillImageFromCode(svgCreator.newImage(), code).getImage();
 };
 
-module.exports = problemTemplate.newProblemType(
-  generateProblemDescription,
-  generateWrongOptions,
-  convertToSvg,
-);
+module.exports = problemTemplate.newProblemType({
+  problemDescriptionGenerator: generateProblemDescription,
+  wrongOptionsGenerator: generateWrongOptions,
+  converterToSvg: convertToSvg,
+  rotatable: true,
+});

@@ -25,14 +25,24 @@ const createProblemSvg = (array, converterToSvg, seed) => {
 const seedTopBound = 99;
 const generateRandomSeed = () => Math.floor(Math.random() * seedTopBound);
 
-const newProblemType = (
+const rotateDescription = (array, times) => (times === 0
+  ? array
+  : rotateDescription([
+    array[6], array[3], array[0],
+    array[7], array[4], array[1],
+    array[8], array[5], array[2],
+  ], times - 1));
+
+const newProblemType = ({
   problemDescriptionGenerator,
   wrongOptionsGenerator,
   converterToSvg,
-) => ({
+  rotatable,
+}) => ({
   generateProblemDescription: problemDescriptionGenerator,
   generateWrongOptions: wrongOptionsGenerator,
   convertToSvg: converterToSvg,
+  isRotatable: rotatable,
 });
 
 const createProblem = (problemType) => {
@@ -62,8 +72,12 @@ const createProblem = (problemType) => {
 
   const graphicsSeed = Math.floor(Math.random() * generateRandomSeed());
 
+  const rotatedProblemFields = problemType.isRotatable
+    ? rotateDescription(problemFields, _.random(0, 3))
+    : problemFields;
+
   return {
-    problemFields: createProblemSvg(problemFields, problemType.convertToSvg, graphicsSeed),
+    problemFields: createProblemSvg(rotatedProblemFields, problemType.convertToSvg, graphicsSeed),
     options: createProblemSvg(options, problemType.convertToSvg, graphicsSeed),
     solution: solutionPosition,
   };

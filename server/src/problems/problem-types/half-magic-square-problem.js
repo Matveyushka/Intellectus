@@ -191,8 +191,8 @@ const convertToSvg = (code, seed) => {
   return figures[code].getImage();
 };
 
-module.exports = problemTemplate.newProblemType(
-  generateProblemDescription,
-  generateWrongOptions,
-  convertToSvg,
-);
+module.exports = problemTemplate.newProblemType({
+  problemDescriptionGenerator: generateProblemDescription,
+  wrongOptionsGenerator: generateWrongOptions,
+  converterToSvg: convertToSvg,
+});
