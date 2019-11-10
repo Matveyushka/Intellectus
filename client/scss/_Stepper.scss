@@ -104,4 +104,14 @@
       display: none;
     }
   }
+
+  @media only screen and (max-height: 650px) {
+    .stepper {
+      &-item {
+        font-size: 20px;
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
 }

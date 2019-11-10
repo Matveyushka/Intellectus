@@ -49,20 +49,23 @@
 
   &-bottom {
     display: flex;
-    align-items: stretch;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
     position: relative;
-    height: 48px
+    height: 48px;
+    font-size: 21px;
   }
 
   &-timer {
     display: flex;
     height: 48px;
     align-items: center;
-    position: absolute;
-    left: 15px;
-    font-size: 21px;
+    //position: absolute;
+    //left: 15px;
+    font-size: inherit;
     color: $primary-1;
+    width: 33.3%;
+    justify-content: center;
   }
 
   &-separator {
@@ -107,12 +110,14 @@
 
   &-finish-button {
     color: $primary-1;
-    font-size: 21px;
+    font-size: inherit;
     font-family: inherit;
     font-weight: normal;
     display: flex;
     transition: transform 1s;
     cursor: pointer;
+    width: 33.3%;
+    justify-content: center;
 
     &.instantly {
       margin-left: auto;
@@ -125,15 +130,17 @@
 
   &-report-button {
     color: $primary-1;
-    font-size: 21px;
+    font-size: inherit;
     font-family: inherit;
     font-weight: normal;
     display: flex;
     transition: transform 1s;
     cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 12px;
+    width: 33.3%;
+    justify-content: center;
+    //position: absolute;
+    //right: 15px;
+    //top: 12px;
     &:hover {
       transform: scale(1.2);
     }
@@ -146,7 +153,6 @@
     grid-template-areas: "a b c" "d e f" "g h i";
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 8px;
     grid-area: prob;
   }
 
@@ -176,6 +182,8 @@
 
     &-wrapper {
       margin: 10px;
+      width: 80px;
+      height: 80px;
       border-radius: 10px;
       border: 1px dashed $primary-1;
     }
@@ -241,6 +249,10 @@
       display: none;
     }
 
+    &-bottom {
+      font-size: 17px;
+    }
+
     &-body {
       display: grid;
       grid-template-areas: "titl1" "prob" "titl2" "opt";
@@ -279,6 +291,38 @@
       grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 8px;
+    }
+  }
+
+  @media only screen and (max-height: 800px) {
+    .problem-wrapper, .option-wrapper {
+      &::before {
+        top: -9px;
+      }
+    }
+
+    .problem {
+      &-title {
+        font-size: 16px;
+      }
+
+      &-cell {
+        width: 60px;
+        height: 60px;
+        margin: 2px;
+
+        &-wrapper {
+          margin: 0;
+          width: 60px;
+          height: 60px;
+          margin: 2px;
+        }
+
+        &.preview {
+          width: 58px;
+          height: 58px;
+        }
+      }
     }
   }
 }

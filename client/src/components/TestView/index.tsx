@@ -120,7 +120,7 @@ export const TestView = (): React.ReactElement => {
                   dispatch.main.getResults();
                 }}
               >
-                Finish Instantly
+                Instantly
               </button>
             )}
           </div>
