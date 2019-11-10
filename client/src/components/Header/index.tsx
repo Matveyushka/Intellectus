@@ -21,8 +21,8 @@ export const Header = (props: HeaderProps): React.ReactElement => {
   const shouldRenderNavBar = !isLoading
     && (currentView === MAIN_VIEW_TYPES.intro || pathname !== URLS.main);
 
-  const headerLogoClass = mergeClassNames("header-logo", {
-    "border-bottom": currentView !== MAIN_VIEW_TYPES.test && currentView !== MAIN_VIEW_TYPES.watch
+  const headerLogoClass = mergeClassNames('header-logo', {
+    'border-bottom': currentView !== MAIN_VIEW_TYPES.test && currentView !== MAIN_VIEW_TYPES.watch,
   });
 
   return (
