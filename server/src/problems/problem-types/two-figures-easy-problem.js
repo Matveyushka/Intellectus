@@ -1,9 +1,12 @@
 const svgCreator = require('../svg-creator');
 const { shuffle } = require('../../utils/arrayShuffle');
+const { seedRandom } = require('../../utils/seedRandom');
 const problemTemplate = require('../problem-template');
 const {
   whiteColor,
   grayColor,
+  redColor,
+  greenColor,
   numberOfWrongOptions,
 } = require('../constants');
 
@@ -47,45 +50,70 @@ const generateWrongOptions = (description, solution) => Array(numberOfWrongOptio
   .fill(null).map(() => generateWrongOption(description, solution));
 
 const convertToSvg = (fieldDescription, seed) => {
+  const randomNumbers = [
+    seedRandom(seed),
+    seedRandom(seed + 1),
+    seedRandom(seed + 2),
+    seedRandom(seed + 3),
+  ];
+
+  const bigFigureColors = [
+    grayColor,
+    redColor,
+  ];
+
+  const smallFigureColors = [
+    whiteColor,
+    greenColor,
+  ];
+
   const bigFigureImageParams = {
     x: 5,
     y: 5,
     size: 90,
-    color: grayColor,
+    color: bigFigureColors[randomNumbers[0] % bigFigureColors.length],
   };
 
   const smallFigureImageParams = {
     x: 38,
     y: 38,
     size: 24,
-    color: whiteColor,
+    color: smallFigureColors[randomNumbers[1] % smallFigureColors.length],
   };
 
   const bigFiguresImageCreators = [
-    () => svgCreator.newImage().circle(bigFigureImageParams),
-    () => svgCreator.newImage().square(bigFigureImageParams),
-    () => svgCreator.newImage().triangle(bigFigureImageParams),
+    svgCreator.newImage().circle,
+    svgCreator.newImage().square,
+    svgCreator.newImage().triangle,
+    svgCreator.newImage().pentagon,
   ];
 
-  const bigFiguresImageCreatorsIndex = (fieldDescription.bigFigureType + seed)
+  const bigFiguresImageCreatorsIndex = (fieldDescription.bigFigureType + randomNumbers[2])
     % bigFiguresImageCreators.length;
 
-  const bigFigureImage = bigFiguresImageCreators[bigFiguresImageCreatorsIndex]();
+  const bigFigureImage = bigFiguresImageCreators[bigFiguresImageCreatorsIndex](
+    bigFigureImageParams,
+  );
 
   const smallFiguresImageAdder = [
-    () => bigFigureImage.circle(smallFigureImageParams),
-    () => bigFigureImage.square(smallFigureImageParams),
-    () => bigFigureImage.triangle(smallFigureImageParams),
+    image => image.circle,
+    image => image.square,
+    image => image.triangle,
+    image => image.pentagon,
   ];
 
-  const randomSmallFigureImageAdderIndex = (fieldDescription.smallFigureType + seed)
-  % smallFiguresImageAdder.length;
+  const randomSmallFigureImageAdderIndex = (fieldDescription.smallFigureType + randomNumbers[3])
+    % smallFiguresImageAdder.length;
 
-  return smallFiguresImageAdder[randomSmallFigureImageAdderIndex]().getImage();
+  return smallFiguresImageAdder[randomSmallFigureImageAdderIndex](
+    bigFigureImage,
+  )(
+    smallFigureImageParams,
+  ).getImage();
 };
 
-module.exports = problemTemplate.newProblemType(
-  generateProblemDescription,
-  generateWrongOptions,
-  convertToSvg,
-);
+module.exports = problemTemplate.newProblemType({
+  problemDescriptionGenerator: generateProblemDescription,
+  wrongOptionsGenerator: generateWrongOptions,
+  converterToSvg: convertToSvg,
+});

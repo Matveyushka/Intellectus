@@ -8,21 +8,31 @@ const sumProblem = require('./problem-types/sum-problem');
 const twoFiguresEasyProblem = require('./problem-types/two-figures-easy-problem');
 const sudokuProblem = require('./problem-types/sudoku-problem');
 const magicSquareProblem = require('./problem-types/half-magic-square-problem');
+const changeByMaskProblem = require('./problem-types/change-by-mask-problem');
+const directionProblem = require('./problem-types/direction-problem');
+const fragmentProblem = require('./problem-types/fragment-problem');
+const differenceProblem = require('./problem-types/difference-problem');
+const transormationProblem = require('./problem-types/transformation-problem');
 
 const easyProblems = [
-  magicSquareProblem,
   missingElementProblem,
-  sumProblem,
   twoFiguresEasyProblem,
+  sumProblem,
+  fragmentProblem,
 ];
 
 const mediumProblems = [
+  magicSquareProblem,
+  directionProblem,
   twoFiguresMediumProblem,
+  bitwiseProblem,
 ];
 
 const hardProblems = [
+  differenceProblem,
+  changeByMaskProblem,
   sudokuProblem,
-  bitwiseProblem,
+  transormationProblem,
 ];
 
 const getShuffledProblemsFromArray = (amount, array) => shuffle(Array(amount)

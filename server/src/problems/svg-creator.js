@@ -38,12 +38,25 @@ const smallFigures = [
 
 const newImage = (sourceImage = baseSvgTag) => ({
   getImage: () => sourceImage,
+
   add: (element) => {
     const sourceImageArray = sourceImage.split('');
     const insertPosition = sourceImageArray.length - '</svg>'.length;
     const image = [
       ...(sourceImageArray.slice(0, insertPosition)),
       element,
+      ...(sourceImageArray.slice(insertPosition, sourceImageArray.length)),
+    ];
+
+    return newImage(image.join(''));
+  },
+
+  rotate: (angle, xOrigin, yOrigin) => {
+    const sourceImageArray = sourceImage.split('');
+    const insertPosition = sourceImage.indexOf('/>');
+    const image = [
+      ...(sourceImageArray.slice(0, insertPosition)),
+      ` transform="rotate(${angle} ${xOrigin} ${yOrigin})"`,
       ...(sourceImageArray.slice(insertPosition, sourceImageArray.length)),
     ];
 
@@ -72,11 +85,16 @@ const newImage = (sourceImage = baseSvgTag) => ({
     ),
 
   triangle: ({
-    x, y, size, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
-  }) => newImage(sourceImage)
-    .add(
-      `<polygon points="${x},${y + size} ${x + size / 2},${y} ${x + size},${y + size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
-    ),
+    x, y, size, width, height, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
+  }) => {
+    const usedWidth = (width || size);
+    const usedHeight = (height || size);
+
+    return newImage(sourceImage)
+      .add(
+        `<polygon points="${x},${y + usedHeight} ${x + usedWidth / 2},${y} ${x + usedWidth},${y + usedHeight}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+      );
+  },
 
   ellipse: ({
     x, y, width, height, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
@@ -86,10 +104,34 @@ const newImage = (sourceImage = baseSvgTag) => ({
     ),
 
   pentagon: ({
+    x, y, size, width, height, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
+  }) => {
+    const usedWidth = (width || size);
+    const usedHeight = (height || size);
+
+    return newImage(sourceImage)
+      .add(
+        `<polygon points="${x + usedWidth * 0.5},${y} ${x + usedWidth},${y + usedHeight * 0.42} ${x + usedWidth * 0.8},${y + usedHeight} ${x + usedWidth * 0.2},${y + usedHeight} ${x},${y + usedHeight * 0.42}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+      );
+  },
+
+  line: ({
+    xBegin, yBegin, xEnd, yEnd, color,
+  }) => newImage(sourceImage)
+    .add(`<line x1="${xBegin}" y1="${yBegin}" x2="${xEnd}" y2="${yEnd}" stroke-width="4" stroke="${color}" />`),
+
+  arrow: ({
     x, y, size, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
   }) => newImage(sourceImage)
     .add(
-      `<polygon points="${x + size * 0.5},${y} ${x + size},${y + size * 0.42} ${x + size * 0.8},${y + size} ${x + size * 0.2},${y + size} ${x},${y + size * 0.42}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+      `<polygon points="${x},${y + size / 2} ${x + size / 2},${y} ${x + size},${y + size / 2} ${x + size * 0.66},${y + size / 2} ${x + size * 0.66},${y + size} ${x + size * 0.33},${y + size} ${x + size * 0.33},${y + size / 2}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
+    ),
+
+  navigationArrow: ({
+    x, y, size, color, borderWidth = defaultBorderWidth, borderColor = defaultBorderColor,
+  }) => newImage(sourceImage)
+    .add(
+      `<polygon points="${x + size / 2},${y} ${x + size},${y + size} ${x + size / 2},${y + size * 0.5} ${x},${y + size}" stroke="${borderColor}" stroke-width="${borderWidth}" fill="${color}" />`,
     ),
 
   drawSmallFigure: (seed, position) => {
