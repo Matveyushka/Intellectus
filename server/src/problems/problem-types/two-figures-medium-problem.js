@@ -1,4 +1,5 @@
 const svgCreator = require('../svg-creator');
+const { seedRandom } = require('../../utils/seedRandom');
 const problemTemplate = require('../problem-template');
 const {
   redColor,
@@ -49,10 +50,10 @@ const convertToSvg = (code, seed) => {
   const figureWidth = 84;
 
   const randomNumbers = [
-    Math.abs(seed * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed + 1)) * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed * 17 + 1)) * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed * 31 + 1)) * seed + seed) % 117,
+    seedRandom(seed),
+    seedRandom(seed + 1),
+    seedRandom(seed + 2),
+    seedRandom(seed + 3),
   ];
 
   const newFigureParamsFromTemplate = (y, color) => ({

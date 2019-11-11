@@ -4,7 +4,6 @@ const grayColor = '#969696';
 const whiteColor = '#f7f7f7';
 const transparentColor = 'rgba(0,0,0,0)';
 const numberOfWrongOptions = 5;
-const descriptionFieldsAmount = 9;
 
 module.exports = {
   whiteColor,
@@ -13,5 +12,4 @@ module.exports = {
   grayColor,
   transparentColor,
   numberOfWrongOptions,
-  descriptionFieldsAmount,
 };

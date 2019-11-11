@@ -1,25 +1,35 @@
 const _ = require('lodash');
 
 const svgCreator = require('../svg-creator');
-const { shuffle } = require('../../utils/arrayShuffle');
+const { generateShuffledArray } = require('../../utils/arrayGenerators');
 const problemTemplate = require('../problem-template');
 const {
   grayColor,
   numberOfWrongOptions,
 } = require('../constants');
 
+/*
+ * Каждое поле состоит из четырёх отрезков, каждый из которых
+ * может быть развёрнут под 2 разными углами - у каждого отрезка
+ * есть 2 возможных состояния. Если взять верхнее левое поле за
+ * начальное, то состояния отрезков меняются при движении по полю:
+ * один из отрезков меняет своё состояние при первом шаге вправо
+ * второй - при втором шаге вправо
+ * третий - при первом шаге вниз
+ * последний - при втором шаге вниз
+ */
+
 const generateProblemDescription = () => {
-  const fieldsInLine = 3;
+  const linesAmount = 3;
+  const fieldsAmountInLine = 3;
 
-  const stepsInLine = fieldsInLine - 1;
+  const stepsAmountInLine = fieldsAmountInLine - 1;
 
-  const transformationMap = shuffle(
-    [...Array(stepsInLine).keys()],
-  );
+  const transformationMap = generateShuffledArray(stepsAmountInLine);
 
-  return Array(3)
+  return Array(linesAmount)
     .fill(null)
-    .map((_row, rowIndex) => Array(3).fill(null).map(
+    .map((_row, rowIndex) => Array(fieldsAmountInLine).fill(null).map(
       (_item, columnIndex) => [
         rowIndex > transformationMap[0],
         columnIndex > transformationMap[1],
@@ -30,11 +40,13 @@ const generateProblemDescription = () => {
 };
 
 const generateWrongOption = (solution) => {
+  const tranformationProbability = 0.5;
+
   const option = [
-    Math.random() > 0.5,
-    Math.random() > 0.5,
-    Math.random() > 0.5,
-    Math.random() > 0.5,
+    Math.random() > tranformationProbability,
+    Math.random() > tranformationProbability,
+    Math.random() > tranformationProbability,
+    Math.random() > tranformationProbability,
   ];
 
   return _.isEqual(option, solution)
@@ -47,19 +59,22 @@ const generateWrongOptions = (description, solution) => Array(numberOfWrongOptio
   .map(() => generateWrongOption(solution));
 
 const convertToSvg = (code, seed) => {
+  const segmentWidth = 40;
+  const segmentHeight = 40;
+
   const paramsFunctions = [
     (x, y) => ({
       xBegin: x,
       yBegin: y,
-      xEnd: x + 40,
-      yEnd: y + 40,
+      xEnd: x + segmentWidth,
+      yEnd: y + segmentHeight,
       color: grayColor,
     }),
     (x, y) => ({
-      xBegin: x + 40,
+      xBegin: x + segmentWidth,
       yBegin: y,
       xEnd: x,
-      yEnd: y + 40,
+      yEnd: y + segmentHeight,
       color: grayColor,
     }),
   ];

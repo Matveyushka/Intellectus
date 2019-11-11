@@ -1,5 +1,6 @@
 const svgCreator = require('../svg-creator');
 const { shuffle } = require('../../utils/arrayShuffle');
+const { seedRandom } = require('../../utils/seedRandom');
 const problemTemplate = require('../problem-template');
 const {
   whiteColor,
@@ -50,10 +51,10 @@ const generateWrongOptions = (description, solution) => Array(numberOfWrongOptio
 
 const convertToSvg = (fieldDescription, seed) => {
   const randomNumbers = [
-    Math.abs(seed * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed + 1)) * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed * 17 + 1)) * seed + seed) % 117,
-    Math.abs(Math.round(Math.log(seed * seed * 31 + 1)) * seed + seed) % 117,
+    seedRandom(seed),
+    seedRandom(seed + 1),
+    seedRandom(seed + 2),
+    seedRandom(seed + 3),
   ];
 
   const bigFigureColors = [

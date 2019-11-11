@@ -94,20 +94,24 @@ const generateWrongOption = (solution) => {
 
   const option = Array(linesAmount).fill(null).reduce(
     (field) => {
-      const stickLeft = Math.random() > 0.6;
-      const stickRight = Math.random() > 0.6;
-      const stickTop = Math.random() > 0.6;
-      const stickBottom = Math.random() > 0.6;
+      const stickProbability = 0.4;
+
+      const stickLeft = Math.random() < stickProbability;
+      const stickRight = Math.random() < stickProbability;
+      const stickTop = Math.random() < stickProbability;
+      const stickBottom = Math.random() < stickProbability;
 
       const stickPadding = 1;
+
+      const randomPointInFieldLine = () => _.random(stickPadding, fieldSize - stickPadding);
 
       return {
         ...field,
         lines: field.lines.concat({
-          xBegin: stickLeft ? stickPadding : _.random(1, fieldSize - stickPadding),
-          yBegin: stickTop ? stickPadding : _.random(1, fieldSize - stickPadding),
-          xEnd: stickRight ? (fieldSize - stickPadding) : _.random(1, fieldSize - stickPadding),
-          yEnd: stickBottom ? (fieldSize - stickPadding) : _.random(1, fieldSize - stickPadding),
+          xBegin: stickLeft ? stickPadding : randomPointInFieldLine(),
+          yBegin: stickTop ? stickPadding : randomPointInFieldLine(),
+          xEnd: stickRight ? (fieldSize - stickPadding) : randomPointInFieldLine(),
+          yEnd: stickBottom ? (fieldSize - stickPadding) : randomPointInFieldLine(),
         }),
       };
     },

@@ -8,6 +8,8 @@ const {
   numberOfWrongOptions,
 } = require('../constants');
 
+const directionsAmount = 8;
+
 const getAroundPositions = (map, x, y) => {
   const up = (y - 1 + map.length) % map.length;
   const down = (y + 1) % map.length;
@@ -61,29 +63,25 @@ const generateProblemDescription = () => {
   return getDirectionsMap(stepsMap).flat();
 };
 
-const generateWrongOptions = (description, solution) => {
-  const directionsAmount = 8;
-
-  return shuffle(
-    [...Array(directionsAmount).keys()].filter(item => item !== solution),
-  ).slice(0, numberOfWrongOptions);
-};
+const generateWrongOptions = (description, solution) => shuffle(
+  [...Array(directionsAmount).keys()].filter(item => item !== solution),
+).slice(0, numberOfWrongOptions);
 
 const arrows = [
   svgCreator.newImage().arrow,
   svgCreator.newImage().navigationArrow,
 ];
 
-const rotators = [
-  image => image.rotate(0, 50, 50),
-  image => image.rotate(45, 50, 50),
-  image => image.rotate(90, 50, 50),
-  image => image.rotate(135, 50, 50),
-  image => image.rotate(180, 50, 50),
-  image => image.rotate(225, 50, 50),
-  image => image.rotate(270, 50, 50),
-  image => image.rotate(315, 50, 50),
-];
+const xRotateOrigin = 50;
+const yRotateOrigin = 50;
+
+const rotators = Array(directionsAmount)
+  .fill(null)
+  .map((_item, index) => (image => image.rotate(
+    (360 / directionsAmount) * index,
+    xRotateOrigin,
+    yRotateOrigin,
+  )));
 
 const colors = [
   greenColor,

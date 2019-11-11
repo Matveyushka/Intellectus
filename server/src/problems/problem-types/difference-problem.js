@@ -2,7 +2,7 @@ const _ = require('lodash');
 
 const svgCreator = require('../svg-creator');
 const problemTemplate = require('../problem-template');
-const { shuffle } = require('../../utils/arrayShuffle');
+const { generateShuffledArray } = require('../../utils/arrayGenerators');
 const {
   transparentColor,
   redColor,
@@ -32,12 +32,11 @@ const deformationTypes = {
  * остальные же являются результатами двух деформаций.
  */
 
-const generateProblemDescription = () => shuffle(
-  [...Array(Object.keys(deformationTypes).length).keys()],
-).map(item => [item]);
+const generateProblemDescription = () => generateShuffledArray(Object.keys(deformationTypes).length)
+  .map(item => [item]);
 
 const generateWrongOption = () => {
-  const randomKeys = shuffle([...Array(Object.keys(deformationTypes).length).keys()]);
+  const randomKeys = generateShuffledArray(Object.keys(deformationTypes).length);
 
   const option = [
     randomKeys[0],
