@@ -1,11 +1,9 @@
 const { shuffle } = require('./arrayShuffle');
 
-const generateOrderedArray = length => [...Array(length).keys()];
+const generateShuffledArray = length => shuffle([...Array(length).keys()]);
 
-const generateShuffledArray = length => shuffle(generateOrderedArray(length));
-
-const createShuffledObjectKeysNumbersArray = object => shuffle(
-  [...Array(Object.keys(object).length).keys()],
+const createShuffledObjectKeysNumbersArray = object => generateShuffledArray(
+  Object.keys(object).length,
 );
 
 module.exports = {
