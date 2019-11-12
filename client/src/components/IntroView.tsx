@@ -7,6 +7,12 @@ import { Dispatch } from '../store';
 export const IntroView = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
+  React.useEffect((): void => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    window.Sharer.init();
+  }, []);
+
   const [isShareOpen, setIsShareOpen] = React.useState<boolean>(false);
 
   const shareClassNames = mergeClassNames('share-buttons', {

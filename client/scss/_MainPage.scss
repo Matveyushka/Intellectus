@@ -30,6 +30,10 @@
   &:hover {
     transform: scale(1.2);
   }
+
+  &.result {
+    bottom: 90px;
+  }
 }
 
 .share-buttons {
@@ -40,6 +44,10 @@
   height: 160px;
   width: 60px;
   overflow: hidden;
+
+  &.result {
+    bottom: 148px;
+  }
 
   &.hidden {
     height: 0;
@@ -104,6 +112,10 @@
 
   &.hidden {
     opacity: 0;
+  }
+
+  &.result {
+    bottom: 144px;
   }
 }
 
