@@ -181,7 +181,7 @@
     }
 
     &-wrapper {
-      margin: 10px;
+      margin: 4%;
       width: auto;
       height: auto;
       border-radius: 10px;
@@ -261,12 +261,6 @@
     &-title {
       background-color: $base-4;
       z-index: 15;
-    }
-
-    &-cell {
-      &-wrapper {
-        margin: 4px;
-      }
     }
   }
 
