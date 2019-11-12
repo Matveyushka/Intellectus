@@ -22,11 +22,12 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement | nul
       {problemFields.map((item, index) => {
         if (item) {
           return (
-            <img
-              className="problem-cell"
-              src={item ? toDataURL(item) : undefined}
-              key={index.toString()}
-            />
+            <div key={index.toString()} className="problem-cell-wrapper">
+              <img
+                className="problem-cell"
+                src={item ? toDataURL(item) : undefined}
+              />
+            </div>
           );
         }
 
@@ -34,7 +35,7 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement | nul
         if (isNil(item) && isNil(userAnswers[stepIndex])) {
           return (
             <div
-              className="problem-cell empty"
+              className="problem-cell-wrapper empty"
               key={index.toString()}
             />
           );
@@ -43,19 +44,20 @@ export const ProblemTable = (props: ProblemTableProps): React.ReactElement | nul
         // Если есть правильный ответ, то показываем его
         if (rightAnswer !== undefined) {
           return (
-            <img
-              className="problem-cell right-answer"
-              src={toDataURL(rightAnswer)}
-              key={index.toString()}
-            />
+            <div key={index.toString()} className="problem-cell-wrapper right-answer">
+              <img
+                className="problem-cell"
+                src={toDataURL(rightAnswer)}
+              />
+            </div>
           );
         }
 
         if (isNil(item) && !isNil(userAnswers[stepIndex]) && questions) {
           return (
-            <div key={index.toString()} className="problem-cell-wrapper">
+            <div key={index.toString()} className="problem-cell-wrapper empty">
               <img
-                className="problem-cell empty preview"
+                className="problem-cell preview"
                 src={toDataURL(options[userAnswers[stepIndex]])}
               />
             </div>

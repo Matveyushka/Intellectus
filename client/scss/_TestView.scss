@@ -32,6 +32,7 @@
 
   &-content {
     margin: auto;
+    min-width: 600px;
   }
 
   &-aside {
@@ -60,8 +61,6 @@
     display: flex;
     height: 48px;
     align-items: center;
-    //position: absolute;
-    //left: 15px;
     font-size: inherit;
     color: $primary-1;
     width: 33.3%;
@@ -89,8 +88,8 @@
     grid-template-areas:
       "titl1 . titl2"
       "prob sep opt";
-    //grid-template-columns: 1fr 1fr 1fr;
-    //grid-template-rows: 1fr;
+    grid-template-columns: 3fr auto 2fr;
+    grid-template-rows: auto 1fr;
     margin-top: 15px;
     position: relative;
   }
@@ -138,9 +137,7 @@
     cursor: pointer;
     width: 33.3%;
     justify-content: center;
-    //position: absolute;
-    //right: 15px;
-    //top: 12px;
+    
     &:hover {
       transform: scale(1.2);
     }
@@ -173,53 +170,47 @@
   }
 
   &-cell {
-    width: 80px;
-    height: 80px;
-    border: 1px solid $primary-1;
-    margin: 10px;
-    padding: 5px;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-
-    &-wrapper {
-      margin: 10px;
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      border: 1px dashed $primary-1;
-    }
-
-    &.empty {
-      border-style: dashed;
-    }
 
     &.preview {
       opacity: 0.5;
-      border: 0;
-      margin: 0;
-      width: 78px;
-      height: 78px;
     }
 
-    &.clickable {
-      cursor: pointer;
-    }
+    &-wrapper {
+      margin: 10px;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid $primary-1;
+      padding: 5px;
 
-    &.selected {
-      cursor: default;
-      border-color: $base-2;
-      box-shadow: inset 0 0 0 1px $base-2;
-
-      &.error {
-        border-color: $error-1;
-        box-shadow: inset 0 0 0 1px $error-1;
-        border-width: 2px;
+      &.clickable {
+        cursor: pointer;
       }
-    }
+  
+      &.selected {
+        cursor: default;
+        border-color: $base-2;
+        box-shadow: inset 0 0 0 1px $base-2;
+  
+        &.error {
+          border-color: $error-1;
+          box-shadow: inset 0 0 0 1px $error-1;
+          border-width: 2px;
+        }
+      }
+  
+      &.right-answer {
+        border-width: 2px;
+        border-color: $primary-1;
+        box-shadow: inset 0 0 0 1px $primary-1;
+      }
 
-    &.right-answer {
-      border-width: 2px;
-      border-color: $primary-1;
-      box-shadow: inset 0 0 0 1px $primary-1;
+      &.empty {
+        border-style: dashed;
+      }
     }
   }
 }
@@ -231,7 +222,6 @@
     grid-template-areas: "a b" "c d" "e f";
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 8px;
   }
 }
 
@@ -239,6 +229,8 @@
   .test-view {
     &-content {
       margin: 0 auto;
+      min-width: 80%;
+      width: 80%;
     }
 
     &-separator {
@@ -268,6 +260,12 @@
       background-color: $base-4;
       z-index: 15;
     }
+
+    &-cell {
+      &-wrapper {
+        margin: 4px;
+      }
+    }
   }
 
   .problem-wrapper, .option-wrapper {
@@ -290,38 +288,14 @@
       grid-template-areas: "a b c" "d e f";
       grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 8px;
     }
   }
 
   @media only screen and (max-height: $sm-height) {
-    .problem-wrapper, .option-wrapper {
-      &::before {
-        top: -9px;
-      }
-    }
-
-    .problem {
-      &-title {
-        font-size: 16px;
-      }
-
-      &-cell {
-        width: 60px;
-        height: 60px;
-        margin: 2px;
-
-        &-wrapper {
-          margin: 0;
-          width: 60px;
-          height: 60px;
-          margin: 2px;
-        }
-
-        &.preview {
-          width: 58px;
-          height: 58px;
-        }
+    .test-view {
+      &-content {
+        min-width: 65%;
+        width: 65%;
       }
     }
   }
