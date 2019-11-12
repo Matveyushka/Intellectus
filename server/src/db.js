@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const PassedTestSchema = require('./model/PassedTest');
 const StatisticsSchema = require('./model/Statistics');
 
+const connectionOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 const PassedTest = mongoose.model('passed_test', PassedTestSchema);
 const Statistics = mongoose.model('statistics', StatisticsSchema);
 
@@ -51,20 +52,6 @@ const recalculateStatistics = async (passedTest, opts) => {
   }, opts);
 };
 
-/** @exports */
-const connect = async () => {
-  mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(async () => { 
-      console.info('MongoDB connected.');
-      await initializeDB();
-
-      startBackup();
-    })
-    .catch((err) => {
-      console.error(`MongoDB connection error: ${err}`);
-    })
-}
-
 const initializeDB = async () => {
   await PassedTest.createCollection();
 
@@ -76,56 +63,87 @@ const initializeDB = async () => {
 const startBackup = async () => {
   try {
     const backupConnection = await mongoose.createConnection(
-      process.env.MONGO_BACKUP_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    
+      process.env.MONGO_BACKUP_URI,
+      connectionOptions,
+    );
+
     console.info('BackupDB connected.');
 
     const PassedTestBackupModel = backupConnection.model('passed_test', PassedTestSchema);
     const StatisticsBackupModel = backupConnection.model('statistics', StatisticsSchema);
 
-    const lastPassedTestBackup = await PassedTestBackupModel.findOne({}, {}, { sort: { 'completionTimestamp': -1 }})
-    const lastUpdate = lastPassedTestBackup? lastPassedTestBackup.completionTimestamp : new Date(0);
-    console.log(lastUpdate)
+    const lastBackupedPassedTest = await PassedTestBackupModel
+      .findOne({}, {}, { sort: { completionTimestamp: -1 } });
+    const lastUpdate = lastBackupedPassedTest
+      ? lastBackupedPassedTest.completionTimestamp
+      : new Date(0);
 
-    const msInDay = 1000*60*60*24;
+    const backupPassedTests = async () => {
+      const passedTestDocs = await PassedTest.find({ completionTimestamp: { $gt: lastUpdate } });
 
-    const updateBackup = async () => {
-      console.info('Backup update starts');
-      const passedTestDocs = await PassedTest.find({completionTimestamp: { $gt: lastUpdate }})
-      passedTestDocs.map(item => {
+      passedTestDocs.forEach((item) => {
         const passedTest = {
           token: item.token,
           completionTimestamp: item.completionTimestamp,
           elapsedTime: item.elapsedTime,
           points: item.points,
-          questions: item.questions
-        }
+          questions: item.questions,
+        };
         const passedTestBackup = new PassedTestBackupModel(passedTest);
-        passedTestBackup.save()
-      })
 
+        passedTestBackup.save();
+      });
+    };
+
+    const backupStatistics = async () => {
       const statisticsDoc = await Statistics.findOne();
       const statistics = {
         passedTestsCounter: statisticsDoc.passedTestsCounter,
         averageTime: statisticsDoc.averageTime,
         pointsDistribution: statisticsDoc.pointsDistribution,
         averageTimeDistribution: statisticsDoc.averageTimeDistribution,
-      }
+      };
       const statisticsBackup = new StatisticsBackupModel(statistics);
-      statisticsBackup.save()
 
-      console.info('Backup saved')
-    }
+      statisticsBackup.save();
+    };
 
-    console.log(new Date().getTime() - lastUpdate.getTime())
-    if (new Date().getTime() - lastUpdate.getTime() >= msInDay) {
+    const updateBackup = async () => {
+      console.info('Backup update starts');
+
+      backupPassedTests();
+
+      backupStatistics();
+
+      console.info('Backup saved');
+    };
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+
+    if (new Date().getTime() - lastUpdate.getTime() >= msPerDay) {
       updateBackup();
-      setInterval(async () => { updateBackup() }, msInDay)
+
+      setInterval(async () => { updateBackup(); }, msPerDay);
     }
   } catch (err) {
     console.error(`MongoDB connection error: ${err}`);
   }
-}
+};
+
+/** @exports */
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, connectionOptions);
+
+    console.info('MongoDB connected.');
+
+    await initializeDB();
+
+    startBackup();
+  } catch (err) {
+    console.error(`MongoDB connection error: ${err}`);
+  }
+};
 
 const savePassedTest = async (test) => {
   const passedTest = new PassedTest(test);
@@ -157,4 +175,4 @@ const savePassedTest = async (test) => {
 
 const getStatistics = () => Statistics.findOne();
 
-module.exports = { connect, initializeDB, savePassedTest, getStatistics };
+module.exports = { connect, savePassedTest, getStatistics };
