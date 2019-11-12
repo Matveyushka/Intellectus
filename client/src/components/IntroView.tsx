@@ -46,7 +46,7 @@ export const IntroView = (): React.ReactElement => {
           type="button"
           data-sharer="twitter"
           className="twitter"
-          data-title="Checkout Intellectus, challange your mind!"
+          data-title="Checkout Intellectus, challenge your mind!"
           data-hashtags="intellectus, iq, test"
           data-url="https://intellectus-demo.herokuapp.com/"
         />
@@ -61,7 +61,7 @@ export const IntroView = (): React.ReactElement => {
           type="button"
           className="vk"
           data-sharer="vk"
-          data-title="Checkout Intellectus, challange your mind!"
+          data-title="Checkout Intellectus, challenge your mind!"
           data-url="https://intellectus-demo.herokuapp.com/"
         />
       </div>
