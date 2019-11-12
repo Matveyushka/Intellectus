@@ -64,7 +64,8 @@
     font-size: inherit;
     color: $primary-1;
     width: 33.3%;
-    justify-content: center;
+    padding-left: 10px;
+    justify-content: flex-start;
   }
 
   &-separator {
@@ -136,8 +137,9 @@
     transition: transform 1s;
     cursor: pointer;
     width: 33.3%;
-    justify-content: center;
-    
+    justify-content: flex-end;
+    padding-right: 10px;
+
     &:hover {
       transform: scale(1.2);
     }

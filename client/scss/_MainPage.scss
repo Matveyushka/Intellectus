@@ -111,7 +111,7 @@
   .main-layout {
     &.intro {
       grid-template:
-      ". . hl hl hl . ."          56px
+      ". . hl hl hl . ."          auto
       ". nav nav nav nav nav ."   auto
       ". . . . . . ."             1fr
       ". t t t t t ."             auto
