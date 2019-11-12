@@ -9,7 +9,7 @@ const {
 } = require('../constants');
 
 const fieldSize = 100;
-const spaceSize = 59;
+const spaceSize = 21;
 const generateFieldPadding = 30;
 
 const createFieldCoordinates = (x, y, size) => ({
