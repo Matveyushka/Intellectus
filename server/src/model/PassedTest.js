@@ -13,6 +13,6 @@ const passedTestSchema = mongoose.Schema({
   }],
 });
 
-const PassedTest = mongoose.model('passed_test', passedTestSchema);
+//const PassedTest = mongoose.model('passed_test', passedTestSchema);
 
-module.exports = PassedTest;
+module.exports = passedTestSchema;

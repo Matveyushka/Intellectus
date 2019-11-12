@@ -7,6 +7,4 @@ const statisticsSchema = mongoose.Schema({
   averageTimeDistribution: [Number],
 });
 
-const Statistics = mongoose.model('statistics', statisticsSchema);
-
-module.exports = Statistics;
+module.exports = statisticsSchema;
