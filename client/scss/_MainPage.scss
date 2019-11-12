@@ -32,6 +32,80 @@
   }
 }
 
+.share-buttons {
+  position: fixed;
+  right: 30px;
+  bottom: 98px;
+  transition: height 0.35s linear;
+  height: 160px;
+  width: 60px;
+  overflow: hidden;
+
+  &.hidden {
+    height: 0;
+  }
+
+  & .vk {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: url(/images/vk.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  & .facebook {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: url(/images/facebook.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  & .twitter {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: url(/images/twitter.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.share-separator {
+  position: fixed;
+  right: 30px;
+  bottom: 94px;
+  height: 4px;
+  width: 60px;
+  opacity: 1;
+  transition: opacity 0.35s;
+  background-color: $primary-1;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
 .main-container {
   display: flex;
   margin: auto;
@@ -118,6 +192,47 @@
       ". . . p . . ."             auto
       ". . . . . . ."             1fr
       ". . f f f . ."             56px / 1fr auto auto auto auto auto 1fr;
+    }
+  }
+
+  .share-buttons {
+    right: 12px;
+    bottom: 60px;
+    height: 134px;
+    width: 40px;
+    overflow: hidden;
+
+    & .vk {
+      width: 32px;
+      height: 32px;
+      margin: 10px 5px;
+    }
+
+    & .facebook {
+      width: 32px;
+      height: 32px;
+      margin: 10px 5px;
+    }
+
+    & .twitter {
+      width: 32px;
+      height: 32px;
+      margin: 10px 5px;
+    }
+  }
+
+  .share-separator {
+    position: fixed;
+    right: 12px;
+    bottom: 56px;
+    height: 2px;
+    width: 40px;
+    opacity: 1;
+    transition: opacity 0.35s;
+    background-color: $primary-1;
+
+    &.hidden {
+      opacity: 0;
     }
   }
 }
