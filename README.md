@@ -26,6 +26,8 @@ All information about test generation is available at [Problems.md](docs/src/Ser
 
 To start demo you should go to `server` folder and run `npm start` command in your console
 
+Alternative way is to visit https://intellectus-demo.herokuapp.com/ (feedback and report doesn't work this way)
+
 # Contributors
 
 - [777PolarFox777](https://github.com/777PolarFox777)
