@@ -32,6 +32,7 @@
 
   &-content {
     margin: auto;
+    min-width: 600px;
   }
 
   &-aside {
@@ -49,26 +50,29 @@
 
   &-bottom {
     display: flex;
-    align-items: stretch;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
     position: relative;
-    height: 48px
+    height: 48px;
+    font-size: 21px;
   }
 
   &-timer {
     display: flex;
     height: 48px;
     align-items: center;
-    position: absolute;
-    left: 15px;
-    font-size: 21px;
+    font-size: inherit;
     color: $primary-1;
+    width: 33.3%;
+    padding-left: 10px;
+    justify-content: flex-start;
   }
 
   &-separator {
     width: 1px;
     background-color: $primary-1;
     margin: 0 10px;
+    grid-area: sep;
   }
 
   &-header {
@@ -81,8 +85,12 @@
   }
 
   &-body {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-areas:
+      "titl1 . titl2"
+      "prob sep opt";
+    grid-template-columns: 3fr auto 2fr;
+    grid-template-rows: auto 1fr;
     margin-top: 15px;
     position: relative;
   }
@@ -102,12 +110,18 @@
 
   &-finish-button {
     color: $primary-1;
-    font-size: 21px;
+    font-size: inherit;
     font-family: inherit;
     font-weight: normal;
     display: flex;
     transition: transform 1s;
     cursor: pointer;
+    width: 33.3%;
+    justify-content: center;
+
+    &.instantly {
+      margin-left: auto;
+    }
 
     &:hover {
       transform: scale(1.2);
@@ -116,15 +130,16 @@
 
   &-report-button {
     color: $primary-1;
-    font-size: 21px;
+    font-size: inherit;
     font-family: inherit;
     font-weight: normal;
     display: flex;
     transition: transform 1s;
     cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 12px;
+    width: 33.3%;
+    justify-content: flex-end;
+    padding-right: 10px;
+
     &:hover {
       transform: scale(1.2);
     }
@@ -137,7 +152,7 @@
     grid-template-areas: "a b c" "d e f" "g h i";
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 8px;
+    grid-area: prob;
   }
 
   &-title {
@@ -146,69 +161,138 @@
     font-weight: normal;
     color: $primary-1;
     text-align: center;
-    margin: 0 120px 0 110px;
+    margin: 0 auto;
+    padding: 0 5px;
+    grid-area: titl1;
+    position: relative;
 
     &.options {
-      margin: 0 55px 0 72px;
+      grid-area: titl2;
     }
   }
 
   &-cell {
-    width: 80px;
-    height: 80px;
-    border: 1px solid $primary-1;
-    margin: 10px;
-    padding: 5px;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-
-    &-wrapper {
-      margin: 10px;
-      border-radius: 10px;
-      border: 1px dashed $primary-1;
-    }
-
-    &.empty {
-      border-style: dashed;
-    }
 
     &.preview {
       opacity: 0.5;
-      border: 0;
-      margin: 0;
-      width: 78px;
-      height: 78px;
     }
 
-    &.clickable {
-      cursor: pointer;
-    }
+    &-wrapper {
+      margin: 4%;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid $primary-1;
+      padding: 5px;
 
-    &.selected {
-      cursor: default;
-      border-color: $base-2;
-      box-shadow: inset 0 0 0 1px $base-2;
-
-      &.error {
-        border-color: $error-1;
-        box-shadow: inset 0 0 0 1px $error-1;
-        border-width: 2px;
+      &.clickable {
+        cursor: pointer;
       }
-    }
+  
+      &.selected {
+        cursor: default;
+        border-color: $base-2;
+        box-shadow: inset 0 0 0 1px $base-2;
+  
+        &.error {
+          border-color: $error-1;
+          box-shadow: inset 0 0 0 1px $error-1;
+          border-width: 2px;
+        }
+      }
+  
+      &.right-answer {
+        border-width: 2px;
+        border-color: $primary-1;
+        box-shadow: inset 0 0 0 1px $primary-1;
+      }
 
-    &.right-answer {
-      border-width: 2px;
-      border-color: $primary-1;
-      box-shadow: inset 0 0 0 1px $primary-1;
+      &.empty {
+        border-style: dashed;
+      }
     }
   }
 }
 
 .option {
   &-wrapper {
+    grid-area: opt;
     display: grid;
     grid-template-areas: "a b" "c d" "e f";
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 8px;
+  }
+}
+
+@media only screen and (max-width: $sm-screen) {
+  .test-view {
+    &-content {
+      margin: 0 auto;
+      min-width: 80%;
+      width: 80%;
+    }
+
+    &-separator {
+      display: none;
+    }
+
+    &-aside {
+      display: none;
+    }
+
+    &-bottom {
+      font-size: 17px;
+    }
+
+    &-body {
+      display: grid;
+      grid-template-areas: "titl1" "prob" "titl2" "opt";
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 3fr auto 2fr;
+      margin-top: 15px;
+      position: relative;
+    }
+  }
+
+  .problem {
+    &-title {
+      background-color: $base-4;
+      z-index: 15;
+    }
+  }
+
+  .problem-wrapper, .option-wrapper {
+    position: relative;
+    &::before {
+      content: "";
+      top: -14px;
+      left: 0;
+      position: absolute;
+      z-index: 14;
+      background-color: $primary-1;
+      width: 100%;
+      height: 1px;
+    }
+  }
+
+  .option {
+    &-wrapper {
+      display: grid;
+      grid-template-areas: "a b c" "d e f";
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media only screen and (max-height: $sm-height) {
+    .test-view {
+      &-content {
+        min-width: 65%;
+        width: 65%;
+      }
+    }
   }
 }

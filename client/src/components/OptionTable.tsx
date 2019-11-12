@@ -22,7 +22,7 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
   return (
     <>
       {options.map((item, index) => {
-        const className = mergeClassNames('problem-cell', {
+        const className = mergeClassNames('problem-cell-wrapper', {
           selected: index === selectedIndex,
           'right-answer': index === rightAnswerIndex,
           error:
@@ -33,12 +33,13 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
         });
 
         return (
-          <img
-            className={className}
-            src={toDataURL(item)}
-            onClick={() => onSelect?.(index)}
-            key={index.toString()}
-          />
+          <div key={index.toString()} className={className}>
+            <img
+              className="problem-cell"
+              src={toDataURL(item)}
+              onClick={() => onSelect?.(index)}
+            />
+          </div>
         );
       })}
     </>

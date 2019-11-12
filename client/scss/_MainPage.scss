@@ -71,7 +71,7 @@
     display: grid;
     grid-template:
       ". . hl hl hl . ."          100px
-      ". nav nav nav nav nav ."   50px
+      ". nav nav nav nav nav ."   auto
       ". . . . . . ."             1fr
       ". t t t t t ."             auto
       ". . . p . . ."             auto
@@ -111,8 +111,8 @@
   .main-layout {
     &.intro {
       grid-template:
-      ". . hl hl hl . ."          56px
-      ". nav nav nav nav nav ."   36px
+      ". . hl hl hl . ."          auto
+      ". nav nav nav nav nav ."   auto
       ". . . . . . ."             1fr
       ". t t t t t ."             auto
       ". . . p . . ."             auto
