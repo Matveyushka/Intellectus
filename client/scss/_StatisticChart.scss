@@ -8,14 +8,17 @@
   padding-bottom: 2px;
 
   .stats-column {
-    background-color: $primary-1;
+    background-color: $base-2;
     margin: 0 1px;
     transition: 0.3s;
     cursor: pointer;
 
-    &:hover,
+    &:hover {
+      background-color: $base-3;
+    }
+
     &.selected {
-      background-color: $base-2;
+      background-color: $primary-1;
     }
   }
 }

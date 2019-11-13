@@ -47,22 +47,11 @@
 
     &-result {
       width: 75%;
+      max-width: 232px;
 
       .stats {
         height: 250px;
         width: 100%;
-
-        .stats-column {
-          background-color: $base-2;
-
-          &:hover {
-            background-color: $base-3;
-          }
-
-          &.selected {
-            background-color: $primary-1;
-          }
-        }
       }
     }
   }
