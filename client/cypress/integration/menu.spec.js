@@ -5,6 +5,7 @@ describe('Menu', () => {
   })
 
   it('Click to menu item navigate to right route', () => {
+    cy.getStatisticsData();
     cy.get('.header-container').contains('STATISTICS').click();
     cy.url().should('include', '/statistics');
     cy.get('.header-container').contains('ABOUT').click();

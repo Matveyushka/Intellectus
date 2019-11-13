@@ -40,8 +40,7 @@ describe('Contact us', () => {
   context('Invalid data', () => {
     
     it('Empty fields', () => {
-      const feedback = {name: ' ', email: ' ', title: ' ', body: ' '};
-      cy.fillContactUsInputFields(feedback)
+      const feedback = {name: '', email: '', title: '', body: ''};
       cy.server().route({
         method: 'POST',
         url: url,
@@ -54,7 +53,6 @@ describe('Contact us', () => {
       cy.get('[name="name"]').should('have.class', 'border-error');
       cy.get('[name="email"]').should('have.class', 'border-error');
       cy.get('[name="title"]').should('have.class', 'border-error');
-      cy.get('[name="body"]').should('have.class', 'border-error');
     })
 
     it('Invalid email', () => {

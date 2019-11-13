@@ -188,8 +188,8 @@ const connect = async () => {
 };
 
 /*
- * Use this function instead of connect () if you want to restore the database from a backup.
- * Replace back to connect () after recovery.
+ * Use this function instead of connect() if you want to restore the database from a backup.
+ * Replace back to connect() after recovery.
  */
 const connectAndRestore = async () => {
   await connectMainDb();
