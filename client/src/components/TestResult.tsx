@@ -11,9 +11,7 @@ export const TestResult = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
   React.useEffect((): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    window.Sharer.init();
+    (window as any).Sharer.init();
   }, []);
 
   const [isShareOpen, setIsShareOpen] = React.useState<boolean>(false);
