@@ -20,4 +20,50 @@
     font-size: 20px;
     letter-spacing: 5px;
   }
+
+  &-time{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $sm-screen) {
+  .test {
+    &-title {
+      margin-top: 5px;
+      font-size: 18px;
+      text-align: center;
+      letter-spacing: 0;
+    }
+
+    &-hint {
+      display: none;
+    }
+
+    &-time{
+      display: block;
+      color: $primary-1;
+      margin-top: 25px;
+    }
+
+    &-result {
+      width: 75%;
+
+      .stats {
+        height: 250px;
+        width: 100%;
+
+        .stats-column {
+          background-color: $base-2;
+
+          &:hover {
+            background-color: $base-3;
+          }
+
+          &.selected {
+            background-color: $primary-1;
+          }
+        }
+      }
+    }
+  }
 }
