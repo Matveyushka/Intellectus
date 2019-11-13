@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
+    "webpack:external": "webpack-dev-server --mode=development --config webpack.dev.config.js --host 0.0.0.0",
     "webpack:watch": "webpack-dev-server --mode=development --config webpack.dev.config.js",
     "start": "npm run sass && run-p sass:watch webpack:watch",
     "build": "webpack --mode=production --config webpack.prod.config.js",

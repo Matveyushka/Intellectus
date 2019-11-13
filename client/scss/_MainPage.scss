@@ -187,6 +187,12 @@
     }
   }
 
+  @supports (-webkit-appearance: none) {
+    .main-layout {
+      height: calc(100vh - 56px);
+    }
+  }
+
   .main-layout {
     &.intro {
       grid-template:
