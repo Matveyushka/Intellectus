@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressStaticGzip = require('express-static-gzip');
 const routes = require('./routes/index');
@@ -37,16 +36,7 @@ app.get('*', (req, res) => {
   res.send(file);
 });
 
-const { MONGO_ATLAS_LOGIN, MONGO_ATLAS_PASSWORD } = process.env;
-const uri = `mongodb+srv://${MONGO_ATLAS_LOGIN}:${MONGO_ATLAS_PASSWORD}@cluster0-gsf7q.gcp.mongodb.net/db?retryWrites=true&w=majority`;
-
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.info('MongoDB connected.');
-
-    db.initializeDB();
-  })
-  .catch(err => console.error(`MongoDB connection error: ${err}`));
+db.connect();
 
 const Port = process.env.PORT || 9000;
 

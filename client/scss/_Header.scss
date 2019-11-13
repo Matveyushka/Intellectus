@@ -7,8 +7,8 @@
     width: 600px;
     height: 100px;
     padding: 35px;
-    border-bottom: 1px solid $primary-1;
     grid-area: hl;
+    border-bottom: 1px solid $primary-1;
 
     &-link {
       height: 100%;
@@ -17,6 +17,10 @@
     &-img {
       height: 100%;
       width: auto;
+    }
+
+    &.border-bottom {
+      border-bottom: 1px solid $primary-1;
     }
   }
 
@@ -62,23 +66,24 @@
   .header {
     &-logo {
       width: 232px;
-      height: 56px;
+      min-height: 32px;
       padding: 0;
+      border: none;
+      height: 52px;
 
       &-img {
         width: 232px;
-        height: 56px;
         object-fit: contain;
       }
     }
 
     &-container {
       width: 232px;
-      padding: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &-item {
-
       & > a {
         font-size: 12px;
         padding: 0;

@@ -81,15 +81,13 @@ export const TestView = (): React.ReactElement => {
           )}
         </div>
         <div className="test-view-content">
-          <div className="test-view-header">
-            <h1 className="problem-title">Problem:</h1>
-            <h1 className="problem-title options">Options:</h1>
-          </div>
           <div className="test-view-body">
+            <h1 className="problem-title">Problem:</h1>
             <div className="problem-wrapper">
               <ProblemTable />
             </div>
             <div className="test-view-separator" />
+            <h1 className="problem-title options">Options:</h1>
             <div className="option-wrapper">
               <OptionTable
                 onSelect={handleOptionSelect}
@@ -111,7 +109,7 @@ export const TestView = (): React.ReactElement => {
               // данный код удаляется вебпаком при сборке
               <button
                 type="button"
-                className="test-view-finish-button"
+                className="test-view-finish-button instantly"
                 onClick={() => {
                   const newAnswers = Array.from(Array(12), () => random(0, 5));
 
@@ -122,7 +120,7 @@ export const TestView = (): React.ReactElement => {
                   dispatch.main.getResults();
                 }}
               >
-                Finish Instantly
+                Instantly
               </button>
             )}
           </div>
