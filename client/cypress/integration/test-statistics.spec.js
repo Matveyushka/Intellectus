@@ -10,7 +10,7 @@ describe('Test statistics', () => {
   })
 
   it('Statistics title contains right number of answers', () => {
-    cy.get('.test-title').should('be.visible').and('contain.text', '5').and('contain.text', '12');
+    cy.get('.test-title').contains(/Your result is.5.out of.12/);
   })
 
   it('The histogram should highlight the current column', () => {

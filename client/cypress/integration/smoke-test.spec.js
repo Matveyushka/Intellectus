@@ -20,7 +20,7 @@ describe('Smoke tests', () => {
       cy.get('.stats').should('be.visible');
     })
 
-    it('Send feedback', () => {
+    it('Send feedback (Some providers can block SMTP)', () => {
       cy.fixture('feedback').then(feedback => {
         cy.get('.header-container').contains('CONTACT US').click();
         cy.fillContactUsInputFields(feedback);
@@ -28,6 +28,8 @@ describe('Smoke tests', () => {
         cy.server().route('POST', '/feedback').as('feedbackReq');
         cy.get('.send-btn').click();
         cy.wait('@feedbackReq');
+        
+        cy.get('.success').should('exist');
       })
     })
   })

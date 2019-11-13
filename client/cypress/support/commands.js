@@ -51,3 +51,9 @@ Cypress.Commands.add('fillContactUsInputFields', feedback => {
   cy.get('[name="title"]').type(feedback.title);
   cy.get('[name="body"]').type(feedback.body);
 })
+
+Cypress.Commands.add('fillReportInputFields', report => {
+  cy.get('[name="name"]').type(report.name);
+  cy.get('[name="email"]').type(report.email);
+  cy.get('[name="body"]').type(report.body);
+})
