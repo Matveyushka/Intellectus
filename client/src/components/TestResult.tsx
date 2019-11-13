@@ -35,7 +35,6 @@ export const TestResult = (): React.ReactElement => {
           {answers.length}
         </h2>
         <StatisticChart rows={pointsDistribution} chosenRowIndex={solutionsCount} />
-        <div className="test-hint">you are here</div>
         <div className="test-time">{formatTime(resultTime ?? new Date(0, 0, 0))}</div>
       </div>
       <Stepper

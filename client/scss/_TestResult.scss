@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    justify-content: center;
   }
 
   &-title {
@@ -14,15 +16,10 @@
     margin-bottom: 25px;
   }
 
-  &-hint {
-    padding-top: 15px;
-    color: $base-1;
-    font-size: 20px;
-    letter-spacing: 5px;
-  }
-
   &-time{
-    display: none;
+    color: $primary-1;
+    margin-top: 25px;
+    font-size: 25px;
   }
 }
 
@@ -35,21 +32,13 @@
       letter-spacing: 0;
     }
 
-    &-hint {
-      display: none;
-    }
-
     &-time{
-      display: block;
-      color: $primary-1;
-      margin-top: 25px;
+      font-size: 22px;
     }
 
     &-result {
       width: 75%;
       max-width: 232px;
-      height: 100%;
-      justify-content: center;
 
       .stats {
         height: 250px;
