@@ -5,7 +5,7 @@ import { Stepper } from './Stepper';
 import { Dispatch, State } from '../store';
 import { MAIN_VIEW_TYPES } from '../constants';
 import { MainState } from '../pages/Main/model';
-import { formatTime } from '../components/TestView/helpers';
+import { formatTime } from './TestView/helpers';
 
 export const TestResult = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const TestResult = (): React.ReactElement => {
     userAnswers,
     solutions = [],
     pointsDistribution = [],
-    resultTime
+    resultTime,
   } = useSelector<State, MainState>(state => state.main);
 
   const answers: boolean[] = userAnswers.map((item, index) => solutions[index] === item);
