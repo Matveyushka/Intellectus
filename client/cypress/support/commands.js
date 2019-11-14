@@ -16,6 +16,14 @@ Cypress.Commands.add('postAnswers', (req = 'fx:answers-req', resp = 'fx:answers-
   });
 })
 
+Cypress.Commands.add('getStatisticsData', (statisticsData = 'fx:statistics-data') => {
+  cy.server().route({
+    method: 'GET',
+    url: '/statistics-data',
+    response: statisticsData
+  });
+})
+
 Cypress.Commands.add('passTest', () => {
   cy.fixture('answers-req').then(req => {
     const lastIndex = req.answers.length - 1;
@@ -31,7 +39,7 @@ Cypress.Commands.add('passTest', () => {
 Cypress.Commands.add('checkProblemFields', question => {
   question.problemFields.forEach((field, index) => {
     if (field) {
-      cy.get('.problem-wrapper').children().eq(index)
+      cy.get('.problem-wrapper').children().eq(index).children()
         .should('have.attr', 'src').and('include', field);
     }
   })
@@ -42,4 +50,10 @@ Cypress.Commands.add('fillContactUsInputFields', feedback => {
   cy.get('[name="email"]').type(feedback.email);
   cy.get('[name="title"]').type(feedback.title);
   cy.get('[name="body"]').type(feedback.body);
+})
+
+Cypress.Commands.add('fillReportInputFields', report => {
+  cy.get('[name="name"]').type(report.name);
+  cy.get('[name="email"]').type(report.email);
+  cy.get('[name="body"]').type(report.body);
 })
