@@ -6,6 +6,7 @@ import { Stepper } from './Stepper';
 import { Dispatch, State } from '../store';
 import { MAIN_VIEW_TYPES } from '../constants';
 import { MainState } from '../pages/Main/model';
+import { formatTime } from './TestView/helpers';
 
 export const TestResult = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const TestResult = (): React.ReactElement => {
     userAnswers,
     solutions = [],
     pointsDistribution = [],
+    resultTime,
   } = useSelector<State, MainState>(state => state.main);
 
   const answers: boolean[] = userAnswers.map((item, index) => solutions[index] === item);
@@ -48,7 +50,7 @@ export const TestResult = (): React.ReactElement => {
           {answers.length}
         </h2>
         <StatisticChart rows={pointsDistribution} chosenRowIndex={solutionsCount} />
-        <div className="test-hint">you are here</div>
+        <div className="test-time">{formatTime(resultTime ?? new Date(0, 0, 0))}</div>
       </div>
       <Stepper
         data={stepperData}
