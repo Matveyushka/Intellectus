@@ -181,6 +181,16 @@
     height: 32px;
     right: 16px;
     bottom: 16px;
+
+    &.result {
+      bottom: 90px;
+    }
+  }
+
+  @supports (-webkit-appearance: none) {
+    .main-layout {
+      height: calc(100vh - 56px);
+    }
   }
 
   .main-layout {
@@ -202,6 +212,10 @@
     height: 134px;
     width: 40px;
     overflow: hidden;
+
+    &.result {
+      bottom: 148px;
+    }
 
     & .vk {
       width: 32px;
@@ -234,6 +248,10 @@
 
     &.hidden {
       opacity: 0;
+    }
+
+    &.result {
+      bottom: 144px;
     }
   }
 }

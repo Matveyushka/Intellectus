@@ -1,4 +1,5 @@
 import * as React from 'react';
+import mergeClassNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { StatisticChart } from './StatisticChart';
 import { Stepper } from './Stepper';
@@ -8,6 +9,20 @@ import { MainState } from '../pages/Main/model';
 
 export const TestResult = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
+
+  React.useEffect((): void => {
+    (window as any).Sharer.init();
+  }, []);
+
+  const [isShareOpen, setIsShareOpen] = React.useState<boolean>(false);
+
+  const shareClassNames = mergeClassNames('share-buttons', 'result', {
+    hidden: !isShareOpen,
+  });
+
+  const shareSeparatorClassName = mergeClassNames('share-separator', 'result', {
+    hidden: !isShareOpen,
+  });
 
   const {
     userAnswers,
@@ -43,6 +58,37 @@ export const TestResult = (): React.ReactElement => {
           dispatch.main.setCurrentView(MAIN_VIEW_TYPES.watch);
         }}
       />
+      <button
+        type="button"
+        title="Share this site with your friends!"
+        className="share-icon result"
+        onClick={() => setIsShareOpen(!isShareOpen)}
+      />
+      <div className={shareSeparatorClassName} />
+      <div className={shareClassNames}>
+        <button
+          type="button"
+          data-sharer="twitter"
+          className="twitter"
+          data-title={`My score at Intellectus is ${solutionsCount} of 12!`}
+          data-hashtags="intellectus, iq, test"
+          data-url="https://intellectus-demo.herokuapp.com/"
+        />
+        <button
+          type="button"
+          className="facebook"
+          data-sharer="facebook"
+          data-hashtag="intellectus"
+          data-url="https://intellectus-demo.herokuapp.com/"
+        />
+        <button
+          type="button"
+          className="vk"
+          data-sharer="vk"
+          data-title={`My score at Intellectus is ${solutionsCount} of 12!`}
+          data-url="https://intellectus-demo.herokuapp.com/"
+        />
+      </div>
     </>
   );
 };

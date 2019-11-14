@@ -7,6 +7,10 @@ import { Dispatch } from '../store';
 export const IntroView = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
+  React.useEffect((): void => {
+    (window as any).Sharer.init();
+  }, []);
+
   const [isShareOpen, setIsShareOpen] = React.useState<boolean>(false);
 
   const shareClassNames = mergeClassNames('share-buttons', {

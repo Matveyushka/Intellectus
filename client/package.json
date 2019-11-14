@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
+    "webpack:external": "webpack-dev-server --mode=development --config webpack.dev.config.js --host 0.0.0.0",
     "webpack:watch": "webpack-dev-server --mode=development --config webpack.dev.config.js",
     "start": "npm run sass && run-p sass:watch webpack:watch",
     "build": "webpack --mode=production --config webpack.prod.config.js",
@@ -40,6 +41,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
+    "sharer.js": "^0.3.8",
     "shortid": "^2.2.15"
   },
   "devDependencies": {
