@@ -135,6 +135,11 @@ export const ContactUsForm = ({
           </div>
         </label>
       </div>
+      <div className="send-btn-mobile">
+        <button type="submit" className="send-btn">
+          Send
+        </button>
+      </div>
     </form>
   );
 };
