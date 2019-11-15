@@ -88,7 +88,7 @@ export const ContactUsForm = ({
           />
         </label>
       </div>
-      <div className="input-field">
+      <div className="input-field max-h">
         <label className="input-label" htmlFor="text">
           <p
             className={mergeClassNames('label-title', {
