@@ -7,9 +7,15 @@
   &-content{
     width: 100%;
     text-align: justify;
-    padding: 20px 0;    
+    padding: 20px 0; 
+
+    p {
+      margin-bottom: 1rem;
+    }
   }
 }
+
+
 
 
 @media only screen and (max-width: $sm-screen){
