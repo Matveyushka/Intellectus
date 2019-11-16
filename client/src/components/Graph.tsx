@@ -8,7 +8,7 @@ interface GraphProps {
 }
 
 export const Graph = (props: GraphProps): React.ReactElement | null => {
-  const {stringForClassName, text, arrayGraph } = props;
+  const { stringForClassName, text, arrayGraph } = props;
 
   return (
     <div className={`statistics-graph-with-text ${stringForClassName}`}>

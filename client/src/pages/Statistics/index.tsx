@@ -45,12 +45,12 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
         </div>
         <div className="statistics-graphs">
           <Graph
-            stringForClassName= {"graph1"}
+            stringForClassName="graph1"
             text={averageTimeGraph}
             arrayGraph={averageTimeDistribution}
-          />         
+          />
           <Graph
-            stringForClassName= {"graph2"}
+            stringForClassName="graph2"
             text={passedTestGraph}
             arrayGraph={pointsDistribution}
           />
@@ -65,7 +65,7 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
         </div>
       </main>
       <div className="statistics-footer">
-          <Footer />
+        <Footer />
       </div>
     </div>
   );
