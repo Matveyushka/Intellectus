@@ -27,3 +27,106 @@
     background-color: $base-4;
   }
 }
+
+.report-header {
+  display: none;
+}
+
+@media only screen and (max-width: $sm-screen) {
+  .modal {
+    height: 100%;
+    &-bg {
+      display: none;
+    }
+
+    &-body {
+      width: 100%;
+      border-radius: 0;
+      overflow-y: scroll;
+      height: 100%;
+      padding: 0 50px;
+
+      .test-view-content {
+        min-width: 100%;
+        width: 100%;
+
+        .test-view-body {
+          margin-top: 0;
+        }
+        
+        .problem-title {
+          font-size: 16px;
+        }
+
+        .problem-wrapper::before,
+        .option-wrapper::before {
+          top: -8px;
+        }
+      }
+
+      .common-form {
+        .two-columns {
+          flex-direction: column;
+          
+          .input-field {
+            width: 100%;
+          }
+        }
+
+        .input-with-area {
+          margin-bottom: 25px;
+          .input-area.mini {
+            height: 150px;
+          }
+
+          .send-form {
+            position: relative;
+  
+            .area-count {
+              position: absolute;
+              top: calc(100% + 15px);
+              font-size: 12px;
+            }
+          }
+        }
+
+        .form-bottom {
+          margin: 15px 0;
+
+          button {
+            font-size: 17px;
+            border: 1px solid $primary-1;
+            border-radius: 12px;
+            padding: 7px 15px;
+
+            &.cancel {
+              border-color: $base-2;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .report-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    position: relative;
+
+    .back-icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      left: 10px;
+      display: inline-block;
+      background-image: url('/images/arrow-left.svg');
+      background-size: cover;
+    }
+
+    h2 {
+      font-weight: lighter;
+    }
+  }
+}
