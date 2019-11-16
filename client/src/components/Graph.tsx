@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StatisticChart } from './StatisticChart';
 import mergeClassNames from 'classnames';
+import { StatisticChart } from './StatisticChart';
 
 interface GraphProps {
   className: string;
