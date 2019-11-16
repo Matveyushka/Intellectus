@@ -31,9 +31,12 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
   if (isLoading) return <Loader />;
 
   return (
-    <div className="main-layout statistics">
-      <Header location={location} />
-      <main className="main-container">
+    <div className="main-layout">
+      <div className="intro">
+        <Header location={location} />
+      </div>
+
+      <main className="main-container statistics-content">
         <div className="statistics-title text-font">
           {'The test was passed '}
           {passedTestsCounter}
@@ -42,22 +45,28 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
         </div>
         <div className="statistics-graphs">
           <Graph
+            stringForClassName= {"graph1"}
             text={averageTimeGraph}
             arrayGraph={averageTimeDistribution}
-          />
+          />         
           <Graph
+            stringForClassName= {"graph2"}
             text={passedTestGraph}
             arrayGraph={pointsDistribution}
           />
         </div>
-        <NavLink
-          to={URLS.main}
-          exact
-        >
-          <button type="button" className="statistics-button textFont">Try now</button>
-        </NavLink>
+        <div className="statistics-button">
+          <NavLink
+            to={URLS.main}
+            exact
+          >
+            <button type="button" className="statistics-button-text textFont">Try now</button>
+          </NavLink>
+        </div>
       </main>
-      <Footer />
+      <div className="statistics-footer">
+          <Footer />
+      </div>
     </div>
   );
 };
