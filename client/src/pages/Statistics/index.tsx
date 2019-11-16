@@ -45,12 +45,12 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
         </div>
         <div className="statistics-graphs">
           <Graph
-            stringForClassName="graph1"
+            className="graph1"
             text={averageTimeGraph}
             arrayGraph={averageTimeDistribution}
           />
           <Graph
-            stringForClassName="graph2"
+            className="graph2"
             text={passedTestGraph}
             arrayGraph={pointsDistribution}
           />

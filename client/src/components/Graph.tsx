@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { StatisticChart } from './StatisticChart';
+import mergeClassNames from 'classnames';
 
 interface GraphProps {
-  stringForClassName: string;
+  className: string;
   text: string;
   arrayGraph: number[];
 }
 
 export const Graph = (props: GraphProps): React.ReactElement | null => {
-  const { stringForClassName, text, arrayGraph } = props;
+  const { className, text, arrayGraph } = props;
+
+  const graphClassNames = mergeClassNames('statistics-graph-with-text', className);
 
   return (
-    <div className={`statistics-graph-with-text ${stringForClassName}`}>
+    <div className={graphClassNames}>
       <StatisticChart rows={arrayGraph} chosenRowIndex={arrayGraph.length} />
       <div className="graphtext text-font">
         {text}
