@@ -25,6 +25,10 @@
     padding: 15px;
     border-radius: 20px;
     background-color: $base-4;
+
+    .test-view-content {
+      min-width: 100%;
+    }
   }
 }
 
