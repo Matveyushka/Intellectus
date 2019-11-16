@@ -187,4 +187,75 @@
       width: 49%;
     }
   }
+
+  .send-btn-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $sm-screen) {
+  .contact-us {
+    height: 100%;
+
+    .main-container {
+      width: 100%;
+      padding: 20px 45px;
+      height: 100%;
+
+      .common-form {
+        font-size: 15px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .send-form {
+          position: relative;
+
+          .area-count {
+            position: absolute;
+            top: calc(100% + 15px);
+            font-size: 12px;
+          }
+
+          .plane-icon {
+            display: none !important;
+          }
+        }
+
+        .send-btn-mobile {
+          margin-top: 12px;
+          display: flex;
+          justify-content: center;
+
+          .send-btn {
+            border: 1px solid $primary-1;
+            color: $primary-1;
+            border-radius: 12px;
+            padding: 7px 15px;
+            font-size: inherit;
+          }
+        }
+
+        .input-field.max-h {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 50;
+
+          .input-label { 
+            height: 100%;
+            .input-with-area { 
+              height: calc(100% - 35px);
+              .input-area {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    footer {
+      margin: 0 auto;
+    }
+  } 
 }

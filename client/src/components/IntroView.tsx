@@ -8,6 +8,7 @@ export const IntroView = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
 
   React.useEffect((): void => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).Sharer.init();
   }, []);
 

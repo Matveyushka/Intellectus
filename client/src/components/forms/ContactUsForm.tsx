@@ -88,7 +88,7 @@ export const ContactUsForm = ({
           />
         </label>
       </div>
-      <div className="input-field">
+      <div className="input-field max-h">
         <label className="input-label" htmlFor="text">
           <p
             className={mergeClassNames('label-title', {
@@ -134,6 +134,11 @@ export const ContactUsForm = ({
             </div>
           </div>
         </label>
+      </div>
+      <div className="send-btn-mobile">
+        <button type="submit" className="send-btn">
+          Send
+        </button>
       </div>
     </form>
   );
