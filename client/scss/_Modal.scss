@@ -132,8 +132,10 @@
       position: absolute;
       left: 10px;
       display: inline-block;
-      background-image: url('/images/arrow-left.svg');
-      background-size: cover;
+      background-image: url('/images/arrow.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      transform: scale(1) rotate(180deg);
     }
 
     h2 {
