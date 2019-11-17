@@ -156,7 +156,7 @@
   }
 
   &-title {
-    font-size: 14px;
+    font-size: 21px;
     font-family: inherit;
     font-weight: normal;
     color: $primary-1;
@@ -228,6 +228,12 @@
 }
 
 @media only screen and (max-width: $sm-screen) {
+  .problem {  
+    &-title {
+      font-size: 14px;
+    }
+  }
+
   .test-view {
     &-content {
       margin: 0 auto;
