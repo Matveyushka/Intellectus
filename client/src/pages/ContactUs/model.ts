@@ -22,7 +22,7 @@ export const contactUs = {
       error,
       oldData,
     }),
-    setIsSent: (state: ContactUsState, isFinish: boolean) => ({
+    setIsSent: (state: ContactUsState, { isFinish }: Partial<ContactUsState>) => ({
       ...state,
       isFinish,
     }),
