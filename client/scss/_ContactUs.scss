@@ -44,7 +44,6 @@
 
 .common-form {
   font-size: 17px;
-  margin-top: 10px;
   width: 100%;
 
   .input-field {
@@ -102,7 +101,7 @@
           font-family: inherit;
           padding: 4px 0;
           resize: none;
-          min-height: 100px;
+          min-height: 150px;
           &.mini {
             min-height: 80px;
           }
@@ -199,6 +198,18 @@
   .contact-results {
     height: 100%;
     justify-content: center;
+  }
+
+  .common-form {
+    .input-field {
+      .input-label {
+        .input-with-area {
+          .input-area {
+            min-height: 100px;
+          }
+        }
+      }
+    }
   }
 
   .contact-us {
