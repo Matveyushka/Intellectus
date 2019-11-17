@@ -67,7 +67,7 @@ export const ReportModal = (): React.ReactElement => {
   if (isLoading) {
     return (
       <Modal>
-        <div className="contact-results padding-for-modal">
+        <div className="contact-results padding-for-modal center">
           <Loader />
         </div>
       </Modal>
@@ -77,7 +77,7 @@ export const ReportModal = (): React.ReactElement => {
   if (finishState.isFinish) {
     return (
       <Modal>
-        <div className="contact-results padding-for-modal">
+        <div className="contact-results padding-for-modal center">
           {finishState.error ? (
             <>
               <div className="error">{finishState.error}</div>
@@ -100,16 +100,18 @@ export const ReportModal = (): React.ReactElement => {
 
   return (
     <Modal>
+      <div className="report-header">
+        <i className="back-icon" onClick={() => dispatch.modal.hideModal()} />
+        <h2>Report</h2>
+      </div>
       <div className="test-view-content">
-        <div className="test-view-header margin-left">
-          <h1 className="problem-title">Problem:</h1>
-          <h1 className="problem-title options">Options:</h1>
-        </div>
         <div className="test-view-body">
+          <h1 className="problem-title">Problem:</h1>
           <div className="problem-wrapper">
             <ProblemTable rightAnswer={currentOptions[rightAnswerIndex]} />
           </div>
           <div className="test-view-separator" />
+          <h1 className="problem-title options">Options:</h1>
           <div className="option-wrapper">
             <OptionTable rightAnswerIndex={rightAnswerIndex} />
           </div>
