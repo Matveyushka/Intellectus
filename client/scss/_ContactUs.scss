@@ -1,7 +1,7 @@
 .contact-results {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-items: center;
 
   &.padding-for-modal {
     padding: 80px 45px;
@@ -25,6 +25,7 @@
   }
 
   .button {
+    font-family: $main-font;
     color: $base-2;
     text-transform: lowercase;
     font-size: 24px;
@@ -195,6 +196,11 @@
 }
 
 @media only screen and (max-width: $sm-screen) {
+  .contact-results {
+    height: 100%;
+    justify-content: center;
+  }
+
   .contact-us {
     height: 100%;
 

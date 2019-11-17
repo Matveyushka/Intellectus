@@ -156,7 +156,7 @@
   }
 
   &-title {
-    font-size: 21px;
+    font-size: 14px;
     font-family: inherit;
     font-weight: normal;
     color: $primary-1;
@@ -268,7 +268,7 @@
     position: relative;
     &::before {
       content: "";
-      top: -14px;
+      top: -8px;
       left: 0;
       position: absolute;
       z-index: 14;
