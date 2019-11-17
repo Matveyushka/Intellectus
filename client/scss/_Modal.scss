@@ -25,9 +25,6 @@
     padding: 15px;
     border-radius: 20px;
     background-color: $base-4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     .test-view-content {
       min-width: 100%;
@@ -40,6 +37,13 @@
 }
 
 @media only screen and (max-width: $sm-screen) {
+  .center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .modal {
     height: 100%;
     &-bg {

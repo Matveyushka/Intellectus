@@ -67,7 +67,7 @@ export const ReportModal = (): React.ReactElement => {
   if (isLoading) {
     return (
       <Modal>
-        <div className="contact-results padding-for-modal">
+        <div className="contact-results padding-for-modal center">
           <Loader />
         </div>
       </Modal>
@@ -77,7 +77,7 @@ export const ReportModal = (): React.ReactElement => {
   if (finishState.isFinish) {
     return (
       <Modal>
-        <div className="contact-results padding-for-modal">
+        <div className="contact-results padding-for-modal center">
           {finishState.error ? (
             <>
               <div className="error">{finishState.error}</div>
