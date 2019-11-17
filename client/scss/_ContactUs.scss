@@ -202,11 +202,16 @@
   }
 
   .contact-us {
-    height: 100%;
+    display: grid;
+    grid-template:
+    "hl"    auto
+    "nav"   auto
+    "mainc" 1fr
+    "f"     56px / auto;
 
     .main-container {
       width: 100%;
-      padding: 20px 45px;
+      padding: 0 45px;
       height: 100%;
 
       .common-form {
@@ -246,7 +251,7 @@
         .input-field.max-h {
           display: flex;
           flex-direction: column;
-          flex-grow: 50;
+          height: 100%;
 
           .input-label { 
             height: 100%;
