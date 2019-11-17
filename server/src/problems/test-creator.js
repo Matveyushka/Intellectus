@@ -17,12 +17,12 @@ const transormationProblem = require('./problem-types/transformation-problem');
 const easyProblems = [
   missingElementProblem,
   twoFiguresEasyProblem,
-  sumProblem,
+  magicSquareProblem,
   fragmentProblem,
 ];
 
 const mediumProblems = [
-  magicSquareProblem,
+  sumProblem,
   directionProblem,
   twoFiguresMediumProblem,
   bitwiseProblem,
