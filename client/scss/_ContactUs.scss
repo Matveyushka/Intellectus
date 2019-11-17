@@ -1,7 +1,7 @@
 .contact-results {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-items: center;
 
   &.padding-for-modal {
     padding: 80px 45px;
@@ -25,6 +25,7 @@
   }
 
   .button {
+    font-family: $main-font;
     color: $base-2;
     text-transform: lowercase;
     font-size: 24px;
@@ -43,7 +44,6 @@
 
 .common-form {
   font-size: 17px;
-  margin-top: 10px;
   width: 100%;
 
   .input-field {
@@ -195,12 +195,34 @@
 }
 
 @media only screen and (max-width: $sm-screen) {
-  .contact-us {
+  .contact-results {
     height: 100%;
+    justify-content: center;
+  }
+
+  .common-form {
+    .input-field {
+      .input-label {
+        .input-with-area {
+          .input-area {
+            min-height: 100px;
+          }
+        }
+      }
+    }
+  }
+
+  .contact-us {
+    display: grid;
+    grid-template:
+    "hl"    auto
+    "nav"   auto
+    "mainc" 1fr
+    "f"     56px / auto;
 
     .main-container {
       width: 100%;
-      padding: 20px 45px;
+      padding: 0 45px;
       height: 100%;
 
       .common-form {
@@ -240,7 +262,7 @@
         .input-field.max-h {
           display: flex;
           flex-direction: column;
-          flex-grow: 50;
+          height: 100%;
 
           .input-label { 
             height: 100%;

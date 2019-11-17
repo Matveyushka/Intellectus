@@ -106,12 +106,12 @@ export const ReportModal = (): React.ReactElement => {
       </div>
       <div className="test-view-content">
         <div className="test-view-body">
-          <h1 className="problem-title">Problem:</h1>
+          <h1 className="problem-title">Problem</h1>
           <div className="problem-wrapper">
             <ProblemTable rightAnswer={currentOptions[rightAnswerIndex]} />
           </div>
           <div className="test-view-separator" />
-          <h1 className="problem-title options">Options:</h1>
+          <h1 className="problem-title options">Options</h1>
           <div className="option-wrapper">
             <OptionTable rightAnswerIndex={rightAnswerIndex} />
           </div>

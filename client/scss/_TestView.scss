@@ -64,8 +64,8 @@
     font-size: inherit;
     color: $primary-1;
     width: 33.3%;
-    padding-left: 10px;
     justify-content: flex-start;
+    padding-left: 10px;
   }
 
   &-separator {
@@ -133,12 +133,12 @@
     font-size: inherit;
     font-family: inherit;
     font-weight: normal;
+    padding-right: 10px;
     display: flex;
     transition: transform 1s;
     cursor: pointer;
     width: 33.3%;
     justify-content: flex-end;
-    padding-right: 10px;
 
     &:hover {
       transform: scale(1.2);
@@ -228,6 +228,12 @@
 }
 
 @media only screen and (max-width: $sm-screen) {
+  .problem {  
+    &-title {
+      font-size: 14px;
+    }
+  }
+
   .test-view {
     &-content {
       margin: 0 auto;
@@ -252,8 +258,20 @@
       grid-template-areas: "titl1" "prob" "titl2" "opt";
       grid-template-columns: 1fr;
       grid-template-rows: auto 3fr auto 2fr;
-      margin-top: 15px;
+      margin-top: 0px;
       position: relative;
+    }
+
+    &-finish-button {
+      font-size: 14px;
+    }
+
+    &-report-button {
+      font-size: 14px;
+    }
+
+    &-timer {
+      font-size: 14px;
     }
   }
 
@@ -268,7 +286,7 @@
     position: relative;
     &::before {
       content: "";
-      top: -14px;
+      top: -8px;
       left: 0;
       position: absolute;
       z-index: 14;
@@ -287,11 +305,38 @@
     }
   }
 
-  @media only screen and (max-height: $sm-height) {
+  @media screen and (max-device-aspect-ratio: 5/7) { 
+    .test-view {
+      &-content {
+        min-width: 50%;
+        width: 50%;
+      }
+    }
+  }
+
+  @media screen and (max-device-aspect-ratio: 5/8) { 
+    .test-view {
+      &-content {
+        min-width: 55%;
+        width: 55%;
+      }
+    }
+  }
+
+  @media screen and (max-device-aspect-ratio: 5/9) { 
     .test-view {
       &-content {
         min-width: 65%;
         width: 65%;
+      }
+    }
+  }
+
+  @media screen and (max-device-aspect-ratio: 1/2) { 
+    .test-view {
+      &-content {
+        min-width: 74%;
+        width: 74%;
       }
     }
   }
