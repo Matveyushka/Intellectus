@@ -145,13 +145,14 @@
   &.intro {
     display: grid;
     grid-template:
-      ". . hl hl hl . ."          100px
-      ". nav nav nav nav nav ."   auto
-      ". . . . . . ."             1fr
-      ". t t t t t ."             auto
-      ". . . p . . ."             auto
-      ". . . . . . ."             1fr
-      ". . f f f . ."             100px / 1fr auto auto auto auto auto 1fr;
+      "hl"            100px
+      "nav"           auto
+      "."             1fr
+      "t"             auto
+      "p"             auto
+      "."             1fr
+      "f"             100px / auto;
+    justify-items: center;
   }
 }
 
@@ -196,13 +197,13 @@
   .main-layout {
     &.intro {
       grid-template:
-      ". . hl hl hl . ."          auto
-      ". nav nav nav nav nav ."   auto
-      ". . . . . . ."             1fr
-      ". t t t t t ."             auto
-      ". . . p . . ."             auto
-      ". . . . . . ."             1fr
-      ". . f f f . ."             56px / 1fr auto auto auto auto auto 1fr;
+      "hl"            auto
+      "nav"           auto
+      "."             1fr
+      "t"             auto
+      "p"             auto
+      "."             1fr
+      "f"             56px / auto;
     }
   }
 
