@@ -81,16 +81,16 @@ export const ReportModal = (): React.ReactElement => {
           {finishState.error ? (
             <>
               <div className="error">{finishState.error}</div>
-              <div className="button" onClick={tryToSendFormAgain}>
+              <button type="button" className="button" onClick={tryToSendFormAgain}>
                 Try again
-              </div>
+              </button>
             </>
           ) : (
             <>
               <div className="success">We got your feedback</div>
-              <div className="button" onClick={() => dispatch.modal.hideModal()}>
+              <button type="button" className="button" onClick={() => dispatch.modal.hideModal()}>
                 Return to results
-              </div>
+              </button>
             </>
           )}
         </div>

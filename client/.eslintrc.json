@@ -75,21 +75,16 @@
     "no-unneeded-ternary": "error",
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "prefer-const": "error",
+
     // не поддерживаем WAI-ARIA
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/alt-text": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    // TODO: содержит баг, включить, когда починят
-    // https://github.com/yannickcr/eslint-plugin-react/issues/2454
-    "react/jsx-curly-brace-presence": "off",
-    // Не распознает optional chaining
-    // https://github.com/typescript-eslint/typescript-eslint/issues/1104
-    "no-undef": "warn",
-    "no-use-before-define": "warn",
-    "no-restricted-globals": "warn",
-    "no-unused-expressions": "warn"
+
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "error"
   },
   "settings": {
     "import/resolver": {

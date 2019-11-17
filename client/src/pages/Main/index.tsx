@@ -8,10 +8,13 @@ import { WatchResults } from '../../components/WatchResults';
 import { Loader } from '../../components/Loader';
 import { State } from '../../store';
 import { MainState } from './model';
+import { handleKeyDown } from './handlers';
 
 export interface MainProps {
   location: Location;
 }
+
+window.addEventListener('keydown', handleKeyDown);
 
 export const Main = (props: MainProps): React.ReactElement | null => {
   const { location } = props;

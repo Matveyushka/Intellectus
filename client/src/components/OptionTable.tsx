@@ -34,11 +34,13 @@ export const OptionTable = (props: OptionTableProps): React.ReactElement | null 
 
         return (
           <div key={index.toString()} className={className}>
-            <img
-              className="problem-cell"
-              src={toDataURL(item)}
-              onClick={() => onSelect?.(index)}
-            />
+            <button type="button" tabIndex={onSelect ? 0 : -1} onClick={() => onSelect?.(index)}>
+              <img
+                className="problem-cell"
+                src={toDataURL(item)}
+                alt="Option for problem solution"
+              />
+            </button>
           </div>
         );
       })}

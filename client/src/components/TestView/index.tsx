@@ -1,17 +1,16 @@
 import * as React from 'react';
 import isNumber from 'lodash/isNumber';
+import isNil from 'lodash/isNil';
 import random from 'lodash/random';
 import { useDispatch, useSelector } from 'react-redux';
-import { StepItem, Stepper } from '../Stepper';
-import { adjustSecond, formatTime, generateInitialStepperData } from './helpers';
+import { Stepper } from '../Stepper';
+import { adjustSecond, formatTime } from './helpers';
 import { OptionTable } from '../OptionTable';
 import { ProblemTable } from '../ProblemTable';
 import { STEPPER_DIRECTION } from './constants';
 import { Dispatch, State } from '../../store';
 import { useInterval } from '../../helpers';
 import { MainState } from '../../pages/Main/model';
-
-const stepperInitialData = generateInitialStepperData();
 
 export const TestView = (): React.ReactElement => {
   const dispatch: Dispatch = useDispatch();
@@ -20,10 +19,13 @@ export const TestView = (): React.ReactElement => {
     userAnswers, stepIndex,
   } = useSelector<State, MainState>(state => state.main);
 
-  const [stepperData, setStepperData] = React.useState<StepItem[]>(stepperInitialData);
+  const stepperData = userAnswers.map((item, index) => ({
+    text: (index + 1).toString(),
+    isCompleted: !isNil(item),
+  }));
+
   const [time, setTime] = React.useState<Date>(new Date(1, 1, 1, 0, 0, 0));
 
-  const selectedOptionIndex = userAnswers[stepIndex];
   const isTestFinished = userAnswers.every(isNumber);
 
   useInterval(() => setTime(adjustSecond(time)), 1000);
@@ -36,29 +38,9 @@ export const TestView = (): React.ReactElement => {
     ));
 
     dispatch.main.setUserAnswers(newAnswers);
-
-    setStepperData(stepperData.map((item, index) => (
-      index === stepIndex
-        ? ({
-          ...item,
-          isCompleted: true,
-        })
-        : item
-    )));
   };
 
   const handlePrevNextButtonClick = (direction: number): void => {
-    if (selectedOptionIndex) {
-      setStepperData(stepperData.map((item, index) => (
-        index === stepIndex
-          ? ({
-            ...item,
-            isCompleted: true,
-          })
-          : item
-      )));
-    }
-
     dispatch.main.setStepIndex(stepIndex + direction);
   };
 
@@ -75,6 +57,7 @@ export const TestView = (): React.ReactElement => {
           {stepIndex > 0 && (
             <button
               type="button"
+              aria-label="previous problem"
               className="test-view-prev-button"
               onClick={() => handlePrevNextButtonClick(STEPPER_DIRECTION.backward)}
             />
@@ -129,6 +112,7 @@ export const TestView = (): React.ReactElement => {
           {stepIndex < stepperData.length - 1 && (
             <button
               type="button"
+              aria-label="next problem"
               className="test-view-next-button"
               onClick={() => handlePrevNextButtonClick(STEPPER_DIRECTION.forward)}
             />
