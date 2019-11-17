@@ -38,9 +38,9 @@ export const Statistics = (props: StatisticsProps): React.ReactElement | null =>
 
       <main className="main-container statistics-content">
         <div className="statistics-title text-font">
-          {'The test was passed '}
+          {'The test was passed\u00A0'}
           {passedTestsCounter}
-          {' times with average time '}
+          {'\u00A0times with average time\u00A0'}
           {averageTime && formatTime(averageTime)}
         </div>
         <div className="statistics-graphs">

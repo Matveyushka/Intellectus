@@ -34,6 +34,7 @@ export const IntroView = (): React.ReactElement => {
       </main>
       <button
         type="button"
+        aria-label="Start test"
         className="play-icon"
         title="Start test!"
         onClick={handlePlayButtonClick}
@@ -41,6 +42,7 @@ export const IntroView = (): React.ReactElement => {
       <Footer />
       <button
         type="button"
+        aria-label="Share this site with your friends"
         title="Share this site with your friends!"
         className="share-icon"
         onClick={() => setIsShareOpen(!isShareOpen)}
@@ -49,6 +51,7 @@ export const IntroView = (): React.ReactElement => {
       <div className={shareClassNames}>
         <button
           type="button"
+          aria-label="share in twitter"
           data-sharer="twitter"
           className="twitter"
           data-title="Checkout Intellectus, challenge your mind!"
@@ -57,6 +60,7 @@ export const IntroView = (): React.ReactElement => {
         />
         <button
           type="button"
+          aria-label="share in facebook"
           className="facebook"
           data-sharer="facebook"
           data-hashtag="intellectus"
@@ -64,6 +68,7 @@ export const IntroView = (): React.ReactElement => {
         />
         <button
           type="button"
+          aria-label="share in vk"
           className="vk"
           data-sharer="vk"
           data-title="Checkout Intellectus, challenge your mind!"
