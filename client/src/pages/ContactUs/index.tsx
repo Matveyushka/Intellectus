@@ -1,68 +1,51 @@
 import * as React from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   Footer, ContactUsForm, DefaultContactData, Header,
-} from '../components';
-import { Loader } from '../components/Loader';
-import { API, URLS } from '../constants';
-import { FinishFormState } from '../commonTypes';
+} from '../../components';
+import { Loader } from '../../components/Loader';
+import { URLS } from '../../constants';
+import { Dispatch, State } from '../../store';
+import { ContactUsState } from './model';
 
 export interface ContactUsProps {
   location: Location;
 }
 
-const defaultFinishState: FinishFormState<DefaultContactData> = {
-  isFinish: false,
-  error: undefined,
-  oldData: {},
-};
-
 export const ContactUs = (props: ContactUsProps): React.ReactElement | null => {
   const { location } = props;
-
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [finishState, setFinishState] = React.useState<FinishFormState<DefaultContactData>>(
-    defaultFinishState,
-  );
+  const dispatch: Dispatch = useDispatch();
+  const isLoading = useSelector<State, boolean>(state => state.loader);
+  const {
+    isFinish,
+    error,
+    oldData,
+  } = useSelector<State, ContactUsState>(state => state.contactUs);
 
   const feedbackFormSubmit = (data: DefaultContactData): void => {
-    setIsLoading(true);
-    let error: string;
-
-    axios(API.feedback, { method: 'post', data })
-      .catch((err: Error) => {
-        error = 'Something went wrong';
-
-        throw err; // на самом деле это просто реджектит промис, а не крашит приложение
-      })
-      .finally(() => {
-        setFinishState({
-          oldData: data,
-          isFinish: true,
-          error,
-        });
-
-        setIsLoading(false);
-      });
+    dispatch.contactUs.postFeedback(data);
   };
 
-  const tryToSendFormAgain = (): void => setFinishState({
-    ...defaultFinishState,
-    oldData: finishState.oldData,
-  });
+  const tryToSendFormAgain = (): void => {
+    dispatch.contactUs.setState({
+      isFinish: false,
+      error: undefined,
+      oldData,
+    });
+  };
 
   if (isLoading) return <Loader />;
 
-  if (finishState.isFinish) {
+  if (isFinish) {
     return (
       <div className="main-layout contact-us">
         <Header location={location} />
         <main className="main-container">
           <div className="contact-results">
-            {finishState.error ? (
+            {error ? (
               <>
-                <div className="error">{finishState.error}</div>
+                <div className="error">{error}</div>
                 <div className="button" onClick={tryToSendFormAgain}>
                   Try again
                 </div>
@@ -88,7 +71,7 @@ export const ContactUs = (props: ContactUsProps): React.ReactElement | null => {
       <main className="main-container">
         <ContactUsForm
           feedbackFormSubmit={feedbackFormSubmit}
-          data={finishState.oldData}
+          data={oldData}
         />
       </main>
       <Footer />

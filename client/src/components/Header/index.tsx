@@ -62,7 +62,11 @@ export const Header = (props: HeaderProps): React.ReactElement => {
               active: pathname === URLS.contactUs,
             })}
           >
-            <NavLink to={URLS.contactUs} exact>
+            <NavLink
+              to={URLS.contactUs}
+              onClick={() => dispatch.contactUs.setIsSent({ isFinish: false })}
+              exact
+            >
               CONTACT US
             </NavLink>
           </h1>
