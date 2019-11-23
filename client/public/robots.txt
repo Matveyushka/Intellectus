@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /questions
+Disallow: /answers
+Disallow: /feedback
+Disallow: /statistics-data
+Disallow: /report
