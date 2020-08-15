@@ -1,3 +1,7 @@
+# Source
+
+The repo is a fork of the original project (https://github.com/777PolarFox777/Intellectus) made by the project's author.
+
 # Intellectus
 
 This is repo for Intellectus project - a web application that allows you to test your IQ.
@@ -26,7 +30,7 @@ All information about test generation is available at [Problems.md](docs/src/Ser
 
 To start demo you should go to `server` folder and run `npm start` command in your console
 
-Alternative way is to visit https://intellectus-demo.herokuapp.com/ (feedback and report doesn't work this way)
+Alternative way is to visit https://intellectus-iq.herokuapp.com/
 
 # Contributors
 
