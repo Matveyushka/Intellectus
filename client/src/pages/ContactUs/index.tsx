@@ -35,8 +35,6 @@ export const ContactUs = (props: ContactUsProps): React.ReactElement | null => {
     });
   };
 
-  if (isLoading) return <Loader />;
-
   if (isFinish) {
     return (
       <div className="main-layout contact-us">
@@ -69,10 +67,14 @@ export const ContactUs = (props: ContactUsProps): React.ReactElement | null => {
     <div className="main-layout contact-us">
       <Header location={location} />
       <main className="main-container">
-        <ContactUsForm
+        {
+          isLoading ?
+          <Loader /> :
+          <ContactUsForm
           feedbackFormSubmit={feedbackFormSubmit}
           data={oldData}
         />
+        }
       </main>
       <Footer />
     </div>
