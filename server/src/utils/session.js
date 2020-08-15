@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 const session = {};
-const lifeTimeSession = 1000 * 60 * 60 * 5;
+const lifeTimeSession = 1000 * 60 * 60 * 24;
 
 const createSession = questions => ({
   questions,

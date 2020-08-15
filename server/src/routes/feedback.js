@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 
   const message = {
-    from: email,
+    from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject: 'Feedback',
     html: `Имя - ${name} <br> Заголовок - ${title} <br> Cообщение - ${body}<br> Email - 

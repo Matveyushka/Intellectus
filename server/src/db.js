@@ -3,9 +3,13 @@ const PassedTestSchema = require('./model/PassedTest');
 const StatisticsSchema = require('./model/Statistics');
 
 let backupConnection;
+
+const passedTestsDbName = 'passed_tests'
+const statisticsDbName = 'statistics'
+
 const connectionOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-const PassedTest = mongoose.model('passed_test', PassedTestSchema);
-const Statistics = mongoose.model('statistics', StatisticsSchema);
+const PassedTest = mongoose.model(passedTestsDbName, PassedTestSchema);
+const Statistics = mongoose.model(statisticsDbName, StatisticsSchema);
 
 const initializeStatistics = async () => Statistics.create({
   passedTestsCounter: 0,
@@ -57,10 +61,19 @@ const recalculateStatistics = async (passedTest, opts) => {
   );
 };
 
-const initializeDB = async () => {
-  await PassedTest.createCollection();
+const createCollectionIfNotExists = async (model) => {
+  await mongoose.connection.db.listCollections({ name: model.modelName })
+    .next(async (err, collinfo) => {
+      if (!collinfo) {
+        await model.createCollection()
+      }
+    });
+}
 
-  await Statistics.createCollection();
+const initializeDB = async () => {
+  await createCollectionIfNotExists(Statistics);
+
+  await createCollectionIfNotExists(PassedTest);
 
   if (!await Statistics.findOne()) await initializeStatistics();
 };
@@ -111,8 +124,8 @@ const restoreDbFromBackup = async () => {
   await connectBackupDb();
 
   console.info('Database recovery from backup has begun.');
-  const PassedTestBackupModel = backupConnection.model('passed_test', PassedTestSchema);
-  const StatisticsBackupModel = backupConnection.model('statistics', StatisticsSchema);
+  const PassedTestBackupModel = backupConnection.model(passedTestsDbName, PassedTestSchema);
+  const StatisticsBackupModel = backupConnection.model(statisticsDbName, StatisticsSchema);
 
   const passedTestDocs = PassedTestBackupModel.find();
   const statisticsDoc = StatisticsBackupModel
@@ -128,8 +141,8 @@ const restoreDbFromBackup = async () => {
 const startBackup = async () => {
   await connectBackupDb();
 
-  const PassedTestBackupModel = backupConnection.model('passed_test', PassedTestSchema);
-  const StatisticsBackupModel = backupConnection.model('statistics', StatisticsSchema);
+  const PassedTestBackupModel = backupConnection.model(passedTestsDbName, PassedTestSchema);
+  const StatisticsBackupModel = backupConnection.model(statisticsDbName, StatisticsSchema);
 
   const lastBackupedPassedTest = await PassedTestBackupModel
     .findOne({}, {}, { sort: { completionTimestamp: -1 } });
